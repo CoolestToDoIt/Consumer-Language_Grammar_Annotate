@@ -19,9 +19,9 @@ the previous milestone supplies reproducible evaluation and restartable runs.
 - Feature 6: efficient review. Find unknown/ambiguous items, search, inspect
   annotation history, resolve stale/conflicting corrections safely, and provide
   uncertainty estimates only when a separate calibration has been validated.
-- Feature 4: isolated internal-stem-edit experiment. The product plan and prior
-  proposal explicitly keep it deferred pending approval. A clarification has been
-  sent; dependent experimental work will not begin without that answer.
+- Feature 4: isolated internal-stem-edit experiment. The user explicitly answered
+  **“Keep Feature 4 deferred.”** It is outside this implementation pass; no
+  experimental branch or learner change will be started.
 
 Worker A owns project persistence, the web UI, contextual modeling, and release
 packaging. No project API implementation exists in this checkout. The plan
@@ -44,16 +44,16 @@ not be displayed as calibrated confidence percentages.
       conflicts and idempotent correction semantics; document the handoff to A.
 - [x] Implement teaching commands and interactive flow against a fixture adapter:
       submit, predict/evidence, confirm, correct, save/reopen and export.
-- [ ] Implement deterministic review ordering, Unicode search, annotation history,
+- [x] Implement deterministic review ordering, Unicode search, annotation history,
       and safe stale/conflicting-answer handling through that contract.
-- [ ] Implement separate frozen-model calibration and held-out validation; require
+- [x] Implement separate frozen-model calibration and held-out validation; require
       sufficient evidence and invalidate calibration after a model change.
 - [ ] Verify complete teaching/review/reopen flows and error recovery without
       third-party dependencies; preserve all existing regressions.
 - [ ] Run bounded Lezgi/Tsez review/calibration checks, record data membership,
       label budgets and honest outcomes, and leave historical results untouched.
-- [ ] Handle Feature 4 according to the explicit approval response, using its own
-      experimental branch and fixtures if authorized; retain the default learner.
+- [x] Resolve Feature 4 scope: keep it deferred at the user's explicit request;
+      retain the default learner and do not start the experiment.
 - [ ] Record final commands, tests, remaining A integration needs and per-feature
       status; keep all work on feature/experimental branches for review.
 

@@ -73,7 +73,7 @@ def shell(store, path):
                 return
             if command == 'help':
                 print('submit ID SOURCE WORDS | predict ID | confirm | correct WORD-GLOSSES | '
-                      'replace REASON :: WORD-GLOSSES | history ID | '
+                      'replace REASON :: WORD-GLOSSES | history ID | search TEXT | review [LIMIT] | '
                       'status | save | reload | export PATH | quit')
             elif command == 'submit' and len(parts) >= 3:
                 emit(service.submit(parts[1], parts[2:]))
@@ -101,6 +101,12 @@ def shell(store, path):
                 current = None
             elif command == 'history' and len(parts) == 2:
                 emit(project.history(parts[1]))
+            elif command == 'search' and len(parts) > 1:
+                from .review import search
+                emit(search(project, ' '.join(parts[1:]), include_history=True))
+            elif command == 'review' and len(parts) <= 2:
+                from .review import review_queue
+                emit(review_queue(project, limit=int(parts[1]) if len(parts) == 2 else 10))
             elif command == 'status' and len(parts) == 1:
                 emit(project_status(project))
             elif command == 'save' and len(parts) == 1:
@@ -123,8 +129,8 @@ def main(argv=None, *, store=None):
     parser = argparse.ArgumentParser(description='Teach and review aligned word glosses in a language project')
     commands = parser.add_subparsers(dest='command', required=True)
     parsers = {}
-    for name in ('init', 'submit', 'predict', 'confirm', 'correct', 'history',
-                 'status', 'save', 'export', 'shell'):
+    for name in ('init', 'submit', 'predict', 'confirm', 'correct', 'history', 'search', 'review',
+                 'status', 'save', 'export', 'shell', 'calibrate'):
         sub = commands.add_parser(name)
         sub.add_argument('--project', required=True, type=Path)
         sub.add_argument('--backend', choices=('workspace', 'fixture'), default='workspace')
@@ -144,7 +150,15 @@ def main(argv=None, *, store=None):
     parsers['correct'].add_argument('--reason', default='')
     parsers['correct'].add_argument('--expected-revision', type=int)
     parsers['history'].add_argument('--id', required=True)
+    parsers['search'].add_argument('--query', required=True)
+    parsers['search'].add_argument('--history', action='store_true')
+    parsers['review'].add_argument('--limit', type=int, default=10)
+    parsers['review'].add_argument('--include-reviewed', action='store_true')
+    parsers['review'].add_argument('--calibration', type=Path)
     parsers['export'].add_argument('--output', type=Path, required=True)
+    parsers['calibrate'].add_argument('--fit', type=Path, required=True)
+    parsers['calibrate'].add_argument('--validation', type=Path, required=True)
+    parsers['calibrate'].add_argument('--output', type=Path, required=True)
     args = parser.parse_args(argv)
     try:
         backend = store if store is not None else _store(args.backend)
@@ -168,6 +182,17 @@ def main(argv=None, *, store=None):
                                      expected_revision=args.expected_revision, replace=args.replace, reason=args.reason)
         elif args.command == 'history':
             result = project.history(args.id)
+        elif args.command == 'search':
+            from .review import search
+            result = search(project, args.query, include_history=args.history)
+        elif args.command == 'review':
+            from .review import review_queue
+            from .review_calibration import Calibration
+            calibration = Calibration.load(args.calibration) if args.calibration else None
+            result = review_queue(project, limit=args.limit, include_reviewed=args.include_reviewed, calibration=calibration)
+        elif args.command == 'calibrate':
+            from .review_calibration import calibrate_files
+            result = calibrate_files(project, args.fit, args.validation, args.output)
         elif args.command == 'export':
             project.export(args.output)
             result = {'exported': str(args.output)}

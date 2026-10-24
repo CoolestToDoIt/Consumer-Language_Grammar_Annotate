@@ -169,6 +169,13 @@ class TeachingTests(unittest.TestCase):
         self.assertEqual(failed.returncode, 2)
         self.assertIn('aligned', failed.stderr)
 
+    def test_teaching_help_exposes_real_commands_through_the_existing_gloss_entrypoint(self):
+        result = subprocess.run([sys.executable, '-X', 'utf8', '-S', '-m', 'decipher.app', 'gloss', 'teach', '--help'],
+                                capture_output=True, text=True, encoding='utf-8', check=True)
+        self.assertIn('confirm', result.stdout)
+        self.assertIn('history', result.stdout)
+        self.assertIn('shell', result.stdout)
+
     def test_interactive_cli_recovers_from_misalignment_then_transfers(self):
         script = ('submit anchors tal mir\npredict anchors\ncorrect tree\ncorrect tree bird\n'
                   'submit plural talum\npredict plural\ncorrect tree-PL\n'

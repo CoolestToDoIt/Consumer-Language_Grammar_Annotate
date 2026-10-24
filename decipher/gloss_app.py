@@ -1,12 +1,17 @@
 """Source-only interlinear glossing commands."""
 import argparse
 import json
+import sys
 from .corpus import TextExample
 from .gloss import GlossLearner, load_gloss
 from .gloss_evaluate import evaluate_gloss, online_gloss, report_gloss, resume_gloss
 
 
 def main(argv=None):
+    argv=list(sys.argv[1:] if argv is None else argv)
+    if argv[:1]==['teach']:
+        from .teaching_app import main as teaching_main
+        return teaching_main(argv[1:])
     parser=argparse.ArgumentParser(description='Learn word glosses from source-only annotated examples')
     commands=parser.add_subparsers(dest='command',required=True)
     evaluate=commands.add_parser('evaluate')
