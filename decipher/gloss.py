@@ -65,7 +65,8 @@ def majority(counter):
 
 def common_prefix(a,b):
     size=0
-    while size<min(len(a),len(b)) and a[size]==b[size]:
+    limit=min(len(a),len(b))
+    while size<limit and a[size]==b[size]:
         size+=1
     return size
 
@@ -134,16 +135,25 @@ class GlossLearner:
             for other,other_gloss in paradigm[-self.paradigm_window:]:
                 if word==other or gloss==other_gloss:
                     continue
-                for a,b,ga,gb in ((other,word,other_gloss,gloss),(word,other,gloss,other_gloss)):
-                    for source_side in ('prefix','suffix'):
-                        remove,append,shared=edit(a,b,source_side)
-                        if shared<2 or not (remove or append):
-                            continue
-                        for target_side in ('prefix','suffix'):
-                            remove_gloss,append_gloss,shared_gloss=edit(ga,gb,target_side)
-                            if shared_gloss<2 or not (remove_gloss or append_gloss):
-                                continue
-                            rule=(source_side,remove,append,target_side,remove_gloss,append_gloss)
+                source_edits=[]
+                for side in ('prefix','suffix'):
+                    remove,append,shared=edit(other,word,side)
+                    if shared>=2 and (remove or append):
+                        source_edits.append((side,remove,append))
+                if not source_edits:
+                    continue
+                target_edits=[]
+                for side in ('prefix','suffix'):
+                    remove,append,shared=edit(other_gloss,gloss,side)
+                    if shared>=2 and (remove or append):
+                        target_edits.append((side,remove,append))
+                # Reverse edits share the same common span; swap their pieces
+                # instead of recalculating it for every source/target pairing.
+                for reverse in (False,True):
+                    for source_side,remove,append in source_edits:
+                        for target_side,remove_gloss,append_gloss in target_edits:
+                            rule=((source_side,append,remove,target_side,append_gloss,remove_gloss) if reverse else
+                                  (source_side,remove,append,target_side,remove_gloss,append_gloss))
                             support=self.rule_evidence[rule]
                             if key not in support:
                                 support.add(key)

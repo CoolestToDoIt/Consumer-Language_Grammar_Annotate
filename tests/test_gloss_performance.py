@@ -5,9 +5,10 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from collections import defaultdict
 
 from decipher.corpus import TextExample
-from decipher.gloss import GlossExample, GlossLearner
+from decipher.gloss import GlossExample, GlossLearner, edit, lexical_key
 
 
 def record(identifier, words, glosses):
@@ -278,6 +279,49 @@ class AnalogyIndexTests(unittest.TestCase):
         self.assertEqual(result[0]['anchor'], 'abc')
         self.assertTrue(model.grams.reads)
         self.assertEqual(set(model.grams.reads), {'abc'})
+
+
+class EditInductionTests(unittest.TestCase):
+    @staticmethod
+    def original_evidence(records,window):
+        paradigms=defaultdict(list)
+        evidence=defaultdict(set)
+        for item in records:
+            for word,gloss in zip(item.example.tokens,item.glosses):
+                key=lexical_key(gloss)
+                if not key or (word,gloss) in paradigms[key]:
+                    continue
+                for other,other_gloss in paradigms[key][-window:]:
+                    if word==other or gloss==other_gloss:
+                        continue
+                    for a,b,ga,gb in ((other,word,other_gloss,gloss),(word,other,gloss,other_gloss)):
+                        for source_side in ('prefix','suffix'):
+                            remove,append,shared=edit(a,b,source_side)
+                            if shared<2 or not (remove or append):
+                                continue
+                            for target_side in ('prefix','suffix'):
+                                remove_gloss,append_gloss,shared_gloss=edit(ga,gb,target_side)
+                                if shared_gloss>=2 and (remove_gloss or append_gloss):
+                                    evidence[(source_side,remove,append,target_side,remove_gloss,append_gloss)].add(key)
+                paradigms[key].append((word,gloss))
+        return evidence
+
+    def test_shared_calculations_preserve_all_hypotheses_support_and_order(self):
+        import random
+        rng=random.Random(312)
+        items=annotations()
+        for index in range(75):
+            root=rng.choice(('tal','mir','café','doran'))
+            prefix,tag=rng.choice((('',''),('za','PST-'),('no','NEG-')))
+            suffix,label=rng.choice((('',''),('um','-PL'),('en','-DAT'),('fin','-ABL')))
+            items.append(record(f'random-{index}',(prefix+root+suffix,),(tag+root+label,)))
+        for window in (1,3,32):
+            model=GlossLearner(paradigm_window=window)
+            for item in items:
+                model.correct(item.example,item.glosses)
+                expected=self.original_evidence(model.records.values(),window)
+                self.assertEqual(model.rule_evidence,expected)
+                self.assertEqual(list(model.rule_evidence),list(expected))
 
 
 class RuleIndexTests(unittest.TestCase):
