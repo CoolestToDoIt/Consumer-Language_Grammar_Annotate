@@ -74,9 +74,11 @@ No original corpus files or new model corrections are needed for that audit.
 ## Git and integration
 
 Protocol checkpoint: `9afb8b8`. Evaluated implementation checkpoint: `4eb8632`.
-The compact result and handoff commit follows those checkpoints. Changes remain
-on the experiment branch. They have not been pushed or merged into main.
+The compact result and handoff commit is `32bb612`. At the initial handoff,
+changes were local on the experiment branch. The user subsequently authorized
+pushing both completed Worker B branches and merging them into main; see
+[the publication note](05-publication-and-main-integration.md).
 
-There is no reason to merge the model into the application after a rejected
-adoption screen. Keep the experiment branch as the reproducible research record;
-the integrated product branch remains available for the teaching/review work.
+Publishing the experimental code and reports preserves the research record.
+It does not select the overlay in the application: the rejected adoption decision
+and existing default learner remain in effect.
