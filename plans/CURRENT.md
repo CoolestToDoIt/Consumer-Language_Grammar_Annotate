@@ -1,5 +1,8 @@
 # Current development direction
 
+Next product features and alternating agent ownership:
+[Agent A/B feature plan](PRODUCT_FEATURE_PLAN.md).
+
 The tested integration is published on `origin/main` at `7b07cdf`, including
 integration checkpoint `7b95de1`. The [integrated release milestone](updates/2026-10-24-05-integrated-gloss-release.md)
 records validation, publication, operating limits and the deferred experiment.
