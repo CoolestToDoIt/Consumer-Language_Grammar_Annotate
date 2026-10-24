@@ -187,6 +187,20 @@ class TeachingTests(unittest.TestCase):
         self.assertIn('bird-PL', result.stdout)
         self.assertEqual(self.store.open(self.path).annotation('probe')['glosses'], ['bird-PL'])
 
+    def test_interactive_language_apostrophes_reasons_and_native_paths_are_literal(self):
+        exported = self.directory/'backup with spaces.fixture.json'
+        script = ("submit sentence don't misread\npredict sentence\ncorrect don't understand\n"
+                  "predict sentence\nreplace teacher's correction :: don't know\n"
+                  "search teacher's\n"+f'export {exported}\nquit\n')
+        result = subprocess.run([sys.executable, '-X', 'utf8', '-S', '-m', 'decipher.teaching_app', 'shell',
+                                 '--project', str(self.path), '--backend', 'fixture'], input=script,
+                                capture_output=True, text=True, encoding='utf-8', check=True)
+        self.assertNotIn('Error:', result.stdout)
+        restored = self.store.open(exported)
+        self.assertEqual(restored.examples()[0].tokens, ("don't", 'misread'))
+        self.assertEqual(restored.annotation('sentence')['glosses'], ["don't", 'know'])
+        self.assertEqual(restored.history('sentence')[-1]['reason'], "teacher's correction")
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -67,8 +67,26 @@ def shell(store, path):
         if not line:
             continue
         try:
-            parts = shlex.split(line)
-            command = parts[0]
+            command = line.split(None, 1)[0]
+            if command == 'submit':
+                # Source text is literal language data, not shell syntax: don't
+                # interpret apostrophes or punctuation as quoting commands.
+                parts = line.split(None, 2)
+            elif command == 'correct':
+                parts = line.split()
+            elif command == 'replace':
+                left, separator, right = line.partition('::')
+                reason = left[len('replace'):].strip()
+                if not separator or not reason:
+                    raise ValueError('Use replace REASON :: WORD-GLOSSES')
+                parts = ['replace', reason, '::', *right.split()]
+            elif command in ('search', 'export'):
+                argument = line[len(command):].strip()
+                if command == 'export' and len(argument) >= 2 and argument[0] == argument[-1] and argument[0] in ('\"', "'"):
+                    argument = argument[1:-1]
+                parts = [command, argument] if argument else [command]
+            else:
+                parts = shlex.split(line)
             if command in ('quit', 'exit'):
                 return
             if command == 'help':
@@ -76,7 +94,7 @@ def shell(store, path):
                       'replace REASON :: WORD-GLOSSES | history ID | search TEXT | review [LIMIT] | '
                       'status | save | reload | export PATH | quit')
             elif command == 'submit' and len(parts) >= 3:
-                emit(service.submit(parts[1], parts[2:]))
+                emit(service.submit(parts[1], ' '.join(parts[2:])))
             elif command == 'predict' and len(parts) == 2:
                 record = service.predict(parts[1])
                 current = record['prediction_id']
