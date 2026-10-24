@@ -3,7 +3,7 @@
 ## Latest Worker A state
 
 The sections below preserve the original bulk-fit measurements. Subsequent
-engine work is on `feat/gloss-engine`, through `1f411c5`, with **59 passing
+engine work is on `feat/gloss-engine`, through `cb824ba`, with **62 passing
 tests**. Merge that branch to incorporate the complete series; no evaluator,
 session, CLI, or public checkpoint-format changes are required. It is local
 and has not been pushed.
@@ -16,6 +16,9 @@ and has not been pushed.
 | Bounded exact selection | Isolated median ranking 92 ms → 37 ms | [Bounded ranking](bounded-ranking.md) |
 | Shared edit spans | Full Tsez fit 0.794 s → 0.533 s | [Edit induction](shared-edits.md) |
 | Input integrity | Invalid corrections rejected before mutation | [Engine note 14](../../../plans/updates/2026-10-24-14-engine.md) |
+| Full correction workloads | Tsez 3,537 updates in 2.006 s; Lezgi 624 in 0.174 s | [Full correction scaling](full-corrections.md) |
+| Exact tier tags | Similarly prefixed metadata remains excluded | [Engine note 17](../../../plans/updates/2026-10-24-17-engine.md) |
+| Prepared gloss keys | Six-run median fit 0.502 s → 0.478 s | [Prepared gloss keys](prepared-gloss-keys.md) |
 
 Timings are diagnostics at the individual changes, not one combined replicated
 benchmark. Valid candidate outputs remain identical in all three modes across

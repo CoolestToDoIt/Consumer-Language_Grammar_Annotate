@@ -2,6 +2,7 @@ import copy
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
 from decipher.corpus import TextExample
 from decipher.gloss import GlossLearner, load_gloss
 from decipher.gloss_evaluate import evaluate_gloss, online_gloss
@@ -109,6 +110,34 @@ class GlossTests(unittest.TestCase):
             for field in ('max_rules','paradigm_window'):
                 with self.subTest(value=value,field=field),self.assertRaises(ValueError):
                     GlossLearner(**{field:value})
+
+    def test_failed_checkpoint_writes_preserve_previous_file_and_allow_recovery(self):
+        def partial_write(state,handle,**kwargs):
+            handle.write('{"schema_version":')
+            raise OSError('injected write failure')
+        for existing in (False,True):
+            for failure in ('write','replace'):
+                with self.subTest(existing=existing,failure=failure),tempfile.TemporaryDirectory() as tmp:
+                    path=Path(tmp)/'model.gz'
+                    model=GlossLearner()
+                    model.correct(TextExample('anchors',('tal','mir')),('tree','bird'))
+                    if existing:
+                        model.save(path)
+                        previous=path.read_bytes()
+                        saved=copy.deepcopy(model.__dict__)
+                    model.correct(TextExample('plural',('talum',)),('tree-PL',))
+                    before=copy.deepcopy(model.__dict__)
+                    patch=(mock.patch('decipher.gloss.json.dump',side_effect=partial_write) if failure=='write' else
+                           mock.patch.object(Path,'replace',side_effect=OSError('injected replace failure')))
+                    with patch,self.assertRaisesRegex(OSError,'injected'):
+                        model.save(path)
+                    self.assertEqual(model.__dict__,before)
+                    self.assertEqual(set(Path(tmp).iterdir()),{path} if existing else set())
+                    if existing:
+                        self.assertEqual(path.read_bytes(),previous)
+                        self.assertEqual(GlossLearner.load(path).__dict__,saved)
+                    model.save(path)
+                    self.assertEqual(GlossLearner.load(path).__dict__,model.__dict__)
 
     def test_evaluation_filters_overlap_and_online_labels_arrive_later(self):
         with tempfile.TemporaryDirectory() as tmp:
