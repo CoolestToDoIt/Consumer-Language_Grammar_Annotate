@@ -24,7 +24,8 @@ def prediction_text(record):
     lines = [f"Prediction {record['prediction_id']} for {record['example_id']} "
              f"(model {record['model_version']}, annotation revision {record['annotation_revision']})"]
     for index, (token, word) in enumerate(zip(record['tokens'], record['words']), 1):
-        lines.append(f"{index}. {token} -> {word['gloss'] or '?'} [{'known' if word['known_form'] else 'unseen'} form]")
+        status = 'known' if word['known_form'] else 'tentative draft' if word.get('provisional') else 'unseen'
+        lines.append(f"{index}. {token} -> {word['gloss'] or '?'} [{status} form]")
         for candidate in word['candidates']:
             evidence = {key: value for key, value in candidate.items() if key not in ('gloss', 'score', 'kind')}
             lines.append(f"   {candidate['gloss']} | {candidate['kind']} | raw score {candidate['score']:.4g} (uncalibrated)"

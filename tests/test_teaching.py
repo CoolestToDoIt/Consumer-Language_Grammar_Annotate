@@ -62,6 +62,29 @@ class TeachingTests(unittest.TestCase):
         self.assertEqual(self.project._state(), before)
         self.assertEqual(self.project.model_version, 0)
 
+    def test_provisional_workspace_guesses_require_an_explicit_correction(self):
+        from decipher.workspace import WorkspaceStore
+        path = self.directory/'production.dproj'
+        project = WorkspaceStore().create(path, name='Language', language='Test')
+        service = TeachingService(project)
+        service.submit('anchor', 'tal')
+        anchor = service.predict('anchor')
+        service.correct(anchor['prediction_id'], ['tree'])
+        service.submit('unknown', 'talum')
+        guess = service.predict('unknown')
+        word = guess['words'][0]
+        self.assertEqual(word['gloss'], 'tree')
+        self.assertFalse(word['known_form'])
+        self.assertTrue(word['provisional'])
+        from decipher.teaching_app import prediction_text
+        self.assertIn('[tentative draft form]', prediction_text(guess))
+        before = project.model_version
+        with self.assertRaisesRegex(ValueError, 'provisional guesses'):
+            service.confirm(guess['prediction_id'])
+        self.assertEqual(project.model_version, before)
+        service.correct(guess['prediction_id'], ['tree-PL'])
+        self.assertEqual(project.annotation('unknown')['glosses'], ['tree-PL'])
+
     def test_two_reviewed_predictions_cannot_overwrite_a_newer_annotation(self):
         self.service.submit('word', 'tal')
         first = self.service.predict('word')

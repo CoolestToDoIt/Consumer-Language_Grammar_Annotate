@@ -95,17 +95,20 @@ def transform(value,side,remove,append):
 
 
 class GlossLearner:
-    def __init__(self,mode='rules',max_rules=512,paradigm_window=32,contextual=False):
+    def __init__(self,mode='rules',max_rules=512,paradigm_window=32,contextual=False,guess_unknown=False):
         if mode not in ('memory','analogy','rules'):
             raise ValueError('Gloss model must be memory, analogy, or rules')
         if any(type(value) is not int or value<1 for value in (max_rules,paradigm_window)):
             raise ValueError('Rule and paradigm bounds must be positive integers')
         if type(contextual) is not bool:
             raise ValueError('Contextual scoring must be a boolean')
+        if type(guess_unknown) is not bool:
+            raise ValueError('Unknown-form guessing must be a boolean')
         self.mode=mode
         self.max_rules=max_rules
         self.paradigm_window=paradigm_window
         self.contextual=contextual
+        self.guess_unknown=guess_unknown
         self.records={}
         self.version=0
         self._reset()
@@ -322,12 +325,34 @@ class GlossLearner:
                              'contextual_support':support})
         return adjusted[:5],True
 
+    def _provisional_candidate(self,word):
+        if not self.lexicon:
+            return None
+        query=self._grams(word)
+        overlap=Counter()
+        for gram in query:
+            overlap.update(self._gram_index.get(gram,()))
+        def similarity(known):
+            shared=overlap[known]
+            union=len(self.grams[known])+len(query)-shared
+            return shared/union if union else 0
+        known=min(overlap,key=lambda value:(-similarity(value),value)) if overlap else min(self.lexicon)
+        return {'gloss':majority(self.lexicon[known]),'score':similarity(known),
+                'kind':'provisional_analogy','anchor':known,'provisional':True}
+
     def predict(self,example):
         if not isinstance(example,TextExample):
             raise TypeError('Gloss prediction accepts public word tokens only')
         predictions=[]
         for index,word in enumerate(example.tokens):
             candidates=self.word_candidates(word)
+            if word not in self.lexicon:
+                if self.guess_unknown:
+                    candidates=[{**candidate,'provisional':True} for candidate in candidates]
+                    if not candidates:
+                        candidate=self._provisional_candidate(word)
+                        if candidate is not None:
+                            candidates=[candidate]
             if self.contextual:
                 if word in self.lexicon and len(self.lexicon[word])>1:
                     counts=self.lexicon[word]
@@ -337,18 +362,22 @@ class GlossLearner:
                 previous=example.tokens[index-1] if index else None
                 following=example.tokens[index+1] if index+1<len(example.tokens) else None
                 candidates,context_used=self._contextual_candidates(word,previous,following,candidates)
-                predictions.append({'gloss':candidates[0]['gloss'] if candidates else None,
-                                    'candidates':candidates,'known_form':word in self.lexicon,
-                                    'context_used':context_used})
+                prediction={'gloss':candidates[0]['gloss'] if candidates else None,
+                            'candidates':candidates,'known_form':word in self.lexicon,
+                            'context_used':context_used}
             else:
-                predictions.append({'gloss':candidates[0]['gloss'] if candidates else None,'candidates':candidates,'known_form':word in self.lexicon})
+                prediction={'gloss':candidates[0]['gloss'] if candidates else None,
+                            'candidates':candidates,'known_form':word in self.lexicon}
+            if self.guess_unknown:
+                prediction['provisional']=bool(candidates and candidates[0].get('provisional'))
+            predictions.append(prediction)
         return predictions
 
     def save(self,path):
         destination=Path(path)
         destination.parent.mkdir(parents=True,exist_ok=True)
         state={'schema_version':1,'mode':self.mode,'max_rules':self.max_rules,'paradigm_window':self.paradigm_window,
-               'contextual':self.contextual,'version':self.version,
+               'contextual':self.contextual,'guess_unknown':self.guess_unknown,'version':self.version,
                'records':[{'id':r.example.id,'tokens':list(r.example.tokens),'glosses':list(r.glosses)} for r in self.records.values()]}
         with tempfile.NamedTemporaryFile(dir=destination.parent,delete=False) as handle:
             temporary=Path(handle.name)
@@ -370,7 +399,8 @@ class GlossLearner:
         version=state.get('version')
         if type(version) is not int or version<len(state['records']):
             raise ValueError('Gloss checkpoint version must cover its authoritative records')
-        model=cls(state['mode'],state['max_rules'],state['paradigm_window'],state.get('contextual',False))
+        model=cls(state['mode'],state['max_rules'],state['paradigm_window'],state.get('contextual',False),
+                  state.get('guess_unknown',False))
         def records():
             seen=set()
             for row in state['records']:

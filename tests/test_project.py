@@ -40,13 +40,16 @@ class LanguageProjectTests(unittest.TestCase):
             count = project.add_corpus('lessons.tsv', 'tal\tshore\nmir\tbird\nunseenum\n', 'tsv')
             self.assertEqual(count, 3)
             queue = project.queue()
-            self.assertEqual([item['tokens'] for item in queue], [['tal'], ['mir'], ['unseenum']])
-            self.assertTrue(queue[0]['annotated'])
-            self.assertFalse(queue[2]['annotated'])
-            self.assertTrue(project.correct(queue[2]['id'], ('unknown',)))
-            self.assertFalse(project.correct(queue[2]['id'], ('unknown',)))
+            self.assertEqual([item['tokens'] for item in queue], [['unseenum'], ['tal'], ['mir']])
+            self.assertFalse(queue[0]['annotated'])
+            self.assertTrue(queue[1]['annotated'])
+            self.assertFalse(queue[0]['predictions'][0]['known_form'])
+            self.assertTrue(queue[0]['predictions'][0]['provisional'])
+            self.assertTrue(queue[0]['predictions'][0]['gloss'])
+            self.assertTrue(project.correct(queue[0]['id'], ('unknown',)))
+            self.assertFalse(project.correct(queue[0]['id'], ('unknown',)))
             with self.assertRaisesRegex(ValueError, 'array'):
-                project.correct(queue[2]['id'], 'single')
+                project.correct(queue[0]['id'], 'single')
             backup = Path(directory) / 'backup.zip'
             project.export(backup)
             restored = LanguageProject.restore(backup, Path(directory) / 'restored.dproj')
@@ -145,9 +148,19 @@ class GlossWebTests(unittest.TestCase):
             self.assertTrue(response['status'].startswith('201'))
             identifier = json.loads(raw)['project_id']
             call('/api/open', 'POST', {'project_id': identifier})
-            call('/api/import', 'POST', {'name': 'lesson.tsv', 'format': 'tsv', 'content': 'tal\tshore\n'})
+            _, preview_raw = call('/api/import/preview', 'POST', {
+                'name': 'lesson.tsv', 'format': 'tsv', 'content': 'tal\tshore\nunseen\n',
+            })
+            preview = json.loads(preview_raw)
+            self.assertEqual(preview['sentence_count'], 2)
+            self.assertEqual(preview['annotated_count'], 1)
+            self.assertEqual(preview['needs_review_count'], 1)
+            self.assertEqual(call('/api/queue')[1], b'[]')
+            call('/api/import', 'POST', {'name': 'lesson.tsv', 'format': 'tsv', 'content': 'tal\tshore\nunseen\n'})
             _, raw = call('/api/queue')
             sentence = json.loads(raw)[0]
+            self.assertEqual(sentence['tokens'], ['unseen'])
+            self.assertTrue(sentence['predictions'][0]['provisional'])
             call('/api/correct', 'POST', {'id': sentence['id'], 'glosses': ['tree']})
             response, archive = call('/api/export')
             self.assertEqual(response['headers']['Content-Type'], 'application/zip')
@@ -161,7 +174,8 @@ class GlossWebTests(unittest.TestCase):
             app.project = None
             call('/api/open', 'POST', {'project_id': restored_id})
             _, raw = call('/api/queue')
-            self.assertEqual(json.loads(raw)[0]['predictions'][0]['gloss'], 'tree')
+            reopened = {item['id']: item for item in json.loads(raw)}
+            self.assertEqual(reopened[sentence['id']]['predictions'][0]['gloss'], 'tree')
 
     def test_api_rejects_nonlocal_hosts(self):
         app = GlossWebApp('/tmp/nonexistent-decipher-workspace')

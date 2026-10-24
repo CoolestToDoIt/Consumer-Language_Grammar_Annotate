@@ -26,6 +26,7 @@ def learner_identity(learner):
     return digest(encoded({'engine_sha256': digest(Path(__file__).with_name('gloss.py').read_text(encoding='utf-8').encode('utf-8')),
                            'mode': learner.mode, 'max_rules': learner.max_rules,
                            'contextual': getattr(learner, 'contextual', False),
+                           'guess_unknown': getattr(learner, 'guess_unknown', False),
                            'paradigm_window': learner.paradigm_window, 'version': learner.version,
                            'records': [{'id': row.example.id, 'tokens': row.example.tokens, 'glosses': row.glosses}
                                        for row in learner.records.values()]}))
@@ -154,5 +155,7 @@ class TeachingService:
         glosses = [word['gloss'] for word in before['words']]
         if any(gloss is None for gloss in glosses):
             raise ValueError('Cannot confirm unknown words; enter complete aligned glosses')
+        if any(word.get('provisional') for word in before['words']):
+            raise ValueError('Review and correct provisional guesses before saving them as verified glosses')
         return self.correct(prediction_id, glosses, operation_id=operation_id, confirm=True,
                             reason='Confirmed the displayed complete prediction')

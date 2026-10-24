@@ -19,6 +19,7 @@ DEFAULT_MODEL_CONFIG = {
     'max_rules': 512,
     'paradigm_window': 32,
     'contextual': True,
+    'guess_unknown': True,
 }
 MAX_IMPORT_BYTES = 25 * 1024 * 1024
 
@@ -287,6 +288,32 @@ class LanguageProject:
         self.save()
         return len(additions)
 
+    def preview_corpus(self, name, content, format='auto'):
+        name = _validate_name(name, 'Corpus name')
+        if not isinstance(content, str):
+            raise ValueError('Imported corpus content must be UTF-8 text')
+        if len(content.encode('utf-8')) > MAX_IMPORT_BYTES:
+            raise ValueError(f'Corpus import exceeds {MAX_IMPORT_BYTES} bytes')
+        if format == 'auto':
+            suffix = Path(name).suffix.lower()
+            format = 'text' if suffix == '.txt' else 'tsv' if suffix == '.tsv' else 'sigmorphon'
+        parsed = _records_from_text(content, name, format)
+        digest = hashlib.sha256(content.encode('utf-8')).hexdigest()
+        return {
+            'name': name,
+            'format': format,
+            'sha256': digest,
+            'duplicate': any(corpus['sha256'] == digest for corpus in self.data['corpora']),
+            'sentence_count': len(parsed),
+            'annotated_count': sum(record.glosses is not None for record in parsed),
+            'needs_review_count': sum(record.glosses is None for record in parsed),
+            'examples': [
+                {'tokens': list(record.example.tokens),
+                 'glosses': list(record.glosses) if record.glosses is not None else None}
+                for record in parsed[:5]
+            ],
+        }
+
     def correct(self, identifier, glosses, *, expected_revision=None, persist=True):
         sentence = self.sentence(identifier)
         revision = sum(item['id'] == identifier for item in self.data['annotation_history'])
@@ -383,16 +410,24 @@ class LanguageProject:
 
     def queue(self):
         latest = self._latest_annotations()
-        return [
-            {
+        entries = []
+        for position, sentence in enumerate(self.data['sentences']):
+            predictions = self.predict(sentence['id'])
+            entries.append({
                 'id': sentence['id'],
                 'tokens': sentence['tokens'],
-                'predictions': self.predict(sentence['id']),
+                'predictions': predictions,
                 'annotated': sentence['id'] in latest,
                 'revision': sum(item['id'] == sentence['id'] for item in self.data['annotation_history']),
-            }
-            for sentence in self.data['sentences']
-        ]
+                'tentative_words': sum(bool(item.get('provisional')) for item in predictions),
+                'needs_gloss_words': sum(item['gloss'] is None for item in predictions),
+                'position': position,
+            })
+        entries.sort(key=lambda item:(item['annotated'], -item['needs_gloss_words'],
+                                      -item['tentative_words'], item['position']))
+        for entry in entries:
+            entry.pop('position')
+        return entries
 
 
 def project_path(workspace, name):

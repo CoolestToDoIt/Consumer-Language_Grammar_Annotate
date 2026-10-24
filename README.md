@@ -123,13 +123,15 @@ python3 -m pip install -e .
 python3 -m decipher.app gloss web
 ```
 
-Open the printed `127.0.0.1` URL, create a project with a language ID, and
-import a UTF-8 corpus. Plain text has one source sentence per line; TSV has
-source words and optional tab-separated gloss words; SIGMORPHON uses its `\t`
-and `\g` tiers. Supplied glosses become the project's initial authoritative
-annotations. Rows without glosses enter the editable review queue. The
-invented [demo TSV](examples/gloss-demo.tsv) is only a workflow fixture, not
-real language data.
+Open the printed `127.0.0.1` URL and follow the three-step flow: create or
+reopen a project, preview an import, then review and correct draft glosses.
+The last project is reopened automatically in the same browser. Plain text has
+one source sentence per line; TSV has source words and optional tab-separated
+gloss words; SIGMORPHON uses its `\t` and `\g` tiers. Preview reports sentence
+and alignment counts before changes are saved. Supplied glosses become the
+project's initial authoritative annotations. The invented
+[demo TSV](examples/gloss-demo.tsv) is only a workflow fixture, not real
+language data.
 
 Projects are independent `.dproj` files in `~/.decipher/projects` by default.
 The file stores a corpus content hash, model configuration, source sentences,
@@ -141,12 +143,21 @@ restore as a separately named project. To use another project directory run:
 python3 -m decipher.app gloss web --workspace-dir ./language-projects --port 8765
 ```
 
-The server binds only to loopback. Imports are capped at 25 MiB. The workspace
-model enables exact adjacent-word context to rerank ambiguous known forms;
-contextual scoring is disabled by default for the existing CLI models and
-historical evaluations. This simple exact-neighbor method cannot resolve an
-ambiguity unless the relevant source form and neighboring form were seen
-together in corrections; its evidence scores are not calibrated probabilities.
+The server binds only to loopback. Imports are capped at 25 MiB. The review
+queue prioritizes unreviewed sentences and can filter by source, ID, or gloss.
+For an unfamiliar word, the workspace puts a **tentative draft gloss** in the
+editable field using the best available rule or nearest spelling analogy; a
+zero-overlap fallback is labeled weak. It is never marked as a known form, and
+the CLI will not let a provisional guess be confirmed without review. Correct
+or replace the draft and save it as an authoritative annotation. If the
+project has no grounded examples yet, no meaningful guess is possible: the
+first user-entered gloss creates the starting anchor. Existing model scores
+remain uncalibrated evidence, not probabilities.
+
+The workspace model also uses exact adjacent-word context to rerank ambiguous
+known forms. This simple method cannot resolve an ambiguity unless relevant
+source and neighboring forms appeared together in corrections. Historical
+evaluation and non-workspace CLI model behavior remain unchanged.
 
 The configured data is the deduplicated `data_v2` release of [SIGMORPHON 2023 glossing](https://github.com/sigmorphon/2023glossingST), pinned to a commit and checksums in [glossing SOURCES.json](data/glossing/SOURCES.json). Original licenses are downloaded locally (CC BY-NC 4.0). This source-only condition does not use the supplied sentence translation and is not directly comparable to the official shared-task conditions or the original pre-deduplication results. Lezgi and Tsez are development languages; Gitksan remains reserved for final fresh-language evaluation.
 

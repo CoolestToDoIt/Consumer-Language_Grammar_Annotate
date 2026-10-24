@@ -24,6 +24,10 @@ The current application supports:
   source/gloss tiers.
 - Generate word-level gloss suggestions from memory, spelling analogy, and
   prefix/suffix rules grounded in corrected examples.
+- Preview corpus imports before committing them, and receive clearly labeled
+  provisional draft glosses for unfamiliar forms when the project has examples
+  to ground a nearest-form suggestion. Drafts require review before they are
+  accepted as verified annotations.
 - Review candidate evidence and known/unknown word forms in the browser UI.
 - Teach, confirm, revise, and review glosses through the local UI and teaching
   CLI. The CLI additionally supports search, annotation history, review
@@ -120,8 +124,9 @@ collaboration, or hosted availability.
 - Conduct observed trials with linguists and intended community users. Record
   task completion, confusion points, import failures, correction effort, and
   backup recovery—not just model accuracy.
-- Improve corpus import feedback: encoding, token/gloss alignment, duplicate
-  imports, large files, malformed records, and actionable error messages.
+- Continue improving corpus import feedback beyond the current preview:
+  encoding, token/gloss alignment, duplicate imports, large files, malformed
+  records, and actionable error messages.
 - Add explicit project-level export formats and documented restore/version
   compatibility; test backups through recovery on a clean installation.
 - Improve navigation and scaling for large queues, including filtering,

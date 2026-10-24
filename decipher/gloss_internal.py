@@ -47,7 +47,7 @@ class InternalGlossOverlay:
 
     def _signature(self):
         base = self.base
-        return base.version, base.mode, base.max_rules, base.paradigm_window, base.contextual
+        return base.version, base.mode, base.max_rules, base.paradigm_window, base.contextual, base.guess_unknown
 
     def _check(self):
         if self._signature() != self._prepared_signature:
