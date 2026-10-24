@@ -114,6 +114,40 @@ The source-only Lezgi development experiment scores 72.2% exact word glosses, ve
 
 The word-gloss learner considers both prefix and suffix edits and reuses only meanings grounded in corrected examples. Its explicit linguistic assumption is the Leipzig-style convention of lowercase lexical gloss labels versus uppercase grammatical tags. Scores are uncalibrated, not probabilities. Misaligned source/gloss records are excluded with counts in reports. Exact source overlap with training is excluded from evaluation.
 
+### Local language workspace
+
+Install the package and start the local browser interface:
+
+```sh
+python3 -m pip install -e .
+python3 -m decipher.app gloss web
+```
+
+Open the printed `127.0.0.1` URL, create a project with a language ID, and
+import a UTF-8 corpus. Plain text has one source sentence per line; TSV has
+source words and optional tab-separated gloss words; SIGMORPHON uses its `\t`
+and `\g` tiers. Supplied glosses become the project's initial authoritative
+annotations. Rows without glosses enter the editable review queue. The
+invented [demo TSV](examples/gloss-demo.tsv) is only a workflow fixture, not
+real language data.
+
+Projects are independent `.dproj` files in `~/.decipher/projects` by default.
+The file stores a corpus content hash, model configuration, source sentences,
+annotation revisions and a versioned model checkpoint rebuilt from those
+annotations. The interface supports project reopen, portable ZIP backup, and
+restore as a separately named project. To use another project directory run:
+
+```sh
+python3 -m decipher.app gloss web --workspace-dir ./language-projects --port 8765
+```
+
+The server binds only to loopback. Imports are capped at 25 MiB. The workspace
+model enables exact adjacent-word context to rerank ambiguous known forms;
+contextual scoring is disabled by default for the existing CLI models and
+historical evaluations. This simple exact-neighbor method cannot resolve an
+ambiguity unless the relevant source form and neighboring form were seen
+together in corrections; its evidence scores are not calibrated probabilities.
+
 The configured data is the deduplicated `data_v2` release of [SIGMORPHON 2023 glossing](https://github.com/sigmorphon/2023glossingST), pinned to a commit and checksums in [glossing SOURCES.json](data/glossing/SOURCES.json). Original licenses are downloaded locally (CC BY-NC 4.0). This source-only condition does not use the supplied sentence translation and is not directly comparable to the official shared-task conditions or the original pre-deduplication results. Lezgi and Tsez are development languages; Gitksan remains reserved for final fresh-language evaluation.
 
 `gloss stream --train FILE --dev FILE --run-dir runs/NAME` runs prediction-before-correction with fixed development probes, memory/analogy/rule comparisons, and delays 0/5/20. `--policies all corrections` adds correction-only feedback; exposure counts and pending answers are recorded separately.

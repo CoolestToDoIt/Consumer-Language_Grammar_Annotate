@@ -44,9 +44,17 @@ def main(argv=None):
     report=commands.add_parser('report',help='Reconstruct a run report from saved predictions, feedback and private scoring data')
     report.add_argument('--checkpoint',required=True)
     report.add_argument('--output',required=True)
+    web=commands.add_parser('web',help='Start the local project and sentence-review web interface')
+    web.add_argument('--workspace-dir',default='~/.decipher/projects')
+    web.add_argument('--port',type=int,default=8765)
     args=parser.parse_args(argv)
     try:
-        if args.command=='evaluate':
+        if args.command=='web':
+            if not 0 <= args.port <= 65535:
+                raise ValueError('Port must be between 0 and 65535')
+            from .gloss_web import serve
+            serve(args.workspace_dir,args.port)
+        elif args.command=='evaluate':
             evaluate_gloss(args.train,args.eval,args.output,args.split)
         elif args.command=='stream':
             online_gloss(args.train,args.dev,args.run_dir,args.support,args.stream,tuple(args.delays),tuple(args.policies),args.probe_every,
