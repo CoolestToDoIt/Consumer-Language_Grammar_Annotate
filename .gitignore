@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+*.dproj
+*.dproj.lock
+language-projects/
+.DS_Store
+demo-run/
+demo-run-*/
