@@ -21,12 +21,12 @@ not a promise that the experiment will win, and not approval to change defaults.
 - [x] Read the existing proposal, current learner/reader and evaluation interfaces.
 - [x] Freeze the model, data, budget and decision criteria below before corpus runs.
 - [x] Verify the full starting regression suite and define the targeted fixtures.
-- [ ] Implement an explicitly prepared, version-checked inference overlay in a new
+- [x] Implement an explicitly prepared, version-checked inference overlay in a new
       module, preserving the base model and its schema-1 checkpoints.
-- [ ] Test replacement/insertion/deletion, competing tags, Unicode, grounding,
+- [x] Test replacement/insertion/deletion, competing tags, Unicode, grounding,
       duplicates/revisions, stale-overlay rejection, read-only prediction,
       checkpoint reconstruction, and exact baseline equivalence without internal evidence.
-- [ ] Build a Windows-compatible isolated comparison runner with a hard 120-second
+- [x] Build a Windows-compatible isolated comparison runner with a hard 120-second
       child-process deadline and memory measurement with explicit units.
 - [ ] Run full pinned Lezgi and Tsez training/development comparisons with the same
       examples and 512 total rule slots; record candidates and private scoring separately.
