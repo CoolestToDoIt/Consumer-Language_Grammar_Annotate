@@ -277,6 +277,23 @@ class GlossStreamTests(unittest.TestCase):
             load_gloss_checkpoint(checkpoint)
             self.assertFalse(any(path.is_dir() for path in checkpoint.parent.iterdir()))
 
+    def test_atomic_save_retries_a_transient_windows_checkpoint_lock(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            checkpoint, _ = self.small_run(Path(tmp), max_inputs=1)
+            session, experiment = load_gloss_checkpoint(checkpoint)
+            original, attempts = Path.replace, []
+            def transient_lock(path, target):
+                if path.name == 'checkpoint.zip':
+                    attempts.append(path)
+                    if len(attempts) < 3:
+                        raise PermissionError('transient Windows sharing violation')
+                return original(path, target)
+            with patch.object(Path, 'replace', new=transient_lock), patch('decipher.gloss_checkpoint.time.sleep'):
+                save_gloss_checkpoint(checkpoint, session, experiment)
+            self.assertEqual(len(attempts), 3)
+            restored, _ = load_gloss_checkpoint(checkpoint)
+            self.assertEqual(restored.state(), session.state())
+
     def test_revisions_survive_checkpoint_with_original_predictions_intact(self):
         with tempfile.TemporaryDirectory() as tmp:
             checkpoint, _ = self.small_run(Path(tmp), max_inputs=1)

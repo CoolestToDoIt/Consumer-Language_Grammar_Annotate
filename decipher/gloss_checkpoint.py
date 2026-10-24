@@ -5,6 +5,7 @@ import json
 import math
 from pathlib import Path
 import tempfile
+import time
 from types import SimpleNamespace
 import zipfile
 
@@ -27,7 +28,8 @@ def digest(content):
 
 def implementation_fingerprint():
     root = Path(__file__).parent
-    return {name: digest((root/name).read_bytes()) for name in
+    # Git may check the same Python revision out with LF or CRLF on Windows.
+    return {name: digest((root/name).read_text(encoding='utf-8').encode('utf-8')) for name in
             ('gloss.py', 'corpus.py', 'online.py', 'gloss_checkpoint.py', 'gloss_evaluate.py')}
 
 
@@ -155,7 +157,16 @@ def save_gloss_checkpoint(path, session, experiment):
             for name, data in components.items():
                 archive.writestr(name, data)
             archive.writestr('integrity.json', encoded(integrity))
-        temporary.replace(destination)
+        # Windows indexers/sync clients can briefly open a completed ZIP without
+        # delete sharing. Keep the old checkpoint intact and retry only that lock.
+        for attempt in range(6):
+            try:
+                temporary.replace(destination)
+                break
+            except PermissionError:
+                if attempt == 5:
+                    raise
+                time.sleep(.05 * 2**attempt)
 
 
 def load_gloss_checkpoint(path):

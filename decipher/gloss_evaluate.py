@@ -173,6 +173,7 @@ def provenance():
         torch_version = None
     return {'source_commit': git('rev-parse', 'HEAD'), 'branch': git('branch', '--show-current'),
             'working_tree_status': git('status', '--short'), 'implementation_sha256': implementation_fingerprint(),
+            'implementation_hash_normalization': 'UTF-8 source text with universal LF newlines',
             'environment': {'python': sys.version, 'executable': sys.executable, 'platform': platform.platform(),
                             'machine': platform.machine(), 'processor': platform.processor(),
                             'torch_installed_version': torch_version, 'torch_required': False}}
