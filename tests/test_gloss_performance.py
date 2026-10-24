@@ -256,6 +256,39 @@ class AnalogyIndexTests(unittest.TestCase):
         self.assertEqual(set(model.grams.reads), {'abc'})
 
 
+class RuleIndexTests(unittest.TestCase):
+    def test_index_matches_exhaustive_affix_filter_in_rank_order(self):
+        import random
+        rng = random.Random(218)
+        model = GlossLearner().fit(annotations())
+        words = ['', 'velum', 'zavel', 'nimfin', 'caféum', 'unknown', '☃']
+        words += [''.join(rng.choices('talumzé☃', k=rng.randrange(1, 20))) for _ in range(300)]
+        for word in words:
+            expected = [rule for rule in model._rules()
+                        if (word.startswith(rule[2]) if rule[0] == 'prefix' else word.endswith(rule[2]))]
+            self.assertEqual(model._matching_rules(word), expected)
+
+    def test_candidates_match_full_rule_scan_after_updates_revisions_and_reload(self):
+        class ExhaustiveLearner(GlossLearner):
+            def _matching_rules(self, word):
+                return self._rules()
+        actual = GlossLearner()
+        expected = ExhaustiveLearner()
+        for item in annotations():
+            actual.correct(item.example, item.glosses)
+            expected.correct(item.example, item.glosses)
+            self.assertEqual(actual.predict(probes()), expected.predict(probes()))
+        before = copy.deepcopy(actual.__dict__)
+        actual.predict(probes())
+        self.assertEqual(actual.__dict__, before)
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'model.gz'
+            actual.save(path)
+            restored = GlossLearner.load(path)
+        self.assertEqual(restored.__dict__, actual.__dict__)
+        self.assertEqual(restored.predict(probes()), expected.predict(probes()))
+
+
 class IncrementalRankingTests(unittest.TestCase):
     @staticmethod
     def exhaustive(model):

@@ -112,6 +112,8 @@ class GlossLearner:
         self._rule_cache=[]
         self._ranked_rules=[]
         self._dirty_rules=set()
+        self._rule_index={}
+        self._rule_lengths={'prefix':(), 'suffix':()}
         self.grams={}
         self._gram_index=defaultdict(set)
 
@@ -206,7 +208,26 @@ class GlossLearner:
             self._rule_cache=sorted(candidates,key=lambda rule:(-len(self.rule_evidence[rule]),sum(len(value) for value in (rule[1],rule[2],rule[4],rule[5])),rule))[:self.max_rules]
             self._ranked_rules=list(self._rule_cache)
             self._dirty_rules.clear()
+            index=defaultdict(list)
+            for position,rule in enumerate(self._rule_cache):
+                # Inverting the source edit requires its appended affix.
+                index[(rule[0],rule[2])].append((position,rule))
+            self._rule_index=dict(index)
+            self._rule_lengths={side:tuple(sorted({len(affix) for kind,affix in index if kind==side}))
+                                for side in ('prefix','suffix')}
         return self._rule_cache
+
+    def _matching_rules(self,word):
+        matches=[]
+        for side,sizes in self._rule_lengths.items():
+            for size in sizes:
+                if size>len(word):
+                    break
+                affix=word[:size] if side=='prefix' else word[len(word)-size:]
+                matches.extend(self._rule_index.get((side,affix),()))
+        # Retain the original accumulation order, including floating scores
+        # and the last supporting rule recorded as candidate evidence.
+        return [rule for _,rule in sorted(matches)]
 
     @staticmethod
     def _grams(word):
@@ -234,7 +255,7 @@ class GlossLearner:
             return [{'gloss':majority(self.lexicon[known]),'score':similarity(known),'kind':'analogy','anchor':known}]
         votes=Counter()
         evidence={}
-        for rule in self._rules():
+        for rule in self._matching_rules(word):
             source_side,remove,append,target_side,remove_gloss,append_gloss=rule
             base=transform(word,source_side,append,remove)
             if not base or base==word or base not in self.lexicon:

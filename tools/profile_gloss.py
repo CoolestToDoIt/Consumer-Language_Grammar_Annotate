@@ -103,6 +103,8 @@ def main(argv=None):
     parser.add_argument('--predictions', required=True, help='Local JSONL candidate outputs, normally under ignored runs/')
     parser.add_argument('--reference-predictions')
     parser.add_argument('--cprofile', help='Optional binary profiling artifact, normally under ignored runs/')
+    parser.add_argument('--profile-stage', choices=('training', 'prediction'), default='training',
+                        help='Stage captured by --cprofile; use one prediction mode to isolate inference')
     args = parser.parse_args(argv)
     for field in ('limit_train', 'limit_dev'):
         value = getattr(args, field)
@@ -142,7 +144,7 @@ def main(argv=None):
             model = ProfiledGlossLearner(args.mode, args.max_rules, args.paradigm_window)
             stage = 'training'
             start = time.perf_counter()
-            if profiler:
+            if profiler and args.profile_stage == 'training':
                 profiler.enable()
             try:
                 if args.strategy == 'bulk':
@@ -151,7 +153,7 @@ def main(argv=None):
                     for record in training:
                         model.correct(record.example, record.glosses)
             finally:
-                if profiler:
+                if profiler and args.profile_stage == 'training':
                     profiler.disable()
             report['training_seconds'] = time.perf_counter() - start
             report['training_profile'] = dict(model.profile)
@@ -166,7 +168,13 @@ def main(argv=None):
                     correct, count = 0, 0
                     start = time.perf_counter()
                     for record in probes:
-                        predictions = model.predict(record.example)
+                        if profiler and args.profile_stage == 'prediction':
+                            profiler.enable()
+                        try:
+                            predictions = model.predict(record.example)
+                        finally:
+                            if profiler and args.profile_stage == 'prediction':
+                                profiler.disable()
                         row = {'mode': mode, 'id': record.example.id, 'tokens': list(record.example.tokens), 'predictions': predictions}
                         line = json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(',', ':')) + '\n'
                         handle.write(line)
