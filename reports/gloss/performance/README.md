@@ -1,5 +1,31 @@
 # Gloss-engine performance and equivalence
 
+## Latest Worker A state
+
+The sections below preserve the original bulk-fit measurements. Subsequent
+engine work is on `feat/gloss-engine`, through `1f411c5`, with **59 passing
+tests**. Merge that branch to incorporate the complete series; no evaluator,
+session, CLI, or public checkpoint-format changes are required. It is local
+and has not been pushed.
+
+| Follow-up | Result | Details |
+|---|---|---|
+| Exact trigram analogy index | Full Tsez analogy pass 7.785 s → 0.462 s | [Analogy indexing](analogy-index.md) |
+| Incremental online top K | 100 corrections 7.44 s → 0.048 s before affix indexing | [Correction ranking](incremental-ranking.md) |
+| Prepared source-affix rules | Full Tsez rule pass 90 ms → 50 ms | [Rule indexing](rule-affix-index.md) |
+| Bounded exact selection | Isolated median ranking 92 ms → 37 ms | [Bounded ranking](bounded-ranking.md) |
+| Shared edit spans | Full Tsez fit 0.794 s → 0.533 s | [Edit induction](shared-edits.md) |
+| Input integrity | Invalid corrections rejected before mutation | [Engine note 14](../../../plans/updates/2026-10-24-14-engine.md) |
+
+Timings are diagnostics at the individual changes, not one combined replicated
+benchmark. Valid candidate outputs remain identical in all three modes across
+the complete Lezgi/Tsez development artifacts and checkpoint reloads. Input
+validation intentionally rejects malformed token containers, labels, bounds,
+and checkpoint metadata; valid schema-1 files are compatible. The selected
+rule hypothesis space and uncalibrated scores are unchanged.
+
+The remaining sections are the historical first handoff (45 tests at that time).
+
 This report records the first bulk-fit optimization. Follow-up: [exact indexed analogy](analogy-index.md) removes the analogy bottleneck identified below while preserving the same outputs.
 
 Worker A branch: `feat/gloss-engine`. Shared base: `524163c64150cf06773c0afcc1a28ea4d797774c`. Engine/API commit: `83e70a0`.
