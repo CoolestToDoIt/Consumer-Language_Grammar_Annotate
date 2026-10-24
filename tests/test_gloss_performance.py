@@ -313,6 +313,17 @@ class IncrementalRankingTests(unittest.TestCase):
             bulk = GlossLearner(max_rules=bound).fit(items + [record('0', items[0].example.tokens, ('revised-LOC',))])
             self.assertEqual(model.__dict__, bulk.__dict__)
 
+    def test_bounded_selection_matches_full_sort_across_strategy_boundary(self):
+        for count in (0, 1, 255, 256, 257, 3000):
+            model = GlossLearner(max_rules=64)
+            for index in range(count):
+                rule = ('suffix', '', str(index), 'suffix', '', '-PL')
+                model.rule_evidence[rule].update(str(n) for n in range(1 + index % 7))
+            model._dirty_rules = set(model.rule_evidence)
+            model._rule_cache = None
+            self.assertEqual(model._rules(), self.exhaustive(model))
+            self.assertFalse(model._dirty_rules)
+
     def test_unchanged_support_keeps_prepared_ranking(self):
         model = CountingGlossLearner().fit(annotations()[:3])
         ranking = model._rule_cache

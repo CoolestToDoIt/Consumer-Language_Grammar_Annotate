@@ -7,6 +7,7 @@ ungrounded English meaning from an unfamiliar root.
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 import gzip
+import heapq
 import json
 from pathlib import Path
 import re
@@ -205,7 +206,12 @@ class GlossLearner:
             # outsider cannot overtake the previous top K; only changed rules
             # need to compete with those winners. Revisions reset both sets.
             candidates=set(self._ranked_rules)|self._dirty_rules
-            self._rule_cache=sorted(candidates,key=lambda rule:(-len(self.rule_evidence[rule]),sum(len(value) for value in (rule[1],rule[2],rule[4],rule[5])),rule))[:self.max_rules]
+            key=lambda rule:(-len(self.rule_evidence[rule]),sum(len(value) for value in (rule[1],rule[2],rule[4],rule[5])),rule)
+            # Keep bounded selection exact; sorting is cheaper for small unions.
+            if len(candidates)>4*self.max_rules:
+                self._rule_cache=heapq.nsmallest(self.max_rules,candidates,key=key)
+            else:
+                self._rule_cache=sorted(candidates,key=key)[:self.max_rules]
             self._ranked_rules=list(self._rule_cache)
             self._dirty_rules.clear()
             index=defaultdict(list)
