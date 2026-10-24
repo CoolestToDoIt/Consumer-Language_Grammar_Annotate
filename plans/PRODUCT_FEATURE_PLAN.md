@@ -7,11 +7,11 @@ translation is a separate future scope. All features below are planned.
 | Feature | Owner | Build | Done when | Status |
 |---|---|---|---|---|
 | 1. Persistent language workspace | **A** | Create/open/save/export projects containing corpus identity, model configuration, authoritative annotations, revisions and checkpoints. | Independent language projects reopen with identical state. | Implemented; independent reopen and backup/restore tested. |
-| 2. Real-text teaching CLI | **B** | Submit sentences, inspect candidates/evidence, confirm or correct aligned glosses, and display updated predictions. | A user can teach and resume a project without editing annotation files. | Pending B. |
+| 2. Real-text teaching CLI | **B** | Submit sentences, inspect candidates/evidence, confirm or correct aligned glosses, and display updated predictions. | A user can teach and resume a project without editing annotation files. | Implemented on B's product feature branch; real .dproj teaching/reopen/export/restore and literal-language input tested. |
 | 3. Local web interface | **A** | Project selection, corpus import, sentence queue, editable word glosses, candidate evidence and known/unknown indicators. | Import → predict → correct → reopen works entirely through the UI. | Implemented; loopback browser smoke test verified import, correction and reopen. |
 | 4. Unknown-form learning | **B** | Run the isolated internal-stem-edit experiment, diagnose grounded-word failures and compare with the frozen baseline. | Reproducible development results support an explicit adopt/reject decision. | Deferred; not started. |
 | 5. Contextual disambiguation | **A** | Use sentence context to resolve ambiguous meanings or grammatical analyses. | A fixed ambiguity benchmark improves without unacceptable baseline regression. | Implemented; fixed fixture improves 1/2 → 2/2 with no change to unambiguous words. |
-| 6. Efficient review | **B** | Review ordering, calibrated uncertainty, search, annotation history and correction-conflict handling. | Users can find uncertain items, trace annotations and replace mistakes safely. | Pending B. |
+| 6. Efficient review | **B** | Review ordering, calibrated uncertainty, search, annotation history and correction-conflict handling. | Users can find uncertain items, trace annotations and replace mistakes safely. | Implemented through teaching CLI and project adapter; review/search/history, validated development calibration and CLI/web conflict guards tested. |
 | 7. Release packaging and validation | **A** | Installation/startup, example projects, backup/restore, portable exports, documentation, end-to-end checks and user trials. | A new user can install, teach, save and recover work; release limitations are documented. | Install/startup and backup/restore are automated-tested; browser smoke test complete; external user trial remains outstanding. |
 
 ## Separate work and integration
@@ -34,3 +34,8 @@ translation is a separate future scope. All features below are planned.
 - Update feature status and milestone notes at meaningful checkpoints. Present
   tested integration for approval before important publication/default-model
   changes. Do not treat uncalibrated scores as confidence percentages.
+
+Worker B's implementation, completed checklist, test results and commands are in
+[the product-feature handoff](updates_b/product-features/07-handoff-and-commands.md).
+The combined feature branch passes 129 tests. Feature 4 remains deferred at the
+user's explicit request; no stem-edit experiment or default-model promotion was made.

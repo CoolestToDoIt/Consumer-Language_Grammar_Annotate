@@ -51,12 +51,18 @@ not be displayed as calibrated confidence percentages.
       sufficient evidence and invalidate calibration after a model change.
 - [x] Verify complete teaching/review/reopen flows and error recovery without
       third-party dependencies; preserve all existing regressions.
-- [ ] Run bounded Lezgi/Tsez review/calibration checks, record data membership,
+- [x] Run bounded Lezgi/Tsez review/calibration checks, record data membership,
       label budgets and honest outcomes, and leave historical results untouched.
 - [x] Resolve Feature 4 scope: keep it deferred at the user's explicit request;
       retain the default learner and do not start the experiment.
-- [ ] Record final commands, tests, remaining A integration needs and per-feature
+- [x] Record final commands, tests, remaining A integration needs and per-feature
       status; keep all work on feature/experimental branches for review.
+
+All currently authorized B tasks are complete. The final combined suite passes
+129 tests. Both development calibration/review checks and the real CLI
+save/reopen/export/restore smoke flow passed. See [results](06-development-results.md)
+and [the final handoff](07-handoff-and-commands.md). The umbrella feature branch
+contains the complete tested A/B workspace integration; main is not a work branch.
 
 ## Design decisions to verify before implementation
 

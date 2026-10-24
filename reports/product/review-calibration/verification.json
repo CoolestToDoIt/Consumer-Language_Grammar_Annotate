@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "corpus_checks": [
+    {
+      "language": "lezgi",
+      "measurement_source_commit": "e1fad21886b84332df7cc87945e42c83f1376d92",
+      "artifact_hashes_match": true,
+      "dataset_hashes_match": true,
+      "split_sources_disjoint": true,
+      "model_version": 110,
+      "full_candidates_match_reopened_model": true,
+      "prediction_metrics_reconstructed": true,
+      "calibration_metrics_reconstructed": true,
+      "review_orders_and_annotation_costs_reconstructed": true,
+      "validation_answers_unreleased": true,
+      "calibration_status": "validated"
+    },
+    {
+      "language": "tsez",
+      "measurement_source_commit": "e1fad21886b84332df7cc87945e42c83f1376d92",
+      "artifact_hashes_match": true,
+      "dataset_hashes_match": true,
+      "split_sources_disjoint": true,
+      "model_version": 110,
+      "full_candidates_match_reopened_model": true,
+      "prediction_metrics_reconstructed": true,
+      "calibration_metrics_reconstructed": true,
+      "review_orders_and_annotation_costs_reconstructed": true,
+      "validation_answers_unreleased": true,
+      "calibration_status": "validated"
+    }
+  ],
+  "real_cli_smoke": {
+    "default_backend": "workspace",
+    "third_party_site_packages_disabled": true,
+    "sentences": 4,
+    "verified_sentences": 3,
+    "verified_word_labels": 4,
+    "model_version": 3,
+    "literal_apostrophe_preserved": true,
+    "first_unknown_predictions_preserved": true,
+    "transfer_before_confirmation": "bird-PL",
+    "review_search_history_checked": true,
+    "export_restore_full_metadata_match": true,
+    "workspace": "runs/product-teaching-smoke/demo.dproj"
+  },
+  "python_3_10_grammar_parse": [
+    "decipher/teaching.py",
+    "decipher/teaching_app.py",
+    "decipher/teaching_fixture.py",
+    "decipher/review.py",
+    "decipher/review_calibration.py",
+    "decipher/workspace.py",
+    "decipher/project.py",
+    "decipher/gloss_web.py",
+    "decipher/gloss_app.py",
+    "tools/evaluate_review_calibration.py"
+  ],
+  "runtime_note": "Executed on the recorded local Python runtime; grammar parsing is not a Python 3.10 runtime test."
+}

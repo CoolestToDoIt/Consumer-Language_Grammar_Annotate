@@ -4,6 +4,9 @@
 
 New work is recorded in [product-features/](product-features/01-plan-and-checklist.md).
 It starts from main commit `a928139` on `feat/worker-b-teaching-review`.
+Features 2 and 6 are implemented and verified; Feature 4 remains explicitly deferred.
+Start with the [current handoff](product-features/07-handoff-and-commands.md) or
+[development results](product-features/06-development-results.md).
 
 ## Earlier gloss evaluation milestone
 
