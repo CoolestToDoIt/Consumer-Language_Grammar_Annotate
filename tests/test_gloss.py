@@ -55,6 +55,43 @@ class GlossTests(unittest.TestCase):
             restored=GlossLearner.load(path)
         self.assertEqual(model.__dict__,restored.__dict__)
 
+    def test_malformed_corrections_leave_fresh_and_trained_state_unchanged(self):
+        cases=[
+            (TextExample('bad',('valid',42)),('root','number')),
+            (TextExample('bad',('valid',[])),('root','number')),
+            (TextExample('bad',('valid','')),('root','empty')),
+            (TextExample('bad',('two words',)),('root',)),
+            (TextExample('bad',('tab\tword',)),('root',)),
+            (TextExample('bad',['mutable']),('root',)),
+            (TextExample([],('valid',)),('root',)),
+            (TextExample(4,('valid',)),('root',)),
+            (TextExample('bad',('a','b','c','d')),'tree'),
+            (TextExample('bad',('a',)),b'x'),
+            (TextExample('bad',('a',)),('two labels',)),
+            (TextExample('bad',('a',)),('',)),
+            (TextExample('bad',('a',)),None),
+        ]
+        for trained in (False,True):
+            model=GlossLearner()
+            if trained:
+                model.correct(TextExample('anchor',('tal','mir')),('tree','bird'))
+                model.correct(TextExample('plural',('talum',)),('tree-PL',))
+            for example,glosses in cases:
+                with self.subTest(trained=trained,example=example,glosses=glosses):
+                    before=copy.deepcopy(model.__dict__)
+                    with self.assertRaises((TypeError,ValueError)):
+                        model.correct(example,glosses)
+                    self.assertEqual(model.__dict__,before)
+            valid=TextExample('next',('mirum',))
+            model.correct(valid,('bird-PL',))
+            self.assertEqual(model.predict(valid)[0]['gloss'],'bird-PL')
+
+    def test_bounds_reject_noninteger_values_before_model_creation(self):
+        for value in (0,-1,1.5,True,'2',None):
+            for field in ('max_rules','paradigm_window'):
+                with self.subTest(value=value,field=field),self.assertRaises(ValueError):
+                    GlossLearner(**{field:value})
+
     def test_evaluation_filters_overlap_and_online_labels_arrive_later(self):
         with tempfile.TemporaryDirectory() as tmp:
             directory=Path(tmp)

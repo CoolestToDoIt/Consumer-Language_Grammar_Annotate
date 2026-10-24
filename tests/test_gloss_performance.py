@@ -97,6 +97,8 @@ class BulkGlossTests(unittest.TestCase):
         expected = GlossLearner().fit([first])
         cases = [
             [first, GlossExample(TextExample('bad', ('tal', 'mir')), ('tree',))],
+            [first, GlossExample(TextExample('bad', ('tal', 42)), ('tree', 'bird'))],
+            [first, GlossExample(TextExample('bad', ['tal']), ('tree',))],
             [first, 'not a gloss record'],
             [first, GlossExample(TextExample('missing', ('tal',)), None)],
         ]
@@ -175,6 +177,28 @@ class BulkGlossTests(unittest.TestCase):
                 json.dump(state, handle)
             with self.assertRaisesRegex(ValueError, 'Duplicate checkpoint'):
                 GlossLearner.load(path)
+
+    def test_malformed_checkpoint_metadata_and_annotation_types_are_rejected(self):
+        valid = {'schema_version': 1, 'mode': 'rules', 'max_rules': 512,
+                 'paradigm_window': 32, 'version': 1,
+                 'records': [{'id': 'one', 'tokens': ['tal'], 'glosses': ['tree']}]}
+        cases = [[], {**valid, 'schema_version': True}, {**valid, 'records': {}},
+                 *[{**valid, 'version': value} for value in (-1, 0, 1.5, True, '1', None)]]
+        for field,value in [('tokens', 'tal'), ('glosses', 'tree'), ('tokens', [42]),
+                            ('tokens', ['']), ('id', []), ('glosses', ['two labels'])]:
+            state = copy.deepcopy(valid)
+            state['records'][0][field] = value
+            cases.append(state)
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'malformed.json.gz'
+            for state in cases:
+                with self.subTest(state=state):
+                    with gzip.open(path, 'wt') as handle:
+                        json.dump(state, handle)
+                    before = path.read_bytes()
+                    with self.assertRaises(ValueError):
+                        GlossLearner.load(path)
+                    self.assertEqual(path.read_bytes(), before)
 
 
 class AnalogyIndexTests(unittest.TestCase):

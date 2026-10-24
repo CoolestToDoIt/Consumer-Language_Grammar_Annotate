@@ -97,8 +97,8 @@ class GlossLearner:
     def __init__(self,mode='rules',max_rules=512,paradigm_window=32):
         if mode not in ('memory','analogy','rules'):
             raise ValueError('Gloss model must be memory, analogy, or rules')
-        if max_rules<1 or paradigm_window<1:
-            raise ValueError('Rule and paradigm bounds must be positive')
+        if any(type(value) is not int or value<1 for value in (max_rules,paradigm_window)):
+            raise ValueError('Rule and paradigm bounds must be positive integers')
         self.mode=mode
         self.max_rules=max_rules
         self.paradigm_window=paradigm_window
@@ -154,8 +154,12 @@ class GlossLearner:
 
     def _correct_record(self,example,glosses):
         """Apply one authoritative correction without preparing rule rankings."""
-        if not isinstance(example,TextExample) or not example.tokens or not example.id:
+        if (not isinstance(example,TextExample) or not isinstance(example.id,str) or not example.id
+                or not isinstance(example.tokens,tuple) or not example.tokens
+                or any(not isinstance(word,str) or not word or any(c.isspace() for c in word) for word in example.tokens)):
             raise ValueError('Corrections need a public example with ID and word tokens')
+        if isinstance(glosses,(str,bytes)):
+            raise ValueError('Glosses must be aligned labels, not a single string')
         glosses=tuple(glosses)
         if len(glosses)!=len(example.tokens) or any(not isinstance(g,str) or not g or any(c.isspace() for c in g) for g in glosses):
             raise ValueError('Glosses must be nonempty labels aligned to source words')
@@ -303,16 +307,24 @@ class GlossLearner:
     def load(cls,path):
         with gzip.open(path,'rt',encoding='utf-8') as handle:
             state=json.load(handle)
-        if state.get('schema_version')!=1:
+        if not isinstance(state,dict) or type(state.get('schema_version')) is not int or state['schema_version']!=1:
             raise ValueError('Unsupported gloss checkpoint schema')
+        if not isinstance(state.get('records'),list):
+            raise ValueError('Gloss checkpoint records must be an array')
+        version=state.get('version')
+        if type(version) is not int or version<len(state['records']):
+            raise ValueError('Gloss checkpoint version must cover its authoritative records')
         model=cls(state['mode'],state['max_rules'],state['paradigm_window'])
         def records():
             seen=set()
             for row in state['records']:
+                if (not isinstance(row,dict) or not isinstance(row.get('id'),str)
+                        or not isinstance(row.get('tokens'),list) or not isinstance(row.get('glosses'),list)):
+                    raise ValueError('Malformed gloss checkpoint annotation')
                 if row['id'] in seen:
                     raise ValueError('Duplicate checkpoint annotation ID')
                 seen.add(row['id'])
                 yield GlossExample(TextExample(row['id'],tuple(row['tokens'])),tuple(row['glosses']))
         model.fit(records())
-        model.version=state['version']
+        model.version=version
         return model
