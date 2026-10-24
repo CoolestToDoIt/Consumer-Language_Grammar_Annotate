@@ -49,7 +49,7 @@ def load_gloss(path, require_gold=True, skip_misaligned=False):
             if not line.strip():
                 flush(); tiers={}
                 continue
-            if line.startswith('\\t') or line.startswith('\\g'):
+            if line[:2] in ('\\t','\\g') and (len(line)==2 or line[2].isspace()):
                 key=line[1]
                 if key in tiers:
                     raise ValueError(f'{path}: repeated \\{key} tier before sentence boundary')

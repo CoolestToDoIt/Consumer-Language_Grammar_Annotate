@@ -31,6 +31,24 @@ class GlossTests(unittest.TestCase):
             self.assertEqual(model.predict(public)[0]['gloss'],'bird-PL')
             self.assertEqual(model.predict(public)[0]['candidates'][0]['kind'],'rule')
 
+    def test_reader_requires_exact_source_and_gloss_tier_names(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'sample'
+            path.write_text('\\translation SECRET ANSWER\n\\t\ttal mir\n'
+                            '\\glossary SECRET LABELS\n\\g\ttree bird\n'
+                            '\\transcription SECRET SEGMENTATION\n\\grammar SECRET GRAMMAR\n')
+            records,stats=load_gloss(path)
+            self.assertEqual(records[0].example.tokens,('tal','mir'))
+            self.assertEqual(records[0].glosses,('tree','bird'))
+            self.assertNotIn('SECRET',repr(records))
+            self.assertEqual(stats['records_read'],1)
+            path.write_text('\\translation SECRET ANSWER\n\\g tree bird\n')
+            with self.assertRaisesRegex(ValueError,'no source words'):
+                load_gloss(path)
+            path.write_text('\\t tal mir\n\\glossary SECRET LABELS\n')
+            with self.assertRaisesRegex(ValueError,'no gold gloss'):
+                load_gloss(path)
+
     def test_predictions_do_not_mutate_and_ungrounded_roots_remain_unknown(self):
         model=GlossLearner()
         model.correct(TextExample('root',('tal',)),('tree',))
