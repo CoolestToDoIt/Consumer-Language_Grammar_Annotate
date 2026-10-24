@@ -44,9 +44,14 @@ def main(argv=None):
     report=commands.add_parser('report',help='Reconstruct a run report from saved predictions, feedback and private scoring data')
     report.add_argument('--checkpoint',required=True)
     report.add_argument('--output',required=True)
+    teach=commands.add_parser('teach',help='Teach/review a language project through its workspace adapter')
+    teach.add_argument('teaching_args',nargs=argparse.REMAINDER)
     args=parser.parse_args(argv)
     try:
-        if args.command=='evaluate':
+        if args.command=='teach':
+            from .teaching_app import main as teaching_main
+            teaching_main(args.teaching_args)
+        elif args.command=='evaluate':
             evaluate_gloss(args.train,args.eval,args.output,args.split)
         elif args.command=='stream':
             online_gloss(args.train,args.dev,args.run_dir,args.support,args.stream,tuple(args.delays),tuple(args.policies),args.probe_every,
