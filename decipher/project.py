@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import re
 import tempfile
+import time
 import zipfile
 
 from .corpus import TextExample, nfc
@@ -20,6 +21,14 @@ DEFAULT_MODEL_CONFIG = {
     'contextual': True,
 }
 MAX_IMPORT_BYTES = 25 * 1024 * 1024
+
+
+class ProjectWriteConflict(ValueError):
+    """A saved workspace changed after this client opened it."""
+
+
+class AnnotationRevisionConflict(ValueError):
+    """The supplied reviewed annotation revision is no longer current."""
 
 
 def _now():
@@ -79,6 +88,7 @@ class LanguageProject:
 
     def __init__(self, path, data):
         self.path = Path(path)
+        self._disk_digest = None
         self.data = data
         self._validate()
         config = _model_config(data['model_config'])
@@ -112,9 +122,10 @@ class LanguageProject:
     @classmethod
     def open(cls, path):
         source = Path(path)
-        with source.open(encoding='utf-8') as handle:
-            data = json.load(handle)
-        return cls(source, data)
+        raw = source.read_bytes()
+        project = cls(source, json.loads(raw))
+        project._disk_digest = hashlib.sha256(raw).hexdigest()
+        return project
 
     @classmethod
     def restore(cls, archive, destination):
@@ -138,6 +149,7 @@ class LanguageProject:
         try:
             restored = cls.open(temporary)
             restored.path = target
+            restored._disk_digest = None
             restored.save()
             return restored
         finally:
@@ -217,6 +229,25 @@ class LanguageProject:
                 return item
         raise ValueError(f'Unknown sentence ID: {identifier}')
 
+    def submit(self, example, *, persist=True):
+        """Register manual public source words without exposing annotations."""
+        if (not isinstance(example, TextExample) or not isinstance(example.id, str) or not example.id
+                or not isinstance(example.tokens, tuple) or not example.tokens
+                or any(not isinstance(word, str) or not word or any(c.isspace() for c in word) for word in example.tokens)
+                or type(persist) is not bool):
+            raise ValueError('Submit a public sentence ID and separately segmented source words')
+        identifier = nfc(example.id)
+        tokens = [nfc(word) for word in example.tokens]
+        for row in self.data['sentences']:
+            if row['id'] == identifier:
+                if row['tokens'] != tokens:
+                    raise ValueError('An existing sentence ID cannot change source words')
+                return False
+        self.data['sentences'].append({'id': identifier, 'tokens': tokens})
+        if persist:
+            self.save()
+        return True
+
     def add_corpus(self, name, content, format='auto'):
         name = _validate_name(name, 'Corpus name')
         if not isinstance(content, str):
@@ -256,8 +287,16 @@ class LanguageProject:
         self.save()
         return len(additions)
 
-    def correct(self, identifier, glosses):
+    def correct(self, identifier, glosses, *, expected_revision=None, persist=True):
         sentence = self.sentence(identifier)
+        revision = sum(item['id'] == identifier for item in self.data['annotation_history'])
+        if type(persist) is not bool:
+            raise ValueError('Persistence choice must be boolean')
+        if expected_revision is not None:
+            if type(expected_revision) is not int or expected_revision < 0:
+                raise ValueError('Expected annotation revision must be a nonnegative integer')
+            if expected_revision != revision:
+                raise AnnotationRevisionConflict(f'Annotation changed: reviewed revision {expected_revision}, current revision {revision}. Refresh and review it again.')
         example = TextExample(identifier, tuple(sentence['tokens']))
         if not isinstance(glosses, (list, tuple)):
             raise ValueError('Glosses must be an array aligned to source words')
@@ -267,7 +306,7 @@ class LanguageProject:
             return False
         if not self.model.correct(example, labels):
             return False
-        revision = 1 + sum(item['id'] == identifier for item in self.data['annotation_history'])
+        revision += 1
         self.data['annotation_history'].append({
             'id': identifier,
             'revision': revision,
@@ -278,7 +317,8 @@ class LanguageProject:
             'model_version': self.model.version,
             'annotation_count': len(self._latest_annotations()),
         }
-        self.save()
+        if persist:
+            self.save()
         return True
 
     def predict(self, identifier):
@@ -295,16 +335,37 @@ class LanguageProject:
             'annotation_count': len(self._latest_annotations()),
         }
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', dir=self.path.parent, delete=False) as handle:
-            temporary = Path(handle.name)
-            json.dump(self.data, handle, ensure_ascii=False, indent=2, allow_nan=False)
-            handle.write('\n')
-            handle.flush()
-            os.fsync(handle.fileno())
+        lock = self.path.with_name(self.path.name+'.lock')
         try:
-            temporary.replace(self.path)
+            descriptor = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+        except FileExistsError as exc:
+            raise ProjectWriteConflict('Project is being saved by another process. Retry after it finishes; a crashed writer lock needs explicit recovery.') from exc
+        temporary = None
+        try:
+            actual = hashlib.sha256(self.path.read_bytes()).hexdigest() if self.path.exists() else None
+            if actual != self._disk_digest:
+                raise ProjectWriteConflict('Project changed on disk. Reopen it before saving; another client has newer work.')
+            self._validate()
+            with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', dir=self.path.parent, delete=False) as handle:
+                temporary = Path(handle.name)
+                json.dump(self.data, handle, ensure_ascii=False, indent=2, allow_nan=False)
+                handle.write('\n')
+                handle.flush()
+                os.fsync(handle.fileno())
+            for attempt in range(6):
+                try:
+                    temporary.replace(self.path)
+                    break
+                except PermissionError:
+                    if attempt == 5:
+                        raise
+                    time.sleep(.05 * 2**attempt)
+            self._disk_digest = hashlib.sha256(self.path.read_bytes()).hexdigest()
         finally:
-            temporary.unlink(missing_ok=True)
+            if temporary is not None:
+                temporary.unlink(missing_ok=True)
+            os.close(descriptor)
+            lock.unlink(missing_ok=True)
 
     def export(self, destination):
         self.save()

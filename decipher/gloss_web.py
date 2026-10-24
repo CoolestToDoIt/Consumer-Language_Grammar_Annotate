@@ -8,7 +8,8 @@ from pathlib import Path
 import tempfile
 import zipfile
 
-from .project import LanguageProject, list_projects, project_path
+from .project import (LanguageProject, list_projects, project_path,
+                      AnnotationRevisionConflict, ProjectWriteConflict)
 
 
 PAGE = """<!doctype html>
@@ -55,7 +56,7 @@ async function json(path,method,data){return (await request(path,{method,headers
 function message(text){byId('message').textContent=text}
 async function loadProjects(){const items=await (await request('/api/projects')).json();const select=byId('projects');select.replaceChildren();for(const item of items){const option=document.createElement('option');option.value=item.project_id;option.textContent=`${item.name} (${item.language_id})`;select.append(option)}}
 async function openProject(id){await json('/api/open','POST',{project_id:id});await refresh();message('Project opened.')}
-async function refresh(){const summary=await (await request('/api/project')).json();byId('project-summary').textContent=`${summary.name} — ${summary.language_id}; ${summary.sentences} sentences; ${summary.annotations} current annotations.`;const items=await (await request('/api/queue')).json();const queue=byId('queue');queue.replaceChildren();for(const item of items){const card=document.createElement('article');card.className='sentence';const heading=document.createElement('h3');heading.textContent=item.id;card.append(heading);const row=document.createElement('div');const inputs=[];for(let i=0;i<item.tokens.length;i++){const word=document.createElement('label');word.className='word';const source=document.createElement('strong');source.textContent=item.tokens[i];const input=document.createElement('input');input.value=item.predictions[i].gloss||'';input.setAttribute('aria-label',`Gloss for ${item.tokens[i]}`);const known=document.createElement('span');known.className=item.predictions[i].known_form?'known':'unknown';known.textContent=item.predictions[i].known_form?'known form':'unknown form';const evidence=document.createElement('span');evidence.className='evidence';const candidates=item.predictions[i].candidates.map(candidate=>`${candidate.gloss} [${candidate.kind}; evidence ${candidate.score}]`).join(' · ');evidence.textContent=candidates||'No candidate evidence';word.append(source,input,known,evidence);row.append(word);inputs.push(input)}card.append(row);const save=document.createElement('button');save.textContent=item.annotated?`Save revision ${item.revision+1}`:'Teach glosses';save.addEventListener('click',async()=>{try{await json('/api/correct','POST',{id:item.id,glosses:inputs.map(input=>input.value.trim())});message('Correction saved.');await refresh()}catch(error){message(error.message)}});card.append(save);queue.append(card)}}
+async function refresh(){const summary=await (await request('/api/project')).json();byId('project-summary').textContent=`${summary.name} — ${summary.language_id}; ${summary.sentences} sentences; ${summary.annotations} current annotations.`;const items=await (await request('/api/queue')).json();const queue=byId('queue');queue.replaceChildren();for(const item of items){const card=document.createElement('article');card.className='sentence';const heading=document.createElement('h3');heading.textContent=item.id;card.append(heading);const row=document.createElement('div');const inputs=[];for(let i=0;i<item.tokens.length;i++){const word=document.createElement('label');word.className='word';const source=document.createElement('strong');source.textContent=item.tokens[i];const input=document.createElement('input');input.value=item.predictions[i].gloss||'';input.setAttribute('aria-label',`Gloss for ${item.tokens[i]}`);const known=document.createElement('span');known.className=item.predictions[i].known_form?'known':'unknown';known.textContent=item.predictions[i].known_form?'known form':'unknown form';const evidence=document.createElement('span');evidence.className='evidence';const candidates=item.predictions[i].candidates.map(candidate=>`${candidate.gloss} [${candidate.kind}; evidence ${candidate.score}]`).join(' · ');evidence.textContent=candidates||'No candidate evidence';word.append(source,input,known,evidence);row.append(word);inputs.push(input)}card.append(row);const save=document.createElement('button');save.textContent=item.annotated?`Save revision ${item.revision+1}`:'Teach glosses';save.addEventListener('click',async()=>{try{await json('/api/correct','POST',{id:item.id,glosses:inputs.map(input=>input.value.trim()),expected_revision:item.revision});message('Correction saved.');await refresh()}catch(error){message(error.message)}});card.append(save);queue.append(card)}}
 byId('open').addEventListener('submit',async event=>{event.preventDefault();try{await openProject(byId('projects').value)}catch(error){message(error.message)}});
 byId('create').addEventListener('submit',async event=>{event.preventDefault();const form=new FormData(event.currentTarget);try{const project=await json('/api/projects','POST',{name:form.get('name'),language_id:form.get('language')});await loadProjects();await openProject(project.project_id)}catch(error){message(error.message)}});
 byId('import').addEventListener('submit',async event=>{event.preventDefault();const form=new FormData(event.currentTarget);const file=form.get('file');try{const content=await file.text();const result=await json('/api/import','POST',{name:file.name,format:form.get('format'),content});message(`Imported ${result.sentences} sentences.`);await refresh()}catch(error){message(error.message)}});
@@ -154,7 +155,8 @@ class GlossWebApp:
                 return self._json(start_response, self._active().queue())
             if path == '/api/correct' and method == 'POST':
                 value = self._body(environ)
-                changed = self._active().correct(value.get('id'), value.get('glosses'))
+                changed = self._active().correct(value.get('id'), value.get('glosses'),
+                                                 expected_revision=value.get('expected_revision'))
                 return self._json(start_response, {'changed': changed})
             if path == '/api/export' and method == 'GET':
                 project = self._active()
@@ -182,7 +184,7 @@ class GlossWebApp:
                 project.save()
                 return self._json(start_response, {'project_id': project.data['project_id']}, HTTPStatus.CREATED)
             return self._json(start_response, {'error': 'Not found'}, HTTPStatus.NOT_FOUND)
-        except FileExistsError as exc:
+        except (FileExistsError, AnnotationRevisionConflict, ProjectWriteConflict) as exc:
             return self._json(start_response, {'error': str(exc)}, HTTPStatus.CONFLICT)
         except (ValueError, KeyError, TypeError, json.JSONDecodeError, zipfile.BadZipFile) as exc:
             return self._json(start_response, {'error': str(exc)}, HTTPStatus.BAD_REQUEST)

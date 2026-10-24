@@ -1,7 +1,7 @@
 """Bounded, source-disjoint development check of B's teaching/review contract.
 
-Uses only configured Lezgi/Tsez development data. The explicit fixture backend is
-for contract validation; it is not the production workspace or a release package.
+Uses only configured Lezgi/Tsez development data and real .dproj workspaces.
+Context is explicitly disabled to retain the frozen word-gloss baseline condition.
 """
 import argparse
 import json
@@ -18,7 +18,8 @@ from decipher.gloss_evaluate import GlossMetrics, provenance, select_online, wri
 from decipher.review import review_queue
 from decipher.review_calibration import Calibration, build_calibration
 from decipher.teaching import TeachingService
-from decipher.teaching_fixture import FixtureProjectStore
+from decipher.project import LanguageProject
+from decipher.workspace import WorkspaceStore
 
 
 def run(language, directory, report_directory, *, training_sentences=110, calibration_sentences=100,
@@ -52,12 +53,14 @@ def run(language, directory, report_directory, *, training_sentences=110, calibr
     origin = provenance()
     origin['product_implementation_sha256'] = {
         path.relative_to(ROOT).as_posix(): digest(path.read_text(encoding='utf-8').encode('utf-8'))
-        for path in [ROOT/'decipher'/name for name in ('teaching.py', 'teaching_fixture.py', 'teaching_app.py', 'review.py', 'review_calibration.py')]
+        for path in [ROOT/'decipher'/name for name in ('teaching.py', 'teaching_app.py', 'workspace.py', 'project.py', 'gloss_app.py', 'gloss_web.py', 'review.py', 'review_calibration.py')]
         +[Path(__file__).resolve()]}
     origin['no_third_party_site_packages'] = bool(sys.flags.no_site)
-    store = FixtureProjectStore()
-    project_path = directory/'project.fixture.json'
-    project = store.create(project_path, name=f'{language} development review', language=language, mode=mode)
+    store = WorkspaceStore()
+    project_path = directory/'project.dproj'
+    LanguageProject.create(project_path, f'{language} development review', language,
+                           {'mode': mode, 'contextual': False})
+    project = store.open(project_path)
     service = TeachingService(project)
     start = perf_counter()
     for gold in training:
@@ -71,7 +74,7 @@ def run(language, directory, report_directory, *, training_sentences=110, calibr
     before_predictions = {gold.example.id: project.predict(gold.example) for gold in validation}
     baseline = GlossMetrics()
     for gold in validation:
-        baseline.add(gold, before_predictions[gold.example.id], project.learner)
+        baseline.add(gold, before_predictions[gold.example.id], project.workspace.model)
         project.submit(gold.example)
     project.save()
     start = perf_counter()
@@ -122,8 +125,8 @@ def run(language, directory, report_directory, *, training_sentences=110, calibr
     def membership(records):
         return {'sentences': len(records), 'word_labels': sum(len(gold.glosses) for gold in records),
                 'selection': [{'id': gold.example.id, 'source_sha256': digest(encoded(gold.example.tokens))} for gold in records]}
-    report = {'schema_version': 1, 'task': 'Frozen-model development correctness calibration and review ordering; fixture-backed contract validation',
-              'language': language, 'mode': mode, 'training': file_info(train), 'development': file_info(dev),
+    report = {'schema_version': 1, 'task': 'Frozen-model development correctness calibration and review ordering using production .dproj workspaces',
+              'language': language, 'mode': mode, 'contextual': False, 'training': file_info(train), 'development': file_info(dev),
               'source_manifest': file_info(ROOT/'data'/'glossing'/'SOURCES.json'), 'filters': filters,
               'budgets': {'learner_training': membership(training), 'calibration_fit': membership(fit),
                           'calibration_validation': membership(validation)}, 'limit_dev': limit_dev,
@@ -131,17 +134,17 @@ def run(language, directory, report_directory, *, training_sentences=110, calibr
               'baseline_prediction_metrics': baseline.result(), 'calibration': calibration.state(),
               'review_comparison': comparisons,
               'read_only_checks': {'model_identity_unchanged': True, 'full_candidates_unchanged': True,
-                                   'validation_answers_never_taught': True, 'fixture_reopen_matches': True,
+                                   'validation_answers_never_taught': True, 'workspace_reopen_matches': True,
                                    'calibration_reload_matches': True},
-              'phase_seconds': {'training_and_fixture_io': training_seconds, 'calibration': calibration_seconds,
+              'phase_seconds': {'training_and_workspace_io': training_seconds, 'calibration': calibration_seconds,
                                 'two_review_queues': queue_seconds}, 'provenance': origin,
               'artifact_sha256': {name: digest((directory/name).read_bytes()) for name in
-                                  ('project.fixture.json', 'calibration.json', 'validation-predictions.jsonl', 'validation-gold.jsonl', 'review-queues.json')},
+                                  ('project.dproj', 'calibration.json', 'validation-predictions.jsonl', 'validation-gold.jsonl', 'review-queues.json')},
               'limitations': ['Single ordered development prefix; no language-level significance claim',
                               'Calibration and validation labels are additional supervision, not learner training',
                               'Review compares equal sentence budgets; word annotation costs differ and are reported',
                               'Error concentration before teaching is not a measured learning gain',
-                              'Production workspace integration is owned by A; this uses the explicit fixture adapter',
+                              'Uses A workspace persistence with B teaching/review adapter; no external user-trial claim',
                               'No internal-stem-edit experiment or default-model change']}
     write_json(directory/'results.json', report)
     write_json(report_directory/'results.json', report)
@@ -162,7 +165,7 @@ def run(language, directory, report_directory, *, training_sentences=110, calibr
               'A failed calibration supplies no confidence estimates; the last row then uses the documented heuristic fallback.', '',
               'This is an ordered prefix development diagnostic. Equal sentence review budgets can cost different numbers of word annotations. '
               'It measures where errors concentrate before teaching, not subsequent learning or unrestricted translation. '
-              'Raw artifacts stay in the specified local run directory. Production persistence remains owned by A. '
+              'Raw artifacts stay in the specified local run directory; the workspace uses A\'s production format. '
               'Gitksan and the deferred stem-edit experiment are untouched.', '']
     (report_directory/'summary.md').write_text('\n'.join(lines), encoding='utf-8')
     print(f"{language}: calibration {status}; validation word accuracy {report['baseline_prediction_metrics']['word_accuracy']:.2%}; "

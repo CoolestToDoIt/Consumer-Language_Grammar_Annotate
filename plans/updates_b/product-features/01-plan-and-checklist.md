@@ -24,10 +24,11 @@ the previous milestone supplies reproducible evaluation and restartable runs.
   experimental branch or learner change will be started.
 
 Worker A owns project persistence, the web UI, contextual modeling, and release
-packaging. No project API implementation exists in this checkout. The plan
-allows B to develop against a fixture adapter while A builds storage. B will
-publish a small typed backend contract and runnable fixture-backed teaching flow;
-it will not silently introduce a competing production workspace format.
+packaging. At the start there was no project API implementation, so B established
+the contract against the allowed fixture adapter. A then published `eaab130`;
+the real `.dproj` adapter is now integrated on the feature branch. Teaching audit
+metadata lives in that same A-owned format, with targeted shared API/write-safety
+additions. The fixture remains an explicit test option, not a production format.
 
 Existing engine behavior, checkpoint schemas, historical reports and held-out
 language boundaries remain fixed. Gitksan stays reserved. Raw model scores must
@@ -48,7 +49,7 @@ not be displayed as calibrated confidence percentages.
       and safe stale/conflicting-answer handling through that contract.
 - [x] Implement separate frozen-model calibration and held-out validation; require
       sufficient evidence and invalidate calibration after a model change.
-- [ ] Verify complete teaching/review/reopen flows and error recovery without
+- [x] Verify complete teaching/review/reopen flows and error recovery without
       third-party dependencies; preserve all existing regressions.
 - [ ] Run bounded Lezgi/Tsez review/calibration checks, record data membership,
       label budgets and honest outcomes, and leave historical results untouched.

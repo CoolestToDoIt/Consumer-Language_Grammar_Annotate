@@ -25,6 +25,7 @@ def learner_identity(learner):
     """Opaque identity changes with model evidence, ordering, settings or engine."""
     return digest(encoded({'engine_sha256': digest(Path(__file__).with_name('gloss.py').read_text(encoding='utf-8').encode('utf-8')),
                            'mode': learner.mode, 'max_rules': learner.max_rules,
+                           'contextual': getattr(learner, 'contextual', False),
                            'paradigm_window': learner.paradigm_window, 'version': learner.version,
                            'records': [{'id': row.example.id, 'tokens': row.example.tokens, 'glosses': row.glosses}
                                        for row in learner.records.values()]}))

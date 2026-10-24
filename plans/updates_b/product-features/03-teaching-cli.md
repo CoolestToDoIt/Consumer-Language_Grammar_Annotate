@@ -66,3 +66,7 @@ quit
 Reopen with the same shell command. Source words are whitespace segmented. Raw
 candidate scores are printed as uncalibrated numbers, never confidence percentages.
 Production persistence/UI integration remains A's responsibility under the plan.
+
+The production binding is now implemented and verified against A's published
+workspace. See [the integration update](05-production-workspace-integration.md)
+for the real `.dproj` commands; the fixture example above remains useful for tests.
