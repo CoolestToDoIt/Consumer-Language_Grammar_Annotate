@@ -1,0 +1,113 @@
+{
+  "status": "complete",
+  "config": {
+    "train": "data/glossing/lezgi/lez-train-track1-uncovered",
+    "dev": "data/glossing/lezgi/lez-dev-track1-uncovered",
+    "strategy": "bulk",
+    "mode": "rules",
+    "prediction_modes": [
+      "memory",
+      "analogy",
+      "rules"
+    ],
+    "limit_train": null,
+    "limit_dev": null,
+    "max_rules": 512,
+    "paradigm_window": 32,
+    "timeout": 120.0,
+    "output": "reports/gloss/performance/lezgi-bulk.json",
+    "predictions": "runs/gloss-engine-optimized/lezgi-predictions.jsonl",
+    "reference_predictions": "runs/gloss-engine-baseline/lezgi-predictions.jsonl",
+    "cprofile": null
+  },
+  "source": {
+    "commit": "524163c64150cf06773c0afcc1a28ea4d797774c",
+    "branch": "feat/gloss-engine",
+    "tracked_dirty": true,
+    "engine_sha256": "2153d60a9eaa188f9a82aeb81922b762aa4512177bd32264b0cba7432d9fda74"
+  },
+  "environment": {
+    "python": "3.12.4 (v3.12.4:8e8a4baf65, Jun  6 2024, 17:33:18) [Clang 13.0.0 (clang-1300.0.29.30)]",
+    "platform": "macOS-14.5-arm64-arm-64bit",
+    "machine": "arm64"
+  },
+  "inputs": {
+    "train": {
+      "path": "data/glossing/lezgi/lez-train-track1-uncovered",
+      "sha256": "aefe3a8da0719d52122c3d534beb0d384bb8d536649e9c7a022aef41b5e80aa0"
+    },
+    "development": {
+      "path": "data/glossing/lezgi/lez-dev-track1-uncovered",
+      "sha256": "2f6c2b959d85ab17a3736bb16a57698023aee38f6f4a332b1340005c035e9034"
+    }
+  },
+  "parsing_seconds": 0.00509208400035277,
+  "dataset": {
+    "training_sentences": 634,
+    "training_words": 6250,
+    "probe_sentences": 88,
+    "probe_words": 992,
+    "excluded_train_source_overlap": 0,
+    "training_reader": {
+      "records_read": 634,
+      "misaligned": 0,
+      "missing_gloss": 0
+    },
+    "development_reader": {
+      "records_read": 88,
+      "misaligned": 0,
+      "missing_gloss": 0
+    },
+    "training_ids_sha256": "cae70f58a4a238be0141e2390d6f104849d6671f7bf49bef8054997342ee3027",
+    "probe_ids_sha256": "44d921ec0032c6a4ec053609cc116241722ddd5a0e6a81f2ac2202182e0636cf"
+  },
+  "training_seconds": 0.03427929199824575,
+  "training_profile": {
+    "ingestion_seconds": 0.028858684847364202,
+    "ranking_seconds": 0.002511500002583489,
+    "ranking_passes": 1
+  },
+  "model": {
+    "version": 634,
+    "authoritative_records": 634,
+    "lexicon_forms": 1763,
+    "rule_hypotheses": 3048,
+    "prepared_rules": 512
+  },
+  "prediction": {
+    "memory": {
+      "seconds": 0.0034627079949132167,
+      "correct_words": 681,
+      "words": 992,
+      "word_accuracy": 0.686491935483871
+    },
+    "analogy": {
+      "seconds": 0.26572674999624724,
+      "correct_words": 693,
+      "words": 992,
+      "word_accuracy": 0.6985887096774194
+    },
+    "rules": {
+      "seconds": 0.01948962499591289,
+      "correct_words": 716,
+      "words": 992,
+      "word_accuracy": 0.7217741935483871
+    }
+  },
+  "predictions_sha256": "f02d95f3db048b4c772a4e4c3215879b481659983fcd080692737eae5ff1e927",
+  "reference_predictions": {
+    "path": "runs/gloss-engine-baseline/lezgi-predictions.jsonl",
+    "sha256": "f02d95f3db048b4c772a4e4c3215879b481659983fcd080692737eae5ff1e927",
+    "exact_match": true
+  },
+  "checkpoint_save_seconds": 0.027543707998120226,
+  "checkpoint_bytes": 38973,
+  "checkpoint_load_seconds": 0.03577804200176615,
+  "reload_profile": {
+    "ingestion_seconds": 0.028593489951163065,
+    "ranking_seconds": 0.00231537499348633,
+    "ranking_passes": 1
+  },
+  "reloaded_predictions_exact_match": true,
+  "process_peak_rss_bytes": 35700736
+}

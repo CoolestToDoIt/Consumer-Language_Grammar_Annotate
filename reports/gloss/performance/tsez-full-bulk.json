@@ -1,0 +1,108 @@
+{
+  "status": "complete",
+  "config": {
+    "train": "data/glossing/tsez/ddo-train-track1-uncovered",
+    "dev": "data/glossing/tsez/ddo-dev-track1-uncovered",
+    "strategy": "bulk",
+    "mode": "rules",
+    "prediction_modes": [
+      "memory",
+      "analogy",
+      "rules"
+    ],
+    "limit_train": null,
+    "limit_dev": null,
+    "max_rules": 512,
+    "paradigm_window": 32,
+    "timeout": 120.0,
+    "output": "reports/gloss/performance/tsez-full-bulk.json",
+    "predictions": "runs/gloss-engine-optimized/tsez-full-predictions.jsonl",
+    "reference_predictions": null,
+    "cprofile": null
+  },
+  "source": {
+    "commit": "524163c64150cf06773c0afcc1a28ea4d797774c",
+    "branch": "feat/gloss-engine",
+    "tracked_dirty": true,
+    "engine_sha256": "2153d60a9eaa188f9a82aeb81922b762aa4512177bd32264b0cba7432d9fda74"
+  },
+  "environment": {
+    "python": "3.12.4 (v3.12.4:8e8a4baf65, Jun  6 2024, 17:33:18) [Clang 13.0.0 (clang-1300.0.29.30)]",
+    "platform": "macOS-14.5-arm64-arm-64bit",
+    "machine": "arm64"
+  },
+  "inputs": {
+    "train": {
+      "path": "data/glossing/tsez/ddo-train-track1-uncovered",
+      "sha256": "e590acdbed9b200ddffc8c2ed280c08913bed2abbb8dcc26458b5f647f0e3082"
+    },
+    "development": {
+      "path": "data/glossing/tsez/ddo-dev-track1-uncovered",
+      "sha256": "0883e6372e7d78e44d37a34dbd39c308ac5ed206efcd6177c519ee19b1cc4c2d"
+    }
+  },
+  "parsing_seconds": 0.0296000830057892,
+  "dataset": {
+    "training_sentences": 3547,
+    "training_words": 37396,
+    "probe_sentences": 445,
+    "probe_words": 4761,
+    "excluded_train_source_overlap": 0,
+    "training_reader": {
+      "records_read": 3547,
+      "misaligned": 0,
+      "missing_gloss": 0
+    },
+    "development_reader": {
+      "records_read": 445,
+      "misaligned": 0,
+      "missing_gloss": 0
+    },
+    "training_ids_sha256": "040969f709a544103df27d55417a4a1104886c80474155d216ba7e9569259bf6",
+    "probe_ids_sha256": "4d6687f87119f487bd823f87877a431d36a029ed9b702ace1fb3f65ae3e25f50"
+  },
+  "training_seconds": 0.789070291997632,
+  "training_profile": {
+    "ingestion_seconds": 0.6500638832367258,
+    "ranking_seconds": 0.1164222920051543,
+    "ranking_passes": 1
+  },
+  "model": {
+    "version": 3547,
+    "authoritative_records": 3547,
+    "lexicon_forms": 11007,
+    "rule_hypotheses": 77448,
+    "prepared_rules": 512
+  },
+  "prediction": {
+    "memory": {
+      "seconds": 0.017208750003192108,
+      "correct_words": 3248,
+      "words": 4761,
+      "word_accuracy": 0.6822096198277673
+    },
+    "analogy": {
+      "seconds": 7.784951749999891,
+      "correct_words": 3396,
+      "words": 4761,
+      "word_accuracy": 0.7132955261499685
+    },
+    "rules": {
+      "seconds": 0.09149849999812432,
+      "correct_words": 3575,
+      "words": 4761,
+      "word_accuracy": 0.7508926696072253
+    }
+  },
+  "predictions_sha256": "02a931fc9a5960a0349bf056002dedd7032d4b73741aa1c3e1457c7baab0e3d0",
+  "checkpoint_save_seconds": 0.17215654099709354,
+  "checkpoint_bytes": 294137,
+  "checkpoint_load_seconds": 0.8286979159965995,
+  "reload_profile": {
+    "ingestion_seconds": 0.7019319119717693,
+    "ranking_seconds": 0.0915023330016993,
+    "ranking_passes": 1
+  },
+  "reloaded_predictions_exact_match": true,
+  "process_peak_rss_bytes": 186351616
+}
