@@ -5,8 +5,9 @@
 The sections below preserve the original bulk-fit measurements. Subsequent
 engine work is on `feat/gloss-engine`, through `cb824ba`, with **64 passing
 tests**. Merge that branch to incorporate the complete series; no evaluator,
-session, CLI, or public checkpoint-format changes are required. It is local
-and has not been pushed.
+session, CLI, or public checkpoint-format changes are required. The tested
+handoff was published to `origin/feat/gloss-engine` at `22e0203` with user
+approval. Combined integration awaits Worker B's branch.
 
 | Follow-up | Result | Details |
 |---|---|---|
