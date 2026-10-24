@@ -30,9 +30,14 @@ requested, arrived, revised, and pending answers independently of teacher decisi
 - [x] Implement atomic validated gloss checkpoints and CLI interruption/resume.
 - [x] Verify delays/policies, revisions, disjointness, read-only probes, invalid
       artifacts, metric reconstruction, and uninterrupted/resumed equality.
-- [ ] Run Lezgi then Tsez bounded 18-condition development matrices.
-- [ ] Run combined regressions and CLI/integrity checks; publish compact reports
+- [x] Run Lezgi then Tsez bounded 18-condition development matrices.
+- [x] Run combined regressions and CLI/integrity checks; publish compact reports
       and exact reproduction/handoff commands.
+
+All Worker B milestone tasks are complete. The final implementation and commands
+are in [the handoff](2026-10-24-07-handoff-and-commands.md); measured results are in
+[the development report](2026-10-24-06-development-matrix-results.md). The Windows
+checkpoint-format changes are explained in updates 04 and 05.
 
 ## Initial environment findings
 
