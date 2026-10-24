@@ -4,7 +4,8 @@
 
 New work is recorded in [product-features/](product-features/01-plan-and-checklist.md).
 It starts from main commit `a928139` on `feat/worker-b-teaching-review`.
-Features 2 and 6 are implemented and verified; Feature 4 remains explicitly deferred.
+Features 2 and 6 are implemented and verified. Feature 4 was subsequently approved
+and is isolated in [feature-4/](feature-4/01-plan-and-frozen-protocol.md).
 Start with the [current handoff](product-features/07-handoff-and-commands.md) or
 [development results](product-features/06-development-results.md).
 
