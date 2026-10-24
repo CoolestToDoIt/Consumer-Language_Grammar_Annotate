@@ -1,5 +1,8 @@
 import copy
 from pathlib import Path
+import json
+import subprocess
+import sys
 import tempfile
 import unittest
 from unittest import mock
@@ -9,6 +12,23 @@ from decipher.gloss_evaluate import evaluate_gloss, online_gloss
 
 
 class GlossTests(unittest.TestCase):
+    def test_cli_train_and_reload_transfer_without_site_packages(self):
+        root=Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as tmp:
+            fixture=Path(tmp)/'fixture'
+            checkpoint=Path(tmp)/'model.gz'
+            fixture.write_text('\\translation IGNORED PRIVATE TEXT\n\\t tal mir\n\\g tree bird\n\n'
+                               '\\t talum\n\\g tree-PL\n')
+            command=[sys.executable,'-S','-m','decipher.app','gloss']
+            subprocess.run(command+['train','--train',str(fixture),'--model',str(checkpoint)],
+                           cwd=root,capture_output=True,text=True,check=True)
+            result=subprocess.run(command+['predict','--model',str(checkpoint),'--text','mirum talum'],
+                                  cwd=root,capture_output=True,text=True,check=True)
+            predictions=json.loads(result.stdout)
+            self.assertEqual([item['gloss'] for item in predictions],['bird-PL','tree-PL'])
+            self.assertFalse(predictions[0]['known_form'])
+            self.assertTrue(predictions[1]['known_form'])
+
     def test_reader_discards_answer_bearing_noninput_tiers(self):
         with tempfile.TemporaryDirectory() as tmp:
             path=Path(tmp)/'sample'

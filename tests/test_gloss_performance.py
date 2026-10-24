@@ -48,6 +48,33 @@ class CountingGlossLearner(GlossLearner):
 
 
 class BulkGlossTests(unittest.TestCase):
+    def test_mixed_duplicate_revision_histories_match_authoritative_reconstruction(self):
+        import random
+        rng=random.Random(771)
+        vocabulary=('tal','mir','vel','café','talum','mirum','velum','zatal','zamir')
+        sources={str(i):tuple(rng.choices(vocabulary,k=rng.randint(1,3))) for i in range(24)}
+        choices=('tree','bird','flower','coffee','tree-PL','bird-PL','PST-tree','PL')
+        identifiers=[str(rng.randrange(24)) for _ in range(100)]
+        events=[record(identifier,sources[identifier],
+                       tuple(rng.choice(choices) for _ in sources[identifier])) for identifier in identifiers]
+        events=[event for index,item in enumerate(events) for event in ([item,item] if index%4==0 else [item])]
+        for mode in ('memory','analogy','rules'):
+            for window in (2,32):
+                model=GlossLearner(mode,max_rules=7,paradigm_window=window)
+                authoritative={}
+                version=0
+                for item in events:
+                    changed=authoritative.get(item.example.id)!=item
+                    self.assertEqual(model.correct(item.example,item.glosses),changed)
+                    if changed:
+                        authoritative.pop(item.example.id,None)
+                        authoritative[item.example.id]=item
+                        version+=1
+                    rebuilt=GlossLearner(mode,max_rules=7,paradigm_window=window).fit(authoritative.values())
+                    rebuilt.version=version
+                    self.assertEqual(model.__dict__,rebuilt.__dict__)
+                    self.assertEqual(model.predict(probes()),rebuilt.predict(probes()))
+
     def test_bulk_matches_sequential_candidates_state_and_version_in_all_modes(self):
         for mode in ('memory', 'analogy', 'rules'):
             for bounds in ({}, {'max_rules': 3, 'paradigm_window': 2}):
