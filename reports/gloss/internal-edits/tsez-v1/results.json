@@ -1,0 +1,2129 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "language": "tsez",
+  "algorithm_id": "grounded-internal-stem-overlay-v1",
+  "config": {
+    "mode": "rules",
+    "max_rules": 512,
+    "paradigm_window": 32,
+    "contextual": false,
+    "unchanged_source_flanks": 1,
+    "minimum_shared_gloss_span": 2,
+    "duplicate_record_policy": "retain offline baseline weighting",
+    "split": "dev"
+  },
+  "decision_criteria": {
+    "max_word_accuracy_loss": 0.005,
+    "min_mean_grounded_oov_gain": 0.01,
+    "max_single_grounded_oov_loss": 0.005,
+    "prediction_ratio": 2.0,
+    "prediction_absolute_extra_seconds": 0.25,
+    "max_peak_bytes": 536870912,
+    "max_child_seconds": 120.0
+  },
+  "timings": {
+    "parsing_seconds": 0.054689800017513335,
+    "base_fit_seconds": 0.8723951999563724,
+    "overlay_prepare_seconds": 0.16221930005121976,
+    "baseline_prediction_seconds": 0.046483400044962764,
+    "experimental_prediction_seconds": 0.13272969995159656,
+    "scoring_and_analysis_seconds": 0.167759699979797,
+    "base_checkpoint_save_seconds": 0.19285800005309284,
+    "checkpoint_load_and_prepare_seconds": 1.060052499989979,
+    "reconstruction_verification_seconds": 0.10717220010701567
+  },
+  "source": {
+    "commit": "4eb8632be480d8cf72fa90cd5e1ed9025f19369b",
+    "branch": "experiment/gloss-internal-edits",
+    "implementation_sha256": {
+      "decipher/gloss.py": "25b57a1aa8f6112ecd374c7c24a7d9f470f5a6f5f5fa3897f816cd721b6c15ed",
+      "decipher/corpus.py": "76ebfe586e2b21f2da85db769279dcc732241f350f9d58123533f3806a268a8c",
+      "decipher/gloss_evaluate.py": "7de6a49f830060f56ebd276be33f8ab95c4286e2e57efbb41392cad41a71142e",
+      "decipher/gloss_internal.py": "9b084d24c999f23214921445ca358167947bcbe07c7bd4c19c470322b70accd3",
+      "tools/evaluate_internal_edits.py": "524619003523afcf8518c65720b76b4b5bbc864d9abde091b5859a9882d105cd"
+    },
+    "baseline_commit": "bc0a5dff3b67c944a2696538d1f19a6b8eeb05da",
+    "protocol_commit": "9afb8b82e601a476c67e1dd17a30ce73f467d680",
+    "protocol_sha256": "0d7dafe0633b703a6a50b09501623e9f8242fa07096c259f8b1f0d13a886c332"
+  },
+  "environment": {
+    "python": "3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 170 Stepping 4, GenuineIntel",
+    "no_site_packages": true
+  },
+  "dataset": {
+    "training": {
+      "path": "C:\\Users\\logan\\OneDrive\\Documents\\Visual Studio\\Hackathons\\HackOHIO2026\\Unknown-Language-Translation\\data\\glossing\\tsez\\ddo-train-track1-uncovered",
+      "sha256": "e590acdbed9b200ddffc8c2ed280c08913bed2abbb8dcc26458b5f647f0e3082"
+    },
+    "development": {
+      "path": "C:\\Users\\logan\\OneDrive\\Documents\\Visual Studio\\Hackathons\\HackOHIO2026\\Unknown-Language-Translation\\data\\glossing\\tsez\\ddo-dev-track1-uncovered",
+      "sha256": "0883e6372e7d78e44d37a34dbd39c308ac5ed206efcd6177c519ee19b1cc4c2d"
+    },
+    "filters": {
+      "training_reader": {
+        "records_read": 3547,
+        "misaligned": 0,
+        "missing_gloss": 0
+      },
+      "evaluation_reader": {
+        "records_read": 445,
+        "misaligned": 0,
+        "missing_gloss": 0
+      },
+      "source_overlaps_excluded": 0,
+      "source_overlap_ids_excluded": []
+    },
+    "training_sentences": 3547,
+    "training_word_labels": 37396,
+    "development_sentences": 445,
+    "development_words": 4761,
+    "training_duplicates": {
+      "repeated_whole_sources": 14,
+      "conflicting_annotations": 1,
+      "unique_sources": 3533,
+      "policy": "retained equally in both systems"
+    },
+    "development_duplicates": {
+      "repeated_whole_sources": 0,
+      "conflicting_annotations": 0,
+      "unique_sources": 445,
+      "policy": "retained equally in both systems"
+    },
+    "manifest_sha256": "77631203d5426c41ed1c52f2a88d3b7add56cac50ec38d83054302b060d0bee9"
+  },
+  "memory_after_base": {
+    "peak_bytes": 135151616,
+    "api": "Windows PROCESS_MEMORY_COUNTERS.PeakWorkingSetSize"
+  },
+  "rules": {
+    "algorithm_id": "grounded-internal-stem-overlay-v1",
+    "base_version": 3547,
+    "total_rule_budget": 512,
+    "paradigm_window": 32,
+    "base_hypotheses": 77448,
+    "internal_hypotheses": 12474,
+    "selected_rules": 512,
+    "selected_internal_rules": 40,
+    "baseline_rules_displaced": 40
+  },
+  "baseline": {
+    "counts": {
+      "sentences": 445,
+      "words": 4761,
+      "correct": 3575,
+      "covered": 4304,
+      "top5_correct": 3997,
+      "nonpunct_words": 4751,
+      "nonpunct_correct": 3565,
+      "correct_sentences": 49,
+      "oov_words": 928,
+      "oov_correct": 327,
+      "grounded_oov_words": 808,
+      "grounded_oov_correct": 312,
+      "ungrounded_or_grammatical_oov_words": 120,
+      "ungrounded_or_grammatical_oov_correct": 15
+    },
+    "word_accuracy": 0.7508926696072253,
+    "sentence_accuracy": 0.1101123595505618,
+    "coverage": 0.9040117622348246,
+    "top5_accuracy": 0.8395295106070153,
+    "oov_accuracy": 0.35237068965517243,
+    "nonpunct_accuracy": 0.7503683435066302,
+    "grounded_oov_accuracy": 0.38613861386138615,
+    "errors": [
+      {
+        "id": "ddo-dev-track1-uncovered:2",
+        "source_word": "xexbin",
+        "expected": "children-and",
+        "predicted": "children-TOP",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:2",
+        "source_word": "teƛno",
+        "expected": "give-PST.UNW",
+        "predicted": "give-PFV.CVB",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:3",
+        "source_word": "ruqˤno",
+        "expected": "II.PL-hide-PFV.CVB",
+        "predicted": "III.PL-hide-PFV.CVB",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:3",
+        "source_word": "rukayn.",
+        "expected": "II.PL-see-PST.UNW",
+        "predicted": "IV-see-PST.UNW",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:4",
+        "source_word": "äsirun",
+        "expected": "tell-IMM.ANT.CVB",
+        "predicted": "tell-PST.PRT-TOP",
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:4",
+        "source_word": "baħrä",
+        "expected": "hound-ERG",
+        "predicted": null,
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:4",
+        "source_word": "mec",
+        "expected": "tongue",
+        "predicted": "language",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:5",
+        "source_word": "esarus",
+        "expected": "find-PST.PRT-GEN1",
+        "predicted": null,
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "source_word": "indowribin",
+        "expected": "turkey-PL-TOP",
+        "predicted": null,
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "source_word": "rayrno,",
+        "expected": "III.PL-bring-PFV.CVB",
+        "predicted": "IV-bring-PFV.CVB",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "source_word": "eƛin,",
+        "expected": "say-PFV.CVB",
+        "predicted": "say-PST.UNW",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "source_word": "mečoƛ’",
+        "expected": "field-SUPER.ESS",
+        "predicted": "place-SUPER.ESS",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "source_word": "ist’owlin,",
+        "expected": "table-and",
+        "predicted": null,
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "source_word": "q’ˤuribin",
+        "expected": "chair-PL-and",
+        "predicted": "chair-PL-TOP",
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "source_word": "roqoƛƛin.",
+        "expected": "IV.PL-become-OPT-QUOT",
+        "predicted": "IV-become-OPT-QUOT",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:7",
+        "source_word": "suƛƛitow",
+        "expected": "immediately-EMPH",
+        "predicted": "at.once-EMPH",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:8",
+        "source_word": "zown",
+        "expected": "ride-PFV.CVB",
+        "predicted": "be.NPRS-PFV.CVB",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:8",
+        "source_word": "rok’ek’no",
+        "expected": "IV-steal-PFV.CVB",
+        "predicted": "II.PL-steal-PFV.CVB",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:8",
+        "source_word": "rižin,",
+        "expected": "IV-carry-PFV.CVB",
+        "predicted": "IV-take.out-PFV.CVB",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:8",
+        "source_word": "q’ˤida",
+        "expected": "under",
+        "predicted": "down",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:8",
+        "source_word": "ičin.",
+        "expected": "sit-PST.UNW",
+        "predicted": "be-PST.UNW",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:9",
+        "source_word": "užiqor.",
+        "expected": "son-POSS.LAT",
+        "predicted": "boy-POSS.LAT",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:10",
+        "source_word": "esizaƛ’",
+        "expected": "tell-CSL.CVB",
+        "predicted": null,
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:10",
+        "source_word": "haqo",
+        "expected": "mouth",
+        "predicted": "well-POSS.ESS",
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:10",
+        "source_word": "c’ok’inayn",
+        "expected": "scold-PST.UNW",
+        "predicted": "scold-PFV.CVB",
+        "oov": false
+      }
+    ]
+  },
+  "experimental": {
+    "counts": {
+      "sentences": 445,
+      "words": 4761,
+      "correct": 3571,
+      "covered": 4301,
+      "top5_correct": 3999,
+      "nonpunct_words": 4751,
+      "nonpunct_correct": 3561,
+      "correct_sentences": 49,
+      "oov_words": 928,
+      "oov_correct": 323,
+      "grounded_oov_words": 808,
+      "grounded_oov_correct": 307,
+      "ungrounded_or_grammatical_oov_words": 120,
+      "ungrounded_or_grammatical_oov_correct": 16
+    },
+    "word_accuracy": 0.7500525099768957,
+    "sentence_accuracy": 0.1101123595505618,
+    "coverage": 0.9033816425120773,
+    "top5_accuracy": 0.8399495904221802,
+    "oov_accuracy": 0.3480603448275862,
+    "nonpunct_accuracy": 0.7495264154914755,
+    "grounded_oov_accuracy": 0.37995049504950495,
+    "errors": [
+      {
+        "id": "ddo-dev-track1-uncovered:2",
+        "source_word": "xexbin",
+        "expected": "children-and",
+        "predicted": "children-TOP",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:2",
+        "source_word": "teƛno",
+        "expected": "give-PST.UNW",
+        "predicted": "give-PFV.CVB",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:3",
+        "source_word": "ruqˤno",
+        "expected": "II.PL-hide-PFV.CVB",
+        "predicted": "III.PL-hide-PFV.CVB",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:3",
+        "source_word": "rukayn.",
+        "expected": "II.PL-see-PST.UNW",
+        "predicted": "IV-see-PST.UNW",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:4",
+        "source_word": "äsirun",
+        "expected": "tell-IMM.ANT.CVB",
+        "predicted": "tell-PST.PRT-TOP",
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:4",
+        "source_word": "baħrä",
+        "expected": "hound-ERG",
+        "predicted": null,
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:4",
+        "source_word": "mec",
+        "expected": "tongue",
+        "predicted": "language",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:5",
+        "source_word": "esarus",
+        "expected": "find-PST.PRT-GEN1",
+        "predicted": null,
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "source_word": "indowribin",
+        "expected": "turkey-PL-TOP",
+        "predicted": null,
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "source_word": "rayrno,",
+        "expected": "III.PL-bring-PFV.CVB",
+        "predicted": "IV-bring-PFV.CVB",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "source_word": "eƛin,",
+        "expected": "say-PFV.CVB",
+        "predicted": "say-PST.UNW",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "source_word": "mečoƛ’",
+        "expected": "field-SUPER.ESS",
+        "predicted": "place-SUPER.ESS",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "source_word": "ist’owlin,",
+        "expected": "table-and",
+        "predicted": null,
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "source_word": "q’ˤuribin",
+        "expected": "chair-PL-and",
+        "predicted": "chair-PL-TOP",
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "source_word": "roqoƛƛin.",
+        "expected": "IV.PL-become-OPT-QUOT",
+        "predicted": "IV-become-OPT-QUOT",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:7",
+        "source_word": "suƛƛitow",
+        "expected": "immediately-EMPH",
+        "predicted": "at.once-EMPH",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:8",
+        "source_word": "zown",
+        "expected": "ride-PFV.CVB",
+        "predicted": "be.NPRS-PFV.CVB",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:8",
+        "source_word": "rok’ek’no",
+        "expected": "IV-steal-PFV.CVB",
+        "predicted": "II.PL-steal-PFV.CVB",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:8",
+        "source_word": "rižin,",
+        "expected": "IV-carry-PFV.CVB",
+        "predicted": "IV-take.out-PFV.CVB",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:8",
+        "source_word": "q’ˤida",
+        "expected": "under",
+        "predicted": "down",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:8",
+        "source_word": "ičin.",
+        "expected": "sit-PST.UNW",
+        "predicted": "be-PST.UNW",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:9",
+        "source_word": "užiqor.",
+        "expected": "son-POSS.LAT",
+        "predicted": "boy-POSS.LAT",
+        "oov": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:10",
+        "source_word": "esizaƛ’",
+        "expected": "tell-CSL.CVB",
+        "predicted": null,
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:10",
+        "source_word": "haqo",
+        "expected": "mouth",
+        "predicted": "well-POSS.ESS",
+        "oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:10",
+        "source_word": "c’ok’inayn",
+        "expected": "scold-PST.UNW",
+        "predicted": "scold-PFV.CVB",
+        "oov": false
+      }
+    ]
+  },
+  "transitions": {
+    "both_correct": 3568,
+    "candidate_records_changed": 115,
+    "top_gloss_changed": 14,
+    "newly_covered": 3,
+    "lost_coverage": 6,
+    "known_form_errors_unchanged": 585,
+    "both_wrong": 1183,
+    "baseline_correct_only": 7,
+    "experimental_correct_only": 3
+  },
+  "known_form_equality": {
+    "words": 3833,
+    "candidate_mismatches": 0
+  },
+  "grounded_oov_failures": {
+    "baseline": {
+      "correct": 312,
+      "grammatical_output_missing": 41,
+      "grounded_lexeme_not_recovered": 409,
+      "correct_gloss_below_top1": 46
+    },
+    "experimental": {
+      "correct": 307,
+      "grammatical_output_missing": 39,
+      "grounded_lexeme_not_recovered": 410,
+      "correct_gloss_below_top1": 52
+    }
+  },
+  "samples": {
+    "improvements": [
+      {
+        "id": "ddo-dev-track1-uncovered:127",
+        "word_index": 4,
+        "word": "boysƛin”,",
+        "expected": "III-do-PST.WIT-QUOT",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": "III-do-PST.WIT-QUOT",
+          "candidates": [
+            {
+              "gloss": "III-do-PST.WIT-QUOT",
+              "score": 7.36842105263158,
+              "kind": "internal_rule",
+              "anchor": "boys,",
+              "rule": [
+                "internal",
+                "",
+                "ƛin”",
+                "suffix",
+                "",
+                "-QUOT"
+              ],
+              "support_lexemes": 14
+            }
+          ],
+          "known_form": false
+        },
+        "grounded_oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:136",
+        "word_index": 3,
+        "word": "ik’ixanu,",
+        "expected": "go-PRS-NEG",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": "go-PRS-NEG",
+          "candidates": [
+            {
+              "gloss": "go-PRS-NEG",
+              "score": 5.2941176470588225,
+              "kind": "internal_rule",
+              "anchor": "ik’ix,",
+              "rule": [
+                "internal",
+                "",
+                "anu",
+                "suffix",
+                "",
+                "-NEG"
+              ],
+              "support_lexemes": 12
+            },
+            {
+              "gloss": "go-IPFV.CVB-NEG",
+              "score": 1.764705882352941,
+              "kind": "internal_rule",
+              "anchor": "ik’ix,",
+              "rule": [
+                "internal",
+                "",
+                "anu",
+                "suffix",
+                "",
+                "-NEG"
+              ],
+              "support_lexemes": 12
+            }
+          ],
+          "known_form": false
+        },
+        "grounded_oov": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:282",
+        "word_index": 3,
+        "word": "yisiƛ’or,",
+        "expected": "DEM2.ISG.OBL-SUPER.LAT",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": "DEM2.ISG.OBL-SUPER.LAT",
+          "candidates": [
+            {
+              "gloss": "DEM2.ISG.OBL-SUPER.LAT",
+              "score": 5.0,
+              "kind": "internal_rule",
+              "anchor": "yisiqor,",
+              "rule": [
+                "internal",
+                "q",
+                "ƛ’",
+                "suffix",
+                "POSS.LAT",
+                "SUPER.LAT"
+              ],
+              "support_lexemes": 15
+            }
+          ],
+          "known_form": false
+        },
+        "grounded_oov": false
+      }
+    ],
+    "regressions": [
+      {
+        "id": "ddo-dev-track1-uncovered:20",
+        "word_index": 8,
+        "word": "ƛexunanu.",
+        "expected": "remain-PFV.CVB-NEG",
+        "baseline": {
+          "gloss": "remain-PFV.CVB-NEG",
+          "candidates": [
+            {
+              "gloss": "remain-PFV.CVB-NEG",
+              "score": 6.296296296296296,
+              "kind": "rule",
+              "anchor": "ƛexun",
+              "rule": [
+                "suffix",
+                "",
+                "anu.",
+                "suffix",
+                "",
+                "-NEG"
+              ],
+              "support_lexemes": 17
+            },
+            {
+              "gloss": "remain-PST.UNW-NEG",
+              "score": 3.148148148148148,
+              "kind": "rule",
+              "anchor": "ƛexun",
+              "rule": [
+                "suffix",
+                "",
+                "anu.",
+                "suffix",
+                "",
+                "-NEG"
+              ],
+              "support_lexemes": 17
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": "remain-PST.UNW-NEG",
+          "candidates": [
+            {
+              "gloss": "remain-PST.UNW-NEG",
+              "score": 9.736383442265794,
+              "kind": "internal_rule",
+              "anchor": "ƛexun.",
+              "rule": [
+                "internal",
+                "",
+                "anu",
+                "suffix",
+                "",
+                "-NEG"
+              ],
+              "support_lexemes": 12
+            },
+            {
+              "gloss": "remain-PFV.CVB-NEG",
+              "score": 6.766884531590414,
+              "kind": "internal_rule",
+              "anchor": "ƛexun.",
+              "rule": [
+                "internal",
+                "",
+                "anu",
+                "suffix",
+                "",
+                "-NEG"
+              ],
+              "support_lexemes": 12
+            }
+          ],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "baseline_winning_rule_displaced": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:31",
+        "word_index": 7,
+        "word": "č’edoł",
+        "expected": "earth-CONT.ESS",
+        "baseline": {
+          "gloss": "earth-CONT.ESS",
+          "candidates": [
+            {
+              "gloss": "earth-CONT.ESS",
+              "score": 4.782608695652175,
+              "kind": "rule",
+              "anchor": "č’edon",
+              "rule": [
+                "suffix",
+                "n",
+                "ł",
+                "suffix",
+                "TOP",
+                "CONT.ESS"
+              ],
+              "support_lexemes": 11
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "baseline_winning_rule_displaced": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:91",
+        "word_index": 6,
+        "word": "bizis,",
+        "expected": "III-get.up-PST.WIT",
+        "baseline": {
+          "gloss": "III-get.up-PST.WIT",
+          "candidates": [
+            {
+              "gloss": "III-get.up-PST.WIT",
+              "score": 4.238866396761134,
+              "kind": "rule",
+              "anchor": "bizin,",
+              "rule": [
+                "suffix",
+                "n,",
+                "s,",
+                "suffix",
+                "FV.CVB",
+                "ST.WIT"
+              ],
+              "support_lexemes": 11
+            },
+            {
+              "gloss": "I.PL-get.up-PST.WIT",
+              "score": 2.6178137651821864,
+              "kind": "rule",
+              "anchor": "bizin,",
+              "rule": [
+                "suffix",
+                "n,",
+                "s,",
+                "suffix",
+                "FV.CVB",
+                "ST.WIT"
+              ],
+              "support_lexemes": 11
+            },
+            {
+              "gloss": "I.PL-get-PST.WIT",
+              "score": 0.8477732793522268,
+              "kind": "rule",
+              "anchor": "bizin,",
+              "rule": [
+                "suffix",
+                "n,",
+                "s,",
+                "suffix",
+                "FV.CVB",
+                "ST.WIT"
+              ],
+              "support_lexemes": 11
+            },
+            {
+              "gloss": "III-get-PST.WIT",
+              "score": 0.4631578947368421,
+              "kind": "rule",
+              "anchor": "bizin",
+              "rule": [
+                "suffix",
+                "n",
+                "s,",
+                "suffix",
+                "FV.CVB",
+                "ST.WIT"
+              ],
+              "support_lexemes": 11
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": "I.PL-get.up-PST.WIT",
+          "candidates": [
+            {
+              "gloss": "I.PL-get.up-PST.WIT",
+              "score": 3.03030303030303,
+              "kind": "internal_rule",
+              "anchor": "bizin,",
+              "rule": [
+                "internal",
+                "n",
+                "s",
+                "suffix",
+                "FV.CVB",
+                "ST.WIT"
+              ],
+              "support_lexemes": 16
+            },
+            {
+              "gloss": "III-get.up-PST.WIT",
+              "score": 3.03030303030303,
+              "kind": "internal_rule",
+              "anchor": "bizin,",
+              "rule": [
+                "internal",
+                "n",
+                "s",
+                "suffix",
+                "FV.CVB",
+                "ST.WIT"
+              ],
+              "support_lexemes": 16
+            },
+            {
+              "gloss": "I.PL-get-PST.WIT",
+              "score": 0.6060606060606061,
+              "kind": "internal_rule",
+              "anchor": "bizin,",
+              "rule": [
+                "internal",
+                "n",
+                "s",
+                "suffix",
+                "FV.CVB",
+                "ST.WIT"
+              ],
+              "support_lexemes": 16
+            }
+          ],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "baseline_winning_rule_displaced": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:104",
+        "word_index": 15,
+        "word": "q’oroladäɣor",
+        "expected": "widow-APUD.VERS",
+        "baseline": {
+          "gloss": "widow-APUD.VERS",
+          "candidates": [
+            {
+              "gloss": "widow-APUD.VERS",
+              "score": 1.4666666666666668,
+              "kind": "rule",
+              "anchor": "q’orola",
+              "rule": [
+                "suffix",
+                "",
+                "däɣor",
+                "suffix",
+                "",
+                "-APUD.VERS"
+              ],
+              "support_lexemes": 11
+            },
+            {
+              "gloss": "widow-ERG-APUD.VERS",
+              "score": 1.4666666666666668,
+              "kind": "rule",
+              "anchor": "q’orola",
+              "rule": [
+                "suffix",
+                "",
+                "däɣor",
+                "suffix",
+                "",
+                "-APUD.VERS"
+              ],
+              "support_lexemes": 11
+            },
+            {
+              "gloss": "widowed-APUD.VERS",
+              "score": 1.4666666666666668,
+              "kind": "rule",
+              "anchor": "q’orola",
+              "rule": [
+                "suffix",
+                "",
+                "däɣor",
+                "suffix",
+                "",
+                "-APUD.VERS"
+              ],
+              "support_lexemes": 11
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "baseline_winning_rule_displaced": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:212",
+        "word_index": 2,
+        "word": "ricinosi,",
+        "expected": "IV-tie-ANT.CVB",
+        "baseline": {
+          "gloss": "IV-tie-ANT.CVB",
+          "candidates": [
+            {
+              "gloss": "IV-tie-ANT.CVB",
+              "score": 9.049539170506913,
+              "kind": "rule",
+              "anchor": "ricinäy,",
+              "rule": [
+                "suffix",
+                "äy,",
+                "osi,",
+                "suffix",
+                "CND.CVB",
+                "ANT.CVB"
+              ],
+              "support_lexemes": 12
+            },
+            {
+              "gloss": "III.PL-tie-ANT.CVB",
+              "score": 7.586206896551723,
+              "kind": "rule",
+              "anchor": "ricin,",
+              "rule": [
+                "suffix",
+                ",",
+                "osi,",
+                "suffix",
+                "PFV.CVB",
+                "ANT.CVB"
+              ],
+              "support_lexemes": 22
+            },
+            {
+              "gloss": "IV.PL-tie-ANT.CVB",
+              "score": 5.178571428571429,
+              "kind": "rule",
+              "anchor": "ricin",
+              "rule": [
+                "suffix",
+                "",
+                "osi,",
+                "suffix",
+                "PFV.CVB",
+                "ANT.CVB"
+              ],
+              "support_lexemes": 29
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": "III.PL-tie-ANT.CVB",
+          "candidates": [
+            {
+              "gloss": "III.PL-tie-ANT.CVB",
+              "score": 15.734355044699871,
+              "kind": "rule",
+              "anchor": "ricin,",
+              "rule": [
+                "suffix",
+                ",",
+                "osi,",
+                "suffix",
+                "PFV.CVB",
+                "ANT.CVB"
+              ],
+              "support_lexemes": 22
+            },
+            {
+              "gloss": "IV-tie-ANT.CVB",
+              "score": 13.18747020498967,
+              "kind": "rule",
+              "anchor": "ricinäy,",
+              "rule": [
+                "suffix",
+                "äy,",
+                "osi,",
+                "suffix",
+                "CND.CVB",
+                "ANT.CVB"
+              ],
+              "support_lexemes": 12
+            },
+            {
+              "gloss": "IV.PL-tie-ANT.CVB",
+              "score": 5.178571428571429,
+              "kind": "rule",
+              "anchor": "ricin",
+              "rule": [
+                "suffix",
+                "",
+                "osi,",
+                "suffix",
+                "PFV.CVB",
+                "ANT.CVB"
+              ],
+              "support_lexemes": 29
+            }
+          ],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "baseline_winning_rule_displaced": false
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:356",
+        "word_index": 9,
+        "word": "eƛanƛin”.",
+        "expected": "say-FUT.DEF-QUOT",
+        "baseline": {
+          "gloss": "say-FUT.DEF-QUOT",
+          "candidates": [
+            {
+              "gloss": "say-FUT.DEF-QUOT",
+              "score": 5.238095238095238,
+              "kind": "rule",
+              "anchor": "eƛan,",
+              "rule": [
+                "suffix",
+                ",",
+                "ƛin”.",
+                "suffix",
+                "",
+                "-QUOT"
+              ],
+              "support_lexemes": 11
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "baseline_winning_rule_displaced": true
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:442",
+        "word_index": 5,
+        "word": "q’orolaydäɣor",
+        "expected": "widow-APUD.VERS",
+        "baseline": {
+          "gloss": "widow-APUD.VERS",
+          "candidates": [
+            {
+              "gloss": "widow-APUD.VERS",
+              "score": 4.4,
+              "kind": "rule",
+              "anchor": "q’orolay",
+              "rule": [
+                "suffix",
+                "",
+                "däɣor",
+                "suffix",
+                "",
+                "-APUD.VERS"
+              ],
+              "support_lexemes": 11
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "baseline_winning_rule_displaced": true
+      }
+    ],
+    "grounded_failures": [
+      {
+        "id": "ddo-dev-track1-uncovered:4",
+        "word_index": 2,
+        "word": "äsirun",
+        "expected": "tell-IMM.ANT.CVB",
+        "baseline": {
+          "gloss": "tell-PST.PRT-TOP",
+          "candidates": [
+            {
+              "gloss": "tell-PST.PRT-TOP",
+              "score": 192.9122807017544,
+              "kind": "rule",
+              "anchor": "äsirus",
+              "rule": [
+                "suffix",
+                "s",
+                "n",
+                "suffix",
+                "GEN1",
+                "TOP"
+              ],
+              "support_lexemes": 41
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": "tell-PST.PRT-TOP",
+          "candidates": [
+            {
+              "gloss": "tell-PST.PRT-TOP",
+              "score": 192.9122807017544,
+              "kind": "rule",
+              "anchor": "äsirus",
+              "rule": [
+                "suffix",
+                "s",
+                "n",
+                "suffix",
+                "GEN1",
+                "TOP"
+              ],
+              "support_lexemes": 41
+            }
+          ],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grammatical_output_missing"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:5",
+        "word_index": 2,
+        "word": "esarus",
+        "expected": "find-PST.PRT-GEN1",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:6",
+        "word_index": 4,
+        "word": "indowribin",
+        "expected": "turkey-PL-TOP",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:10",
+        "word_index": 2,
+        "word": "esizaƛ’",
+        "expected": "tell-CSL.CVB",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:10",
+        "word_index": 4,
+        "word": "haqo",
+        "expected": "mouth",
+        "baseline": {
+          "gloss": "well-POSS.ESS",
+          "candidates": [
+            {
+              "gloss": "well-POSS.ESS",
+              "score": 6.19047619047619,
+              "kind": "rule",
+              "anchor": "ha",
+              "rule": [
+                "suffix",
+                "",
+                "qo",
+                "suffix",
+                "",
+                "-POSS.ESS"
+              ],
+              "support_lexemes": 13
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": "well-POSS.ESS",
+          "candidates": [
+            {
+              "gloss": "well-POSS.ESS",
+              "score": 6.19047619047619,
+              "kind": "rule",
+              "anchor": "ha",
+              "rule": [
+                "suffix",
+                "",
+                "qo",
+                "suffix",
+                "",
+                "-POSS.ESS"
+              ],
+              "support_lexemes": 13
+            }
+          ],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:10",
+        "word_index": 8,
+        "word": "xexoyqor.",
+        "expected": "young.animal-POSS.LAT",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:11",
+        "word_index": 3,
+        "word": "mołiranix",
+        "expected": "teach-CAUS-MSD-AD.ESS",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:12",
+        "word_index": 4,
+        "word": "zamanałäz",
+        "expected": "time-CONT.ESS.DIST",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:12",
+        "word_index": 6,
+        "word": "meko",
+        "expected": "hunger",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:13",
+        "word_index": 3,
+        "word": "yodira",
+        "expected": "II-do-CAUS-INF",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:14",
+        "word_index": 0,
+        "word": "Micxir",
+        "expected": "money",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:17",
+        "word_index": 6,
+        "word": "mesedno,",
+        "expected": "gold-and",
+        "baseline": {
+          "gloss": "gold-TOP",
+          "candidates": [
+            {
+              "gloss": "gold-TOP",
+              "score": 9.999999999999998,
+              "kind": "rule",
+              "anchor": "mesed",
+              "rule": [
+                "suffix",
+                "",
+                "no,",
+                "suffix",
+                "",
+                "-TOP"
+              ],
+              "support_lexemes": 17
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": "gold-TOP",
+          "candidates": [
+            {
+              "gloss": "gold-TOP",
+              "score": 9.999999999999998,
+              "kind": "rule",
+              "anchor": "mesed",
+              "rule": [
+                "suffix",
+                "",
+                "no,",
+                "suffix",
+                "",
+                "-TOP"
+              ],
+              "support_lexemes": 17
+            }
+          ],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:18",
+        "word_index": 5,
+        "word": "roqnäy",
+        "expected": "IV-happen-CND.CVB",
+        "baseline": {
+          "gloss": "IV-become-CND.CVB",
+          "candidates": [
+            {
+              "gloss": "IV-become-CND.CVB",
+              "score": 67.67857142857143,
+              "kind": "rule",
+              "anchor": "roqnäyƛin”.",
+              "rule": [
+                "suffix",
+                "ƛin”.",
+                "",
+                "suffix",
+                "-QUOT",
+                ""
+              ],
+              "support_lexemes": 15
+            },
+            {
+              "gloss": "III.PL-become-CND.CVB",
+              "score": 31.833333333333332,
+              "kind": "rule",
+              "anchor": "yoqnäy",
+              "rule": [
+                "prefix",
+                "y",
+                "r",
+                "prefix",
+                "II",
+                "III.PL"
+              ],
+              "support_lexemes": 27
+            },
+            {
+              "gloss": "II.PL-become-CND.CVB",
+              "score": 23.343653250773993,
+              "kind": "rule",
+              "anchor": "oqnäy",
+              "rule": [
+                "prefix",
+                "",
+                "r",
+                "prefix",
+                "",
+                "II.PL-"
+              ],
+              "support_lexemes": 20
+            },
+            {
+              "gloss": "IV.PL-become-CND.CVB",
+              "score": 5.7894736842105265,
+              "kind": "rule",
+              "anchor": "yoqnäy",
+              "rule": [
+                "prefix",
+                "y",
+                "r",
+                "prefix",
+                "II",
+                "IV.PL"
+              ],
+              "support_lexemes": 11
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": "IV-become-CND.CVB",
+          "candidates": [
+            {
+              "gloss": "IV-become-CND.CVB",
+              "score": 67.67857142857143,
+              "kind": "rule",
+              "anchor": "roqnäyƛin”.",
+              "rule": [
+                "suffix",
+                "ƛin”.",
+                "",
+                "suffix",
+                "-QUOT",
+                ""
+              ],
+              "support_lexemes": 15
+            },
+            {
+              "gloss": "III.PL-become-CND.CVB",
+              "score": 31.833333333333332,
+              "kind": "rule",
+              "anchor": "yoqnäy",
+              "rule": [
+                "prefix",
+                "y",
+                "r",
+                "prefix",
+                "II",
+                "III.PL"
+              ],
+              "support_lexemes": 27
+            },
+            {
+              "gloss": "II.PL-become-CND.CVB",
+              "score": 23.343653250773993,
+              "kind": "rule",
+              "anchor": "oqnäy",
+              "rule": [
+                "prefix",
+                "",
+                "r",
+                "prefix",
+                "",
+                "II.PL-"
+              ],
+              "support_lexemes": 20
+            }
+          ],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:18",
+        "word_index": 7,
+        "word": "riƛ’arza",
+        "expected": "IV-plunge-LCV",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:18",
+        "word_index": 8,
+        "word": "mečoƛ’azay",
+        "expected": "place-SUPER.ABL.DIST",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:19",
+        "word_index": 6,
+        "word": "ičix.",
+        "expected": "wait-PRS",
+        "baseline": {
+          "gloss": "be-IPST.UNW",
+          "candidates": [
+            {
+              "gloss": "be-IPST.UNW",
+              "score": 29.503105590062116,
+              "kind": "rule",
+              "anchor": "ičix",
+              "rule": [
+                "suffix",
+                "",
+                ".",
+                "suffix",
+                "FV.CVB",
+                "ST.UNW"
+              ],
+              "support_lexemes": 95
+            },
+            {
+              "gloss": "live-IPST.UNW",
+              "score": 11.801242236024844,
+              "kind": "rule",
+              "anchor": "ičix",
+              "rule": [
+                "suffix",
+                "",
+                ".",
+                "suffix",
+                "FV.CVB",
+                "ST.UNW"
+              ],
+              "support_lexemes": 95
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": "be-IPST.UNW",
+          "candidates": [
+            {
+              "gloss": "be-IPST.UNW",
+              "score": 29.503105590062116,
+              "kind": "rule",
+              "anchor": "ičix",
+              "rule": [
+                "suffix",
+                "",
+                ".",
+                "suffix",
+                "FV.CVB",
+                "ST.UNW"
+              ],
+              "support_lexemes": 95
+            },
+            {
+              "gloss": "live-IPST.UNW",
+              "score": 11.801242236024844,
+              "kind": "rule",
+              "anchor": "ičix",
+              "rule": [
+                "suffix",
+                "",
+                ".",
+                "suffix",
+                "FV.CVB",
+                "ST.UNW"
+              ],
+              "support_lexemes": 95
+            },
+            {
+              "gloss": "be-IPFV.CVB",
+              "score": 4.102564102564102,
+              "kind": "internal_rule",
+              "anchor": "ičin.",
+              "rule": [
+                "internal",
+                "n",
+                "x",
+                "suffix",
+                "PST.UNW",
+                "IPFV.CVB"
+              ],
+              "support_lexemes": 16
+            },
+            {
+              "gloss": "be-PRS",
+              "score": 3.897435897435897,
+              "kind": "internal_rule",
+              "anchor": "ičin.",
+              "rule": [
+                "internal",
+                "n",
+                "x",
+                "suffix",
+                "ST.UNW",
+                "RS"
+              ],
+              "support_lexemes": 12
+            },
+            {
+              "gloss": "wait-PRS",
+              "score": 1.3846153846153846,
+              "kind": "internal_rule",
+              "anchor": "ičin.",
+              "rule": [
+                "internal",
+                "n",
+                "x",
+                "suffix",
+                "ST.UNW",
+                "RS"
+              ],
+              "support_lexemes": 12
+            }
+          ],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "correct_gloss_below_top1"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:20",
+        "word_index": 5,
+        "word": "at’ik’ace",
+        "expected": "moisten-TERM",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:20",
+        "word_index": 8,
+        "word": "ƛexunanu.",
+        "expected": "remain-PFV.CVB-NEG",
+        "baseline": {
+          "gloss": "remain-PFV.CVB-NEG",
+          "candidates": [
+            {
+              "gloss": "remain-PFV.CVB-NEG",
+              "score": 6.296296296296296,
+              "kind": "rule",
+              "anchor": "ƛexun",
+              "rule": [
+                "suffix",
+                "",
+                "anu.",
+                "suffix",
+                "",
+                "-NEG"
+              ],
+              "support_lexemes": 17
+            },
+            {
+              "gloss": "remain-PST.UNW-NEG",
+              "score": 3.148148148148148,
+              "kind": "rule",
+              "anchor": "ƛexun",
+              "rule": [
+                "suffix",
+                "",
+                "anu.",
+                "suffix",
+                "",
+                "-NEG"
+              ],
+              "support_lexemes": 17
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": "remain-PST.UNW-NEG",
+          "candidates": [
+            {
+              "gloss": "remain-PST.UNW-NEG",
+              "score": 9.736383442265794,
+              "kind": "internal_rule",
+              "anchor": "ƛexun.",
+              "rule": [
+                "internal",
+                "",
+                "anu",
+                "suffix",
+                "",
+                "-NEG"
+              ],
+              "support_lexemes": 12
+            },
+            {
+              "gloss": "remain-PFV.CVB-NEG",
+              "score": 6.766884531590414,
+              "kind": "internal_rule",
+              "anchor": "ƛexun.",
+              "rule": [
+                "internal",
+                "",
+                "anu",
+                "suffix",
+                "",
+                "-NEG"
+              ],
+              "support_lexemes": 12
+            }
+          ],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "correct_gloss_below_top1"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:21",
+        "word_index": 10,
+        "word": "bok’ełxo",
+        "expected": "III-escape-PRS",
+        "baseline": {
+          "gloss": "I.PL-escape-IPFV.CVB",
+          "candidates": [
+            {
+              "gloss": "I.PL-escape-IPFV.CVB",
+              "score": 11.37037037037037,
+              "kind": "rule",
+              "anchor": "bok’ełno.",
+              "rule": [
+                "suffix",
+                "no.",
+                "xo",
+                "suffix",
+                "PST.UNW",
+                "IPFV.CVB"
+              ],
+              "support_lexemes": 20
+            },
+            {
+              "gloss": "III-escape-IPFV.CVB",
+              "score": 2.2222222222222223,
+              "kind": "rule",
+              "anchor": "bok’ełno.",
+              "rule": [
+                "suffix",
+                "no.",
+                "xo",
+                "suffix",
+                "PST.UNW",
+                "IPFV.CVB"
+              ],
+              "support_lexemes": 20
+            },
+            {
+              "gloss": "I.PL-go.away-IPFV.CVB",
+              "score": 0.7407407407407407,
+              "kind": "rule",
+              "anchor": "bok’ełno.",
+              "rule": [
+                "suffix",
+                "no.",
+                "xo",
+                "suffix",
+                "PST.UNW",
+                "IPFV.CVB"
+              ],
+              "support_lexemes": 20
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": "I.PL-escape-IPFV.CVB",
+          "candidates": [
+            {
+              "gloss": "I.PL-escape-IPFV.CVB",
+              "score": 11.37037037037037,
+              "kind": "rule",
+              "anchor": "bok’ełno.",
+              "rule": [
+                "suffix",
+                "no.",
+                "xo",
+                "suffix",
+                "PST.UNW",
+                "IPFV.CVB"
+              ],
+              "support_lexemes": 20
+            },
+            {
+              "gloss": "III-escape-IPFV.CVB",
+              "score": 2.2222222222222223,
+              "kind": "rule",
+              "anchor": "bok’ełno.",
+              "rule": [
+                "suffix",
+                "no.",
+                "xo",
+                "suffix",
+                "PST.UNW",
+                "IPFV.CVB"
+              ],
+              "support_lexemes": 20
+            },
+            {
+              "gloss": "I.PL-go.away-IPFV.CVB",
+              "score": 0.7407407407407407,
+              "kind": "rule",
+              "anchor": "bok’ełno.",
+              "rule": [
+                "suffix",
+                "no.",
+                "xo",
+                "suffix",
+                "PST.UNW",
+                "IPFV.CVB"
+              ],
+              "support_lexemes": 20
+            }
+          ],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grammatical_output_missing"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:22",
+        "word_index": 0,
+        "word": "K’emot’yay",
+        "expected": "wooden.case-IN.ABL",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:22",
+        "word_index": 7,
+        "word": "yaƛ’ˤno.",
+        "expected": "II-be.afraid-PROHIB",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:23",
+        "word_index": 0,
+        "word": "Esiwłtow",
+        "expected": "brother-CONT.ESS-EMPH",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:24",
+        "word_index": 9,
+        "word": "bˤaƛ’u.",
+        "expected": "I.PL-fall",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:25",
+        "word_index": 6,
+        "word": "aqru,",
+        "expected": "begin-PST.PRT",
+        "baseline": {
+          "gloss": "happen-PST.PRT",
+          "candidates": [
+            {
+              "gloss": "happen-PST.PRT",
+              "score": 42.0,
+              "kind": "rule",
+              "anchor": "baqru,",
+              "rule": [
+                "prefix",
+                "b",
+                "",
+                "prefix",
+                "III-",
+                ""
+              ],
+              "support_lexemes": 63
+            }
+          ],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": "happen-PST.PRT",
+          "candidates": [
+            {
+              "gloss": "happen-PST.PRT",
+              "score": 42.0,
+              "kind": "rule",
+              "anchor": "baqru,",
+              "rule": [
+                "prefix",
+                "b",
+                "",
+                "prefix",
+                "III-",
+                ""
+              ],
+              "support_lexemes": 63
+            }
+          ],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      },
+      {
+        "id": "ddo-dev-track1-uncovered:27",
+        "word_index": 0,
+        "word": "ʕIla",
+        "expected": "enough",
+        "baseline": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "experimental": {
+          "gloss": null,
+          "candidates": [],
+          "known_form": false
+        },
+        "grounded_oov": true,
+        "failure": "grounded_lexeme_not_recovered"
+      }
+    ]
+  },
+  "grounded_error_recovery": {
+    "no_selected_internal_anchor_for_gold_lexeme": 482,
+    "internal_anchor_for_gold_lexeme": 19
+  },
+  "regression_winning_rules_displaced": 5,
+  "memory": {
+    "peak_bytes": 185724928,
+    "api": "Windows PROCESS_MEMORY_COUNTERS.PeakWorkingSetSize",
+    "scope": "Process lifetime peak: parsing, base plus overlay, output arrays and reconstruction; one fitted graph pair retained at a time"
+  },
+  "checks": {
+    "base_identity_unchanged": true,
+    "known_form_candidates_exact": true,
+    "checkpoint_full_candidates_exact": true,
+    "checkpoint_rules_exact": true,
+    "source_only_inputs": true,
+    "default_engine_source_matches_frozen_commit": true
+  },
+  "artifact_sha256": {
+    "manifest.json": "f9d56b7bddc992d0030dbd9f64bab2015c257c8c02da9b1b13e97cb29032a69d",
+    "selected-rules.json": "166891070a94d741f69f0f98ae0256a18d822dfb1294c83d10783762b27e1301",
+    "scoring-context.json": "067fffe28927c3e46c0deb33b64b89d7b805ea6ff105f6c036d206cfdf59b784",
+    "predictions.jsonl": "1027a0c54535631bdf32f8336bf817f123e8492605ad8f9f3080046dbc39ddc4",
+    "private-gold.jsonl": "97c85f0f07db475fb9c56f84cafa9fe3fc47cc983485e01d9aa7da3bc9222324",
+    "private-changes.jsonl": "afcc2985b8f584e1d79cddc81d77b4e1da7bd5180cfcffd6eb5c655fea26a4fb",
+    "base-model.json.gz": "947c25c8900ab5a814ba8c7768537af5b53611f3d047a8ed2d3c6d1d24093981"
+  },
+  "process": {
+    "status": "exited",
+    "returncode": 0,
+    "parent_elapsed_seconds": 3.738260900019668,
+    "timeout_seconds": 120.0,
+    "scope": "subprocess execution timeout; platform process-start/cleanup overhead included in parent elapsed time"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "successful": true,
+  "tests_run": 146,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "source_commit": "4eb8632be480d8cf72fa90cd5e1ed9025f19369b",
+  "implementation_sha256": {
+    "decipher/gloss.py": "25b57a1aa8f6112ecd374c7c24a7d9f470f5a6f5f5fa3897f816cd721b6c15ed",
+    "decipher/corpus.py": "76ebfe586e2b21f2da85db769279dcc732241f350f9d58123533f3806a268a8c",
+    "decipher/gloss_evaluate.py": "7de6a49f830060f56ebd276be33f8ab95c4286e2e57efbb41392cad41a71142e",
+    "decipher/gloss_internal.py": "9b084d24c999f23214921445ca358167947bcbe07c7bd4c19c470322b70accd3",
+    "tools/evaluate_internal_edits.py": "524619003523afcf8518c65720b76b4b5bbc864d9abde091b5859a9882d105cd"
+  },
+  "code_unchanged_during_tests": true,
+  "python": "3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]"
+}

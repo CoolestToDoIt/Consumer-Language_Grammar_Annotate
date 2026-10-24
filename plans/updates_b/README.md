@@ -4,8 +4,12 @@
 
 New work is recorded in [product-features/](product-features/01-plan-and-checklist.md).
 It starts from main commit `a928139` on `feat/worker-b-teaching-review`.
-Features 2 and 6 are implemented and verified. Feature 4 was subsequently approved
-and is isolated in [feature-4/](feature-4/01-plan-and-frozen-protocol.md).
+Features 2 and 6 are implemented and verified. The subsequently approved Feature 4
+experiment is complete on its separate branch, with 146 passing tests and a
+**reject default adoption** decision. Start with its
+[handoff](feature-4/04-handoff-and-commands.md),
+[results](feature-4/03-results-and-decision.md) or
+[completed checklist](feature-4/01-plan-and-frozen-protocol.md).
 Start with the [current handoff](product-features/07-handoff-and-commands.md) or
 [development results](product-features/06-development-results.md).
 

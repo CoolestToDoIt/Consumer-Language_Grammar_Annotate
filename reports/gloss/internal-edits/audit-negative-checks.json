@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "verified": true,
+  "checks": [
+    {
+      "case": "corrupt candidate artifact",
+      "rejected": true,
+      "reason": "Artifact checksum mismatch: predictions.jsonl"
+    },
+    {
+      "case": "incorrect published metric",
+      "rejected": true,
+      "reason": "Reconstructed scoring differs: baseline"
+    },
+    {
+      "case": "incomplete run",
+      "rejected": true,
+      "reason": "Only complete runs can be audited"
+    },
+    {
+      "case": "different implementation",
+      "rejected": true,
+      "reason": "Use the recorded implementation to replay"
+    },
+    {
+      "case": "existing audit output",
+      "rejected": true,
+      "reason": "Artifact audit failed: Choose a fresh audit report path"
+    }
+  ],
+  "verifier_sha256": "6a61cba1e73d28659d88dfb750ad4b0acb32f532bafd8dfa982bb6e206e8c28f",
+  "scope": "Five negative sanity checks on a temporary copy; original experiment artifacts unchanged"
+}

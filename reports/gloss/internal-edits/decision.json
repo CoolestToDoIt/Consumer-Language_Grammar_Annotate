@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "decision": "reject_default_adoption",
+  "default_changed": false,
+  "criteria": {
+    "max_word_accuracy_loss": 0.005,
+    "min_mean_grounded_oov_gain": 0.01,
+    "max_single_grounded_oov_loss": 0.005,
+    "prediction_ratio": 2.0,
+    "prediction_absolute_extra_seconds": 0.25,
+    "max_peak_bytes": 536870912,
+    "max_child_seconds": 120.0
+  },
+  "checks": {
+    "both_full_runs_complete": true,
+    "regressions_passed": true,
+    "same_tested_implementation": true,
+    "known_forms_exact": true,
+    "checkpoint_reconstruction": true,
+    "word_accuracy_gate": true,
+    "grounded_oov_loss_gate": false,
+    "prediction_gate": true,
+    "memory_gate": true,
+    "deadline_gate": true,
+    "mean_grounded_oov_gain": false
+  },
+  "failed_checks": [
+    "grounded_oov_loss_gate",
+    "mean_grounded_oov_gain"
+  ],
+  "per_language": [
+    {
+      "language": "lezgi",
+      "word_accuracy_gain_pp": 0.0,
+      "grounded_oov_gain_pp": 0.0,
+      "prediction_ratio": 1.424187304237974,
+      "prediction_extra_seconds": 0.004640100058168173,
+      "peak_bytes": 52387840,
+      "word_accuracy_gate": true,
+      "grounded_oov_loss_gate": true,
+      "prediction_gate": true,
+      "memory_gate": true,
+      "deadline_gate": true
+    },
+    {
+      "language": "tsez",
+      "word_accuracy_gain_pp": -0.08401596303296843,
+      "grounded_oov_gain_pp": -0.6188118811881194,
+      "prediction_ratio": 2.855421501508257,
+      "prediction_extra_seconds": 0.0862462999066338,
+      "peak_bytes": 185724928,
+      "word_accuracy_gate": true,
+      "grounded_oov_loss_gate": false,
+      "prediction_gate": true,
+      "memory_gate": true,
+      "deadline_gate": true
+    }
+  ],
+  "mean_grounded_oov_gain_pp": -0.3094059405940597,
+  "test_record": {
+    "schema_version": 1,
+    "successful": true,
+    "tests_run": 146,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "source_commit": "4eb8632be480d8cf72fa90cd5e1ed9025f19369b",
+    "implementation_sha256": {
+      "decipher/gloss.py": "25b57a1aa8f6112ecd374c7c24a7d9f470f5a6f5f5fa3897f816cd721b6c15ed",
+      "decipher/corpus.py": "76ebfe586e2b21f2da85db769279dcc732241f350f9d58123533f3806a268a8c",
+      "decipher/gloss_evaluate.py": "7de6a49f830060f56ebd276be33f8ab95c4286e2e57efbb41392cad41a71142e",
+      "decipher/gloss_internal.py": "9b084d24c999f23214921445ca358167947bcbe07c7bd4c19c470322b70accd3",
+      "tools/evaluate_internal_edits.py": "524619003523afcf8518c65720b76b4b5bbc864d9abde091b5859a9882d105cd"
+    },
+    "code_unchanged_during_tests": true,
+    "python": "3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]"
+  },
+  "note": "Development screening only. Even passing requires separate default-model approval; no automatic promotion.",
+  "report_sha256": {
+    "reports\\gloss\\internal-edits\\lezgi-v1\\results.json": "a7adffcd878e1025b7bbdf64fc42d9cb2f6a3bd1efc0c766e9d454643cb65604",
+    "reports\\gloss\\internal-edits\\tsez-v1\\results.json": "4d05cec05023ddec09600bc3806fdc6338f844bc80eb0693d65e251dbcec32e3"
+  },
+  "test_record_sha256": "de27feb25d86972423582777af32683ed57a0ec7b0d5e4f02ed39b38cb27de34"
+}

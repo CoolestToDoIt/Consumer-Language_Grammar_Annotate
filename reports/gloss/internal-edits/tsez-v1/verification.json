@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "language": "tsez",
+  "verified": true,
+  "sentences": 445,
+  "words": 4761,
+  "changed_words": 115,
+  "checks": [
+    "artifact_checksums",
+    "frozen_implementation",
+    "training_and_development_membership",
+    "all_scores_and_samples",
+    "all_changed_word_records",
+    "grounded_failure_categories_and_recovery",
+    "checkpoint_selected_rules",
+    "all_base_and_overlay_full_candidates"
+  ],
+  "results_sha256": "4d05cec05023ddec09600bc3806fdc6338f844bc80eb0693d65e251dbcec32e3",
+  "verifier_sha256": "6a61cba1e73d28659d88dfb750ad4b0acb32f532bafd8dfa982bb6e206e8c28f",
+  "scope": "Independent saved-artifact replay; no corpus files, new labels or model corrections"
+}

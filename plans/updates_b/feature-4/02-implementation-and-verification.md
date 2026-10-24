@@ -77,5 +77,32 @@ candidate record and selected rule is checked again after checkpoint loading.
 the criteria committed in the protocol before any corpus outcomes. Even a
 passing result only recommends a separate adoption review; it changes no default.
 
-Corpus results and the final combined regression record are pending at this
-implementation checkpoint. See the following results/handoff notes when present.
+## Completed verification
+
+At implementation commit `4eb8632`, all **146 combined tests passed**, with zero
+failures, errors or skips. This includes all 129 previous tests and the 17 new
+tests. Both full corpus runs use that same fingerprinted implementation. The
+record is [regressions.json](../../../reports/gloss/internal-edits/regressions.json).
+
+After collecting results, `tools/verify_internal_edits.py` independently reads
+only the saved artifacts. It verifies their checksums and membership/order,
+reconstructs every metric, changed-word record, sample and grounded-error count,
+then rebuilds the checkpoint and checks all full candidates and selected rules.
+Both language audits passed. This audit helper does not change the model or
+comparison implementation tested at `4eb8632`.
+
+Five additional negative sanity checks on a temporary copy also passed: corrupt
+candidates, incorrect reported scores, incomplete status, a different source
+fingerprint and an existing output path are all rejected. The original artifacts
+were preserved. Evidence is in
+[audit-negative-checks.json](../../../reports/gloss/internal-edits/audit-negative-checks.json).
+
+All five new Python files parse with the project's Python 3.10 syntax rules;
+execution was verified on the installed Python 3.13 environment. All 21 local
+links in the current milestone notes/plan resolve. The only new learner-package
+file is the isolated overlay; the existing production implementation is unchanged.
+The report folder fixes line endings to LF so Windows Git conversion does not
+change the byte hashes used by the decision and audit records.
+
+See [results](03-results-and-decision.md) and [handoff](04-handoff-and-commands.md)
+for the outcome, reproducible commands and remaining limitations.

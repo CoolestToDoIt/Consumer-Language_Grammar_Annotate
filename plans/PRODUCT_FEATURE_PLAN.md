@@ -9,7 +9,7 @@ translation is a separate future scope. All features below are planned.
 | 1. Persistent language workspace | **A** | Create/open/save/export projects containing corpus identity, model configuration, authoritative annotations, revisions and checkpoints. | Independent language projects reopen with identical state. | Implemented; independent reopen and backup/restore tested. |
 | 2. Real-text teaching CLI | **B** | Submit sentences, inspect candidates/evidence, confirm or correct aligned glosses, and display updated predictions. | A user can teach and resume a project without editing annotation files. | Implemented on B's product feature branch; real .dproj teaching/reopen/export/restore and literal-language input tested. |
 | 3. Local web interface | **A** | Project selection, corpus import, sentence queue, editable word glosses, candidate evidence and known/unknown indicators. | Import → predict → correct → reopen works entirely through the UI. | Implemented; loopback browser smoke test verified import, correction and reopen. |
-| 4. Unknown-form learning | **B** | Run the isolated internal-stem-edit experiment, diagnose grounded-word failures and compare with the frozen baseline. | Reproducible development results support an explicit adopt/reject decision. | Explicitly approved in the follow-up request; isolated experiment in progress on experiment/gloss-internal-edits. |
+| 4. Unknown-form learning | **B** | Run the isolated internal-stem-edit experiment, diagnose grounded-word failures and compare with the frozen baseline. | Reproducible development results support an explicit adopt/reject decision. | Experiment complete on experiment/gloss-internal-edits; 146 tests and both full development/artifact checks pass. Frozen criteria reject default adoption; baseline retained. |
 | 5. Contextual disambiguation | **A** | Use sentence context to resolve ambiguous meanings or grammatical analyses. | A fixed ambiguity benchmark improves without unacceptable baseline regression. | Implemented; fixed fixture improves 1/2 → 2/2 with no change to unambiguous words. |
 | 6. Efficient review | **B** | Review ordering, calibrated uncertainty, search, annotation history and correction-conflict handling. | Users can find uncertain items, trace annotations and replace mistakes safely. | Implemented through teaching CLI and project adapter; review/search/history, validated development calibration and CLI/web conflict guards tested. |
 | 7. Release packaging and validation | **A** | Installation/startup, example projects, backup/restore, portable exports, documentation, end-to-end checks and user trials. | A new user can install, teach, save and recover work; release limitations are documented. | Install/startup and backup/restore are automated-tested; browser smoke test complete; external user trial remains outstanding. |
@@ -38,5 +38,8 @@ translation is a separate future scope. All features below are planned.
 Worker B's implementation, completed checklist, test results and commands are in
 [the product-feature handoff](updates_b/product-features/07-handoff-and-commands.md).
 The completed product-feature branch passed 129 tests. The subsequently approved
-Feature 4 protocol and checklist are in [the experiment notes](updates_b/feature-4/01-plan-and-frozen-protocol.md).
+Feature 4 experiment passes 146 combined tests and is complete with a rejected
+default-adoption decision. Its protocol, completed checklist and results are in
+[the experiment notes](updates_b/feature-4/01-plan-and-frozen-protocol.md) and
+[handoff](updates_b/feature-4/04-handoff-and-commands.md).
 No default-model promotion is authorized by the experiment request.

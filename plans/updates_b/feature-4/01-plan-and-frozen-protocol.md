@@ -28,11 +28,11 @@ not a promise that the experiment will win, and not approval to change defaults.
       checkpoint reconstruction, and exact baseline equivalence without internal evidence.
 - [x] Build a Windows-compatible isolated comparison runner with a hard 120-second
       child-process deadline and memory measurement with explicit units.
-- [ ] Run full pinned Lezgi and Tsez training/development comparisons with the same
+- [x] Run full pinned Lezgi and Tsez training/development comparisons with the same
       examples and 512 total rule slots; record candidates and private scoring separately.
-- [ ] Reconstruct scores and changed-word/grounded-error diagnostics from artifacts;
+- [x] Reconstruct scores and changed-word/grounded-error diagnostics from artifacts;
       report runtime, memory, regressions and incomplete runs honestly.
-- [ ] Apply the frozen adopt/reject criteria, run combined regressions, and document
+- [x] Apply the frozen adopt/reject criteria, run combined regressions, and document
       results, commands and limitations in this folder. Do not promote the default model.
 
 ## Frozen model condition
@@ -108,3 +108,12 @@ transfer from an observed plural; middle insertion/deletion; repeated deletion
 positions recovering one anchor; competing plural/dual tags; accented Unicode;
 unanchored roots; pure edge morphology with full candidate equivalence; and
 duplicate/revised annotations followed by explicit preparation and save/load.
+
+## Completion
+
+Feature 4 is complete as an isolated experiment. All 146 combined tests passed
+without skips. Both full corpus runs and independent artifact/checkpoint audits
+passed. The frozen decision is **reject default adoption**: Lezgi accuracy did not
+improve and Tsez grounded-OOV accuracy fell by 0.619 percentage points. See
+[results](03-results-and-decision.md) and [handoff](04-handoff-and-commands.md).
+The default learner remains the frozen baseline.
