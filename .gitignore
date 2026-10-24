@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+checkpoint.json
+events.jsonl
+
+dist/
+
+# Downloaded corpora and fitted models stay local.
+data/corpora/*/
+models/
+
+# Full experiment state is local; compact reports remain versioned.
+runs/

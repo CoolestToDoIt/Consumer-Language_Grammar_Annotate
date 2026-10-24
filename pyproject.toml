@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "decipher-lab"
+version = "0.2.0"
+description = "Interactive grammar learning and real-corpus morphological analysis"
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+neural = ["torch>=2.5,<3"]
+
+[project.scripts]
+decipher = "decipher.app:main"
+
+[tool.setuptools.packages.find]
+include = ["decipher*"]

@@ -1,0 +1,3332 @@
+{
+  "protocol": "11 root anchors + 9 support sentences; 60 stream sentences; 30 disjoint never-taught probes. Pending labels are not drained.",
+  "environment": {
+    "python": "3.12.4",
+    "platform": "macOS-14.5-arm64-arm-64bit"
+  },
+  "manifests": [
+    {
+      "dataset_version": 2,
+      "preset": "A",
+      "seed": 7,
+      "fingerprint": "b36cd28f54ccab6d6d5aac5a9d7ebb3b0de77362542ded1f64aae5ec2aff48ce",
+      "root_anchors": 11,
+      "split_ids": {
+        "support": [
+          "A-7-0",
+          "A-7-1",
+          "A-7-2",
+          "A-7-3",
+          "A-7-4",
+          "A-7-5",
+          "A-7-6",
+          "A-7-7",
+          "A-7-8"
+        ],
+        "stream": [
+          "A-7-9",
+          "A-7-10",
+          "A-7-11",
+          "A-7-12",
+          "A-7-13",
+          "A-7-14",
+          "A-7-15",
+          "A-7-16",
+          "A-7-17",
+          "A-7-18",
+          "A-7-19",
+          "A-7-20",
+          "A-7-21",
+          "A-7-22",
+          "A-7-23",
+          "A-7-24",
+          "A-7-25",
+          "A-7-26",
+          "A-7-27",
+          "A-7-28",
+          "A-7-29",
+          "A-7-30",
+          "A-7-31",
+          "A-7-32",
+          "A-7-33",
+          "A-7-34",
+          "A-7-35",
+          "A-7-36",
+          "A-7-37",
+          "A-7-38",
+          "A-7-39",
+          "A-7-40",
+          "A-7-41",
+          "A-7-42",
+          "A-7-43",
+          "A-7-44",
+          "A-7-45",
+          "A-7-46",
+          "A-7-47",
+          "A-7-48",
+          "A-7-49",
+          "A-7-50",
+          "A-7-51",
+          "A-7-52",
+          "A-7-53",
+          "A-7-54",
+          "A-7-55",
+          "A-7-56",
+          "A-7-57",
+          "A-7-58",
+          "A-7-59",
+          "A-7-60",
+          "A-7-61",
+          "A-7-62",
+          "A-7-63",
+          "A-7-64",
+          "A-7-65",
+          "A-7-66",
+          "A-7-67",
+          "A-7-68"
+        ],
+        "probes": [
+          "A-7-69",
+          "A-7-70",
+          "A-7-71",
+          "A-7-72",
+          "A-7-73",
+          "A-7-74",
+          "A-7-75",
+          "A-7-76",
+          "A-7-77",
+          "A-7-78",
+          "A-7-79",
+          "A-7-80",
+          "A-7-81",
+          "A-7-82",
+          "A-7-83",
+          "A-7-84",
+          "A-7-85",
+          "A-7-86",
+          "A-7-87",
+          "A-7-88",
+          "A-7-89",
+          "A-7-90",
+          "A-7-91",
+          "A-7-92",
+          "A-7-93",
+          "A-7-94",
+          "A-7-95",
+          "A-7-96",
+          "A-7-97",
+          "A-7-98"
+        ]
+      }
+    },
+    {
+      "dataset_version": 2,
+      "preset": "A",
+      "seed": 19,
+      "fingerprint": "24de36ba9dcd16c5d415427877a3f62e59101f69cf5721f65c61bf2a2f7919e5",
+      "root_anchors": 11,
+      "split_ids": {
+        "support": [
+          "A-19-0",
+          "A-19-1",
+          "A-19-2",
+          "A-19-3",
+          "A-19-4",
+          "A-19-5",
+          "A-19-6",
+          "A-19-7",
+          "A-19-8"
+        ],
+        "stream": [
+          "A-19-9",
+          "A-19-10",
+          "A-19-11",
+          "A-19-12",
+          "A-19-13",
+          "A-19-14",
+          "A-19-15",
+          "A-19-16",
+          "A-19-17",
+          "A-19-18",
+          "A-19-19",
+          "A-19-20",
+          "A-19-21",
+          "A-19-22",
+          "A-19-23",
+          "A-19-24",
+          "A-19-25",
+          "A-19-26",
+          "A-19-27",
+          "A-19-28",
+          "A-19-29",
+          "A-19-30",
+          "A-19-31",
+          "A-19-32",
+          "A-19-33",
+          "A-19-34",
+          "A-19-35",
+          "A-19-36",
+          "A-19-37",
+          "A-19-38",
+          "A-19-39",
+          "A-19-40",
+          "A-19-41",
+          "A-19-42",
+          "A-19-43",
+          "A-19-44",
+          "A-19-45",
+          "A-19-46",
+          "A-19-47",
+          "A-19-48",
+          "A-19-49",
+          "A-19-50",
+          "A-19-51",
+          "A-19-52",
+          "A-19-53",
+          "A-19-54",
+          "A-19-55",
+          "A-19-56",
+          "A-19-57",
+          "A-19-58",
+          "A-19-59",
+          "A-19-60",
+          "A-19-61",
+          "A-19-62",
+          "A-19-63",
+          "A-19-64",
+          "A-19-65",
+          "A-19-66",
+          "A-19-67",
+          "A-19-68"
+        ],
+        "probes": [
+          "A-19-69",
+          "A-19-70",
+          "A-19-71",
+          "A-19-72",
+          "A-19-73",
+          "A-19-74",
+          "A-19-75",
+          "A-19-76",
+          "A-19-77",
+          "A-19-78",
+          "A-19-79",
+          "A-19-80",
+          "A-19-81",
+          "A-19-82",
+          "A-19-83",
+          "A-19-84",
+          "A-19-85",
+          "A-19-86",
+          "A-19-87",
+          "A-19-88",
+          "A-19-89",
+          "A-19-90",
+          "A-19-91",
+          "A-19-92",
+          "A-19-93",
+          "A-19-94",
+          "A-19-95",
+          "A-19-96",
+          "A-19-97",
+          "A-19-98"
+        ]
+      }
+    },
+    {
+      "dataset_version": 2,
+      "preset": "A",
+      "seed": 41,
+      "fingerprint": "a0e682436902ac4f185ab80405972c1dc05915e4e012c40f8dac40d73a420b82",
+      "root_anchors": 11,
+      "split_ids": {
+        "support": [
+          "A-41-0",
+          "A-41-1",
+          "A-41-2",
+          "A-41-3",
+          "A-41-4",
+          "A-41-5",
+          "A-41-6",
+          "A-41-7",
+          "A-41-8"
+        ],
+        "stream": [
+          "A-41-9",
+          "A-41-10",
+          "A-41-11",
+          "A-41-12",
+          "A-41-13",
+          "A-41-14",
+          "A-41-15",
+          "A-41-16",
+          "A-41-17",
+          "A-41-18",
+          "A-41-19",
+          "A-41-20",
+          "A-41-21",
+          "A-41-22",
+          "A-41-23",
+          "A-41-24",
+          "A-41-25",
+          "A-41-26",
+          "A-41-27",
+          "A-41-28",
+          "A-41-29",
+          "A-41-30",
+          "A-41-31",
+          "A-41-32",
+          "A-41-33",
+          "A-41-34",
+          "A-41-35",
+          "A-41-36",
+          "A-41-37",
+          "A-41-38",
+          "A-41-39",
+          "A-41-40",
+          "A-41-41",
+          "A-41-42",
+          "A-41-43",
+          "A-41-44",
+          "A-41-45",
+          "A-41-46",
+          "A-41-47",
+          "A-41-48",
+          "A-41-49",
+          "A-41-50",
+          "A-41-51",
+          "A-41-52",
+          "A-41-53",
+          "A-41-54",
+          "A-41-55",
+          "A-41-56",
+          "A-41-57",
+          "A-41-58",
+          "A-41-59",
+          "A-41-60",
+          "A-41-61",
+          "A-41-62",
+          "A-41-63",
+          "A-41-64",
+          "A-41-65",
+          "A-41-66",
+          "A-41-67",
+          "A-41-68"
+        ],
+        "probes": [
+          "A-41-69",
+          "A-41-70",
+          "A-41-71",
+          "A-41-72",
+          "A-41-73",
+          "A-41-74",
+          "A-41-75",
+          "A-41-76",
+          "A-41-77",
+          "A-41-78",
+          "A-41-79",
+          "A-41-80",
+          "A-41-81",
+          "A-41-82",
+          "A-41-83",
+          "A-41-84",
+          "A-41-85",
+          "A-41-86",
+          "A-41-87",
+          "A-41-88",
+          "A-41-89",
+          "A-41-90",
+          "A-41-91",
+          "A-41-92",
+          "A-41-93",
+          "A-41-94",
+          "A-41-95",
+          "A-41-96",
+          "A-41-97",
+          "A-41-98"
+        ]
+      }
+    },
+    {
+      "dataset_version": 2,
+      "preset": "B",
+      "seed": 7,
+      "fingerprint": "06d8fc7a04e2b7e6106c1675c3ffb54597af2d50ffc8349f3dfaad7821ea3e53",
+      "root_anchors": 11,
+      "split_ids": {
+        "support": [
+          "B-7-0",
+          "B-7-1",
+          "B-7-2",
+          "B-7-3",
+          "B-7-4",
+          "B-7-5",
+          "B-7-6",
+          "B-7-7",
+          "B-7-8"
+        ],
+        "stream": [
+          "B-7-9",
+          "B-7-10",
+          "B-7-11",
+          "B-7-12",
+          "B-7-13",
+          "B-7-14",
+          "B-7-15",
+          "B-7-16",
+          "B-7-17",
+          "B-7-18",
+          "B-7-19",
+          "B-7-20",
+          "B-7-21",
+          "B-7-22",
+          "B-7-23",
+          "B-7-24",
+          "B-7-25",
+          "B-7-26",
+          "B-7-27",
+          "B-7-28",
+          "B-7-29",
+          "B-7-30",
+          "B-7-31",
+          "B-7-32",
+          "B-7-33",
+          "B-7-34",
+          "B-7-35",
+          "B-7-36",
+          "B-7-37",
+          "B-7-38",
+          "B-7-39",
+          "B-7-40",
+          "B-7-41",
+          "B-7-42",
+          "B-7-43",
+          "B-7-44",
+          "B-7-45",
+          "B-7-46",
+          "B-7-47",
+          "B-7-48",
+          "B-7-49",
+          "B-7-50",
+          "B-7-51",
+          "B-7-52",
+          "B-7-53",
+          "B-7-54",
+          "B-7-55",
+          "B-7-56",
+          "B-7-57",
+          "B-7-58",
+          "B-7-59",
+          "B-7-60",
+          "B-7-61",
+          "B-7-62",
+          "B-7-63",
+          "B-7-64",
+          "B-7-65",
+          "B-7-66",
+          "B-7-67",
+          "B-7-68"
+        ],
+        "probes": [
+          "B-7-69",
+          "B-7-70",
+          "B-7-71",
+          "B-7-72",
+          "B-7-73",
+          "B-7-74",
+          "B-7-75",
+          "B-7-76",
+          "B-7-77",
+          "B-7-78",
+          "B-7-79",
+          "B-7-80",
+          "B-7-81",
+          "B-7-82",
+          "B-7-83",
+          "B-7-84",
+          "B-7-85",
+          "B-7-86",
+          "B-7-87",
+          "B-7-88",
+          "B-7-89",
+          "B-7-90",
+          "B-7-91",
+          "B-7-92",
+          "B-7-93",
+          "B-7-94",
+          "B-7-95",
+          "B-7-96",
+          "B-7-97",
+          "B-7-98"
+        ]
+      }
+    },
+    {
+      "dataset_version": 2,
+      "preset": "B",
+      "seed": 19,
+      "fingerprint": "743ed22d1ba76024a784ce928d80a3d425890717914b606fb29fcf684ac4e5c1",
+      "root_anchors": 11,
+      "split_ids": {
+        "support": [
+          "B-19-0",
+          "B-19-1",
+          "B-19-2",
+          "B-19-3",
+          "B-19-4",
+          "B-19-5",
+          "B-19-6",
+          "B-19-7",
+          "B-19-8"
+        ],
+        "stream": [
+          "B-19-9",
+          "B-19-10",
+          "B-19-11",
+          "B-19-12",
+          "B-19-13",
+          "B-19-14",
+          "B-19-15",
+          "B-19-16",
+          "B-19-17",
+          "B-19-18",
+          "B-19-19",
+          "B-19-20",
+          "B-19-21",
+          "B-19-22",
+          "B-19-23",
+          "B-19-24",
+          "B-19-25",
+          "B-19-26",
+          "B-19-27",
+          "B-19-28",
+          "B-19-29",
+          "B-19-30",
+          "B-19-31",
+          "B-19-32",
+          "B-19-33",
+          "B-19-34",
+          "B-19-35",
+          "B-19-36",
+          "B-19-37",
+          "B-19-38",
+          "B-19-39",
+          "B-19-40",
+          "B-19-41",
+          "B-19-42",
+          "B-19-43",
+          "B-19-44",
+          "B-19-45",
+          "B-19-46",
+          "B-19-47",
+          "B-19-48",
+          "B-19-49",
+          "B-19-50",
+          "B-19-51",
+          "B-19-52",
+          "B-19-53",
+          "B-19-54",
+          "B-19-55",
+          "B-19-56",
+          "B-19-57",
+          "B-19-58",
+          "B-19-59",
+          "B-19-60",
+          "B-19-61",
+          "B-19-62",
+          "B-19-63",
+          "B-19-64",
+          "B-19-65",
+          "B-19-66",
+          "B-19-67",
+          "B-19-68"
+        ],
+        "probes": [
+          "B-19-69",
+          "B-19-70",
+          "B-19-71",
+          "B-19-72",
+          "B-19-73",
+          "B-19-74",
+          "B-19-75",
+          "B-19-76",
+          "B-19-77",
+          "B-19-78",
+          "B-19-79",
+          "B-19-80",
+          "B-19-81",
+          "B-19-82",
+          "B-19-83",
+          "B-19-84",
+          "B-19-85",
+          "B-19-86",
+          "B-19-87",
+          "B-19-88",
+          "B-19-89",
+          "B-19-90",
+          "B-19-91",
+          "B-19-92",
+          "B-19-93",
+          "B-19-94",
+          "B-19-95",
+          "B-19-96",
+          "B-19-97",
+          "B-19-98"
+        ]
+      }
+    },
+    {
+      "dataset_version": 2,
+      "preset": "B",
+      "seed": 41,
+      "fingerprint": "d412e016b1401cbcff5bcd3bf97a0e6b59a99e42887bec57758383dac99233a3",
+      "root_anchors": 11,
+      "split_ids": {
+        "support": [
+          "B-41-0",
+          "B-41-1",
+          "B-41-2",
+          "B-41-3",
+          "B-41-4",
+          "B-41-5",
+          "B-41-6",
+          "B-41-7",
+          "B-41-8"
+        ],
+        "stream": [
+          "B-41-9",
+          "B-41-10",
+          "B-41-11",
+          "B-41-12",
+          "B-41-13",
+          "B-41-14",
+          "B-41-15",
+          "B-41-16",
+          "B-41-17",
+          "B-41-18",
+          "B-41-19",
+          "B-41-20",
+          "B-41-21",
+          "B-41-22",
+          "B-41-23",
+          "B-41-24",
+          "B-41-25",
+          "B-41-26",
+          "B-41-27",
+          "B-41-28",
+          "B-41-29",
+          "B-41-30",
+          "B-41-31",
+          "B-41-32",
+          "B-41-33",
+          "B-41-34",
+          "B-41-35",
+          "B-41-36",
+          "B-41-37",
+          "B-41-38",
+          "B-41-39",
+          "B-41-40",
+          "B-41-41",
+          "B-41-42",
+          "B-41-43",
+          "B-41-44",
+          "B-41-45",
+          "B-41-46",
+          "B-41-47",
+          "B-41-48",
+          "B-41-49",
+          "B-41-50",
+          "B-41-51",
+          "B-41-52",
+          "B-41-53",
+          "B-41-54",
+          "B-41-55",
+          "B-41-56",
+          "B-41-57",
+          "B-41-58",
+          "B-41-59",
+          "B-41-60",
+          "B-41-61",
+          "B-41-62",
+          "B-41-63",
+          "B-41-64",
+          "B-41-65",
+          "B-41-66",
+          "B-41-67",
+          "B-41-68"
+        ],
+        "probes": [
+          "B-41-69",
+          "B-41-70",
+          "B-41-71",
+          "B-41-72",
+          "B-41-73",
+          "B-41-74",
+          "B-41-75",
+          "B-41-76",
+          "B-41-77",
+          "B-41-78",
+          "B-41-79",
+          "B-41-80",
+          "B-41-81",
+          "B-41-82",
+          "B-41-83",
+          "B-41-84",
+          "B-41-85",
+          "B-41-86",
+          "B-41-87",
+          "B-41-88",
+          "B-41-89",
+          "B-41-90",
+          "B-41-91",
+          "B-41-92",
+          "B-41-93",
+          "B-41-94",
+          "B-41-95",
+          "B-41-96",
+          "B-41-97",
+          "B-41-98"
+        ]
+      }
+    },
+    {
+      "dataset_version": 2,
+      "preset": "C",
+      "seed": 7,
+      "fingerprint": "9bd97e7333b78798666577b149a73d89b87ee4832e0b21a67917346cdc8a3e28",
+      "root_anchors": 11,
+      "split_ids": {
+        "support": [
+          "C-7-0",
+          "C-7-1",
+          "C-7-2",
+          "C-7-3",
+          "C-7-4",
+          "C-7-5",
+          "C-7-6",
+          "C-7-7",
+          "C-7-8"
+        ],
+        "stream": [
+          "C-7-9",
+          "C-7-10",
+          "C-7-11",
+          "C-7-12",
+          "C-7-13",
+          "C-7-14",
+          "C-7-15",
+          "C-7-16",
+          "C-7-17",
+          "C-7-18",
+          "C-7-19",
+          "C-7-20",
+          "C-7-21",
+          "C-7-22",
+          "C-7-23",
+          "C-7-24",
+          "C-7-25",
+          "C-7-26",
+          "C-7-27",
+          "C-7-28",
+          "C-7-29",
+          "C-7-30",
+          "C-7-31",
+          "C-7-32",
+          "C-7-33",
+          "C-7-34",
+          "C-7-35",
+          "C-7-36",
+          "C-7-37",
+          "C-7-38",
+          "C-7-39",
+          "C-7-40",
+          "C-7-41",
+          "C-7-42",
+          "C-7-43",
+          "C-7-44",
+          "C-7-45",
+          "C-7-46",
+          "C-7-47",
+          "C-7-48",
+          "C-7-49",
+          "C-7-50",
+          "C-7-51",
+          "C-7-52",
+          "C-7-53",
+          "C-7-54",
+          "C-7-55",
+          "C-7-56",
+          "C-7-57",
+          "C-7-58",
+          "C-7-59",
+          "C-7-60",
+          "C-7-61",
+          "C-7-62",
+          "C-7-63",
+          "C-7-64",
+          "C-7-65",
+          "C-7-66",
+          "C-7-67",
+          "C-7-68"
+        ],
+        "probes": [
+          "C-7-69",
+          "C-7-70",
+          "C-7-71",
+          "C-7-72",
+          "C-7-73",
+          "C-7-74",
+          "C-7-75",
+          "C-7-76",
+          "C-7-77",
+          "C-7-78",
+          "C-7-79",
+          "C-7-80",
+          "C-7-81",
+          "C-7-82",
+          "C-7-83",
+          "C-7-84",
+          "C-7-85",
+          "C-7-86",
+          "C-7-87",
+          "C-7-88",
+          "C-7-89",
+          "C-7-90",
+          "C-7-91",
+          "C-7-92",
+          "C-7-93",
+          "C-7-94",
+          "C-7-95",
+          "C-7-96",
+          "C-7-97",
+          "C-7-98"
+        ]
+      }
+    },
+    {
+      "dataset_version": 2,
+      "preset": "C",
+      "seed": 19,
+      "fingerprint": "a07ccf0e94cb17d23e673f7250b6fb80ecd34ea06ca8b6ea7c1ca53c57f03c54",
+      "root_anchors": 11,
+      "split_ids": {
+        "support": [
+          "C-19-0",
+          "C-19-1",
+          "C-19-2",
+          "C-19-3",
+          "C-19-4",
+          "C-19-5",
+          "C-19-6",
+          "C-19-7",
+          "C-19-8"
+        ],
+        "stream": [
+          "C-19-9",
+          "C-19-10",
+          "C-19-11",
+          "C-19-12",
+          "C-19-13",
+          "C-19-14",
+          "C-19-15",
+          "C-19-16",
+          "C-19-17",
+          "C-19-18",
+          "C-19-19",
+          "C-19-20",
+          "C-19-21",
+          "C-19-22",
+          "C-19-23",
+          "C-19-24",
+          "C-19-25",
+          "C-19-26",
+          "C-19-27",
+          "C-19-28",
+          "C-19-29",
+          "C-19-30",
+          "C-19-31",
+          "C-19-32",
+          "C-19-33",
+          "C-19-34",
+          "C-19-35",
+          "C-19-36",
+          "C-19-37",
+          "C-19-38",
+          "C-19-39",
+          "C-19-40",
+          "C-19-41",
+          "C-19-42",
+          "C-19-43",
+          "C-19-44",
+          "C-19-45",
+          "C-19-46",
+          "C-19-47",
+          "C-19-48",
+          "C-19-49",
+          "C-19-50",
+          "C-19-51",
+          "C-19-52",
+          "C-19-53",
+          "C-19-54",
+          "C-19-55",
+          "C-19-56",
+          "C-19-57",
+          "C-19-58",
+          "C-19-59",
+          "C-19-60",
+          "C-19-61",
+          "C-19-62",
+          "C-19-63",
+          "C-19-64",
+          "C-19-65",
+          "C-19-66",
+          "C-19-67",
+          "C-19-68"
+        ],
+        "probes": [
+          "C-19-69",
+          "C-19-70",
+          "C-19-71",
+          "C-19-72",
+          "C-19-73",
+          "C-19-74",
+          "C-19-75",
+          "C-19-76",
+          "C-19-77",
+          "C-19-78",
+          "C-19-79",
+          "C-19-80",
+          "C-19-81",
+          "C-19-82",
+          "C-19-83",
+          "C-19-84",
+          "C-19-85",
+          "C-19-86",
+          "C-19-87",
+          "C-19-88",
+          "C-19-89",
+          "C-19-90",
+          "C-19-91",
+          "C-19-92",
+          "C-19-93",
+          "C-19-94",
+          "C-19-95",
+          "C-19-96",
+          "C-19-97",
+          "C-19-98"
+        ]
+      }
+    },
+    {
+      "dataset_version": 2,
+      "preset": "C",
+      "seed": 41,
+      "fingerprint": "058a700dfa13d06a8468513af3a8c4cda8a9e3c8a3965bd88cd50259d82bf514",
+      "root_anchors": 11,
+      "split_ids": {
+        "support": [
+          "C-41-0",
+          "C-41-1",
+          "C-41-2",
+          "C-41-3",
+          "C-41-4",
+          "C-41-5",
+          "C-41-6",
+          "C-41-7",
+          "C-41-8"
+        ],
+        "stream": [
+          "C-41-9",
+          "C-41-10",
+          "C-41-11",
+          "C-41-12",
+          "C-41-13",
+          "C-41-14",
+          "C-41-15",
+          "C-41-16",
+          "C-41-17",
+          "C-41-18",
+          "C-41-19",
+          "C-41-20",
+          "C-41-21",
+          "C-41-22",
+          "C-41-23",
+          "C-41-24",
+          "C-41-25",
+          "C-41-26",
+          "C-41-27",
+          "C-41-28",
+          "C-41-29",
+          "C-41-30",
+          "C-41-31",
+          "C-41-32",
+          "C-41-33",
+          "C-41-34",
+          "C-41-35",
+          "C-41-36",
+          "C-41-37",
+          "C-41-38",
+          "C-41-39",
+          "C-41-40",
+          "C-41-41",
+          "C-41-42",
+          "C-41-43",
+          "C-41-44",
+          "C-41-45",
+          "C-41-46",
+          "C-41-47",
+          "C-41-48",
+          "C-41-49",
+          "C-41-50",
+          "C-41-51",
+          "C-41-52",
+          "C-41-53",
+          "C-41-54",
+          "C-41-55",
+          "C-41-56",
+          "C-41-57",
+          "C-41-58",
+          "C-41-59",
+          "C-41-60",
+          "C-41-61",
+          "C-41-62",
+          "C-41-63",
+          "C-41-64",
+          "C-41-65",
+          "C-41-66",
+          "C-41-67",
+          "C-41-68"
+        ],
+        "probes": [
+          "C-41-69",
+          "C-41-70",
+          "C-41-71",
+          "C-41-72",
+          "C-41-73",
+          "C-41-74",
+          "C-41-75",
+          "C-41-76",
+          "C-41-77",
+          "C-41-78",
+          "C-41-79",
+          "C-41-80",
+          "C-41-81",
+          "C-41-82",
+          "C-41-83",
+          "C-41-84",
+          "C-41-85",
+          "C-41-86",
+          "C-41-87",
+          "C-41-88",
+          "C-41-89",
+          "C-41-90",
+          "C-41-91",
+          "C-41-92",
+          "C-41-93",
+          "C-41-94",
+          "C-41-95",
+          "C-41-96",
+          "C-41-97",
+          "C-41-98"
+        ]
+      }
+    }
+  ],
+  "runs": [
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/A-7-memory.jsonl",
+      "prediction_ms": 0.002938800146997285,
+      "feedback_call_ms": 0.005849916730464126,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "A",
+      "seed": 7,
+      "model": "memory",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/A-7-analogy.jsonl",
+      "prediction_ms": 0.1266562666084307,
+      "feedback_call_ms": 0.006047216690300653,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "A",
+      "seed": 7,
+      "model": "analogy",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.9654589371980675,
+      "event_log": "reports/immediate/events/A-7-rules.jsonl",
+      "prediction_ms": 0.01822424977338718,
+      "feedback_call_ms": 0.24492084970309708,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "A",
+      "seed": 7,
+      "model": "rules",
+      "delay": 0,
+      "root_only_accuracy": 0.1,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.1
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.13333333333333333
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.4666666666666667
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.4666666666666667
+        },
+        {
+          "labels": 4,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 1.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 1.0
+        }
+      ],
+      "stream_accuracy": 1.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/A-19-memory.jsonl",
+      "prediction_ms": 0.003208316775271669,
+      "feedback_call_ms": 0.007325050016030825,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "A",
+      "seed": 19,
+      "model": "memory",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/A-19-analogy.jsonl",
+      "prediction_ms": 0.1444985497679833,
+      "feedback_call_ms": 0.0068882663375309985,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "A",
+      "seed": 19,
+      "model": "analogy",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.993719806763285,
+      "event_log": "reports/immediate/events/A-19-rules.jsonl",
+      "prediction_ms": 0.015817383367296618,
+      "feedback_call_ms": 0.2114111668561236,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "A",
+      "seed": 19,
+      "model": "rules",
+      "delay": 0,
+      "root_only_accuracy": 0.13333333333333333,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.13333333333333333
+        },
+        {
+          "labels": 1,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 1.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 1.0
+        }
+      ],
+      "stream_accuracy": 1.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/A-41-memory.jsonl",
+      "prediction_ms": 0.002811049913968115,
+      "feedback_call_ms": 0.0077179664610108984,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "A",
+      "seed": 41,
+      "model": "memory",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/A-41-analogy.jsonl",
+      "prediction_ms": 0.12945005037181545,
+      "feedback_call_ms": 0.005901350292939848,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "A",
+      "seed": 41,
+      "model": "analogy",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.9929951690821256,
+      "event_log": "reports/immediate/events/A-41-rules.jsonl",
+      "prediction_ms": 0.014820133340739025,
+      "feedback_call_ms": 0.21623331679923768,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "A",
+      "seed": 41,
+      "model": "rules",
+      "delay": 0,
+      "root_only_accuracy": 0.03333333333333333,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.03333333333333333
+        },
+        {
+          "labels": 1,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 1.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 1.0
+        }
+      ],
+      "stream_accuracy": 1.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/B-7-memory.jsonl",
+      "prediction_ms": 0.0028194166588946246,
+      "feedback_call_ms": 0.005769416687447422,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "B",
+      "seed": 7,
+      "model": "memory",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/B-7-analogy.jsonl",
+      "prediction_ms": 0.1304895333305467,
+      "feedback_call_ms": 0.006061766483374716,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "B",
+      "seed": 7,
+      "model": "analogy",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.9659420289855073,
+      "event_log": "reports/immediate/events/B-7-rules.jsonl",
+      "prediction_ms": 0.015479933426831849,
+      "feedback_call_ms": 0.24469924986381864,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "B",
+      "seed": 7,
+      "model": "rules",
+      "delay": 0,
+      "root_only_accuracy": 0.03333333333333333,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.03333333333333333
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.06666666666666667
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.06666666666666667
+        },
+        {
+          "labels": 3,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 1.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 1.0
+        }
+      ],
+      "stream_accuracy": 1.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/B-19-memory.jsonl",
+      "prediction_ms": 0.002930549938658563,
+      "feedback_call_ms": 0.0062228002813450685,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "B",
+      "seed": 19,
+      "model": "memory",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/B-19-analogy.jsonl",
+      "prediction_ms": 0.12956866679208662,
+      "feedback_call_ms": 0.006186099926708266,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "B",
+      "seed": 19,
+      "model": "analogy",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.9932367149758454,
+      "event_log": "reports/immediate/events/B-19-rules.jsonl",
+      "prediction_ms": 0.015423599628168933,
+      "feedback_call_ms": 0.2105985335826214,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "B",
+      "seed": 19,
+      "model": "rules",
+      "delay": 0,
+      "root_only_accuracy": 0.06666666666666667,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.06666666666666667
+        },
+        {
+          "labels": 1,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 1.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 1.0
+        }
+      ],
+      "stream_accuracy": 1.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/B-41-memory.jsonl",
+      "prediction_ms": 0.002710399773301712,
+      "feedback_call_ms": 0.00545973374149374,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "B",
+      "seed": 41,
+      "model": "memory",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/B-41-analogy.jsonl",
+      "prediction_ms": 0.14281798315399402,
+      "feedback_call_ms": 0.007026416642474942,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "B",
+      "seed": 41,
+      "model": "analogy",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.979951690821256,
+      "event_log": "reports/immediate/events/B-41-rules.jsonl",
+      "prediction_ms": 0.01597641658008797,
+      "feedback_call_ms": 0.21857638336465848,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "B",
+      "seed": 41,
+      "model": "rules",
+      "delay": 0,
+      "root_only_accuracy": 0.1,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.1
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.5333333333333333
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.5333333333333333
+        },
+        {
+          "labels": 3,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 1.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 1.0
+        }
+      ],
+      "stream_accuracy": 1.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/C-7-memory.jsonl",
+      "prediction_ms": 0.00267135001195129,
+      "feedback_call_ms": 0.0054304996713957126,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "C",
+      "seed": 7,
+      "model": "memory",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/C-7-analogy.jsonl",
+      "prediction_ms": 0.14293191682857773,
+      "feedback_call_ms": 0.006150716823564532,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "C",
+      "seed": 7,
+      "model": "analogy",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.9852657004830918,
+      "event_log": "reports/immediate/events/C-7-rules.jsonl",
+      "prediction_ms": 0.01620485005939069,
+      "feedback_call_ms": 0.1669978501619577,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "C",
+      "seed": 7,
+      "model": "rules",
+      "delay": 0,
+      "root_only_accuracy": 0.03333333333333333,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.03333333333333333
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.4666666666666667
+        },
+        {
+          "labels": 2,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 1.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 1.0
+        }
+      ],
+      "stream_accuracy": 1.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/C-19-memory.jsonl",
+      "prediction_ms": 0.002794299810678543,
+      "feedback_call_ms": 0.005693699919599264,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "C",
+      "seed": 19,
+      "model": "memory",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/C-19-analogy.jsonl",
+      "prediction_ms": 0.13981870003287136,
+      "feedback_call_ms": 0.00598680004865552,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "C",
+      "seed": 19,
+      "model": "analogy",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.976086956521739,
+      "event_log": "reports/immediate/events/C-19-rules.jsonl",
+      "prediction_ms": 0.013214566327709084,
+      "feedback_call_ms": 0.17563746702459565,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "C",
+      "seed": 19,
+      "model": "rules",
+      "delay": 0,
+      "root_only_accuracy": 0.1,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.1
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.4
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.4
+        },
+        {
+          "labels": 3,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 1.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 1.0
+        }
+      ],
+      "stream_accuracy": 1.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/C-41-memory.jsonl",
+      "prediction_ms": 0.0028361166187096387,
+      "feedback_call_ms": 0.005740283510628312,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "C",
+      "seed": 41,
+      "model": "memory",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.0,
+      "event_log": "reports/immediate/events/C-41-analogy.jsonl",
+      "prediction_ms": 0.15080344965099357,
+      "feedback_call_ms": 0.006102749891094088,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "C",
+      "seed": 41,
+      "model": "analogy",
+      "delay": 0,
+      "root_only_accuracy": 0.0,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 2,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 0.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 0.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 0.0
+        }
+      ],
+      "stream_accuracy": 0.0,
+      "pending": 0,
+      "retention": 1.0
+    },
+    {
+      "auc": 0.985024154589372,
+      "event_log": "reports/immediate/events/C-41-rules.jsonl",
+      "prediction_ms": 0.012810350138655243,
+      "feedback_call_ms": 0.14801735032961005,
+      "teacher_answers": 69,
+      "teacher_decisions": 69,
+      "preset": "C",
+      "seed": 41,
+      "model": "rules",
+      "delay": 0,
+      "root_only_accuracy": 0.06666666666666667,
+      "support_labels": 9,
+      "support_curve": [
+        {
+          "labels": 0,
+          "accuracy": 0.06666666666666667
+        },
+        {
+          "labels": 1,
+          "accuracy": 0.43333333333333335
+        },
+        {
+          "labels": 2,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 3,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 4,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 6,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 7,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 8,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 9,
+          "accuracy": 1.0
+        }
+      ],
+      "curve": [
+        {
+          "labels": 0,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 5,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 10,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 20,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 40,
+          "accuracy": 1.0
+        },
+        {
+          "labels": 60,
+          "accuracy": 1.0
+        }
+      ],
+      "stream_accuracy": 1.0,
+      "pending": 0,
+      "retention": 1.0
+    }
+  ]
+}

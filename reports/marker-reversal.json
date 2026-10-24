@@ -1,0 +1,113 @@
+{
+  "protocol": "Paired languages share roots and sentence meanings, but swap plural/past marker strings. Each learner starts fresh; nine support labels; 30 held-out probes.",
+  "runs": [
+    {
+      "preset": "A",
+      "reversed": false,
+      "fresh_start": true,
+      "probe_correct": 30,
+      "probe_count": 30,
+      "accuracy": 1.0,
+      "rules": [
+        {
+          "order": "SVO",
+          "placement": "suffix",
+          "rules": {
+            "za": "PLURAL",
+            "xu": "PAST"
+          }
+        }
+      ]
+    },
+    {
+      "preset": "A",
+      "reversed": true,
+      "fresh_start": true,
+      "probe_correct": 30,
+      "probe_count": 30,
+      "accuracy": 1.0,
+      "rules": [
+        {
+          "order": "SVO",
+          "placement": "suffix",
+          "rules": {
+            "xu": "PLURAL",
+            "za": "PAST"
+          }
+        }
+      ]
+    },
+    {
+      "preset": "B",
+      "reversed": false,
+      "fresh_start": true,
+      "probe_correct": 30,
+      "probe_count": 30,
+      "accuracy": 1.0,
+      "rules": [
+        {
+          "order": "SOV",
+          "placement": "prefix",
+          "rules": {
+            "fe": "PLURAL",
+            "wo": "PAST"
+          }
+        }
+      ]
+    },
+    {
+      "preset": "B",
+      "reversed": true,
+      "fresh_start": true,
+      "probe_correct": 30,
+      "probe_count": 30,
+      "accuracy": 1.0,
+      "rules": [
+        {
+          "order": "SOV",
+          "placement": "prefix",
+          "rules": {
+            "wo": "PLURAL",
+            "fe": "PAST"
+          }
+        }
+      ]
+    },
+    {
+      "preset": "C",
+      "reversed": false,
+      "fresh_start": true,
+      "probe_correct": 30,
+      "probe_count": 30,
+      "accuracy": 1.0,
+      "rules": [
+        {
+          "order": "VSO",
+          "placement": "particle",
+          "rules": {
+            "jo": "PLURAL",
+            "ha": "PAST"
+          }
+        }
+      ]
+    },
+    {
+      "preset": "C",
+      "reversed": true,
+      "fresh_start": true,
+      "probe_correct": 30,
+      "probe_count": 30,
+      "accuracy": 1.0,
+      "rules": [
+        {
+          "order": "VSO",
+          "placement": "particle",
+          "rules": {
+            "ha": "PLURAL",
+            "jo": "PAST"
+          }
+        }
+      ]
+    }
+  ]
+}

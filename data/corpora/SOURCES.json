@@ -1,0 +1,56 @@
+{
+  "english-ewt": {
+    "repository": "https://github.com/UniversalDependencies/UD_English-EWT",
+    "release": "r2.15",
+    "license": "CC BY-SA 4.0 annotations; underlying text rights described in upstream README",
+    "files": {
+      "en_ewt-ud-train.conllu": {
+        "url": "https://raw.githubusercontent.com/UniversalDependencies/UD_English-EWT/r2.15/en_ewt-ud-train.conllu",
+        "sha256": "a049fc40822e21593ff89ccd0a4b081443f09fae71b61f813c624aa598f6c566"
+      },
+      "en_ewt-ud-dev.conllu": {
+        "url": "https://raw.githubusercontent.com/UniversalDependencies/UD_English-EWT/r2.15/en_ewt-ud-dev.conllu",
+        "sha256": "14a82ce2c4c4648c3e7c4efc76872c85c5f4c39643fcb7f9c91a45a58157a270"
+      },
+      "en_ewt-ud-test.conllu": {
+        "url": "https://raw.githubusercontent.com/UniversalDependencies/UD_English-EWT/r2.15/en_ewt-ud-test.conllu",
+        "sha256": "0612e45914359e4b36d187ef2bfeaf66fc8933210925be985c5fbf6a9e311036"
+      },
+      "README.md": {
+        "url": "https://raw.githubusercontent.com/UniversalDependencies/UD_English-EWT/r2.15/README.md",
+        "sha256": "fc0c5d1344f56442af1501c8c2c850c002924ab6fe20f7de6f8667c1ebc46a79"
+      },
+      "LICENSE.txt": {
+        "url": "https://raw.githubusercontent.com/UniversalDependencies/UD_English-EWT/r2.15/LICENSE.txt",
+        "sha256": "b3d1b0f4c6ae151f7eb78738f46ebd5ee140f8a7f76501ba26af123140d35ae7"
+      }
+    }
+  },
+  "turkish-imst": {
+    "repository": "https://github.com/UniversalDependencies/UD_Turkish-IMST",
+    "release": "r2.15",
+    "license": "CC BY-NC-SA 4.0",
+    "files": {
+      "tr_imst-ud-train.conllu": {
+        "url": "https://raw.githubusercontent.com/UniversalDependencies/UD_Turkish-IMST/r2.15/tr_imst-ud-train.conllu",
+        "sha256": "8d8b8b581dab9362e6f2e4328aef77b9fabec1d189a199e320ba136710c7bd83"
+      },
+      "tr_imst-ud-dev.conllu": {
+        "url": "https://raw.githubusercontent.com/UniversalDependencies/UD_Turkish-IMST/r2.15/tr_imst-ud-dev.conllu",
+        "sha256": "3bdaab362b7a9af7cbf8944aee5c1c1d077970ad4bcafcf23c5c062d4cf93801"
+      },
+      "tr_imst-ud-test.conllu": {
+        "url": "https://raw.githubusercontent.com/UniversalDependencies/UD_Turkish-IMST/r2.15/tr_imst-ud-test.conllu",
+        "sha256": "fc9269bd598489b942a025b678779557266ce0c054a843e47c7db386d76d6459"
+      },
+      "README.md": {
+        "url": "https://raw.githubusercontent.com/UniversalDependencies/UD_Turkish-IMST/r2.15/README.md",
+        "sha256": "2aa6a32af70331dcded415baf173b248470ff1a7cfeb502a23d0515698a0e25f"
+      },
+      "LICENSE.txt": {
+        "url": "https://raw.githubusercontent.com/UniversalDependencies/UD_Turkish-IMST/r2.15/LICENSE.txt",
+        "sha256": "446deff834665054c41eff659e9a7f22b62c00879574dde2aebb1d5db83b842b"
+      }
+    }
+  }
+}

@@ -1,0 +1,1434 @@
+{
+  "task": "Supervised word lemmatization, POS and morphological feature prediction; not translation.",
+  "protocol": "Frozen model; evaluation receives tokens only; exact NFC token-sequence overlaps with training are excluded; supplied syntactic-word segmentation; punctuation included with nonpunctuation scores reported separately.",
+  "split": "dev",
+  "training": {
+    "path": "data/corpora/english-ewt/en_ewt-ud-train.conllu",
+    "sha256": "a049fc40822e21593ff89ccd0a4b081443f09fae71b61f813c624aa598f6c566"
+  },
+  "evaluation": {
+    "path": "data/corpora/english-ewt/en_ewt-ud-dev.conllu",
+    "sha256": "14a82ce2c4c4648c3e7c4efc76872c85c5f4c39643fcb7f9c91a45a58157a270"
+  },
+  "training_sentences": 12544,
+  "training_tokens": 204444,
+  "training_labels": "All available training annotations; no pretraining or external lexicon.",
+  "evaluation_sentences_read": 2001,
+  "excluded_train_overlap_sentences": 68,
+  "limit_train": null,
+  "limit_eval": null,
+  "training_seconds": 3.8588201250022394,
+  "models": {
+    "lexicon": {
+      "counts": {
+        "sentences": 1933,
+        "tokens": 25012,
+        "oov_tokens": 2089,
+        "covered_tokens": 25012,
+        "joint_total": 24986,
+        "joint_correct": 20046,
+        "nonpunct_joint_total": 21958,
+        "nonpunct_joint_correct": 17052,
+        "lemma_total": 24986,
+        "lemma_correct": 23811,
+        "upos_total": 25012,
+        "upos_correct": 21471,
+        "feats_total": 25012,
+        "feats_correct": 21761,
+        "sentence_total": 1915,
+        "sentence_correct": 303,
+        "oov_joint_total": 2082,
+        "oov_joint_correct": 294,
+        "oov_lemma_total": 2082,
+        "oov_lemma_correct": 1352,
+        "oov_upos_total": 2089,
+        "oov_upos_correct": 620,
+        "oov_feats_total": 2089,
+        "oov_feats_correct": 1121
+      },
+      "coverage": 1.0,
+      "joint_accuracy": 0.8022892819979188,
+      "nonpunct_joint_accuracy": 0.7765734584206212,
+      "sentence_exact_accuracy": 0.15822454308093994,
+      "oov_joint_accuracy": 0.14121037463976946,
+      "lemma_accuracy": 0.9529736652525415,
+      "oov_lemma_accuracy": 0.6493756003842459,
+      "upos_accuracy": 0.8584279545818008,
+      "oov_upos_accuracy": 0.2967927237912877,
+      "feats_accuracy": 0.8700223892531584,
+      "oov_feats_accuracy": 0.5366203925323121,
+      "feature_micro_f1": 0.8505129752564876,
+      "feature_counts": {
+        "tp": 28186,
+        "fp": 3691,
+        "fn": 6217
+      },
+      "prediction_seconds": 0.4514821499979007,
+      "errors": [
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0001",
+          "token_index": 2,
+          "form": "AP",
+          "oov": false,
+          "expected": {
+            "lemma": "AP",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "AP",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0002",
+          "token_index": 4,
+          "form": "nominated",
+          "oov": false,
+          "expected": {
+            "lemma": "nominate",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "nominate",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0002",
+          "token_index": 9,
+          "form": "retiring",
+          "oov": false,
+          "expected": {
+            "lemma": "retire",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Ger"
+            ]
+          },
+          "predicted": {
+            "lemma": "retire",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Pres",
+              "VerbForm=Part"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0002",
+          "token_index": 10,
+          "form": "jurists",
+          "oov": true,
+          "expected": {
+            "lemma": "jurist",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Plur"
+            ]
+          },
+          "predicted": {
+            "lemma": "jurists",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0003",
+          "token_index": 1,
+          "form": "nominated",
+          "oov": false,
+          "expected": {
+            "lemma": "nominate",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "nominate",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0003",
+          "token_index": 12,
+          "form": "associate",
+          "oov": false,
+          "expected": {
+            "lemma": "associate",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          },
+          "predicted": {
+            "lemma": "associate",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0003",
+          "token_index": 16,
+          "form": "Superior",
+          "oov": false,
+          "expected": {
+            "lemma": "Superior",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          },
+          "predicted": {
+            "lemma": "Superior",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0003",
+          "token_index": 25,
+          "form": "Steffen",
+          "oov": true,
+          "expected": {
+            "lemma": "Steffen",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "Steffen",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0003",
+          "token_index": 27,
+          "form": "Graae",
+          "oov": true,
+          "expected": {
+            "lemma": "Graae",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "Graae",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0005",
+          "token_index": 2,
+          "form": "nominated",
+          "oov": false,
+          "expected": {
+            "lemma": "nominate",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "nominate",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0005",
+          "token_index": 5,
+          "form": "Anketell",
+          "oov": true,
+          "expected": {
+            "lemma": "Anketell",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "Anketell",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0005",
+          "token_index": 6,
+          "form": "Kramer",
+          "oov": true,
+          "expected": {
+            "lemma": "Kramer",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "Kramer",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0005",
+          "token_index": 14,
+          "form": "associate",
+          "oov": false,
+          "expected": {
+            "lemma": "associate",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          },
+          "predicted": {
+            "lemma": "associate",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0005",
+          "token_index": 23,
+          "form": "Appeals",
+          "oov": false,
+          "expected": {
+            "lemma": "Appeal",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Plur"
+            ]
+          },
+          "predicted": {
+            "lemma": "appeal",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Plur"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0005",
+          "token_index": 28,
+          "form": "Steadman",
+          "oov": true,
+          "expected": {
+            "lemma": "Steadman",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "Steadman",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0001",
+          "token_index": 11,
+          "form": "F",
+          "oov": false,
+          "expected": {
+            "lemma": "F",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "F",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0001",
+          "token_index": 15,
+          "form": "launched",
+          "oov": false,
+          "expected": {
+            "lemma": "launch",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part",
+              "Voice=Pass"
+            ]
+          },
+          "predicted": {
+            "lemma": "launch",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0002",
+          "token_index": 8,
+          "form": "israelians",
+          "oov": true,
+          "expected": {
+            "lemma": "Israelian",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Plur"
+            ]
+          },
+          "predicted": {
+            "lemma": "israelians",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0002",
+          "token_index": 9,
+          "form": "have",
+          "oov": false,
+          "expected": {
+            "lemma": "have",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "have",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0002",
+          "token_index": 16,
+          "form": "founded",
+          "oov": false,
+          "expected": {
+            "lemma": "found",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "found",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0002",
+          "token_index": 28,
+          "form": "did",
+          "oov": false,
+          "expected": {
+            "lemma": "do",
+            "upos": "AUX",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "do",
+            "upos": "AUX",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0003",
+          "token_index": 7,
+          "form": "lost",
+          "oov": false,
+          "expected": {
+            "lemma": "lose",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part"
+            ]
+          },
+          "predicted": {
+            "lemma": "lose",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part",
+              "Voice=Pass"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0003",
+          "token_index": 12,
+          "form": "hope",
+          "oov": false,
+          "expected": {
+            "lemma": "hope",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "hope",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=1",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0004",
+          "token_index": 0,
+          "form": "Nervous",
+          "oov": true,
+          "expected": {
+            "lemma": "nervous",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          },
+          "predicted": {
+            "lemma": "Nervous",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0004",
+          "token_index": 2,
+          "form": "make",
+          "oov": false,
+          "expected": {
+            "lemma": "make",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "make",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0004",
+          "token_index": 3,
+          "form": "mistakes",
+          "oov": true,
+          "expected": {
+            "lemma": "mistake",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Plur"
+            ]
+          },
+          "predicted": {
+            "lemma": "mistakes",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0004",
+          "token_index": 10,
+          "form": "be",
+          "oov": false,
+          "expected": {
+            "lemma": "be",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          },
+          "predicted": {
+            "lemma": "be",
+            "upos": "AUX",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0004",
+          "token_index": 14,
+          "form": "succesfull",
+          "oov": true,
+          "expected": {
+            "lemma": "succesfull",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          },
+          "predicted": {
+            "lemma": "succesfull",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0004",
+          "token_index": 15,
+          "form": "arab",
+          "oov": true,
+          "expected": {
+            "lemma": "Arab",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          },
+          "predicted": {
+            "lemma": "arab",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0005",
+          "token_index": 0,
+          "form": "A",
+          "oov": false,
+          "expected": {
+            "lemma": "a",
+            "upos": "X",
+            "feats": [
+              "Foreign=Yes"
+            ]
+          },
+          "predicted": {
+            "lemma": "a",
+            "upos": "DET",
+            "feats": [
+              "Definite=Ind",
+              "PronType=Art"
+            ]
+          }
+        }
+      ]
+    },
+    "affix": {
+      "counts": {
+        "sentences": 1933,
+        "tokens": 25012,
+        "oov_tokens": 2089,
+        "covered_tokens": 25012,
+        "joint_total": 24986,
+        "joint_correct": 21996,
+        "nonpunct_joint_total": 21958,
+        "nonpunct_joint_correct": 18982,
+        "lemma_total": 24986,
+        "lemma_correct": 23944,
+        "upos_total": 25012,
+        "upos_correct": 22949,
+        "feats_total": 25012,
+        "feats_correct": 23040,
+        "sentence_total": 1915,
+        "sentence_correct": 629,
+        "oov_joint_total": 2082,
+        "oov_joint_correct": 1100,
+        "oov_lemma_total": 2082,
+        "oov_lemma_correct": 1393,
+        "oov_upos_total": 2089,
+        "oov_upos_correct": 1336,
+        "oov_feats_total": 2089,
+        "oov_feats_correct": 1469
+      },
+      "coverage": 1.0,
+      "joint_accuracy": 0.8803329864724245,
+      "nonpunct_joint_accuracy": 0.8644685308315876,
+      "sentence_exact_accuracy": 0.32845953002610967,
+      "oov_joint_accuracy": 0.5283381364073007,
+      "lemma_accuracy": 0.9582966461218282,
+      "oov_lemma_accuracy": 0.6690682036503363,
+      "upos_accuracy": 0.9175195905965137,
+      "oov_upos_accuracy": 0.6395404499760651,
+      "feats_accuracy": 0.9211578442347673,
+      "oov_feats_accuracy": 0.7032072762087123,
+      "feature_micro_f1": 0.9145648783071897,
+      "feature_counts": {
+        "tp": 31076,
+        "fp": 2479,
+        "fn": 3327
+      },
+      "prediction_seconds": 0.2671718668752874,
+      "errors": [
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0001",
+          "token_index": 2,
+          "form": "AP",
+          "oov": false,
+          "expected": {
+            "lemma": "AP",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "AP",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0002",
+          "token_index": 4,
+          "form": "nominated",
+          "oov": false,
+          "expected": {
+            "lemma": "nominate",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "nominate",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0002",
+          "token_index": 9,
+          "form": "retiring",
+          "oov": false,
+          "expected": {
+            "lemma": "retire",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Ger"
+            ]
+          },
+          "predicted": {
+            "lemma": "retire",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Pres",
+              "VerbForm=Part"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0003",
+          "token_index": 1,
+          "form": "nominated",
+          "oov": false,
+          "expected": {
+            "lemma": "nominate",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "nominate",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0003",
+          "token_index": 12,
+          "form": "associate",
+          "oov": false,
+          "expected": {
+            "lemma": "associate",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          },
+          "predicted": {
+            "lemma": "associate",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0003",
+          "token_index": 16,
+          "form": "Superior",
+          "oov": false,
+          "expected": {
+            "lemma": "Superior",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          },
+          "predicted": {
+            "lemma": "Superior",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0005",
+          "token_index": 2,
+          "form": "nominated",
+          "oov": false,
+          "expected": {
+            "lemma": "nominate",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "nominate",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0005",
+          "token_index": 5,
+          "form": "Anketell",
+          "oov": true,
+          "expected": {
+            "lemma": "Anketell",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "anketell",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0005",
+          "token_index": 6,
+          "form": "Kramer",
+          "oov": true,
+          "expected": {
+            "lemma": "Kramer",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "kramer",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0005",
+          "token_index": 14,
+          "form": "associate",
+          "oov": false,
+          "expected": {
+            "lemma": "associate",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          },
+          "predicted": {
+            "lemma": "associate",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_nominations_20041117172713_ENG_20041117_172713-0005",
+          "token_index": 23,
+          "form": "Appeals",
+          "oov": false,
+          "expected": {
+            "lemma": "Appeal",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Plur"
+            ]
+          },
+          "predicted": {
+            "lemma": "appeal",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Plur"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0001",
+          "token_index": 1,
+          "form": "sheikh",
+          "oov": true,
+          "expected": {
+            "lemma": "sheikh",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "Sheikh",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0001",
+          "token_index": 11,
+          "form": "F",
+          "oov": false,
+          "expected": {
+            "lemma": "F",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "F",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0002",
+          "token_index": 8,
+          "form": "israelians",
+          "oov": true,
+          "expected": {
+            "lemma": "Israelian",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Plur"
+            ]
+          },
+          "predicted": {
+            "lemma": "israelian",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Plur"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0002",
+          "token_index": 9,
+          "form": "have",
+          "oov": false,
+          "expected": {
+            "lemma": "have",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "have",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0002",
+          "token_index": 16,
+          "form": "founded",
+          "oov": false,
+          "expected": {
+            "lemma": "found",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "found",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part",
+              "Voice=Pass"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0004",
+          "token_index": 2,
+          "form": "make",
+          "oov": false,
+          "expected": {
+            "lemma": "make",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "make",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0004",
+          "token_index": 3,
+          "form": "mistakes",
+          "oov": true,
+          "expected": {
+            "lemma": "mistake",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Plur"
+            ]
+          },
+          "predicted": {
+            "lemma": "mistake",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0004",
+          "token_index": 10,
+          "form": "be",
+          "oov": false,
+          "expected": {
+            "lemma": "be",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          },
+          "predicted": {
+            "lemma": "be",
+            "upos": "AUX",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0005",
+          "token_index": 0,
+          "form": "A",
+          "oov": false,
+          "expected": {
+            "lemma": "a",
+            "upos": "X",
+            "feats": [
+              "Foreign=Yes"
+            ]
+          },
+          "predicted": {
+            "lemma": "a",
+            "upos": "DET",
+            "feats": [
+              "Definite=Ind",
+              "PronType=Art"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0005",
+          "token_index": 2,
+          "form": "guerre",
+          "oov": true,
+          "expected": {
+            "lemma": "guerre",
+            "upos": "X",
+            "feats": [
+              "Foreign=Yes"
+            ]
+          },
+          "predicted": {
+            "lemma": "guerbe",
+            "upos": "AUX",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0005",
+          "token_index": 3,
+          "form": "c'est",
+          "oov": true,
+          "expected": {
+            "lemma": "c'est",
+            "upos": "X",
+            "feats": [
+              "Foreign=Yes"
+            ]
+          },
+          "predicted": {
+            "lemma": "c'est",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0005",
+          "token_index": 4,
+          "form": "comme",
+          "oov": true,
+          "expected": {
+            "lemma": "comme",
+            "upos": "X",
+            "feats": [
+              "Foreign=Yes"
+            ]
+          },
+          "predicted": {
+            "lemma": "comme",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0005",
+          "token_index": 5,
+          "form": "a",
+          "oov": false,
+          "expected": {
+            "lemma": "a",
+            "upos": "X",
+            "feats": [
+              "Foreign=Yes"
+            ]
+          },
+          "predicted": {
+            "lemma": "a",
+            "upos": "DET",
+            "feats": [
+              "Definite=Ind",
+              "PronType=Art"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_gettingpolitical_20030906235000_ENG_20030906_235000-0005",
+          "token_index": 7,
+          "form": "guerre",
+          "oov": true,
+          "expected": {
+            "lemma": "guerre",
+            "upos": "X",
+            "feats": [
+              "Foreign=Yes"
+            ]
+          },
+          "predicted": {
+            "lemma": "guerre",
+            "upos": "ADV",
+            "feats": [
+              "PronType=Dem"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-juancole.com_juancole_20040114085100_ENG_20040114_085100-0001",
+          "token_index": 8,
+          "form": "detonated",
+          "oov": false,
+          "expected": {
+            "lemma": "detonate",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "detonate",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part",
+              "Voice=Pass"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-juancole.com_juancole_20040114085100_ENG_20040114_085100-0002",
+          "token_index": 2,
+          "form": "lost",
+          "oov": false,
+          "expected": {
+            "lemma": "lose",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "lose",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part",
+              "Voice=Pass"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-juancole.com_juancole_20040114085100_ENG_20040114_085100-0002",
+          "token_index": 6,
+          "form": "to",
+          "oov": false,
+          "expected": {
+            "lemma": "to",
+            "upos": "ADP",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "to",
+            "upos": "PART",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "weblog-juancole.com_juancole_20040114085100_ENG_20040114_085100-0002",
+          "token_index": 14,
+          "form": "heartland",
+          "oov": true,
+          "expected": {
+            "lemma": "heartland",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "Heartland",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-juancole.com_juancole_20040114085100_ENG_20040114_085100-0003",
+          "token_index": 6,
+          "form": "came",
+          "oov": false,
+          "expected": {
+            "lemma": "come",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "come",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "algorithm_id": "count-affix-v1",
+  "environment": {
+    "python": "3.12.4",
+    "platform": "macOS-14.5-arm64-arm-64bit"
+  }
+}

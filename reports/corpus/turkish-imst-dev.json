@@ -1,0 +1,1481 @@
+{
+  "task": "Supervised word lemmatization, POS and morphological feature prediction; not translation.",
+  "protocol": "Frozen model; evaluation receives tokens only; exact NFC token-sequence overlaps with training are excluded; supplied syntactic-word segmentation; punctuation included with nonpunctuation scores reported separately.",
+  "split": "dev",
+  "training": {
+    "path": "data/corpora/turkish-imst/tr_imst-ud-train.conllu",
+    "sha256": "8d8b8b581dab9362e6f2e4328aef77b9fabec1d189a199e320ba136710c7bd83"
+  },
+  "evaluation": {
+    "path": "data/corpora/turkish-imst/tr_imst-ud-dev.conllu",
+    "sha256": "3bdaab362b7a9af7cbf8944aee5c1c1d077970ad4bcafcf23c5c062d4cf93801"
+  },
+  "training_sentences": 3435,
+  "training_tokens": 37442,
+  "training_labels": "All available training annotations; no pretraining or external lexicon.",
+  "evaluation_sentences_read": 1100,
+  "excluded_train_overlap_sentences": 0,
+  "limit_train": null,
+  "limit_eval": null,
+  "training_seconds": 0.8650199160001648,
+  "models": {
+    "lexicon": {
+      "counts": {
+        "sentences": 1100,
+        "tokens": 10542,
+        "oov_tokens": 3358,
+        "covered_tokens": 10542,
+        "joint_total": 10522,
+        "joint_correct": 6615,
+        "lemma_total": 10522,
+        "lemma_correct": 7761,
+        "upos_total": 10542,
+        "upos_correct": 6829,
+        "feats_total": 10542,
+        "feats_correct": 6933,
+        "sentence_total": 1081,
+        "sentence_correct": 77,
+        "nonpunct_joint_total": 8544,
+        "nonpunct_joint_correct": 4637,
+        "oov_joint_total": 3344,
+        "oov_joint_correct": 0,
+        "oov_lemma_total": 3344,
+        "oov_lemma_correct": 664,
+        "oov_upos_total": 3358,
+        "oov_upos_correct": 0,
+        "oov_feats_total": 3358,
+        "oov_feats_correct": 187
+      },
+      "coverage": 1.0,
+      "joint_accuracy": 0.628682759931572,
+      "nonpunct_joint_accuracy": 0.5427200374531835,
+      "sentence_exact_accuracy": 0.07123034227567067,
+      "oov_joint_accuracy": 0.0,
+      "lemma_accuracy": 0.7375974149401254,
+      "oov_lemma_accuracy": 0.19856459330143542,
+      "upos_accuracy": 0.6477897932081199,
+      "oov_upos_accuracy": 0.0,
+      "feats_accuracy": 0.657655093910074,
+      "oov_feats_accuracy": 0.055687909469922574,
+      "feature_micro_f1": 0.6296675075566465,
+      "feature_counts": {
+        "tp": 13853,
+        "fp": 657,
+        "fn": 15638
+      },
+      "prediction_seconds": 2.4012932849946083,
+      "errors": [
+        {
+          "sentence_id": "00001131_14",
+          "token_index": 0,
+          "form": "Ne",
+          "oov": false,
+          "expected": {
+            "lemma": "ne",
+            "upos": "ADJ",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "ne",
+            "upos": "PRON",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00001131_14",
+          "token_index": 1,
+          "form": "o",
+          "oov": false,
+          "expected": {
+            "lemma": "o",
+            "upos": "PRON",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3",
+              "PronType=Dem"
+            ]
+          },
+          "predicted": {
+            "lemma": "o",
+            "upos": "DET",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002113_1",
+          "token_index": 0,
+          "form": "Doğru",
+          "oov": false,
+          "expected": {
+            "lemma": "doğru",
+            "upos": "ADJ",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "doğru",
+            "upos": "ADJ",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002113_2",
+          "token_index": 0,
+          "form": "Hoşça",
+          "oov": true,
+          "expected": {
+            "lemma": "hoşça",
+            "upos": "ADJ",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "Hoşça",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002113_2",
+          "token_index": 1,
+          "form": "kalın",
+          "oov": false,
+          "expected": {
+            "lemma": "kal",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Mood=Imp",
+              "Number=Plur",
+              "Person=2",
+              "Polarity=Pos",
+              "Tense=Pres"
+            ]
+          },
+          "predicted": {
+            "lemma": "kalın",
+            "upos": "ADJ",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002113_3",
+          "token_index": 0,
+          "form": "Aç",
+          "oov": true,
+          "expected": {
+            "lemma": "aç",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Mood=Imp",
+              "Number=Sing",
+              "Person=2",
+              "Polarity=Pos",
+              "Tense=Pres"
+            ]
+          },
+          "predicted": {
+            "lemma": "Aç",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002113_4",
+          "token_index": 1,
+          "form": "?",
+          "oov": false,
+          "expected": {
+            "lemma": "nere",
+            "upos": "PRON",
+            "feats": [
+              "Case=Loc",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "?",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002113_4",
+          "token_index": 2,
+          "form": "eredesin",
+          "oov": true,
+          "expected": {
+            "lemma": "i",
+            "upos": "AUX",
+            "feats": [
+              "Aspect=Perf",
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=2",
+              "Tense=Pres"
+            ]
+          },
+          "predicted": {
+            "lemma": "eredesin",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_1",
+          "token_index": 2,
+          "form": "şarklı",
+          "oov": true,
+          "expected": {
+            "lemma": "şarklı",
+            "upos": "ADJ",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "şarklı",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_2",
+          "token_index": 2,
+          "form": "şarklı",
+          "oov": true,
+          "expected": {
+            "lemma": "şarklı",
+            "upos": "ADJ",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "şarklı",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_5",
+          "token_index": 0,
+          "form": "Arkaya",
+          "oov": true,
+          "expected": {
+            "lemma": "arka",
+            "upos": "ADJ",
+            "feats": [
+              "Case=Dat",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "Arkaya",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_5",
+          "token_index": 1,
+          "form": "taranmış",
+          "oov": true,
+          "expected": {
+            "lemma": "tara",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Evident=Nfh",
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Polarity=Pos",
+              "Tense=Past",
+              "Voice=Pass"
+            ]
+          },
+          "predicted": {
+            "lemma": "taranmış",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_6",
+          "token_index": 0,
+          "form": "İzini",
+          "oov": true,
+          "expected": {
+            "lemma": "iz",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Acc",
+              "Number=Sing",
+              "Number[psor]=Sing",
+              "Person=3",
+              "Person[psor]=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "İzini",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_6",
+          "token_index": 1,
+          "form": "bulursanız",
+          "oov": true,
+          "expected": {
+            "lemma": "bul",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Hab",
+              "Mood=Cnd",
+              "Number=Plur",
+              "Person=2",
+              "Polarity=Pos",
+              "Tense=Pres"
+            ]
+          },
+          "predicted": {
+            "lemma": "bulursanız",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_6",
+          "token_index": 4,
+          "form": "numaraya",
+          "oov": true,
+          "expected": {
+            "lemma": "numara",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Dat",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "numaraya",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_6",
+          "token_index": 6,
+          "form": "verirsiniz",
+          "oov": true,
+          "expected": {
+            "lemma": "ver",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Hab",
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=2",
+              "Polarity=Pos",
+              "Tense=Pres"
+            ]
+          },
+          "predicted": {
+            "lemma": "verirsiniz",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_7",
+          "token_index": 0,
+          "form": "Kahvenin",
+          "oov": true,
+          "expected": {
+            "lemma": "kahve",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Gen",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "Kahvenin",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_8",
+          "token_index": 3,
+          "form": "Osman",
+          "oov": true,
+          "expected": {
+            "lemma": "Osman",
+            "upos": "PROPN",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "Osman",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_13",
+          "token_index": 1,
+          "form": "vermemesi",
+          "oov": true,
+          "expected": {
+            "lemma": "ver",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Case=Nom",
+              "Mood=Ind",
+              "Number[psor]=Sing",
+              "Person[psor]=3",
+              "Polarity=Neg",
+              "Tense=Pres",
+              "VerbForm=Vnoun"
+            ]
+          },
+          "predicted": {
+            "lemma": "vermemesi",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_13",
+          "token_index": 3,
+          "form": "tuhaf",
+          "oov": true,
+          "expected": {
+            "lemma": "tuhaf",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "tuhaf",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_14",
+          "token_index": 2,
+          "form": "polise",
+          "oov": true,
+          "expected": {
+            "lemma": "polis",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Dat",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "polise",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_15",
+          "token_index": 0,
+          "form": "Çevreyi",
+          "oov": true,
+          "expected": {
+            "lemma": "çevre",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Acc",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "Çevreyi",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_15",
+          "token_index": 1,
+          "form": "araştırırlar",
+          "oov": true,
+          "expected": {
+            "lemma": "araştır",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Hab",
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Polarity=Pos",
+              "Tense=Pres"
+            ]
+          },
+          "predicted": {
+            "lemma": "araştırırlar",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_16",
+          "token_index": 0,
+          "form": "Bulabilirler",
+          "oov": true,
+          "expected": {
+            "lemma": "bul",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Hab",
+              "Mood=Pot",
+              "Number=Plur",
+              "Person=3",
+              "Polarity=Pos",
+              "Tense=Pres"
+            ]
+          },
+          "predicted": {
+            "lemma": "Bulabilirler",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_17",
+          "token_index": 0,
+          "form": "Ömür",
+          "oov": true,
+          "expected": {
+            "lemma": "ömür",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "Ömür",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_17",
+          "token_index": 1,
+          "form": "Uzatma",
+          "oov": true,
+          "expected": {
+            "lemma": "uza",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Case=Nom",
+              "Mood=Ind",
+              "Polarity=Pos",
+              "Tense=Pres",
+              "VerbForm=Vnoun",
+              "Voice=Cau"
+            ]
+          },
+          "predicted": {
+            "lemma": "Uzatma",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_17",
+          "token_index": 2,
+          "form": "Kıraathanesi'nin",
+          "oov": true,
+          "expected": {
+            "lemma": "kıraathane",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Gen",
+              "Number=Sing",
+              "Number[psor]=Sing",
+              "Person=3",
+              "Person[psor]=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "Kıraathanesi'nin",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_17",
+          "token_index": 4,
+          "form": "güm",
+          "oov": true,
+          "expected": {
+            "lemma": "güm",
+            "upos": "ADV",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "güm",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_17",
+          "token_index": 5,
+          "form": "güm",
+          "oov": true,
+          "expected": {
+            "lemma": "güm",
+            "upos": "ADV",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "güm",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_17",
+          "token_index": 6,
+          "form": "vuruldu",
+          "oov": true,
+          "expected": {
+            "lemma": "vur",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Polarity=Pos",
+              "Tense=Past",
+              "Voice=Pass"
+            ]
+          },
+          "predicted": {
+            "lemma": "vuruldu",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        }
+      ]
+    },
+    "affix": {
+      "counts": {
+        "sentences": 1100,
+        "tokens": 10542,
+        "oov_tokens": 3358,
+        "covered_tokens": 10542,
+        "joint_total": 10522,
+        "joint_correct": 8227,
+        "lemma_total": 10522,
+        "lemma_correct": 9230,
+        "upos_total": 10542,
+        "upos_correct": 9240,
+        "feats_total": 10542,
+        "feats_correct": 8741,
+        "sentence_total": 1081,
+        "sentence_correct": 231,
+        "nonpunct_joint_total": 8544,
+        "nonpunct_joint_correct": 6249,
+        "oov_joint_total": 3344,
+        "oov_joint_correct": 1566,
+        "oov_lemma_total": 3344,
+        "oov_lemma_correct": 2121,
+        "oov_upos_total": 3358,
+        "oov_upos_correct": 2378,
+        "oov_feats_total": 3358,
+        "oov_feats_correct": 1958
+      },
+      "coverage": 1.0,
+      "joint_accuracy": 0.7818855730849649,
+      "nonpunct_joint_accuracy": 0.7313904494382022,
+      "sentence_exact_accuracy": 0.21369102682701202,
+      "oov_joint_accuracy": 0.46830143540669855,
+      "lemma_accuracy": 0.8772096559589432,
+      "oov_lemma_accuracy": 0.6342703349282297,
+      "upos_accuracy": 0.8764940239043825,
+      "oov_upos_accuracy": 0.7081596188207266,
+      "feats_accuracy": 0.829159552267122,
+      "oov_feats_accuracy": 0.5830851697438951,
+      "feature_micro_f1": 0.8852700434946402,
+      "feature_counts": {
+        "tp": 25849,
+        "fp": 3058,
+        "fn": 3642
+      },
+      "prediction_seconds": 0.13753906997226295,
+      "errors": [
+        {
+          "sentence_id": "00001131_14",
+          "token_index": 0,
+          "form": "Ne",
+          "oov": false,
+          "expected": {
+            "lemma": "ne",
+            "upos": "ADJ",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "ne",
+            "upos": "PRON",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00001131_14",
+          "token_index": 1,
+          "form": "o",
+          "oov": false,
+          "expected": {
+            "lemma": "o",
+            "upos": "PRON",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3",
+              "PronType=Dem"
+            ]
+          },
+          "predicted": {
+            "lemma": "o",
+            "upos": "PRON",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3",
+              "PronType=Prs"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002113_2",
+          "token_index": 0,
+          "form": "Hoşça",
+          "oov": true,
+          "expected": {
+            "lemma": "hoşça",
+            "upos": "ADJ",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "hoşça",
+            "upos": "ADV",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002113_2",
+          "token_index": 1,
+          "form": "kalın",
+          "oov": false,
+          "expected": {
+            "lemma": "kal",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Mood=Imp",
+              "Number=Plur",
+              "Person=2",
+              "Polarity=Pos",
+              "Tense=Pres"
+            ]
+          },
+          "predicted": {
+            "lemma": "kalın",
+            "upos": "ADJ",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002113_3",
+          "token_index": 0,
+          "form": "Aç",
+          "oov": true,
+          "expected": {
+            "lemma": "aç",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Mood=Imp",
+              "Number=Sing",
+              "Person=2",
+              "Polarity=Pos",
+              "Tense=Pres"
+            ]
+          },
+          "predicted": {
+            "lemma": "aç",
+            "upos": "DET",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002113_4",
+          "token_index": 1,
+          "form": "?",
+          "oov": false,
+          "expected": {
+            "lemma": "nere",
+            "upos": "PRON",
+            "feats": [
+              "Case=Loc",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "?",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002113_4",
+          "token_index": 2,
+          "form": "eredesin",
+          "oov": true,
+          "expected": {
+            "lemma": "i",
+            "upos": "AUX",
+            "feats": [
+              "Aspect=Perf",
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=2",
+              "Tense=Pres"
+            ]
+          },
+          "predicted": {
+            "lemma": "eredesin",
+            "upos": "ADJ",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_5",
+          "token_index": 0,
+          "form": "Arkaya",
+          "oov": true,
+          "expected": {
+            "lemma": "arka",
+            "upos": "ADJ",
+            "feats": [
+              "Case=Dat",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "Arkaya",
+            "upos": "PROPN",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_6",
+          "token_index": 0,
+          "form": "İzini",
+          "oov": true,
+          "expected": {
+            "lemma": "iz",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Acc",
+              "Number=Sing",
+              "Number[psor]=Sing",
+              "Person=3",
+              "Person[psor]=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "i̇z",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Acc",
+              "Number=Sing",
+              "Number[psor]=Sing",
+              "Person=3",
+              "Person[psor]=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_6",
+          "token_index": 1,
+          "form": "bulursanız",
+          "oov": true,
+          "expected": {
+            "lemma": "bul",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Hab",
+              "Mood=Cnd",
+              "Number=Plur",
+              "Person=2",
+              "Polarity=Pos",
+              "Tense=Pres"
+            ]
+          },
+          "predicted": {
+            "lemma": "bulur",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Hab",
+              "Mood=Cnd",
+              "Number=Plur",
+              "Person=2",
+              "Polarity=Pos",
+              "Tense=Pres"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_6",
+          "token_index": 6,
+          "form": "verirsiniz",
+          "oov": true,
+          "expected": {
+            "lemma": "ver",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Hab",
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=2",
+              "Polarity=Pos",
+              "Tense=Pres"
+            ]
+          },
+          "predicted": {
+            "lemma": "ver",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=2",
+              "Polarity=Pos",
+              "Tense=Fut"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_8",
+          "token_index": 3,
+          "form": "Osman",
+          "oov": true,
+          "expected": {
+            "lemma": "Osman",
+            "upos": "PROPN",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "osman",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_13",
+          "token_index": 1,
+          "form": "vermemesi",
+          "oov": true,
+          "expected": {
+            "lemma": "ver",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Case=Nom",
+              "Mood=Ind",
+              "Number[psor]=Sing",
+              "Person[psor]=3",
+              "Polarity=Neg",
+              "Tense=Pres",
+              "VerbForm=Vnoun"
+            ]
+          },
+          "predicted": {
+            "lemma": "verme",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Case=Nom",
+              "Mood=Ind",
+              "Number[psor]=Sing",
+              "Person[psor]=3",
+              "Polarity=Pos",
+              "Tense=Pres",
+              "VerbForm=Vnoun"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_14",
+          "token_index": 2,
+          "form": "polise",
+          "oov": true,
+          "expected": {
+            "lemma": "polis",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Dat",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "polise",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_16",
+          "token_index": 0,
+          "form": "Bulabilirler",
+          "oov": true,
+          "expected": {
+            "lemma": "bul",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Hab",
+              "Mood=Pot",
+              "Number=Plur",
+              "Person=3",
+              "Polarity=Pos",
+              "Tense=Pres"
+            ]
+          },
+          "predicted": {
+            "lemma": "bulabilir",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Nom",
+              "Number=Plur",
+              "Person=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_17",
+          "token_index": 1,
+          "form": "Uzatma",
+          "oov": true,
+          "expected": {
+            "lemma": "uza",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Case=Nom",
+              "Mood=Ind",
+              "Polarity=Pos",
+              "Tense=Pres",
+              "VerbForm=Vnoun",
+              "Voice=Cau"
+            ]
+          },
+          "predicted": {
+            "lemma": "uzat",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Case=Nom",
+              "Mood=Ind",
+              "Polarity=Pos",
+              "Tense=Pres",
+              "VerbForm=Vnoun"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_17",
+          "token_index": 2,
+          "form": "Kıraathanesi'nin",
+          "oov": true,
+          "expected": {
+            "lemma": "kıraathane",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Gen",
+              "Number=Sing",
+              "Number[psor]=Sing",
+              "Person=3",
+              "Person[psor]=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "Kıraathanesi",
+            "upos": "PROPN",
+            "feats": [
+              "Case=Gen",
+              "Number=Sing",
+              "Person=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_17",
+          "token_index": 4,
+          "form": "güm",
+          "oov": true,
+          "expected": {
+            "lemma": "güm",
+            "upos": "ADV",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "güm",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=1",
+              "Polarity=Pos",
+              "Tense=Past"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_17",
+          "token_index": 5,
+          "form": "güm",
+          "oov": true,
+          "expected": {
+            "lemma": "güm",
+            "upos": "ADV",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "güm",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=1",
+              "Polarity=Pos",
+              "Tense=Past"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_17",
+          "token_index": 6,
+          "form": "vuruldu",
+          "oov": true,
+          "expected": {
+            "lemma": "vur",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Polarity=Pos",
+              "Tense=Past",
+              "Voice=Pass"
+            ]
+          },
+          "predicted": {
+            "lemma": "vur",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Polarity=Pos",
+              "Tense=Past"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_18",
+          "token_index": 1,
+          "form": "heyecanla",
+          "oov": true,
+          "expected": {
+            "lemma": "heyecan",
+            "upos": "ADV",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "heyecan",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Ins",
+              "Number=Sing",
+              "Person=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_19",
+          "token_index": 0,
+          "form": "Osman",
+          "oov": true,
+          "expected": {
+            "lemma": "Osman",
+            "upos": "PROPN",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "osman",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Nom",
+              "Number=Sing",
+              "Person=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_20",
+          "token_index": 1,
+          "form": "açık",
+          "oov": false,
+          "expected": {
+            "lemma": "açık",
+            "upos": "ADV",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "açık",
+            "upos": "ADJ",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_22",
+          "token_index": 0,
+          "form": "İçeriye",
+          "oov": true,
+          "expected": {
+            "lemma": "içeri",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Dat",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "i̇çeri",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Dat",
+              "Number=Sing",
+              "Person=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_22",
+          "token_index": 1,
+          "form": "gençten",
+          "oov": true,
+          "expected": {
+            "lemma": "genç",
+            "upos": "ADJ",
+            "feats": [
+              "Case=Abl",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "gençten",
+            "upos": "ADV",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "00002213_24",
+          "token_index": 0,
+          "form": "Kapının",
+          "oov": false,
+          "expected": {
+            "lemma": "kapı",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Gen",
+              "Number=Sing",
+              "Number[psor]=Sing",
+              "Person=3",
+              "Person[psor]=2"
+            ]
+          },
+          "predicted": {
+            "lemma": "kapı",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Gen",
+              "Number=Sing",
+              "Person=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_24",
+          "token_index": 1,
+          "form": "kenarında",
+          "oov": true,
+          "expected": {
+            "lemma": "kenar",
+            "upos": "ADJ",
+            "feats": [
+              "Case=Loc",
+              "Number=Sing",
+              "Number[psor]=Sing",
+              "Person=3",
+              "Person[psor]=2"
+            ]
+          },
+          "predicted": {
+            "lemma": "kenar",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Loc",
+              "Number=Plur",
+              "Number[psor]=Sing",
+              "Person=3",
+              "Person[psor]=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_24",
+          "token_index": 3,
+          "form": "duvara",
+          "oov": true,
+          "expected": {
+            "lemma": "duvar",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Dat",
+              "Number=Sing",
+              "Person=3"
+            ]
+          },
+          "predicted": {
+            "lemma": "duvara",
+            "upos": "NOUN",
+            "feats": [
+              "Case=Dat",
+              "Number=Plur",
+              "Person=3"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_24",
+          "token_index": 4,
+          "form": "dayanıp",
+          "oov": true,
+          "expected": {
+            "lemma": "dayan",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Mood=Ind",
+              "Polarity=Pos",
+              "Tense=Pres",
+              "VerbForm=Conv"
+            ]
+          },
+          "predicted": {
+            "lemma": "dayan",
+            "upos": "VERB",
+            "feats": [
+              "Aspect=Perf",
+              "Mood=Ind",
+              "Polarity=Pos",
+              "Tense=Pres",
+              "VerbForm=Conv",
+              "Voice=Pass"
+            ]
+          }
+        },
+        {
+          "sentence_id": "00002213_24",
+          "token_index": 7,
+          "form": "bir",
+          "oov": false,
+          "expected": {
+            "lemma": "bir",
+            "upos": "NUM",
+            "feats": [
+              "NumType=Card"
+            ]
+          },
+          "predicted": {
+            "lemma": "bir",
+            "upos": "DET",
+            "feats": []
+          }
+        }
+      ]
+    }
+  },
+  "algorithm_id": "count-affix-v1",
+  "environment": {
+    "python": "3.12.4",
+    "platform": "macOS-14.5-arm64-arm-64bit"
+  }
+}

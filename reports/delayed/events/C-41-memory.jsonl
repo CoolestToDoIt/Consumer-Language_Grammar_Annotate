@@ -1,0 +1,135 @@
+{"type": "prediction", "step": 1, "id": "C-41-0", "source": "ha bari lori kiri", "prediction": {"meaning": null, "candidates": [], "version": 0, "recall": false}}
+{"type": "feedback", "step": 1, "id": "C-41-0", "meaning": {"agent": "DOG", "predicate": "CHASE", "patient": "BIRD", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 1}
+{"type": "prediction", "step": 2, "id": "C-41-1", "source": "bari jo kisu jo basu", "prediction": {"meaning": null, "candidates": [], "version": 1, "recall": false}}
+{"type": "feedback", "step": 2, "id": "C-41-1", "meaning": {"agent": "TREE", "predicate": "CHASE", "patient": "FISH", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 2}
+{"type": "prediction", "step": 3, "id": "C-41-2", "source": "ha pota basu jo kisu", "prediction": {"meaning": null, "candidates": [], "version": 2, "recall": false}}
+{"type": "feedback", "step": 3, "id": "C-41-2", "meaning": {"agent": "FISH", "predicate": "TOUCH", "patient": "TREE", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 3}
+{"type": "prediction", "step": 4, "id": "C-41-3", "source": "kive jo lori jo nesu", "prediction": {"meaning": null, "candidates": [], "version": 3, "recall": false}}
+{"type": "feedback", "step": 4, "id": "C-41-3", "meaning": {"agent": "DOG", "predicate": "SEE", "patient": "CAT", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 4}
+{"type": "prediction", "step": 5, "id": "C-41-4", "source": "kive jo kiri jo basu", "prediction": {"meaning": null, "candidates": [], "version": 4, "recall": false}}
+{"type": "feedback", "step": 5, "id": "C-41-4", "meaning": {"agent": "BIRD", "predicate": "SEE", "patient": "FISH", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 5}
+{"type": "prediction", "step": 6, "id": "C-41-5", "source": "ha kive jo pove basu", "prediction": {"meaning": null, "candidates": [], "version": 5, "recall": false}}
+{"type": "feedback", "step": 6, "id": "C-41-5", "meaning": {"agent": "FLOWER", "predicate": "SEE", "patient": "FISH", "tense": "PAST", "agent_number": "PLURAL", "patient_number": "SINGULAR"}, "due": 6}
+{"type": "prediction", "step": 7, "id": "C-41-6", "source": "kive kisu jo nesu", "prediction": {"meaning": null, "candidates": [], "version": 6, "recall": false}}
+{"type": "feedback", "step": 7, "id": "C-41-6", "meaning": {"agent": "TREE", "predicate": "SEE", "patient": "CAT", "tense": "PRESENT", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 7}
+{"type": "prediction", "step": 8, "id": "C-41-7", "source": "kive jo lori jo kisu", "prediction": {"meaning": null, "candidates": [], "version": 7, "recall": false}}
+{"type": "feedback", "step": 8, "id": "C-41-7", "meaning": {"agent": "DOG", "predicate": "SEE", "patient": "TREE", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 8}
+{"type": "prediction", "step": 9, "id": "C-41-8", "source": "ha bari pove lori", "prediction": {"meaning": null, "candidates": [], "version": 8, "recall": false}}
+{"type": "feedback", "step": 9, "id": "C-41-8", "meaning": {"agent": "FLOWER", "predicate": "CHASE", "patient": "DOG", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 9}
+{"type": "prediction", "step": 10, "id": "C-41-9", "source": "kive kisu kiri", "prediction": {"meaning": null, "candidates": [], "version": 9, "recall": false}}
+{"type": "prediction", "step": 11, "id": "C-41-10", "source": "pota pove jo nesu", "prediction": {"meaning": null, "candidates": [], "version": 9, "recall": false}}
+{"type": "prediction", "step": 12, "id": "C-41-11", "source": "bari jo lori muta", "prediction": {"meaning": null, "candidates": [], "version": 9, "recall": false}}
+{"type": "feedback", "step": 13, "id": "C-41-9", "meaning": {"agent": "TREE", "predicate": "SEE", "patient": "BIRD", "tense": "PRESENT", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 13}
+{"type": "prediction", "step": 13, "id": "C-41-12", "source": "ha kive jo basu jo lori", "prediction": {"meaning": null, "candidates": [], "version": 10, "recall": false}}
+{"type": "feedback", "step": 14, "id": "C-41-10", "meaning": {"agent": "FLOWER", "predicate": "TOUCH", "patient": "CAT", "tense": "PRESENT", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 14}
+{"type": "prediction", "step": 14, "id": "C-41-13", "source": "ha kive neve jo kiri", "prediction": {"meaning": null, "candidates": [], "version": 11, "recall": false}}
+{"type": "feedback", "step": 15, "id": "C-41-11", "meaning": {"agent": "DOG", "predicate": "CHASE", "patient": "CHILD", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "SINGULAR"}, "due": 15}
+{"type": "prediction", "step": 15, "id": "C-41-14", "source": "pota jo kisu jo lori", "prediction": {"meaning": null, "candidates": [], "version": 12, "recall": false}}
+{"type": "feedback", "step": 16, "id": "C-41-12", "meaning": {"agent": "FISH", "predicate": "SEE", "patient": "DOG", "tense": "PAST", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 16}
+{"type": "prediction", "step": 16, "id": "C-41-15", "source": "ha bari nesu basu", "prediction": {"meaning": null, "candidates": [], "version": 13, "recall": false}}
+{"type": "feedback", "step": 17, "id": "C-41-13", "meaning": {"agent": "STONE", "predicate": "SEE", "patient": "BIRD", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 17}
+{"type": "prediction", "step": 17, "id": "C-41-16", "source": "ha pota jo neve jo kiri", "prediction": {"meaning": null, "candidates": [], "version": 14, "recall": false}}
+{"type": "feedback", "step": 18, "id": "C-41-14", "meaning": {"agent": "TREE", "predicate": "TOUCH", "patient": "DOG", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 18}
+{"type": "prediction", "step": 18, "id": "C-41-17", "source": "ha pota jo basu lori", "prediction": {"meaning": null, "candidates": [], "version": 15, "recall": false}}
+{"type": "feedback", "step": 19, "id": "C-41-15", "meaning": {"agent": "CAT", "predicate": "CHASE", "patient": "FISH", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 19}
+{"type": "prediction", "step": 19, "id": "C-41-18", "source": "kive jo muta neve", "prediction": {"meaning": null, "candidates": [], "version": 16, "recall": false}}
+{"type": "feedback", "step": 20, "id": "C-41-16", "meaning": {"agent": "STONE", "predicate": "TOUCH", "patient": "BIRD", "tense": "PAST", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 20}
+{"type": "prediction", "step": 20, "id": "C-41-19", "source": "pota nesu lori", "prediction": {"meaning": null, "candidates": [], "version": 17, "recall": false}}
+{"type": "feedback", "step": 21, "id": "C-41-17", "meaning": {"agent": "FISH", "predicate": "TOUCH", "patient": "DOG", "tense": "PAST", "agent_number": "PLURAL", "patient_number": "SINGULAR"}, "due": 21}
+{"type": "prediction", "step": 21, "id": "C-41-20", "source": "bari muta jo lori", "prediction": {"meaning": null, "candidates": [], "version": 18, "recall": false}}
+{"type": "feedback", "step": 22, "id": "C-41-18", "meaning": {"agent": "CHILD", "predicate": "SEE", "patient": "STONE", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "SINGULAR"}, "due": 22}
+{"type": "prediction", "step": 22, "id": "C-41-21", "source": "ha kive neve lori", "prediction": {"meaning": null, "candidates": [], "version": 19, "recall": false}}
+{"type": "feedback", "step": 23, "id": "C-41-19", "meaning": {"agent": "CAT", "predicate": "TOUCH", "patient": "DOG", "tense": "PRESENT", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 23}
+{"type": "prediction", "step": 23, "id": "C-41-22", "source": "ha kive jo basu muta", "prediction": {"meaning": null, "candidates": [], "version": 20, "recall": false}}
+{"type": "feedback", "step": 24, "id": "C-41-20", "meaning": {"agent": "CHILD", "predicate": "CHASE", "patient": "DOG", "tense": "PRESENT", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 24}
+{"type": "prediction", "step": 24, "id": "C-41-23", "source": "ha pota jo nesu jo kiri", "prediction": {"meaning": null, "candidates": [], "version": 21, "recall": false}}
+{"type": "feedback", "step": 25, "id": "C-41-21", "meaning": {"agent": "STONE", "predicate": "SEE", "patient": "DOG", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 25}
+{"type": "prediction", "step": 25, "id": "C-41-24", "source": "ha kive lori basu", "prediction": {"meaning": null, "candidates": [], "version": 22, "recall": false}}
+{"type": "feedback", "step": 26, "id": "C-41-22", "meaning": {"agent": "FISH", "predicate": "SEE", "patient": "CHILD", "tense": "PAST", "agent_number": "PLURAL", "patient_number": "SINGULAR"}, "due": 26}
+{"type": "prediction", "step": 26, "id": "C-41-25", "source": "ha pota nesu muta", "prediction": {"meaning": null, "candidates": [], "version": 23, "recall": false}}
+{"type": "feedback", "step": 27, "id": "C-41-23", "meaning": {"agent": "CAT", "predicate": "TOUCH", "patient": "BIRD", "tense": "PAST", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 27}
+{"type": "prediction", "step": 27, "id": "C-41-26", "source": "pota basu jo nesu", "prediction": {"meaning": null, "candidates": [], "version": 24, "recall": false}}
+{"type": "feedback", "step": 28, "id": "C-41-24", "meaning": {"agent": "DOG", "predicate": "SEE", "patient": "FISH", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 28}
+{"type": "prediction", "step": 28, "id": "C-41-27", "source": "ha pota pove kiri", "prediction": {"meaning": null, "candidates": [], "version": 25, "recall": false}}
+{"type": "feedback", "step": 29, "id": "C-41-25", "meaning": {"agent": "CAT", "predicate": "TOUCH", "patient": "CHILD", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 29}
+{"type": "prediction", "step": 29, "id": "C-41-28", "source": "pota nesu kiri", "prediction": {"meaning": null, "candidates": [], "version": 26, "recall": false}}
+{"type": "feedback", "step": 30, "id": "C-41-26", "meaning": {"agent": "FISH", "predicate": "TOUCH", "patient": "CAT", "tense": "PRESENT", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 30}
+{"type": "prediction", "step": 30, "id": "C-41-29", "source": "ha bari jo kisu jo neve", "prediction": {"meaning": null, "candidates": [], "version": 27, "recall": false}}
+{"type": "feedback", "step": 31, "id": "C-41-27", "meaning": {"agent": "FLOWER", "predicate": "TOUCH", "patient": "BIRD", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 31}
+{"type": "prediction", "step": 31, "id": "C-41-30", "source": "ha kive neve jo basu", "prediction": {"meaning": null, "candidates": [], "version": 28, "recall": false}}
+{"type": "feedback", "step": 32, "id": "C-41-28", "meaning": {"agent": "CAT", "predicate": "TOUCH", "patient": "BIRD", "tense": "PRESENT", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 32}
+{"type": "prediction", "step": 32, "id": "C-41-31", "source": "ha kive jo neve jo nesu", "prediction": {"meaning": null, "candidates": [], "version": 29, "recall": false}}
+{"type": "feedback", "step": 33, "id": "C-41-29", "meaning": {"agent": "TREE", "predicate": "CHASE", "patient": "STONE", "tense": "PAST", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 33}
+{"type": "prediction", "step": 33, "id": "C-41-32", "source": "pota kiri pove", "prediction": {"meaning": null, "candidates": [], "version": 30, "recall": false}}
+{"type": "feedback", "step": 34, "id": "C-41-30", "meaning": {"agent": "STONE", "predicate": "SEE", "patient": "FISH", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 34}
+{"type": "prediction", "step": 34, "id": "C-41-33", "source": "bari jo nesu pove", "prediction": {"meaning": null, "candidates": [], "version": 31, "recall": false}}
+{"type": "feedback", "step": 35, "id": "C-41-31", "meaning": {"agent": "STONE", "predicate": "SEE", "patient": "CAT", "tense": "PAST", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 35}
+{"type": "prediction", "step": 35, "id": "C-41-34", "source": "ha bari nesu kiri", "prediction": {"meaning": null, "candidates": [], "version": 32, "recall": false}}
+{"type": "feedback", "step": 36, "id": "C-41-32", "meaning": {"agent": "BIRD", "predicate": "TOUCH", "patient": "FLOWER", "tense": "PRESENT", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 36}
+{"type": "prediction", "step": 36, "id": "C-41-35", "source": "kive jo kiri jo nesu", "prediction": {"meaning": null, "candidates": [], "version": 33, "recall": false}}
+{"type": "feedback", "step": 37, "id": "C-41-33", "meaning": {"agent": "CAT", "predicate": "CHASE", "patient": "FLOWER", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "SINGULAR"}, "due": 37}
+{"type": "prediction", "step": 37, "id": "C-41-36", "source": "ha pota jo nesu kisu", "prediction": {"meaning": null, "candidates": [], "version": 34, "recall": false}}
+{"type": "feedback", "step": 38, "id": "C-41-34", "meaning": {"agent": "CAT", "predicate": "CHASE", "patient": "BIRD", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 38}
+{"type": "prediction", "step": 38, "id": "C-41-37", "source": "pota jo kiri jo basu", "prediction": {"meaning": null, "candidates": [], "version": 35, "recall": false}}
+{"type": "feedback", "step": 39, "id": "C-41-35", "meaning": {"agent": "BIRD", "predicate": "SEE", "patient": "CAT", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 39}
+{"type": "prediction", "step": 39, "id": "C-41-38", "source": "pota jo kiri jo pove", "prediction": {"meaning": null, "candidates": [], "version": 36, "recall": false}}
+{"type": "feedback", "step": 40, "id": "C-41-36", "meaning": {"agent": "CAT", "predicate": "TOUCH", "patient": "TREE", "tense": "PAST", "agent_number": "PLURAL", "patient_number": "SINGULAR"}, "due": 40}
+{"type": "prediction", "step": 40, "id": "C-41-39", "source": "ha bari kiri jo neve", "prediction": {"meaning": null, "candidates": [], "version": 37, "recall": false}}
+{"type": "feedback", "step": 41, "id": "C-41-37", "meaning": {"agent": "BIRD", "predicate": "TOUCH", "patient": "FISH", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 41}
+{"type": "prediction", "step": 41, "id": "C-41-40", "source": "ha bari jo kiri jo basu", "prediction": {"meaning": null, "candidates": [], "version": 38, "recall": false}}
+{"type": "feedback", "step": 42, "id": "C-41-38", "meaning": {"agent": "BIRD", "predicate": "TOUCH", "patient": "FLOWER", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 42}
+{"type": "prediction", "step": 42, "id": "C-41-41", "source": "bari jo muta nesu", "prediction": {"meaning": null, "candidates": [], "version": 39, "recall": false}}
+{"type": "feedback", "step": 43, "id": "C-41-39", "meaning": {"agent": "BIRD", "predicate": "CHASE", "patient": "STONE", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 43}
+{"type": "prediction", "step": 43, "id": "C-41-42", "source": "ha pota basu jo lori", "prediction": {"meaning": null, "candidates": [], "version": 40, "recall": false}}
+{"type": "feedback", "step": 44, "id": "C-41-40", "meaning": {"agent": "BIRD", "predicate": "CHASE", "patient": "FISH", "tense": "PAST", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 44}
+{"type": "prediction", "step": 44, "id": "C-41-43", "source": "kive jo lori basu", "prediction": {"meaning": null, "candidates": [], "version": 41, "recall": false}}
+{"type": "feedback", "step": 45, "id": "C-41-41", "meaning": {"agent": "CHILD", "predicate": "CHASE", "patient": "CAT", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "SINGULAR"}, "due": 45}
+{"type": "prediction", "step": 45, "id": "C-41-44", "source": "ha bari neve jo basu", "prediction": {"meaning": null, "candidates": [], "version": 42, "recall": false}}
+{"type": "feedback", "step": 46, "id": "C-41-42", "meaning": {"agent": "FISH", "predicate": "TOUCH", "patient": "DOG", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 46}
+{"type": "prediction", "step": 46, "id": "C-41-45", "source": "bari nesu jo lori", "prediction": {"meaning": null, "candidates": [], "version": 43, "recall": false}}
+{"type": "feedback", "step": 47, "id": "C-41-43", "meaning": {"agent": "DOG", "predicate": "SEE", "patient": "FISH", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "SINGULAR"}, "due": 47}
+{"type": "prediction", "step": 47, "id": "C-41-46", "source": "bari pove jo nesu", "prediction": {"meaning": null, "candidates": [], "version": 44, "recall": false}}
+{"type": "feedback", "step": 48, "id": "C-41-44", "meaning": {"agent": "STONE", "predicate": "CHASE", "patient": "FISH", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 48}
+{"type": "prediction", "step": 48, "id": "C-41-47", "source": "bari jo kiri neve", "prediction": {"meaning": null, "candidates": [], "version": 45, "recall": false}}
+{"type": "feedback", "step": 49, "id": "C-41-45", "meaning": {"agent": "CAT", "predicate": "CHASE", "patient": "DOG", "tense": "PRESENT", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 49}
+{"type": "prediction", "step": 49, "id": "C-41-48", "source": "ha bari jo lori jo kiri", "prediction": {"meaning": null, "candidates": [], "version": 46, "recall": false}}
+{"type": "feedback", "step": 50, "id": "C-41-46", "meaning": {"agent": "FLOWER", "predicate": "CHASE", "patient": "CAT", "tense": "PRESENT", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 50}
+{"type": "prediction", "step": 50, "id": "C-41-49", "source": "ha kive basu jo nesu", "prediction": {"meaning": null, "candidates": [], "version": 47, "recall": false}}
+{"type": "feedback", "step": 51, "id": "C-41-47", "meaning": {"agent": "BIRD", "predicate": "CHASE", "patient": "STONE", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "SINGULAR"}, "due": 51}
+{"type": "prediction", "step": 51, "id": "C-41-50", "source": "pota basu nesu", "prediction": {"meaning": null, "candidates": [], "version": 48, "recall": false}}
+{"type": "feedback", "step": 52, "id": "C-41-48", "meaning": {"agent": "DOG", "predicate": "CHASE", "patient": "BIRD", "tense": "PAST", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 52}
+{"type": "prediction", "step": 52, "id": "C-41-51", "source": "bari nesu pove", "prediction": {"meaning": null, "candidates": [], "version": 49, "recall": false}}
+{"type": "feedback", "step": 53, "id": "C-41-49", "meaning": {"agent": "FISH", "predicate": "SEE", "patient": "CAT", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 53}
+{"type": "prediction", "step": 53, "id": "C-41-52", "source": "bari jo neve jo lori", "prediction": {"meaning": null, "candidates": [], "version": 50, "recall": false}}
+{"type": "feedback", "step": 54, "id": "C-41-50", "meaning": {"agent": "FISH", "predicate": "TOUCH", "patient": "CAT", "tense": "PRESENT", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 54}
+{"type": "prediction", "step": 54, "id": "C-41-53", "source": "kive pove jo neve", "prediction": {"meaning": null, "candidates": [], "version": 51, "recall": false}}
+{"type": "feedback", "step": 55, "id": "C-41-51", "meaning": {"agent": "CAT", "predicate": "CHASE", "patient": "FLOWER", "tense": "PRESENT", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 55}
+{"type": "prediction", "step": 55, "id": "C-41-54", "source": "kive jo kiri jo kisu", "prediction": {"meaning": null, "candidates": [], "version": 52, "recall": false}}
+{"type": "feedback", "step": 56, "id": "C-41-52", "meaning": {"agent": "STONE", "predicate": "CHASE", "patient": "DOG", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 56}
+{"type": "prediction", "step": 56, "id": "C-41-55", "source": "ha bari muta pove", "prediction": {"meaning": null, "candidates": [], "version": 53, "recall": false}}
+{"type": "feedback", "step": 57, "id": "C-41-53", "meaning": {"agent": "FLOWER", "predicate": "SEE", "patient": "STONE", "tense": "PRESENT", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 57}
+{"type": "prediction", "step": 57, "id": "C-41-56", "source": "pota jo kisu nesu", "prediction": {"meaning": null, "candidates": [], "version": 54, "recall": false}}
+{"type": "feedback", "step": 58, "id": "C-41-54", "meaning": {"agent": "BIRD", "predicate": "SEE", "patient": "TREE", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 58}
+{"type": "prediction", "step": 58, "id": "C-41-57", "source": "bari jo lori kisu", "prediction": {"meaning": null, "candidates": [], "version": 55, "recall": false}}
+{"type": "feedback", "step": 59, "id": "C-41-55", "meaning": {"agent": "CHILD", "predicate": "CHASE", "patient": "FLOWER", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 59}
+{"type": "prediction", "step": 59, "id": "C-41-58", "source": "bari jo nesu jo basu", "prediction": {"meaning": null, "candidates": [], "version": 56, "recall": false}}
+{"type": "feedback", "step": 60, "id": "C-41-56", "meaning": {"agent": "TREE", "predicate": "TOUCH", "patient": "CAT", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "SINGULAR"}, "due": 60}
+{"type": "prediction", "step": 60, "id": "C-41-59", "source": "pota jo kiri jo lori", "prediction": {"meaning": null, "candidates": [], "version": 57, "recall": false}}
+{"type": "feedback", "step": 61, "id": "C-41-57", "meaning": {"agent": "DOG", "predicate": "CHASE", "patient": "TREE", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "SINGULAR"}, "due": 61}
+{"type": "prediction", "step": 61, "id": "C-41-60", "source": "kive basu jo kisu", "prediction": {"meaning": null, "candidates": [], "version": 58, "recall": false}}
+{"type": "feedback", "step": 62, "id": "C-41-58", "meaning": {"agent": "CAT", "predicate": "CHASE", "patient": "FISH", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 62}
+{"type": "prediction", "step": 62, "id": "C-41-61", "source": "ha kive muta basu", "prediction": {"meaning": null, "candidates": [], "version": 59, "recall": false}}
+{"type": "feedback", "step": 63, "id": "C-41-59", "meaning": {"agent": "BIRD", "predicate": "TOUCH", "patient": "DOG", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 63}
+{"type": "prediction", "step": 63, "id": "C-41-62", "source": "ha bari jo nesu jo pove", "prediction": {"meaning": null, "candidates": [], "version": 60, "recall": false}}
+{"type": "feedback", "step": 64, "id": "C-41-60", "meaning": {"agent": "FISH", "predicate": "SEE", "patient": "TREE", "tense": "PRESENT", "agent_number": "SINGULAR", "patient_number": "PLURAL"}, "due": 64}
+{"type": "prediction", "step": 64, "id": "C-41-63", "source": "ha kive neve kisu", "prediction": {"meaning": null, "candidates": [], "version": 61, "recall": false}}
+{"type": "feedback", "step": 65, "id": "C-41-61", "meaning": {"agent": "CHILD", "predicate": "SEE", "patient": "FISH", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 65}
+{"type": "prediction", "step": 65, "id": "C-41-64", "source": "pota jo kisu jo neve", "prediction": {"meaning": null, "candidates": [], "version": 62, "recall": false}}
+{"type": "feedback", "step": 66, "id": "C-41-62", "meaning": {"agent": "CAT", "predicate": "CHASE", "patient": "FLOWER", "tense": "PAST", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 66}
+{"type": "prediction", "step": 66, "id": "C-41-65", "source": "ha bari jo muta jo basu", "prediction": {"meaning": null, "candidates": [], "version": 63, "recall": false}}
+{"type": "feedback", "step": 67, "id": "C-41-63", "meaning": {"agent": "STONE", "predicate": "SEE", "patient": "TREE", "tense": "PAST", "agent_number": "SINGULAR", "patient_number": "SINGULAR"}, "due": 67}
+{"type": "prediction", "step": 67, "id": "C-41-66", "source": "ha kive jo kiri jo nesu", "prediction": {"meaning": null, "candidates": [], "version": 64, "recall": false}}
+{"type": "feedback", "step": 68, "id": "C-41-64", "meaning": {"agent": "TREE", "predicate": "TOUCH", "patient": "STONE", "tense": "PRESENT", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 68}
+{"type": "prediction", "step": 68, "id": "C-41-67", "source": "kive jo nesu jo kiri", "prediction": {"meaning": null, "candidates": [], "version": 65, "recall": false}}
+{"type": "feedback", "step": 69, "id": "C-41-65", "meaning": {"agent": "CHILD", "predicate": "CHASE", "patient": "FISH", "tense": "PAST", "agent_number": "PLURAL", "patient_number": "PLURAL"}, "due": 69}
+{"type": "prediction", "step": 69, "id": "C-41-68", "source": "ha pota muta lori", "prediction": {"meaning": null, "candidates": [], "version": 66, "recall": false}}
