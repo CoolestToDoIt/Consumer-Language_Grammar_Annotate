@@ -177,13 +177,15 @@ def save_gloss_checkpoint(path, session, experiment):
     pointer = {'schema_version': SCHEMA_VERSION, 'algorithm_id': ALGORITHM_ID,
                'checkpoint_file': blob.relative_to(destination.parent).as_posix(),
                'sha256': digest(blob.read_bytes())}
-    with tempfile.NamedTemporaryFile(dir=destination.parent, suffix='.tmp', delete=False) as handle:
-        pointer_temporary = Path(handle.name)
-        handle.write(encoded(pointer))
+    pointer_temporary = None
     try:
+        with tempfile.NamedTemporaryFile(dir=destination.parent, suffix='.tmp', delete=False) as handle:
+            pointer_temporary = Path(handle.name)
+            handle.write(encoded(pointer))
         _replace_with_retry(pointer_temporary, destination)
     finally:
-        pointer_temporary.unlink(missing_ok=True)
+        if pointer_temporary is not None:
+            pointer_temporary.unlink(missing_ok=True)
 
 
 def load_gloss_checkpoint(path):

@@ -308,6 +308,39 @@ class GlossStreamTests(unittest.TestCase):
             self.assertEqual(checkpoint.read_bytes(), before)
             load_gloss_checkpoint(checkpoint)
 
+    def test_failed_manifest_write_cleans_temporary_pointer_and_preserves_checkpoint(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            checkpoint, _ = self.small_run(Path(tmp), max_inputs=1)
+            session, experiment = load_gloss_checkpoint(checkpoint)
+            before = checkpoint.read_bytes()
+            entries = set(checkpoint.parent.iterdir())
+            original = tempfile.NamedTemporaryFile
+            class PartialWrite:
+                def __init__(self, handle):
+                    self.handle = handle
+                    self.name = handle.name
+                def __enter__(self):
+                    self.handle.__enter__()
+                    return self
+                def __exit__(self, *args):
+                    return self.handle.__exit__(*args)
+                def write(self, content):
+                    self.handle.write(content[:len(content)//2])
+                    raise OSError('injected partial manifest write')
+            def failing_pointer(*args, **kwargs):
+                handle = original(*args, **kwargs)
+                return PartialWrite(handle) if kwargs.get('suffix') == '.tmp' else handle
+            with patch('decipher.gloss_checkpoint.tempfile.NamedTemporaryFile', side_effect=failing_pointer):
+                with self.assertRaisesRegex(OSError, 'partial manifest write'):
+                    save_gloss_checkpoint(checkpoint, session, experiment)
+            self.assertEqual(checkpoint.read_bytes(), before)
+            self.assertEqual(set(checkpoint.parent.iterdir()), entries)
+            restored, _ = load_gloss_checkpoint(checkpoint)
+            self.assertEqual(restored.state(), session.state())
+            save_gloss_checkpoint(checkpoint, session, experiment)
+            restored, _ = load_gloss_checkpoint(checkpoint)
+            self.assertEqual(restored.state(), session.state())
+
     def test_checkpoint_manifest_requires_complete_checksummed_local_archive(self):
         with tempfile.TemporaryDirectory() as tmp:
             checkpoint, _ = self.small_run(Path(tmp), max_inputs=1)
