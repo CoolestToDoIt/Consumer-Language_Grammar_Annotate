@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "source_commit": "ded160c752e2fe87c70fbed5fa358c1f68bfc304",
+  "stopped_stream_inputs": 37,
+  "stopped_stream_labels_arrived": 17,
+  "stopped_pending_answers": 20,
+  "resumed_stream_inputs": 100,
+  "resumed_stream_labels_arrived": 80,
+  "resumed_pending_answers": 20,
+  "final_model_version": 90,
+  "original_event_count_preserved_exactly": 158,
+  "history_matches_uninterrupted_except_timestamps_and_latencies": true,
+  "probe_predictions_and_versions_match": true,
+  "final_learned_state_matches": true,
+  "reconstructed_report_matches": true,
+  "pending_drained": false,
+  "checkpoint_manifest_sha256": "310cf2e34a7dfe6cce636242f4e203a9feaf48a5b204daffc5c70cf4ac12fa0d",
+  "run_directory": "runs\\gloss-online-worker-b-20261024-resume-smoke",
+  "comparison_run_directory": "runs/gloss-online-worker-b-20261024-lezgi-prefix-v3/rules-delay-20-all"
+}

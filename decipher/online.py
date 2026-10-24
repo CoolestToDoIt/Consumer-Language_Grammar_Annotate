@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 import tempfile
+from time import perf_counter
 
 
 def validate_text(text, limit):
@@ -34,11 +35,16 @@ class OnlineSession:
             raise ValueError('Prediction ID must be a new nonempty string')
         # Validate before advancing time or exposing already-due labels.
         validate_text(source, self.learner.config.max_source_bytes)
+        validator = getattr(self.learner, 'validate_source', None)
+        if validator is not None:
+            validator(source)
         self.step += 1
         self.flush()
+        start = perf_counter()
         prediction = self.learner.predict(source, **kwargs)
+        latency_ms = (perf_counter()-start)*1000
         self.sources[identifier] = source
-        self.events.append(self._event('prediction', example_id=identifier, source=source, model_version=self.learner.version, prediction=copy.deepcopy(prediction)))
+        self.events.append(self._event('prediction', example_id=identifier, source=source, model_version=self.learner.version, prediction=copy.deepcopy(prediction), latency_ms=latency_ms))
         return prediction
 
     def feedback(self, identifier, target, delay=0, revision=0):
@@ -47,6 +53,9 @@ class OnlineSession:
         if not isinstance(delay, int) or delay < 0 or not isinstance(revision, int) or revision < 0:
             raise ValueError('Delay and revision must be nonnegative integers')
         validate_text(target, self.learner.config.max_target_bytes)
+        validator = getattr(self.learner, 'validate_feedback', None)
+        if validator is not None:
+            validator(self.sources[identifier], target)
         incoming = {'example_id': identifier, 'target': target, 'arrival_step': self.step+delay, 'feedback_revision': revision}
         previous = self.processed.get(identifier)
         queued = next((event for event in self.pending if event['example_id'] == identifier), None)
@@ -61,6 +70,7 @@ class OnlineSession:
         # A revision supersedes a queued older answer; historical applied events stay.
         self.pending = [event for event in self.pending if event['example_id'] != identifier]
         self.pending.append(incoming)
+        self.events.append(self._event('feedback_requested', **incoming))
         self.flush()
         return True
 
@@ -69,9 +79,11 @@ class OnlineSession:
         due = sorted((e for e in self.pending if e['arrival_step'] <= self.step), key=lambda e: e['arrival_step'])
         for event in due:
             identifier = event['example_id']
-            self.learner.correct(identifier, self.sources[identifier], event['target'])
+            start = perf_counter()
+            changed = self.learner.correct(identifier, self.sources[identifier], event['target'])
+            latency_ms = (perf_counter()-start)*1000
             self.processed[identifier] = copy.deepcopy(event)
-            self.events.append(self._event('feedback', model_version=self.learner.version, **event))
+            self.events.append(self._event('feedback', model_version=self.learner.version, changed=changed, latency_ms=latency_ms, **event))
             self.pending.remove(event)
 
     def state(self):
@@ -108,5 +120,6 @@ class OnlineSession:
     def export(self, directory):
         directory = Path(directory)
         directory.mkdir(parents=True, exist_ok=True)
-        for kind in ('prediction', 'feedback'):
-            (directory/('predictions.jsonl' if kind == 'prediction' else 'feedback.jsonl')).write_text(''.join(json.dumps(event, ensure_ascii=False)+'\n' for event in self.events if event['event_type'] == kind))
+        for kind, filename in (('prediction', 'predictions.jsonl'), ('feedback', 'feedback.jsonl'),
+                               ('feedback_requested', 'feedback_requests.jsonl'), (None, 'events.jsonl')):
+            (directory/filename).write_text(''.join(json.dumps(event, ensure_ascii=False)+'\n' for event in self.events if kind is None or event['event_type'] == kind), encoding='utf-8')
