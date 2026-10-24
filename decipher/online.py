@@ -6,6 +6,11 @@ from pathlib import Path
 import tempfile
 
 
+def validate_text(text, limit):
+    if not isinstance(text, str) or not text or len(text.encode('utf-8')) > limit:
+        raise ValueError(f'Text must be nonempty and at most {limit} UTF-8 bytes')
+
+
 def timestamp():
     return datetime.now(timezone.utc).isoformat()
 
@@ -28,8 +33,7 @@ class OnlineSession:
         if not isinstance(identifier, str) or not identifier or identifier in self.sources:
             raise ValueError('Prediction ID must be a new nonempty string')
         # Validate before advancing time or exposing already-due labels.
-        from .neural import encode
-        encode(source, self.learner.config.max_source_bytes)
+        validate_text(source, self.learner.config.max_source_bytes)
         self.step += 1
         self.flush()
         prediction = self.learner.predict(source, **kwargs)
@@ -42,8 +46,7 @@ class OnlineSession:
             raise ValueError('Predict an example before scheduling feedback')
         if not isinstance(delay, int) or delay < 0 or not isinstance(revision, int) or revision < 0:
             raise ValueError('Delay and revision must be nonnegative integers')
-        from .neural import encode
-        encode(target, self.learner.config.max_target_bytes)
+        validate_text(target, self.learner.config.max_target_bytes)
         incoming = {'example_id': identifier, 'target': target, 'arrival_step': self.step+delay, 'feedback_revision': revision}
         previous = self.processed.get(identifier)
         queued = next((event for event in self.pending if event['example_id'] == identifier), None)
@@ -106,4 +109,4 @@ class OnlineSession:
         directory = Path(directory)
         directory.mkdir(parents=True, exist_ok=True)
         for kind in ('prediction', 'feedback'):
-            (directory/f'{kind}s.jsonl').write_text(''.join(json.dumps(event, ensure_ascii=False)+'\n' for event in self.events if event['event_type'] == kind))
+            (directory/('predictions.jsonl' if kind == 'prediction' else 'feedback.jsonl')).write_text(''.join(json.dumps(event, ensure_ascii=False)+'\n' for event in self.events if event['event_type'] == kind))

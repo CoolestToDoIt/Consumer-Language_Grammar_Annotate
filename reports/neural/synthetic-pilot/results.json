@@ -1,0 +1,677 @@
+{
+  "protocol": "Development-only online comparisons. Shared source examples, seed labels, stream order, probe set and answer-delay schedule. All-label feedback is the main matched-supervision condition; corrections-only feedback may produce different label exposure and is reported separately. Pending labels are not drained.",
+  "runs": [
+    {
+      "task": "synthetic-A-7",
+      "kind": "synthetic",
+      "metrics": {
+        "mode": "rules",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 20,
+        "stream_predictions": 20,
+        "stream_accuracy": 1.0,
+        "teacher_decisions": 20,
+        "stream_answers_requested": 20,
+        "stream_answers_arrived": 20,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 1.0
+          }
+        ],
+        "auc": 1.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 1.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 0,
+        "training_examples_consumed": 0,
+        "parameter_count": 0,
+        "prediction_median_ms": 0.021541003661695868,
+        "prediction_p95_ms": 0.027457994292490184,
+        "feedback_call_median_ms": 0.21137500152690336,
+        "feedback_call_p95_ms": 0.23704200430074707
+      },
+      "run_directory": "runs/neural-synthetic-pilot/synthetic-A-7/seed-7/rules-delay-0-all"
+    },
+    {
+      "task": "synthetic-A-7",
+      "kind": "synthetic",
+      "metrics": {
+        "mode": "frozen",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 20,
+        "stream_predictions": 20,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 20,
+        "stream_answers_requested": 20,
+        "stream_answers_arrived": 20,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 0,
+        "training_examples_consumed": 0,
+        "parameter_count": 405443,
+        "prediction_median_ms": 8.552499995857943,
+        "prediction_p95_ms": 8.900584005459677,
+        "feedback_call_median_ms": 0.014958000974729657,
+        "feedback_call_p95_ms": 0.02274999860674143
+      },
+      "run_directory": "runs/neural-synthetic-pilot/synthetic-A-7/seed-7/frozen-delay-0-all"
+    },
+    {
+      "task": "synthetic-A-7",
+      "kind": "synthetic",
+      "metrics": {
+        "mode": "memory",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 20,
+        "stream_predictions": 20,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 20,
+        "stream_answers_requested": 20,
+        "stream_answers_arrived": 20,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 1.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 0,
+        "training_examples_consumed": 0,
+        "parameter_count": 405443,
+        "prediction_median_ms": 8.370999996259343,
+        "prediction_p95_ms": 8.508708997396752,
+        "feedback_call_median_ms": 0.012459000572562218,
+        "feedback_call_p95_ms": 0.016917001630645245
+      },
+      "run_directory": "runs/neural-synthetic-pilot/synthetic-A-7/seed-7/memory-delay-0-all"
+    },
+    {
+      "task": "synthetic-A-7",
+      "kind": "synthetic",
+      "metrics": {
+        "mode": "parameters",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 20,
+        "stream_predictions": 20,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 20,
+        "stream_answers_requested": 20,
+        "stream_answers_arrived": 20,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 80,
+        "training_examples_consumed": 80,
+        "parameter_count": 405443,
+        "prediction_median_ms": 8.712124996236525,
+        "prediction_p95_ms": 8.857582994096447,
+        "feedback_call_median_ms": 21.07587499631336,
+        "feedback_call_p95_ms": 21.85766700131353
+      },
+      "run_directory": "runs/neural-synthetic-pilot/synthetic-A-7/seed-7/parameters-delay-0-all"
+    },
+    {
+      "task": "synthetic-A-7",
+      "kind": "synthetic",
+      "metrics": {
+        "mode": "replay",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 20,
+        "stream_predictions": 20,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 20,
+        "stream_answers_requested": 20,
+        "stream_answers_arrived": 20,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 80,
+        "training_examples_consumed": 1040,
+        "parameter_count": 405443,
+        "prediction_median_ms": 8.67962499614805,
+        "prediction_p95_ms": 9.032333000504877,
+        "feedback_call_median_ms": 31.012624996947125,
+        "feedback_call_p95_ms": 34.978083000169136
+      },
+      "run_directory": "runs/neural-synthetic-pilot/synthetic-A-7/seed-7/replay-delay-0-all"
+    },
+    {
+      "task": "synthetic-A-7",
+      "kind": "synthetic",
+      "metrics": {
+        "mode": "hybrid",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 20,
+        "stream_predictions": 20,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 20,
+        "stream_answers_requested": 20,
+        "stream_answers_arrived": 20,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 1.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 80,
+        "training_examples_consumed": 1040,
+        "parameter_count": 405443,
+        "prediction_median_ms": 8.643041001050733,
+        "prediction_p95_ms": 8.853290994011331,
+        "feedback_call_median_ms": 30.97383300337242,
+        "feedback_call_p95_ms": 32.46524999849498
+      },
+      "run_directory": "runs/neural-synthetic-pilot/synthetic-A-7/seed-7/hybrid-delay-0-all"
+    },
+    {
+      "task": "synthetic-B-7",
+      "kind": "synthetic",
+      "metrics": {
+        "mode": "rules",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 20,
+        "stream_predictions": 20,
+        "stream_accuracy": 1.0,
+        "teacher_decisions": 20,
+        "stream_answers_requested": 20,
+        "stream_answers_arrived": 20,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 1.0
+          }
+        ],
+        "auc": 1.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 1.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 0,
+        "training_examples_consumed": 0,
+        "parameter_count": 0,
+        "prediction_median_ms": 0.015042001905385405,
+        "prediction_p95_ms": 0.01604200224392116,
+        "feedback_call_median_ms": 0.15408400213345885,
+        "feedback_call_p95_ms": 0.18579099560156465
+      },
+      "run_directory": "runs/neural-synthetic-pilot/synthetic-B-7/seed-7/rules-delay-0-all"
+    },
+    {
+      "task": "synthetic-B-7",
+      "kind": "synthetic",
+      "metrics": {
+        "mode": "frozen",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 20,
+        "stream_predictions": 20,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 20,
+        "stream_answers_requested": 20,
+        "stream_answers_arrived": 20,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 0,
+        "training_examples_consumed": 0,
+        "parameter_count": 405443,
+        "prediction_median_ms": 8.54408300074283,
+        "prediction_p95_ms": 8.683416999701876,
+        "feedback_call_median_ms": 0.012875003449153155,
+        "feedback_call_p95_ms": 0.017499995010439306
+      },
+      "run_directory": "runs/neural-synthetic-pilot/synthetic-B-7/seed-7/frozen-delay-0-all"
+    },
+    {
+      "task": "synthetic-B-7",
+      "kind": "synthetic",
+      "metrics": {
+        "mode": "memory",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 20,
+        "stream_predictions": 20,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 20,
+        "stream_answers_requested": 20,
+        "stream_answers_arrived": 20,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 1.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 0,
+        "training_examples_consumed": 0,
+        "parameter_count": 405443,
+        "prediction_median_ms": 8.407833003730047,
+        "prediction_p95_ms": 8.725083003810141,
+        "feedback_call_median_ms": 0.01279199932469055,
+        "feedback_call_p95_ms": 0.022000000171829015
+      },
+      "run_directory": "runs/neural-synthetic-pilot/synthetic-B-7/seed-7/memory-delay-0-all"
+    },
+    {
+      "task": "synthetic-B-7",
+      "kind": "synthetic",
+      "metrics": {
+        "mode": "parameters",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 20,
+        "stream_predictions": 20,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 20,
+        "stream_answers_requested": 20,
+        "stream_answers_arrived": 20,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 80,
+        "training_examples_consumed": 80,
+        "parameter_count": 405443,
+        "prediction_median_ms": 8.64466599887237,
+        "prediction_p95_ms": 8.89245900179958,
+        "feedback_call_median_ms": 21.55470899742795,
+        "feedback_call_p95_ms": 22.29537499806611
+      },
+      "run_directory": "runs/neural-synthetic-pilot/synthetic-B-7/seed-7/parameters-delay-0-all"
+    },
+    {
+      "task": "synthetic-B-7",
+      "kind": "synthetic",
+      "metrics": {
+        "mode": "replay",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 20,
+        "stream_predictions": 20,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 20,
+        "stream_answers_requested": 20,
+        "stream_answers_arrived": 20,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 80,
+        "training_examples_consumed": 1040,
+        "parameter_count": 405443,
+        "prediction_median_ms": 8.571708000090439,
+        "prediction_p95_ms": 9.065250000276137,
+        "feedback_call_median_ms": 32.82333300012397,
+        "feedback_call_p95_ms": 35.3260420015431
+      },
+      "run_directory": "runs/neural-synthetic-pilot/synthetic-B-7/seed-7/replay-delay-0-all"
+    },
+    {
+      "task": "synthetic-B-7",
+      "kind": "synthetic",
+      "metrics": {
+        "mode": "hybrid",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 20,
+        "stream_predictions": 20,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 20,
+        "stream_answers_requested": 20,
+        "stream_answers_arrived": 20,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 10,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 1.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 80,
+        "training_examples_consumed": 1040,
+        "parameter_count": 405443,
+        "prediction_median_ms": 8.711583002877887,
+        "prediction_p95_ms": 8.944582994445227,
+        "feedback_call_median_ms": 33.15774999646237,
+        "feedback_call_p95_ms": 34.13412500231061
+      },
+      "run_directory": "runs/neural-synthetic-pilot/synthetic-B-7/seed-7/hybrid-delay-0-all"
+    }
+  ]
+}

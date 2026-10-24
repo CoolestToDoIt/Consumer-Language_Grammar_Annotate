@@ -13,3 +13,5 @@ models/
 
 # Full experiment state is local; compact reports remain versioned.
 runs/
+
+data/glossing/*/

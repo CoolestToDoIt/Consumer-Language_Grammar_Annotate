@@ -1,0 +1,65 @@
+{
+  "lezgi": {
+    "repository": "https://github.com/sigmorphon/2023glossingST",
+    "commit": "190689ac81935359c69a46463c48e25e63e601f7",
+    "data_version": "data_v2",
+    "license": "CC BY-NC 4.0",
+    "selection_role": "development",
+    "files": {
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/sigmorphon/2023glossingST/190689ac81935359c69a46463c48e25e63e601f7/data_v2/Lezgi/LICENSE",
+        "sha256": "41003d4a74749c0220e33dd415042164b5a1093ed401f36277234f772d22d3d0"
+      },
+      "lez-dev-track1-uncovered": {
+        "url": "https://raw.githubusercontent.com/sigmorphon/2023glossingST/190689ac81935359c69a46463c48e25e63e601f7/data_v2/Lezgi/lez-dev-track1-uncovered",
+        "sha256": "2f6c2b959d85ab17a3736bb16a57698023aee38f6f4a332b1340005c035e9034"
+      },
+      "lez-train-track1-uncovered": {
+        "url": "https://raw.githubusercontent.com/sigmorphon/2023glossingST/190689ac81935359c69a46463c48e25e63e601f7/data_v2/Lezgi/lez-train-track1-uncovered",
+        "sha256": "aefe3a8da0719d52122c3d534beb0d384bb8d536649e9c7a022aef41b5e80aa0"
+      }
+    }
+  },
+  "tsez": {
+    "repository": "https://github.com/sigmorphon/2023glossingST",
+    "commit": "190689ac81935359c69a46463c48e25e63e601f7",
+    "data_version": "data_v2",
+    "license": "CC BY-NC 4.0",
+    "selection_role": "development",
+    "files": {
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/sigmorphon/2023glossingST/190689ac81935359c69a46463c48e25e63e601f7/data_v2/Tsez/LICENSE",
+        "sha256": "41003d4a74749c0220e33dd415042164b5a1093ed401f36277234f772d22d3d0"
+      },
+      "ddo-dev-track1-uncovered": {
+        "url": "https://raw.githubusercontent.com/sigmorphon/2023glossingST/190689ac81935359c69a46463c48e25e63e601f7/data_v2/Tsez/ddo-dev-track1-uncovered",
+        "sha256": "0883e6372e7d78e44d37a34dbd39c308ac5ed206efcd6177c519ee19b1cc4c2d"
+      },
+      "ddo-train-track1-uncovered": {
+        "url": "https://raw.githubusercontent.com/sigmorphon/2023glossingST/190689ac81935359c69a46463c48e25e63e601f7/data_v2/Tsez/ddo-train-track1-uncovered",
+        "sha256": "e590acdbed9b200ddffc8c2ed280c08913bed2abbb8dcc26458b5f647f0e3082"
+      }
+    }
+  },
+  "gitksan": {
+    "repository": "https://github.com/sigmorphon/2023glossingST",
+    "commit": "190689ac81935359c69a46463c48e25e63e601f7",
+    "data_version": "data_v2",
+    "license": "CC BY-NC 4.0",
+    "selection_role": "reserved final language; no evaluation run",
+    "files": {
+      "LICENSE": {
+        "url": "https://raw.githubusercontent.com/sigmorphon/2023glossingST/190689ac81935359c69a46463c48e25e63e601f7/data_v2/Gitksan/LICENSE",
+        "sha256": "41003d4a74749c0220e33dd415042164b5a1093ed401f36277234f772d22d3d0"
+      },
+      "git-dev-track1-uncovered": {
+        "url": "https://raw.githubusercontent.com/sigmorphon/2023glossingST/190689ac81935359c69a46463c48e25e63e601f7/data_v2/Gitksan/git-dev-track1-uncovered",
+        "sha256": "8c7161e94adab6942227b70ac7787c33886337229372773fd718adafabed0cf6"
+      },
+      "git-train-track1-uncovered": {
+        "url": "https://raw.githubusercontent.com/sigmorphon/2023glossingST/190689ac81935359c69a46463c48e25e63e601f7/data_v2/Gitksan/git-train-track1-uncovered",
+        "sha256": "b547ce27d89e3d6a3e63b14a65f9016bf7398d48c45e1bf67856a6eaf456735b"
+      }
+    }
+  }
+}

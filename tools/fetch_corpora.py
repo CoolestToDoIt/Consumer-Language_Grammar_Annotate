@@ -10,16 +10,18 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
-    sources = json.loads((ROOT/'data/corpora/SOURCES.json').read_text())
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--collection', choices=('corpora', 'glossing'), default='corpora')
+    preliminary, _ = parser.parse_known_args()
+    sources = json.loads((ROOT/'data'/preliminary.collection/'SOURCES.json').read_text())
     parser.add_argument('--corpus', choices=tuple(sources), action='append')
     parser.add_argument('--verify-only', action='store_true')
     args = parser.parse_args()
     for name in args.corpus or sources:
         entry = sources[name]
-        directory = ROOT/'data/corpora'/name
+        directory = ROOT/'data'/args.collection/name
         directory.mkdir(parents=True, exist_ok=True)
-        print(f"{name}: {entry['release']}; {entry['license']}")
+        print(f"{name}: {entry.get('release', entry.get('commit'))}; {entry['license']}")
         for filename, metadata in entry['files'].items():
             destination = directory/filename
             if destination.exists() and hashlib.sha256(destination.read_bytes()).hexdigest() == metadata['sha256']:

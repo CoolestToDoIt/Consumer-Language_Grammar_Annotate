@@ -1,0 +1,341 @@
+{
+  "protocol": "Development-only online comparisons. Shared source examples, seed labels, stream order, probe set and answer-delay schedule. All-label feedback is the main matched-supervision condition; corrections-only feedback may produce different label exposure and is reported separately. Pending labels are not drained.",
+  "runs": [
+    {
+      "task": "tr_imst-ud-train",
+      "kind": "corpus",
+      "metrics": {
+        "mode": "affix",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 25,
+        "stream_predictions": 40,
+        "stream_accuracy": 0.175,
+        "teacher_decisions": 40,
+        "stream_answers_requested": 40,
+        "stream_answers_arrived": 40,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.55
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.55
+          },
+          {
+            "labels": 40,
+            "accuracy": 0.55
+          }
+        ],
+        "auc": 0.55,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 40,
+            "accuracy": 1.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 0,
+        "training_examples_consumed": 0,
+        "parameter_count": 0,
+        "prediction_median_ms": 0.04829200042877346,
+        "prediction_p95_ms": 0.05987499753246084,
+        "feedback_call_median_ms": 0.0389159977203235,
+        "feedback_call_p95_ms": 0.04499999340623617
+      },
+      "run_directory": "runs/neural-corpus-pilot/tr_imst-ud-train/seed-7/affix-delay-0-all"
+    },
+    {
+      "task": "tr_imst-ud-train",
+      "kind": "corpus",
+      "metrics": {
+        "mode": "frozen",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 25,
+        "stream_predictions": 40,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 40,
+        "stream_answers_requested": 40,
+        "stream_answers_arrived": 40,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 40,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 40,
+            "accuracy": 0.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 0,
+        "training_examples_consumed": 0,
+        "parameter_count": 405443,
+        "prediction_median_ms": 7.819584003300406,
+        "prediction_p95_ms": 8.847333003359381,
+        "feedback_call_median_ms": 0.01695800165180117,
+        "feedback_call_p95_ms": 0.027582995244301856
+      },
+      "run_directory": "runs/neural-corpus-pilot/tr_imst-ud-train/seed-7/frozen-delay-0-all"
+    },
+    {
+      "task": "tr_imst-ud-train",
+      "kind": "corpus",
+      "metrics": {
+        "mode": "memory",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 25,
+        "stream_predictions": 40,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 40,
+        "stream_answers_requested": 40,
+        "stream_answers_arrived": 40,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 40,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 40,
+            "accuracy": 1.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 0,
+        "training_examples_consumed": 0,
+        "parameter_count": 405443,
+        "prediction_median_ms": 7.625541999004781,
+        "prediction_p95_ms": 7.917625000118278,
+        "feedback_call_median_ms": 0.013290999049786478,
+        "feedback_call_p95_ms": 0.0155829984578304
+      },
+      "run_directory": "runs/neural-corpus-pilot/tr_imst-ud-train/seed-7/memory-delay-0-all"
+    },
+    {
+      "task": "tr_imst-ud-train",
+      "kind": "corpus",
+      "metrics": {
+        "mode": "parameters",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 25,
+        "stream_predictions": 40,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 40,
+        "stream_answers_requested": 40,
+        "stream_answers_arrived": 40,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 40,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 40,
+            "accuracy": 0.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 130,
+        "training_examples_consumed": 130,
+        "parameter_count": 405443,
+        "prediction_median_ms": 8.016667001356836,
+        "prediction_p95_ms": 8.236375004344154,
+        "feedback_call_median_ms": 24.753790996328462,
+        "feedback_call_p95_ms": 33.88570799870649
+      },
+      "run_directory": "runs/neural-corpus-pilot/tr_imst-ud-train/seed-7/parameters-delay-0-all"
+    },
+    {
+      "task": "tr_imst-ud-train",
+      "kind": "corpus",
+      "metrics": {
+        "mode": "replay",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 25,
+        "stream_predictions": 40,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 40,
+        "stream_answers_requested": 40,
+        "stream_answers_arrived": 40,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 40,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 40,
+            "accuracy": 0.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 130,
+        "training_examples_consumed": 1840,
+        "parameter_count": 405443,
+        "prediction_median_ms": 8.099792001303285,
+        "prediction_p95_ms": 8.456084004137665,
+        "feedback_call_median_ms": 61.96833300055005,
+        "feedback_call_p95_ms": 67.62166599946795
+      },
+      "run_directory": "runs/neural-corpus-pilot/tr_imst-ud-train/seed-7/replay-delay-0-all"
+    },
+    {
+      "task": "tr_imst-ud-train",
+      "kind": "corpus",
+      "metrics": {
+        "mode": "hybrid",
+        "model_seed": 7,
+        "delay": 0,
+        "policy": "all",
+        "support_answers": 25,
+        "stream_predictions": 40,
+        "stream_accuracy": 0.0,
+        "teacher_decisions": 40,
+        "stream_answers_requested": 40,
+        "stream_answers_arrived": 40,
+        "pending_answers": 0,
+        "pending_drained": false,
+        "curve": [
+          {
+            "labels": 0,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 0.0
+          },
+          {
+            "labels": 40,
+            "accuracy": 0.0
+          }
+        ],
+        "auc": 0.0,
+        "retention_curve": [
+          {
+            "labels": 0,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 20,
+            "accuracy": 1.0
+          },
+          {
+            "labels": 40,
+            "accuracy": 1.0
+          }
+        ],
+        "retention_drop_pp": 0.0,
+        "optimizer_steps": 130,
+        "training_examples_consumed": 1840,
+        "parameter_count": 405443,
+        "prediction_median_ms": 8.109791997412685,
+        "prediction_p95_ms": 8.329958000103943,
+        "feedback_call_median_ms": 62.310916000569705,
+        "feedback_call_p95_ms": 69.62487499549752
+      },
+      "run_directory": "runs/neural-corpus-pilot/tr_imst-ud-train/seed-7/hybrid-delay-0-all"
+    }
+  ]
+}

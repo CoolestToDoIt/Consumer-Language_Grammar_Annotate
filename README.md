@@ -90,3 +90,50 @@ python3 -m unittest discover -s tests -v
 ## Corpus attribution
 
 Format: [Universal Dependencies CoNLL-U](https://universaldependencies.org/format.html). Sources: [English EWT](https://github.com/UniversalDependencies/UD_English-EWT/tree/r2.15) and [Turkish IMST](https://github.com/UniversalDependencies/UD_Turkish-IMST/tree/r2.15). English annotations use CC BY-SA 4.0; the upstream README describes underlying text rights. Turkish IMST uses CC BY-NC-SA 4.0. Downloads include the original README and license files, and remain excluded from version control alongside fitted models. Consult those source terms before redistributing data or trained artifacts.
+
+## Source-only interlinear glossing
+
+This track learns lexical gloss anchors and reusable affix substitutions from aligned source/gloss examples. Translation and gold-segmentation tiers are discarded at ingestion. Input is the whitespace-segmented source sentence; output is one interlinear gloss per word. It is not unrestricted sentence translation.
+
+```sh
+python3 tools/fetch_corpora.py --collection glossing
+python3 -m decipher.app gloss evaluate \
+  --train data/glossing/lezgi/lez-train-track1-uncovered \
+  --eval data/glossing/lezgi/lez-dev-track1-uncovered \
+  --output reports/gloss/lezgi-dev.json
+python3 -m decipher.app gloss train \
+  --train data/glossing/lezgi/lez-train-track1-uncovered --model models/lezgi-gloss.json.gz
+python3 -m decipher.app gloss predict --model models/lezgi-gloss.json.gz --text 'SOURCE WORDS'
+```
+
+The source-only Lezgi development experiment scores 72.2% exact word glosses, versus 68.6% memory and 69.9% spelling analogy. Unseen-word accuracy is 15.8%, so vocabulary grounding remains a substantial limitation. These are development results, not a final held-out-language result. See [gloss reports](reports/gloss).
+
+The word-gloss learner considers both prefix and suffix edits and reuses only meanings grounded in corrected examples. Its explicit linguistic assumption is the Leipzig-style convention of lowercase lexical gloss labels versus uppercase grammatical tags. Scores are uncalibrated, not probabilities. Misaligned source/gloss records are excluded with counts in reports. Exact source overlap with training is excluded from evaluation.
+
+The configured data is the deduplicated `data_v2` release of [SIGMORPHON 2023 glossing](https://github.com/sigmorphon/2023glossingST), pinned to a commit and checksums in [glossing SOURCES.json](data/glossing/SOURCES.json). Original licenses are downloaded locally (CC BY-NC 4.0). This source-only condition does not use the supplied sentence translation and is not directly comparable to the official shared-task conditions or the original pre-deduplication results. Lezgi and Tsez are development languages; Gitksan remains reserved for final fresh-language evaluation.
+
+`gloss stream --train FILE --dev FILE --run-dir runs/NAME` runs prediction-before-correction with fixed development probes, memory/analogy/rule comparisons, and delays 0/5/20. `--policies all corrections` adds correction-only feedback; exposure counts and pending answers are recorded separately.
+
+## Optional neural adaptation
+
+The byte-level model has a bidirectional GRU encoder, attention, and an autoregressive decoder. No pretrained weights or future-data vocabulary is used. The standard-library learners remain available without PyTorch. Install the optional neural dependency into a local environment:
+
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -e '.[neural]'
+.venv/bin/python -m unittest discover -s tests -v
+```
+
+The local experiments were run with PyTorch 2.14.1; pinned installed neural dependencies are in [configs/neural-environment.txt](configs/neural-environment.txt). Deterministic CPU restart is regression-tested within this runtime; cross-version/device bitwise identity is not claimed. See the [PyTorch reproducibility notes](https://docs.pytorch.org/docs/2.14/notes/randomness.html).
+
+```sh
+.venv/bin/python -m decipher.app neural benchmark \
+  --presets A B --stream 20 --probes 10 \
+  --run-dir runs/neural-example --report-dir reports/neural/example
+```
+
+Modes: `frozen` updates neither parameters nor prediction memory; `memory` returns verified exact matches but freezes parameters; `parameters` trains on the new answer alone; `replay` trains with previous corrections; `hybrid` adds verified prediction memory to replay. Defaults are 64 embedding dimensions, 128 hidden units, Adam at 0.0003, two clipped updates per correction, up to fifteen replay examples, and a reservoir of at most 2,000 examples.
+
+The [synthetic pilot](reports/neural/synthetic-pilot/summary.md) and [real-morphology pilot](reports/neural/corpus-pilot/summary.md) show zero exact-match probe accuracy for these small neural runs. The symbolic systems remain the preferred models. These pilots use one model seed, small streams, and equal teacher exposure; replay consumes more example presentations, so no equal-compute or statistically significant neural advantage is claimed. This negative result is distinct from verifying that the network can fit a corrected pair when repeatedly trained.
+
+`neural corpus-benchmark --train FILE --dev FILE --run-dir DIR --report-dir DIR` applies the same online protocol to lemma/POS/features targets. `neural fit --pairs FILE --run-dir DIR` accepts JSONL records with `id`, `source`, and `target`, records each prediction before feedback, and saves the optimizer, replay reservoir/RNG, authoritative corrections, pending feedback, and original events in `session.pt`. `--resume FILE` continues a compatible session; revisions rebuild from the original initialization. `neural predict --session FILE --source TEXT` inspects a saved model. Full runs remain local under ignored `runs/`; compact result summaries are kept under `reports/`.

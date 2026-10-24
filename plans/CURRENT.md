@@ -1,11 +1,15 @@
 # Current development direction
 
-Build an interactive language learner that can apply corrected knowledge to unseen text. The synthetic track tests selected grammar transfer under controlled conditions. The real-corpus track currently learns and evaluates lemma, POS, and morphology on English and Turkish data.
+Two-person implementation plan: [split-agent workflow](SPLIT_AGENT_WORKFLOW.md). The plan assigns engine/performance work and evaluation/resume work to separate branches; implementation has not resumed as part of writing it.
 
-Latest status: [real-corpus validation](updates/2026-10-24-06-real-corpus-validation.md).
+Work is paused at a tested checkpoint at the user's request. Latest status and exact resume steps: [tested stopping point](updates/2026-10-24-08-tested-stopping-point.md).
 
-Real-corpus baseline joint accuracy is 88.6% for English EWT and 78.5% for Turkish IMST, with exact training-source overlaps excluded. This is supervised morphological analysis with supplied word segmentation, not arbitrary-language translation. Keep annotation budgets and corpus splits explicit.
+Completed tracks:
+- Synthetic grammar learning with correction transfer, delayed feedback and checkpoints.
+- Supervised real-corpus morphology, with held-out joint scores of 88.6% English / 78.5% Turkish on filtered upstream splits.
+- Optional attention/GRU adaptation and replay with deterministic CPU resume tests. Small pilot runs did not beat symbolic learners.
+- Source-only real-language glossing with a first Lezgi development result of 72.2% exact word glosses, versus 68.6% memory and 69.9% spelling analogy.
 
-Near-term priorities are contextual ambiguity, unseen forms, and a separately evaluated bilingual gloss/translation track. Use development data for improvement; retain test reports as the fixed baseline for the present algorithm. Continue writing updates after meaningful implementation/verification milestones.
+35 regression tests pass in the neural-enabled .venv. No full-plan completion or unrestricted translation claim is made.
 
-The [original research roadmap](overview/Language_Decipherment_Build_Plan.md) provides longer-term experiments and limitations. Run instructions and corpus formats are documented in the repository README.
+Next action is to profile and finish the larger Tsez development run; then run real-gloss online correction comparisons. Keep Gitksan reserved for a final fresh-language evaluation and use development data for model changes. The [original research roadmap](overview/Language_Decipherment_Build_Plan.md) still contains unfinished experiments and optional extensions.

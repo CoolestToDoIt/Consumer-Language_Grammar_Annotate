@@ -9,12 +9,25 @@ from .presentation import predict_view, teach, status
 
 def main():
     import sys
+    if sys.argv[1:2] == ['gloss']:
+        from .gloss_app import main as gloss_main
+        gloss_main(sys.argv[2:])
+        return
+    if sys.argv[1:2] == ['neural']:
+        try:
+            from .neural_app import main as neural_main
+        except ModuleNotFoundError as exc:
+            if exc.name == 'torch':
+                raise SystemExit('Neural commands need the optional PyTorch dependency; use the project .venv or install .[neural]') from exc
+            raise
+        neural_main(sys.argv[2:])
+        return
     if sys.argv[1:2] == ['corpus']:
         from .corpus_app import main as corpus_main
         corpus_main(sys.argv[2:])
         return
     parser = argparse.ArgumentParser(description='Learn grammar from corrections and analyze annotated corpora.', epilog='Real text commands: decipher corpus --help')
-    parser.add_argument('command', choices=('demo', 'evaluate', 'walkthrough', 'dataset', 'stress', 'corpus'), nargs='?', default='demo')
+    parser.add_argument('command', choices=('demo', 'evaluate', 'walkthrough', 'dataset', 'stress', 'corpus', 'neural', 'gloss'), nargs='?', default='demo')
     parser.add_argument('--preset', choices=PRESETS, default='A')
     parser.add_argument('--seed', type=int, default=7)
     parser.add_argument('--delay', type=int, default=0)
