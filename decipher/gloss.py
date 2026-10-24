@@ -140,7 +140,8 @@ class GlossLearner:
             paradigm.append((word,gloss))
         self._rule_cache=None
 
-    def correct(self,example,glosses):
+    def _correct_record(self,example,glosses):
+        """Apply one authoritative correction without preparing rule rankings."""
         if not isinstance(example,TextExample) or not example.tokens or not example.id:
             raise ValueError('Corrections need a public example with ID and word tokens')
         glosses=tuple(glosses)
@@ -161,9 +162,31 @@ class GlossLearner:
             self._reset()
             for item in self.records.values():
                 self._observe(item)
-        self._rules()
         self.version+=1
         return True
+
+    def correct(self,example,glosses):
+        changed=self._correct_record(example,glosses)
+        if changed:
+            self._rules()
+        return changed
+
+    def fit(self,records):
+        """Apply records in order, preparing inference once at the batch boundary.
+
+        Duplicate and revised annotations behave exactly as successive calls to
+        correct(). If the iterable or an annotation fails, earlier successful
+        corrections remain applied and their rule cache is prepared before the
+        exception propagates. Inference must not run concurrently with fitting.
+        """
+        try:
+            for record in records:
+                if not isinstance(record,GlossExample):
+                    raise TypeError('fit accepts an iterable of GlossExample records')
+                self._correct_record(record.example,record.glosses)
+        finally:
+            self._rules()
+        return self
 
     def _rules(self):
         if self._rule_cache is None:
@@ -236,9 +259,13 @@ class GlossLearner:
         if state.get('schema_version')!=1:
             raise ValueError('Unsupported gloss checkpoint schema')
         model=cls(state['mode'],state['max_rules'],state['paradigm_window'])
-        for row in state['records']:
-            if row['id'] in model.records:
-                raise ValueError('Duplicate checkpoint annotation ID')
-            model.correct(TextExample(row['id'],tuple(row['tokens'])),row['glosses'])
+        def records():
+            seen=set()
+            for row in state['records']:
+                if row['id'] in seen:
+                    raise ValueError('Duplicate checkpoint annotation ID')
+                seen.add(row['id'])
+                yield GlossExample(TextExample(row['id'],tuple(row['tokens'])),tuple(row['glosses']))
+        model.fit(records())
         model.version=state['version']
         return model
