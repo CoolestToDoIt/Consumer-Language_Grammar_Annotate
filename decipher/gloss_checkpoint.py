@@ -7,6 +7,7 @@ from pathlib import Path
 import tempfile
 import time
 from types import SimpleNamespace
+import uuid
 import zipfile
 
 from .corpus import TextExample
@@ -140,10 +141,24 @@ def _validate_session(state, learner):
         raise ValueError('Authoritative gloss model disagrees with feedback history')
 
 
+def _replace_with_retry(source, destination):
+    for attempt in range(6):
+        try:
+            source.replace(destination)
+            return
+        except PermissionError:
+            if attempt == 5:
+                raise
+            time.sleep(.05 * 2**attempt)
+
+
 def save_gloss_checkpoint(path, session, experiment):
-    """One atomic ZIP contains the model, original history and experiment state."""
+    """Atomically point at an immutable, complete, checksummed session ZIP."""
     destination = Path(path)
     destination.parent.mkdir(parents=True, exist_ok=True)
+    blob_directory = destination.parent/'checkpoints'
+    blob_directory.mkdir(exist_ok=True)
+    blob = blob_directory/f'gloss-{uuid.uuid4().hex}.zip'
     with tempfile.TemporaryDirectory(dir=destination.parent) as directory:
         directory = Path(directory)
         model_path = directory/'model.json.gz'
@@ -157,21 +172,37 @@ def save_gloss_checkpoint(path, session, experiment):
             for name, data in components.items():
                 archive.writestr(name, data)
             archive.writestr('integrity.json', encoded(integrity))
-        # Windows indexers/sync clients can briefly open a completed ZIP without
-        # delete sharing. Keep the old checkpoint intact and retry only that lock.
-        for attempt in range(6):
-            try:
-                temporary.replace(destination)
-                break
-            except PermissionError:
-                if attempt == 5:
-                    raise
-                time.sleep(.05 * 2**attempt)
+        # Never replace an existing ZIP: OneDrive/Windows may still be scanning it.
+        _replace_with_retry(temporary, blob)
+    pointer = {'schema_version': SCHEMA_VERSION, 'algorithm_id': ALGORITHM_ID,
+               'checkpoint_file': blob.relative_to(destination.parent).as_posix(),
+               'sha256': digest(blob.read_bytes())}
+    with tempfile.NamedTemporaryFile(dir=destination.parent, suffix='.tmp', delete=False) as handle:
+        pointer_temporary = Path(handle.name)
+        handle.write(encoded(pointer))
+    try:
+        _replace_with_retry(pointer_temporary, destination)
+    finally:
+        pointer_temporary.unlink(missing_ok=True)
 
 
 def load_gloss_checkpoint(path):
     """Reject incomplete, corrupted and incompatible data before returning state."""
     try:
+        path = Path(path)
+        # Also read standalone ZIP artifacts, including earlier session archives.
+        if not zipfile.is_zipfile(path):
+            pointer = json.loads(path.read_text(encoding='utf-8'))
+            if pointer.get('schema_version') != SCHEMA_VERSION or pointer.get('algorithm_id') != ALGORITHM_ID:
+                raise ValueError('Unsupported checkpoint manifest schema/algorithm')
+            reference = Path(pointer['checkpoint_file'])
+            blob = (path.parent/reference).resolve()
+            allowed = (path.parent/'checkpoints').resolve()
+            if reference.is_absolute() or blob.parent != allowed or blob.suffix != '.zip':
+                raise ValueError('Checkpoint component path must stay inside the checkpoints directory')
+            if digest(blob.read_bytes()) != pointer['sha256']:
+                raise ValueError('Checkpoint archive checksum mismatch')
+            path = blob
         with zipfile.ZipFile(path) as archive:
             required = {'integrity.json', 'model.json.gz', 'session.json', 'experiment.json'}
             if len(archive.namelist()) != len(required) or set(archive.namelist()) != required:

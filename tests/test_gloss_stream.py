@@ -45,6 +45,8 @@ def stable(value):
 
 
 def rewrite_archive(source, destination, name, transform, repair_checksums=True):
+    if not zipfile.is_zipfile(source):
+        source = source.parent/json.loads(source.read_text(encoding='utf-8'))['checkpoint_file']
     with zipfile.ZipFile(source) as archive:
         files = {key: archive.read(key) for key in archive.namelist()}
     files[name] = transform(files[name])
@@ -62,7 +64,7 @@ class GlossStreamTests(unittest.TestCase):
         train, dev = fixtures(directory)
         report = online_gloss(train, dev, directory/'run', support=1, stream_size=3,
                               delays=(5,), modes=('rules',), probe_every=1, **kwargs)
-        return directory/'run'/'rules-delay-5-all'/'checkpoint.zip', report
+        return directory/'run'/'rules-delay-5-all'/'checkpoint.json', report
 
     def test_delay_orders_predictions_before_labels_and_revisions_supersede(self):
         session = OnlineSession(GlossAdapter(), 'fixture')
@@ -122,7 +124,7 @@ class GlossStreamTests(unittest.TestCase):
             self.assertEqual(len(full['runs']), 18)
             for expected, partial in zip(full['runs'], stopped['runs']):
                 with self.subTest(mode=expected['mode'], delay=expected['delay'], policy=expected['policy']):
-                    checkpoint = Path(partial['run_directory'])/'checkpoint.zip'
+                    checkpoint = Path(partial['run_directory'])/'checkpoint.json'
                     historical, experiment = load_gloss_checkpoint(checkpoint)
                     prefix = copy.deepcopy(historical.events)
                     middle = resume_gloss(checkpoint, max_inputs=3, checkpoint_every=2)
@@ -130,7 +132,7 @@ class GlossStreamTests(unittest.TestCase):
                     actual = resume_gloss(checkpoint)
                     self.assertEqual(encoded(stable(actual)), encoded(stable(expected)))
                     resumed, experiment = load_gloss_checkpoint(checkpoint)
-                    uninterrupted, full_experiment = load_gloss_checkpoint(Path(expected['run_directory'])/'checkpoint.zip')
+                    uninterrupted, full_experiment = load_gloss_checkpoint(Path(expected['run_directory'])/'checkpoint.json')
                     self.assertEqual(resumed.events[:len(prefix)], prefix)
                     self.assertEqual(encoded(stable(resumed.state())), encoded(stable(uninterrupted.state())))
                     self.assertEqual(resumed.learner.learner.__dict__, uninterrupted.learner.learner.__dict__)
@@ -267,7 +269,7 @@ class GlossStreamTests(unittest.TestCase):
             session, experiment = load_gloss_checkpoint(checkpoint)
             original = Path.replace
             def fail_commit(path, target):
-                if path.name == 'checkpoint.zip':
+                if Path(target) == checkpoint:
                     raise OSError('simulated interrupted commit')
                 return original(path, target)
             with patch.object(Path, 'replace', new=fail_commit):
@@ -275,7 +277,7 @@ class GlossStreamTests(unittest.TestCase):
                     save_gloss_checkpoint(checkpoint, session, experiment)
             self.assertEqual(checkpoint.read_bytes(), before)
             load_gloss_checkpoint(checkpoint)
-            self.assertFalse(any(path.is_dir() for path in checkpoint.parent.iterdir()))
+            self.assertEqual([path.name for path in checkpoint.parent.iterdir() if path.is_dir()], ['checkpoints'])
 
     def test_atomic_save_retries_a_transient_windows_checkpoint_lock(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -283,7 +285,7 @@ class GlossStreamTests(unittest.TestCase):
             session, experiment = load_gloss_checkpoint(checkpoint)
             original, attempts = Path.replace, []
             def transient_lock(path, target):
-                if path.name == 'checkpoint.zip':
+                if Path(target) == checkpoint:
                     attempts.append(path)
                     if len(attempts) < 3:
                         raise PermissionError('transient Windows sharing violation')
@@ -293,6 +295,34 @@ class GlossStreamTests(unittest.TestCase):
             self.assertEqual(len(attempts), 3)
             restored, _ = load_gloss_checkpoint(checkpoint)
             self.assertEqual(restored.state(), session.state())
+            before = checkpoint.read_bytes()
+            def permanent_lock(path, target):
+                if Path(target) == checkpoint:
+                    raise PermissionError('persistent sharing violation')
+                return original(path, target)
+            with (patch.object(Path, 'replace', new=permanent_lock),
+                  patch('decipher.gloss_checkpoint.time.sleep') as sleep):
+                with self.assertRaises(PermissionError):
+                    save_gloss_checkpoint(checkpoint, session, experiment)
+            self.assertEqual(sleep.call_count, 5)
+            self.assertEqual(checkpoint.read_bytes(), before)
+            load_gloss_checkpoint(checkpoint)
+
+    def test_checkpoint_manifest_requires_complete_checksummed_local_archive(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            checkpoint, _ = self.small_run(Path(tmp), max_inputs=1)
+            pointer = json.loads(checkpoint.read_text(encoding='utf-8'))
+            standalone = checkpoint.parent/pointer['checkpoint_file']
+            original, _ = load_gloss_checkpoint(checkpoint)
+            direct, _ = load_gloss_checkpoint(standalone)
+            self.assertEqual(original.state(), direct.state())
+            bad = checkpoint.parent/'bad-manifest.json'
+            for change in ({'checkpoint_file': 'checkpoints/missing.zip'},
+                           {'checkpoint_file': '../outside.zip'}, {'schema_version': 99}, {'sha256': '0'*64}):
+                with self.subTest(change=change):
+                    bad.write_bytes(encoded(dict(pointer, **change)))
+                    with self.assertRaises(ValueError):
+                        load_gloss_checkpoint(bad)
 
     def test_revisions_survive_checkpoint_with_original_predictions_intact(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -345,7 +375,7 @@ class GlossStreamTests(unittest.TestCase):
             cli('stream', '--train', train, '--dev', dev, '--run-dir', directory/'cli', '--support', 1,
                 '--stream', 3, '--modes', 'rules', '--delays', 5, '--policies', 'all', '--max-inputs', 1,
                 '--probe-every', 1)
-            checkpoint = directory/'cli'/'rules-delay-5-all'/'checkpoint.zip'
+            checkpoint = directory/'cli'/'rules-delay-5-all'/'checkpoint.json'
             self.assertIn('complete: True', cli('resume', '--checkpoint', checkpoint).stdout)
             cli('report', '--checkpoint', checkpoint, '--output', directory/'report.json')
             report = json.loads((directory/'report.json').read_text(encoding='utf-8'))

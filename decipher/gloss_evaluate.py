@@ -420,6 +420,7 @@ def _advance(session, experiment, directory, max_inputs=None, checkpoint_every=2
     directory.mkdir(parents=True, exist_ok=True)
     config, stream = experiment['manifest']['config'], experiment['scoring']['stream']
     end = len(stream) if max_inputs is None else min(len(stream), experiment['cursor']+max_inputs)
+    saved_cursor = None
     while experiment['cursor'] < end:
         row = stream[experiment['cursor']]
         prediction = session.predict(row['id'], json.dumps(row['tokens'], ensure_ascii=False, separators=(',', ':')))
@@ -432,8 +433,10 @@ def _advance(session, experiment, directory, max_inputs=None, checkpoint_every=2
         if experiment['cursor'] % config['probe_every'] == 0 or experiment['cursor'] == len(stream):
             take_snapshot(session, experiment)
         if experiment['cursor'] % checkpoint_every == 0:
-            save_gloss_checkpoint(directory/'checkpoint.zip', session, experiment)
-    save_gloss_checkpoint(directory/'checkpoint.zip', session, experiment)
+            save_gloss_checkpoint(directory/'checkpoint.json', session, experiment)
+            saved_cursor = experiment['cursor']
+    if saved_cursor != experiment['cursor']:
+        save_gloss_checkpoint(directory/'checkpoint.json', session, experiment)
     session.export(directory)
     session.learner.learner.save(directory/'model.json.gz')
     write_json(directory/'manifest.json', experiment['manifest'])
@@ -500,7 +503,7 @@ def online_gloss(train_path, dev_path, directory, support=10, stream_size=100, d
                 take_snapshot(session, experiment)
                 row = _advance(session, experiment, run_directory, max_inputs, checkpoint_every)
                 row['run_directory'] = str(run_directory)
-                row['checkpoint_sha256'] = digest((run_directory/'checkpoint.zip').read_bytes())
+                row['checkpoint_sha256'] = digest((run_directory/'checkpoint.json').read_bytes())
                 rows.append(row)
                 print(f"{mode}, delay {delay}, {policy}: {row['processed_stream_inputs']} inputs; "
                       f"{row['budget']['stream']['answers_arrived']} arrived answers; "
