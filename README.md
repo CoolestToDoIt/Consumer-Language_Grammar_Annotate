@@ -87,6 +87,10 @@ python3 -m unittest discover -s tests -v
 
 [Progress notes](plans/updates) track completed work and next steps. The [long-term build plan](plans/overview/Language_Decipherment_Build_Plan.md) remains the research roadmap. Priorities are unseen-word morphology, contextual disambiguation, corpus learning curves, and a separately evaluated bilingual gloss/translation track. Arbitrary word meanings require semantic anchors; unannotated text alone does not establish English meanings.
 
+The combined gloss integration checkpoint passes **83 tests** in the neural-enabled
+`.venv`; without optional PyTorch the neural tests are skipped. Its current
+branch and resume instructions are in [plans/CURRENT.md](plans/CURRENT.md).
+
 ## Corpus attribution
 
 Format: [Universal Dependencies CoNLL-U](https://universaldependencies.org/format.html). Sources: [English EWT](https://github.com/UniversalDependencies/UD_English-EWT/tree/r2.15) and [Turkish IMST](https://github.com/UniversalDependencies/UD_Turkish-IMST/tree/r2.15). English annotations use CC BY-SA 4.0; the upstream README describes underlying text rights. Turkish IMST uses CC BY-NC-SA 4.0. Downloads include the original README and license files, and remain excluded from version control alongside fitted models. Consult those source terms before redistributing data or trained artifacts.
@@ -96,7 +100,7 @@ Format: [Universal Dependencies CoNLL-U](https://universaldependencies.org/forma
 This track learns lexical gloss anchors and reusable affix substitutions from aligned source/gloss examples. Translation and gold-segmentation tiers are discarded at ingestion. Input is the whitespace-segmented source sentence; output is one interlinear gloss per word. It is not unrestricted sentence translation.
 
 ```sh
-python3 tools/fetch_corpora.py --collection glossing
+python3 tools/fetch_corpora.py --collection glossing --corpus lezgi --corpus tsez
 python3 -m decipher.app gloss evaluate \
   --train data/glossing/lezgi/lez-train-track1-uncovered \
   --eval data/glossing/lezgi/lez-dev-track1-uncovered \
@@ -113,6 +117,39 @@ The word-gloss learner considers both prefix and suffix edits and reuses only me
 The configured data is the deduplicated `data_v2` release of [SIGMORPHON 2023 glossing](https://github.com/sigmorphon/2023glossingST), pinned to a commit and checksums in [glossing SOURCES.json](data/glossing/SOURCES.json). Original licenses are downloaded locally (CC BY-NC 4.0). This source-only condition does not use the supplied sentence translation and is not directly comparable to the official shared-task conditions or the original pre-deduplication results. Lezgi and Tsez are development languages; Gitksan remains reserved for final fresh-language evaluation.
 
 `gloss stream --train FILE --dev FILE --run-dir runs/NAME` runs prediction-before-correction with fixed development probes, memory/analogy/rule comparisons, and delays 0/5/20. `--policies all corrections` adds correction-only feedback; exposure counts and pending answers are recorded separately.
+
+Both development languages have complete 18-run prefix matrices (three models,
+three delays, two feedback policies), with ten support and 100 stream sentences.
+Immediate all-label final probe word accuracy is 57.01% / 58.50% / 59.57% for
+Lezgi memory / analogy / rules and 30.69% / 35.35% / 41.59% for Tsez. These small
+prefix results use less supervision than the full-training baseline above.
+See [historical online results](reports/gloss/online/README.md) and
+[combined validation](reports/gloss/online/integration-20261024/summary.md).
+
+To interrupt and resume one fresh rule-learning experiment:
+
+```sh
+python3 -m decipher.app gloss stream \
+  --train data/glossing/lezgi/lez-train-track1-uncovered \
+  --dev data/glossing/lezgi/lez-dev-track1-uncovered \
+  --run-dir runs/gloss-resume-example --support 10 --stream 100 \
+  --modes rules --delays 20 --policies all --probe-every 25 \
+  --checkpoint-every 25 --max-inputs 37
+python3 -m decipher.app gloss resume \
+  --checkpoint runs/gloss-resume-example/rules-delay-20-all/checkpoint.json
+python3 -m decipher.app gloss report \
+  --checkpoint runs/gloss-resume-example/rules-delay-20-all/checkpoint.json \
+  --output runs/gloss-resume-example/reconstructed.json
+```
+
+Use fresh run/report paths. `--max-inputs` is an additional budget per invocation;
+stopping does not drain pending answers or rewrite historical predictions.
+Keep each checkpoint manifest with its sibling `checkpoints/` folder. Resume
+requires the recorded core implementation and unchanged original dataset paths;
+cross-machine path remapping is not implemented. A single-run resume updates its
+metrics, while an earlier matrix-level summary remains the original snapshot.
+Gloss commands need only the standard library. Engine model checkpoints remain
+schema 1 and reconstruct prepared inference state when loaded.
 
 ## Optional neural adaptation
 

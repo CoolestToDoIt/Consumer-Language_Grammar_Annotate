@@ -1,0 +1,24 @@
+{
+  "source": {
+    "commit": "ad602cb957db20bda60035a9c97965514aa701ae",
+    "branch": "integration/gloss-workstreams",
+    "tracked_dirty": false,
+    "engine_sha256": "a9c50e5277cab218fbeb4e182c49a568f7afe4ba2a47b8a988b39e3586dc1c60"
+  },
+  "site_packages_disabled": true,
+  "stopped_inputs": 37,
+  "stopped_arrived": 17,
+  "stopped_pending": 20,
+  "original_events_preserved": 158,
+  "resumed_inputs": 100,
+  "resumed_arrived": 80,
+  "resumed_pending": 20,
+  "final_version": 90,
+  "history_matches_uninterrupted": true,
+  "complete_model_state_matches": true,
+  "all_snapshots_match": true,
+  "reconstructed_metrics_match": true,
+  "pending_drained": false,
+  "checkpoint_sha256": "ed2e9d9a653da4789a13c2ead3a0ef1ddb0a080aca7dd530e3df9f9d2b8577ba",
+  "run_directory": "runs/gloss-integration-20261024-resume-v1"
+}
