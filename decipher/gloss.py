@@ -95,14 +95,17 @@ def transform(value,side,remove,append):
 
 
 class GlossLearner:
-    def __init__(self,mode='rules',max_rules=512,paradigm_window=32):
+    def __init__(self,mode='rules',max_rules=512,paradigm_window=32,contextual=False):
         if mode not in ('memory','analogy','rules'):
             raise ValueError('Gloss model must be memory, analogy, or rules')
         if any(type(value) is not int or value<1 for value in (max_rules,paradigm_window)):
             raise ValueError('Rule and paradigm bounds must be positive integers')
+        if type(contextual) is not bool:
+            raise ValueError('Contextual scoring must be a boolean')
         self.mode=mode
         self.max_rules=max_rules
         self.paradigm_window=paradigm_window
+        self.contextual=contextual
         self.records={}
         self.version=0
         self._reset()
@@ -119,6 +122,7 @@ class GlossLearner:
         self._rule_lengths={'prefix':(), 'suffix':()}
         self.grams={}
         self._gram_index=defaultdict(set)
+        self.contexts=defaultdict(Counter)
 
     def _observe(self,record):
         for word,gloss in zip(record.example.tokens,record.glosses):
@@ -162,6 +166,12 @@ class GlossLearner:
                                 support.add(key)
                                 self._dirty_rules.add(rule)
             paradigm.append((word,gloss))
+        tokens=record.example.tokens
+        for index,(word,gloss) in enumerate(zip(tokens,record.glosses)):
+            if index:
+                self.contexts[(word,'previous',tokens[index-1])][gloss]+=1
+            if index+1<len(tokens):
+                self.contexts[(word,'next',tokens[index+1])][gloss]+=1
         if self._dirty_rules:
             self._rule_cache=None
 
@@ -293,19 +303,52 @@ class GlossLearner:
                 evidence[proposed]={'kind':'rule','anchor':base,'rule':list(rule),'support_lexemes':support}
         return [{'gloss':g,'score':votes[g],**evidence[g]} for g in sorted(votes,key=lambda g:(-votes[g],g))[:5]]
 
+    def _contextual_candidates(self,word,previous,following,candidates):
+        if not self.contextual or len(self.lexicon.get(word,()))<2 or not candidates:
+            return candidates,False
+        evidence=Counter()
+        if previous is not None:
+            evidence.update(self.contexts.get((word,'previous',previous),()))
+        if following is not None:
+            evidence.update(self.contexts.get((word,'next',following),()))
+        if not evidence:
+            return candidates,False
+        ranked=sorted(enumerate(candidates),key=lambda item:(-evidence[item[1]['gloss']],item[0]))
+        adjusted=[]
+        for _,candidate in ranked:
+            support=evidence[candidate['gloss']]
+            adjusted.append({**candidate,'score':support if support else candidate['score'],
+                             'kind':'contextual' if support else candidate['kind'],
+                             'contextual_support':support})
+        return adjusted[:5],True
+
     def predict(self,example):
         if not isinstance(example,TextExample):
             raise TypeError('Gloss prediction accepts public word tokens only')
         predictions=[]
-        for word in example.tokens:
+        for index,word in enumerate(example.tokens):
             candidates=self.word_candidates(word)
-            predictions.append({'gloss':candidates[0]['gloss'] if candidates else None,'candidates':candidates,'known_form':word in self.lexicon})
+            if self.contextual:
+                if word in self.lexicon and len(self.lexicon[word])>1:
+                    counts=self.lexicon[word]
+                    total=sum(counts.values())
+                    candidates=[{'gloss':gloss,'score':counts[gloss]/total,'kind':'lexical','anchor':word}
+                                for gloss in sorted(counts,key=lambda gloss:(-counts[gloss],gloss))]
+                previous=example.tokens[index-1] if index else None
+                following=example.tokens[index+1] if index+1<len(example.tokens) else None
+                candidates,context_used=self._contextual_candidates(word,previous,following,candidates)
+                predictions.append({'gloss':candidates[0]['gloss'] if candidates else None,
+                                    'candidates':candidates,'known_form':word in self.lexicon,
+                                    'context_used':context_used})
+            else:
+                predictions.append({'gloss':candidates[0]['gloss'] if candidates else None,'candidates':candidates,'known_form':word in self.lexicon})
         return predictions
 
     def save(self,path):
         destination=Path(path)
         destination.parent.mkdir(parents=True,exist_ok=True)
-        state={'schema_version':1,'mode':self.mode,'max_rules':self.max_rules,'paradigm_window':self.paradigm_window,'version':self.version,
+        state={'schema_version':1,'mode':self.mode,'max_rules':self.max_rules,'paradigm_window':self.paradigm_window,
+               'contextual':self.contextual,'version':self.version,
                'records':[{'id':r.example.id,'tokens':list(r.example.tokens),'glosses':list(r.glosses)} for r in self.records.values()]}
         with tempfile.NamedTemporaryFile(dir=destination.parent,delete=False) as handle:
             temporary=Path(handle.name)
@@ -327,7 +370,7 @@ class GlossLearner:
         version=state.get('version')
         if type(version) is not int or version<len(state['records']):
             raise ValueError('Gloss checkpoint version must cover its authoritative records')
-        model=cls(state['mode'],state['max_rules'],state['paradigm_window'])
+        model=cls(state['mode'],state['max_rules'],state['paradigm_window'],state.get('contextual',False))
         def records():
             seen=set()
             for row in state['records']:

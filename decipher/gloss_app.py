@@ -51,11 +51,16 @@ def main(argv=None):
     report.add_argument('--output',required=True)
     teach=commands.add_parser('teach',help='Teach/review a language project through its workspace adapter')
     teach.add_argument('teaching_args',nargs=argparse.REMAINDER)
+    web=commands.add_parser('web',help='Start the local project and sentence-review web interface')
+    web.add_argument('--workspace-dir',default='~/.decipher/projects')
+    web.add_argument('--port',type=int,default=8765)
     args=parser.parse_args(argv)
     try:
-        if args.command=='teach':
-            from .teaching_app import main as teaching_main
-            teaching_main(args.teaching_args)
+        if args.command=='web':
+            if not 0 <= args.port <= 65535:
+                raise ValueError('Port must be between 0 and 65535')
+            from .gloss_web import serve
+            serve(args.workspace_dir,args.port)
         elif args.command=='evaluate':
             evaluate_gloss(args.train,args.eval,args.output,args.split)
         elif args.command=='stream':
