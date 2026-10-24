@@ -1,0 +1,6 @@
+{
+  "method": "sys.getsizeof reachable instance graph with identity deduplication; includes referenced records, excludes allocator/process overhead",
+  "original_bytes": 66275343,
+  "prepared_bytes": 66362262,
+  "cached_labels": 9391
+}

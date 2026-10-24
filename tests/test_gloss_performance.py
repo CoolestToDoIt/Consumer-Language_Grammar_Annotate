@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
 from collections import defaultdict
 
 from decipher.corpus import TextExample
@@ -282,6 +283,20 @@ class AnalogyIndexTests(unittest.TestCase):
 
 
 class EditInductionTests(unittest.TestCase):
+    def test_observed_gloss_keys_are_prepared_once_and_rebuilt_on_revision(self):
+        items=annotations()+[record('tags',('x','y'),('PL','PL'))]
+        model=GlossLearner()
+        with mock.patch('decipher.gloss.lexical_key', wraps=lexical_key) as parser:
+            model.fit(items[:8])
+            labels={gloss for item in items[:8] for gloss in item.glosses}
+            self.assertEqual(parser.call_count,len(labels))
+        model.fit(items[8:])
+        labels={gloss for item in model.records.values() for gloss in item.glosses}
+        self.assertEqual(model._gloss_keys,{gloss:lexical_key(gloss) for gloss in labels})
+        self.assertNotIn('tree-DAT',model._gloss_keys)
+        self.assertEqual(model._gloss_keys['PL'],())
+        self.assertEqual(GlossLearner()._gloss_keys,{})
+
     @staticmethod
     def original_evidence(records,window):
         paradigms=defaultdict(list)

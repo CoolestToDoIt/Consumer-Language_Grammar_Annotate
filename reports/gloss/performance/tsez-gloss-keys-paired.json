@@ -1,0 +1,34 @@
+{
+  "source": {
+    "commit": "c7cac7f44fb5ce62d88e8382ae71a62bebff2969",
+    "branch": "feat/gloss-engine",
+    "tracked_dirty": true,
+    "engine_sha256": "a9c50e5277cab218fbeb4e182c49a568f7afe4ba2a47b8a988b39e3586dc1c60"
+  },
+  "reference_commit": "c7cac7f",
+  "reference_engine_sha256": "ac14e10cbe969303fdb2bf81bd92dff63eca189d311f4053e3c9bd492aaedc37",
+  "training_sentences": 3547,
+  "order": "alternating, garbage collection before each fit",
+  "seconds": {
+    "original": [
+      0.5058232500014128,
+      0.5008164999962901,
+      0.4991582090005977,
+      0.5028387919956003,
+      0.4991910419994383,
+      0.5123941659985576
+    ],
+    "prepared": [
+      0.4846160409942968,
+      0.4790614590019686,
+      0.4746501249974244,
+      0.47636366699589416,
+      0.4838843329998781,
+      0.47549449999496574
+    ]
+  },
+  "median_seconds": {
+    "original": 0.5018276459959452,
+    "prepared": 0.4777125629989314
+  }
+}

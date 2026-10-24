@@ -109,6 +109,7 @@ class GlossLearner:
 
     def _reset(self):
         self.lexicon=defaultdict(Counter)
+        self._gloss_keys={}
         self.paradigms=defaultdict(list)
         self.rule_evidence=defaultdict(set)
         self._rule_cache=[]
@@ -126,7 +127,9 @@ class GlossLearner:
                 self.grams[word]=self._grams(word)
                 for gram in self.grams[word]:
                     self._gram_index[gram].add(word)
-            key=lexical_key(gloss)
+            if gloss not in self._gloss_keys:
+                self._gloss_keys[gloss]=lexical_key(gloss)
+            key=self._gloss_keys[gloss]
             if not key:
                 continue
             paradigm=self.paradigms[key]
@@ -282,7 +285,7 @@ class GlossLearner:
                 continue
             for gloss,count in self.lexicon[base].items():
                 proposed=transform(gloss,target_side,remove_gloss,append_gloss)
-                if not proposed or lexical_key(proposed)!=lexical_key(gloss):
+                if not proposed or lexical_key(proposed)!=self._gloss_keys[gloss]:
                     continue
                 support=len(self.rule_evidence[rule])
                 weight=support/(1+.1*(len(remove)+len(append)+len(remove_gloss)+len(append_gloss)))
