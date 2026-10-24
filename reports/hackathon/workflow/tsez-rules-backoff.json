@@ -1,0 +1,520 @@
+{
+  "language": "Tsez",
+  "config": {
+    "mode": "rules",
+    "guess_unknown": false,
+    "normalize_unknown": true
+  },
+  "filters": {
+    "training_reader": {
+      "records_read": 3547,
+      "misaligned": 0,
+      "missing_gloss": 0
+    },
+    "evaluation_reader": {
+      "records_read": 445,
+      "misaligned": 0,
+      "missing_gloss": 0
+    },
+    "source_overlaps_excluded": 0
+  },
+  "teaching_session": {
+    "sentences": 3547,
+    "words": 37396,
+    "suggestion_acceptance": 0.7107712054765215,
+    "one_click_fix": 0.08086426355759975,
+    "typed_from_scratch": 0.2083645309658787,
+    "typing_saved_chars": 0.7409663145941938,
+    "zero_edit_sentences": 0.10008457851705667,
+    "abstained_words": 0.1296395336399615,
+    "wrong_guess_words": 0.15958926088351696,
+    "precision_when_suggesting": 0.8166400393265332,
+    "known_form_accuracy": 0.8438792939836781,
+    "teach_once_reuse": 0.8999716633607254,
+    "new_form_accuracy": 0.3934485566917021,
+    "new_form_grammatical_accuracy": 0.6658986175115207,
+    "sentences_until_rolling_acceptance": {
+      "50%": 201,
+      "60%": 374,
+      "70%": 503
+    },
+    "predict_ms_p50": 0.08258399611804634,
+    "predict_ms_p95": 0.23925000277813524,
+    "correct_ms_p50": 0.46666699927300215,
+    "correct_ms_p95": 0.7540420047007501,
+    "counts": {
+      "words": 37396,
+      "accepted": 26580,
+      "picked": 3024,
+      "typed": 7792,
+      "abstained": 4848,
+      "wrong_guess": 5968,
+      "gloss_chars": 426238,
+      "typed_chars": 110410,
+      "zero_edit_sentences": 355,
+      "repeat_words": 26345,
+      "repeat_correct": 22232,
+      "repeat_same_answer": 24703,
+      "repeat_same_answer_correct": 22232,
+      "new_form_words": 11051,
+      "new_form_correct": 4348,
+      "new_form_grammatical": 434,
+      "new_form_grammatical_correct": 289
+    },
+    "curve": [
+      {
+        "sentences_taught_before_window_end": 50,
+        "words": 518,
+        "suggestion_acceptance": 0.1718146718146718,
+        "typed_from_scratch": 0.8166023166023166
+      },
+      {
+        "sentences_taught_before_window_end": 100,
+        "words": 541,
+        "suggestion_acceptance": 0.3955637707948244,
+        "typed_from_scratch": 0.5600739371534196
+      },
+      {
+        "sentences_taught_before_window_end": 150,
+        "words": 533,
+        "suggestion_acceptance": 0.4709193245778612,
+        "typed_from_scratch": 0.48405253283302063
+      },
+      {
+        "sentences_taught_before_window_end": 200,
+        "words": 549,
+        "suggestion_acceptance": 0.4918032786885246,
+        "typed_from_scratch": 0.4663023679417122
+      },
+      {
+        "sentences_taught_before_window_end": 250,
+        "words": 517,
+        "suggestion_acceptance": 0.5415860735009671,
+        "typed_from_scratch": 0.3829787234042553
+      },
+      {
+        "sentences_taught_before_window_end": 300,
+        "words": 536,
+        "suggestion_acceptance": 0.5559701492537313,
+        "typed_from_scratch": 0.39925373134328357
+      },
+      {
+        "sentences_taught_before_window_end": 350,
+        "words": 531,
+        "suggestion_acceptance": 0.5725047080979284,
+        "typed_from_scratch": 0.3540489642184557
+      },
+      {
+        "sentences_taught_before_window_end": 400,
+        "words": 528,
+        "suggestion_acceptance": 0.615530303030303,
+        "typed_from_scratch": 0.3181818181818182
+      },
+      {
+        "sentences_taught_before_window_end": 450,
+        "words": 519,
+        "suggestion_acceptance": 0.6551059730250481,
+        "typed_from_scratch": 0.28709055876685935
+      },
+      {
+        "sentences_taught_before_window_end": 500,
+        "words": 523,
+        "suggestion_acceptance": 0.6883365200764818,
+        "typed_from_scratch": 0.2447418738049713
+      },
+      {
+        "sentences_taught_before_window_end": 550,
+        "words": 511,
+        "suggestion_acceptance": 0.675146771037182,
+        "typed_from_scratch": 0.2720156555772994
+      },
+      {
+        "sentences_taught_before_window_end": 600,
+        "words": 462,
+        "suggestion_acceptance": 0.658008658008658,
+        "typed_from_scratch": 0.26406926406926406
+      },
+      {
+        "sentences_taught_before_window_end": 650,
+        "words": 557,
+        "suggestion_acceptance": 0.7055655296229802,
+        "typed_from_scratch": 0.22980251346499103
+      },
+      {
+        "sentences_taught_before_window_end": 700,
+        "words": 545,
+        "suggestion_acceptance": 0.6568807339449542,
+        "typed_from_scratch": 0.27155963302752295
+      },
+      {
+        "sentences_taught_before_window_end": 750,
+        "words": 592,
+        "suggestion_acceptance": 0.6351351351351351,
+        "typed_from_scratch": 0.2652027027027027
+      },
+      {
+        "sentences_taught_before_window_end": 800,
+        "words": 512,
+        "suggestion_acceptance": 0.67578125,
+        "typed_from_scratch": 0.232421875
+      },
+      {
+        "sentences_taught_before_window_end": 850,
+        "words": 553,
+        "suggestion_acceptance": 0.6889692585895117,
+        "typed_from_scratch": 0.2314647377938517
+      },
+      {
+        "sentences_taught_before_window_end": 900,
+        "words": 494,
+        "suggestion_acceptance": 0.7125506072874493,
+        "typed_from_scratch": 0.20647773279352227
+      },
+      {
+        "sentences_taught_before_window_end": 950,
+        "words": 569,
+        "suggestion_acceptance": 0.7223198594024605,
+        "typed_from_scratch": 0.1968365553602812
+      },
+      {
+        "sentences_taught_before_window_end": 1000,
+        "words": 540,
+        "suggestion_acceptance": 0.687037037037037,
+        "typed_from_scratch": 0.22777777777777777
+      },
+      {
+        "sentences_taught_before_window_end": 1050,
+        "words": 516,
+        "suggestion_acceptance": 0.6627906976744186,
+        "typed_from_scratch": 0.24612403100775193
+      },
+      {
+        "sentences_taught_before_window_end": 1100,
+        "words": 508,
+        "suggestion_acceptance": 0.7106299212598425,
+        "typed_from_scratch": 0.18700787401574803
+      },
+      {
+        "sentences_taught_before_window_end": 1150,
+        "words": 581,
+        "suggestion_acceptance": 0.7194492254733219,
+        "typed_from_scratch": 0.21514629948364888
+      },
+      {
+        "sentences_taught_before_window_end": 1200,
+        "words": 545,
+        "suggestion_acceptance": 0.708256880733945,
+        "typed_from_scratch": 0.20733944954128442
+      },
+      {
+        "sentences_taught_before_window_end": 1250,
+        "words": 453,
+        "suggestion_acceptance": 0.7064017660044151,
+        "typed_from_scratch": 0.2141280353200883
+      },
+      {
+        "sentences_taught_before_window_end": 1300,
+        "words": 560,
+        "suggestion_acceptance": 0.7178571428571429,
+        "typed_from_scratch": 0.18571428571428572
+      },
+      {
+        "sentences_taught_before_window_end": 1350,
+        "words": 527,
+        "suggestion_acceptance": 0.7077798861480076,
+        "typed_from_scratch": 0.20872865275142316
+      },
+      {
+        "sentences_taught_before_window_end": 1400,
+        "words": 501,
+        "suggestion_acceptance": 0.7465069860279441,
+        "typed_from_scratch": 0.19560878243512975
+      },
+      {
+        "sentences_taught_before_window_end": 1450,
+        "words": 480,
+        "suggestion_acceptance": 0.70625,
+        "typed_from_scratch": 0.19791666666666666
+      },
+      {
+        "sentences_taught_before_window_end": 1500,
+        "words": 518,
+        "suggestion_acceptance": 0.7027027027027027,
+        "typed_from_scratch": 0.18725868725868725
+      },
+      {
+        "sentences_taught_before_window_end": 1550,
+        "words": 552,
+        "suggestion_acceptance": 0.6956521739130435,
+        "typed_from_scratch": 0.2246376811594203
+      },
+      {
+        "sentences_taught_before_window_end": 1600,
+        "words": 562,
+        "suggestion_acceptance": 0.7419928825622776,
+        "typed_from_scratch": 0.17793594306049823
+      },
+      {
+        "sentences_taught_before_window_end": 1650,
+        "words": 484,
+        "suggestion_acceptance": 0.7727272727272727,
+        "typed_from_scratch": 0.1590909090909091
+      },
+      {
+        "sentences_taught_before_window_end": 1700,
+        "words": 511,
+        "suggestion_acceptance": 0.7416829745596869,
+        "typed_from_scratch": 0.17416829745596868
+      },
+      {
+        "sentences_taught_before_window_end": 1750,
+        "words": 480,
+        "suggestion_acceptance": 0.7520833333333333,
+        "typed_from_scratch": 0.16666666666666666
+      },
+      {
+        "sentences_taught_before_window_end": 1800,
+        "words": 513,
+        "suggestion_acceptance": 0.7504873294346979,
+        "typed_from_scratch": 0.1695906432748538
+      },
+      {
+        "sentences_taught_before_window_end": 1850,
+        "words": 601,
+        "suggestion_acceptance": 0.7753743760399334,
+        "typed_from_scratch": 0.1447587354409318
+      },
+      {
+        "sentences_taught_before_window_end": 1900,
+        "words": 495,
+        "suggestion_acceptance": 0.7212121212121212,
+        "typed_from_scratch": 0.18181818181818182
+      },
+      {
+        "sentences_taught_before_window_end": 1950,
+        "words": 541,
+        "suggestion_acceptance": 0.744916820702403,
+        "typed_from_scratch": 0.17190388170055454
+      },
+      {
+        "sentences_taught_before_window_end": 2000,
+        "words": 562,
+        "suggestion_acceptance": 0.7241992882562278,
+        "typed_from_scratch": 0.20462633451957296
+      },
+      {
+        "sentences_taught_before_window_end": 2050,
+        "words": 532,
+        "suggestion_acceptance": 0.7631578947368421,
+        "typed_from_scratch": 0.13533834586466165
+      },
+      {
+        "sentences_taught_before_window_end": 2100,
+        "words": 542,
+        "suggestion_acceptance": 0.7730627306273062,
+        "typed_from_scratch": 0.13653136531365315
+      },
+      {
+        "sentences_taught_before_window_end": 2150,
+        "words": 554,
+        "suggestion_acceptance": 0.7527075812274369,
+        "typed_from_scratch": 0.16787003610108303
+      },
+      {
+        "sentences_taught_before_window_end": 2200,
+        "words": 517,
+        "suggestion_acceptance": 0.8065764023210832,
+        "typed_from_scratch": 0.1276595744680851
+      },
+      {
+        "sentences_taught_before_window_end": 2250,
+        "words": 474,
+        "suggestion_acceptance": 0.740506329113924,
+        "typed_from_scratch": 0.16244725738396623
+      },
+      {
+        "sentences_taught_before_window_end": 2300,
+        "words": 558,
+        "suggestion_acceptance": 0.7634408602150538,
+        "typed_from_scratch": 0.13978494623655913
+      },
+      {
+        "sentences_taught_before_window_end": 2350,
+        "words": 555,
+        "suggestion_acceptance": 0.7783783783783784,
+        "typed_from_scratch": 0.14414414414414414
+      },
+      {
+        "sentences_taught_before_window_end": 2400,
+        "words": 519,
+        "suggestion_acceptance": 0.766859344894027,
+        "typed_from_scratch": 0.14258188824662812
+      },
+      {
+        "sentences_taught_before_window_end": 2450,
+        "words": 525,
+        "suggestion_acceptance": 0.7638095238095238,
+        "typed_from_scratch": 0.15047619047619049
+      },
+      {
+        "sentences_taught_before_window_end": 2500,
+        "words": 527,
+        "suggestion_acceptance": 0.7514231499051234,
+        "typed_from_scratch": 0.1442125237191651
+      },
+      {
+        "sentences_taught_before_window_end": 2550,
+        "words": 514,
+        "suggestion_acceptance": 0.7178988326848249,
+        "typed_from_scratch": 0.1614785992217899
+      },
+      {
+        "sentences_taught_before_window_end": 2600,
+        "words": 564,
+        "suggestion_acceptance": 0.7606382978723404,
+        "typed_from_scratch": 0.14184397163120568
+      },
+      {
+        "sentences_taught_before_window_end": 2650,
+        "words": 501,
+        "suggestion_acceptance": 0.7664670658682635,
+        "typed_from_scratch": 0.14770459081836326
+      },
+      {
+        "sentences_taught_before_window_end": 2700,
+        "words": 496,
+        "suggestion_acceptance": 0.7943548387096774,
+        "typed_from_scratch": 0.13306451612903225
+      },
+      {
+        "sentences_taught_before_window_end": 2750,
+        "words": 521,
+        "suggestion_acceptance": 0.7715930902111324,
+        "typed_from_scratch": 0.1381957773512476
+      },
+      {
+        "sentences_taught_before_window_end": 2800,
+        "words": 493,
+        "suggestion_acceptance": 0.8012170385395537,
+        "typed_from_scratch": 0.13184584178498987
+      },
+      {
+        "sentences_taught_before_window_end": 2850,
+        "words": 570,
+        "suggestion_acceptance": 0.7789473684210526,
+        "typed_from_scratch": 0.1368421052631579
+      },
+      {
+        "sentences_taught_before_window_end": 2900,
+        "words": 520,
+        "suggestion_acceptance": 0.7826923076923077,
+        "typed_from_scratch": 0.14615384615384616
+      },
+      {
+        "sentences_taught_before_window_end": 2950,
+        "words": 492,
+        "suggestion_acceptance": 0.7703252032520326,
+        "typed_from_scratch": 0.1443089430894309
+      },
+      {
+        "sentences_taught_before_window_end": 3000,
+        "words": 513,
+        "suggestion_acceptance": 0.7563352826510721,
+        "typed_from_scratch": 0.12475633528265107
+      },
+      {
+        "sentences_taught_before_window_end": 3050,
+        "words": 522,
+        "suggestion_acceptance": 0.7796934865900383,
+        "typed_from_scratch": 0.1206896551724138
+      },
+      {
+        "sentences_taught_before_window_end": 3100,
+        "words": 539,
+        "suggestion_acceptance": 0.7996289424860853,
+        "typed_from_scratch": 0.10946196660482375
+      },
+      {
+        "sentences_taught_before_window_end": 3150,
+        "words": 500,
+        "suggestion_acceptance": 0.778,
+        "typed_from_scratch": 0.122
+      },
+      {
+        "sentences_taught_before_window_end": 3200,
+        "words": 513,
+        "suggestion_acceptance": 0.7719298245614035,
+        "typed_from_scratch": 0.12280701754385964
+      },
+      {
+        "sentences_taught_before_window_end": 3250,
+        "words": 548,
+        "suggestion_acceptance": 0.7864963503649635,
+        "typed_from_scratch": 0.12408759124087591
+      },
+      {
+        "sentences_taught_before_window_end": 3300,
+        "words": 563,
+        "suggestion_acceptance": 0.8134991119005328,
+        "typed_from_scratch": 0.11900532859680284
+      },
+      {
+        "sentences_taught_before_window_end": 3350,
+        "words": 558,
+        "suggestion_acceptance": 0.7616487455197133,
+        "typed_from_scratch": 0.15232974910394265
+      },
+      {
+        "sentences_taught_before_window_end": 3400,
+        "words": 526,
+        "suggestion_acceptance": 0.7585551330798479,
+        "typed_from_scratch": 0.12547528517110265
+      },
+      {
+        "sentences_taught_before_window_end": 3450,
+        "words": 511,
+        "suggestion_acceptance": 0.7964774951076321,
+        "typed_from_scratch": 0.11937377690802348
+      },
+      {
+        "sentences_taught_before_window_end": 3500,
+        "words": 533,
+        "suggestion_acceptance": 0.797373358348968,
+        "typed_from_scratch": 0.13883677298311445
+      },
+      {
+        "sentences_taught_before_window_end": 3547,
+        "words": 476,
+        "suggestion_acceptance": 0.7941176470588235,
+        "typed_from_scratch": 0.12815126050420167
+      }
+    ]
+  },
+  "review_triage": {
+    "words": 4761,
+    "errors": 1099,
+    "word_accuracy": 0.7691661415668978,
+    "errors_found_by_review_budget": {
+      "10%": {
+        "review_ordered": 0.3685168334849864,
+        "random_order": 0.09463148316651501
+      },
+      "20%": {
+        "review_ordered": 0.4786169244767971,
+        "random_order": 0.21292083712465878
+      },
+      "30%": {
+        "review_ordered": 0.6969972702456779,
+        "random_order": 0.31392174704276615
+      },
+      "50%": {
+        "review_ordered": 0.8671519563239308,
+        "random_order": 0.49954504094631486
+      }
+    },
+    "auto_accept_share": 0.4868725057760975,
+    "auto_accept_accuracy": 0.9370146678170836,
+    "flagged_share": 0.5131274942239026,
+    "errors_inside_flagged": 0.8671519563239308
+  }
+}

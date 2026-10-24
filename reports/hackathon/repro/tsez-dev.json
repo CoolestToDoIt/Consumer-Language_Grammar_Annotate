@@ -1,0 +1,647 @@
+{
+  "task": "Word-aligned, source-only interlinear gloss prediction; no translations or gold segmentation as input.",
+  "split": "dev",
+  "training": {
+    "path": "data/glossing/tsez/ddo-train-track1-uncovered",
+    "sha256": "e590acdbed9b200ddffc8c2ed280c08913bed2abbb8dcc26458b5f647f0e3082"
+  },
+  "evaluation": {
+    "path": "data/glossing/tsez/ddo-dev-track1-uncovered",
+    "sha256": "0883e6372e7d78e44d37a34dbd39c308ac5ed206efcd6177c519ee19b1cc4c2d"
+  },
+  "filters": {
+    "training_reader": {
+      "records_read": 3547,
+      "misaligned": 0,
+      "missing_gloss": 0
+    },
+    "evaluation_reader": {
+      "records_read": 445,
+      "misaligned": 0,
+      "missing_gloss": 0
+    },
+    "source_overlaps_excluded": 0,
+    "source_overlap_ids_excluded": []
+  },
+  "training_sentences": 3547,
+  "training_words": 37396,
+  "config": {
+    "max_rules": 512,
+    "paradigm_window": 32,
+    "source_only": true,
+    "gold_segmentation": false,
+    "translation_input": false
+  },
+  "models": {
+    "memory": {
+      "counts": {
+        "sentences": 445,
+        "words": 4761,
+        "correct": 3248,
+        "covered": 3833,
+        "top5_correct": 3623,
+        "nonpunct_words": 4751,
+        "nonpunct_correct": 3238,
+        "correct_sentences": 28,
+        "oov_words": 928,
+        "oov_correct": 0,
+        "grounded_oov_words": 808,
+        "grounded_oov_correct": 0,
+        "ungrounded_or_grammatical_oov_words": 120,
+        "ungrounded_or_grammatical_oov_correct": 0
+      },
+      "word_accuracy": 0.6822096198277673,
+      "sentence_accuracy": 0.06292134831460675,
+      "coverage": 0.805082965763495,
+      "top5_accuracy": 0.7609745851711825,
+      "oov_accuracy": 0.0,
+      "nonpunct_accuracy": 0.6815407282677332,
+      "grounded_oov_accuracy": 0.0,
+      "errors": [
+        {
+          "id": "ddo-dev-track1-uncovered:2",
+          "source_word": "Ražbadinez",
+          "expected": "Razhbadin-GEN2",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:2",
+          "source_word": "xexbin",
+          "expected": "children-and",
+          "predicted": "children-TOP",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:2",
+          "source_word": "teƛno",
+          "expected": "give-PST.UNW",
+          "predicted": "give-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:3",
+          "source_word": "ruqˤno",
+          "expected": "II.PL-hide-PFV.CVB",
+          "predicted": "III.PL-hide-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:3",
+          "source_word": "rukayn.",
+          "expected": "II.PL-see-PST.UNW",
+          "predicted": "IV-see-PST.UNW",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:4",
+          "source_word": "äsirun",
+          "expected": "tell-IMM.ANT.CVB",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:4",
+          "source_word": "baħrä",
+          "expected": "hound-ERG",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:4",
+          "source_word": "biłe,",
+          "expected": "III-as",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:4",
+          "source_word": "mec",
+          "expected": "tongue",
+          "predicted": "language",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:4",
+          "source_word": "boƛik’no.",
+          "expected": "III-push.out-PST.UNW",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:5",
+          "source_word": "esarus",
+          "expected": "find-PST.PRT-GEN1",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:5",
+          "source_word": "xizor.",
+          "expected": "back",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "indowribin",
+          "expected": "turkey-PL-TOP",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "rayrno,",
+          "expected": "III.PL-bring-PFV.CVB",
+          "predicted": "IV-bring-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "eƛin,",
+          "expected": "say-PFV.CVB",
+          "predicted": "say-PST.UNW",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "mečoƛ’",
+          "expected": "field-SUPER.ESS",
+          "predicted": "place-SUPER.ESS",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "ist’owlin,",
+          "expected": "table-and",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "q’ˤuribin",
+          "expected": "chair-PL-and",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "roqoƛƛin.",
+          "expected": "IV.PL-become-OPT-QUOT",
+          "predicted": "IV-become-OPT-QUOT",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:7",
+          "source_word": "suƛƛitow",
+          "expected": "immediately-EMPH",
+          "predicted": "at.once-EMPH",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "zown",
+          "expected": "ride-PFV.CVB",
+          "predicted": "be.NPRS-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "rok’ek’no",
+          "expected": "IV-steal-PFV.CVB",
+          "predicted": "II.PL-steal-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "rižin,",
+          "expected": "IV-carry-PFV.CVB",
+          "predicted": "IV-take.out-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "q’ˤida",
+          "expected": "under",
+          "predicted": "down",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "ičin.",
+          "expected": "sit-PST.UNW",
+          "predicted": "be-PST.UNW",
+          "oov": false
+        }
+      ],
+      "rules_considered": 512
+    },
+    "analogy": {
+      "counts": {
+        "sentences": 445,
+        "words": 4761,
+        "correct": 3396,
+        "covered": 4761,
+        "top5_correct": 3771,
+        "nonpunct_words": 4751,
+        "nonpunct_correct": 3386,
+        "correct_sentences": 36,
+        "oov_words": 928,
+        "oov_correct": 148,
+        "grounded_oov_words": 808,
+        "grounded_oov_correct": 138,
+        "ungrounded_or_grammatical_oov_words": 120,
+        "ungrounded_or_grammatical_oov_correct": 10
+      },
+      "word_accuracy": 0.7132955261499685,
+      "sentence_accuracy": 0.08089887640449438,
+      "coverage": 1.0,
+      "top5_accuracy": 0.7920604914933838,
+      "oov_accuracy": 0.15948275862068967,
+      "nonpunct_accuracy": 0.7126920648284572,
+      "grounded_oov_accuracy": 0.1707920792079208,
+      "errors": [
+        {
+          "id": "ddo-dev-track1-uncovered:2",
+          "source_word": "Ražbadinez",
+          "expected": "Razhbadin-GEN2",
+          "predicted": "Razhbadin-LAT",
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:2",
+          "source_word": "xexbin",
+          "expected": "children-and",
+          "predicted": "children-TOP",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:2",
+          "source_word": "teƛno",
+          "expected": "give-PST.UNW",
+          "predicted": "give-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:3",
+          "source_word": "ruqˤno",
+          "expected": "II.PL-hide-PFV.CVB",
+          "predicted": "III.PL-hide-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:3",
+          "source_word": "rukayn.",
+          "expected": "II.PL-see-PST.UNW",
+          "predicted": "IV-see-PST.UNW",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:4",
+          "source_word": "äsirun",
+          "expected": "tell-IMM.ANT.CVB",
+          "predicted": "tell-PST.PRT",
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:4",
+          "source_word": "baħrä",
+          "expected": "hound-ERG",
+          "predicted": "hero-ERG",
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:4",
+          "source_word": "mec",
+          "expected": "tongue",
+          "predicted": "language",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:4",
+          "source_word": "boƛik’no.",
+          "expected": "III-push.out-PST.UNW",
+          "predicted": "III-pull.out-PFV.CVB",
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:5",
+          "source_word": "esarus",
+          "expected": "find-PST.PRT-GEN1",
+          "predicted": "find-PST.WIT",
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "indowribin",
+          "expected": "turkey-PL-TOP",
+          "predicted": "turkey-PL-GEN2",
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "rayrno,",
+          "expected": "III.PL-bring-PFV.CVB",
+          "predicted": "IV-bring-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "eƛin,",
+          "expected": "say-PFV.CVB",
+          "predicted": "say-PST.UNW",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "mečoƛ’",
+          "expected": "field-SUPER.ESS",
+          "predicted": "place-SUPER.ESS",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "ist’owlin,",
+          "expected": "table-and",
+          "predicted": "snow-and",
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "q’ˤuribin",
+          "expected": "chair-PL-and",
+          "predicted": "chair-TOP",
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "roqoƛƛin.",
+          "expected": "IV.PL-become-OPT-QUOT",
+          "predicted": "IV-become-OPT-QUOT",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:7",
+          "source_word": "suƛƛitow",
+          "expected": "immediately-EMPH",
+          "predicted": "at.once-EMPH",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "zown",
+          "expected": "ride-PFV.CVB",
+          "predicted": "be.NPRS-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "rok’ek’no",
+          "expected": "IV-steal-PFV.CVB",
+          "predicted": "II.PL-steal-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "rižin,",
+          "expected": "IV-carry-PFV.CVB",
+          "predicted": "IV-take.out-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "q’ˤida",
+          "expected": "under",
+          "predicted": "down",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "ičin.",
+          "expected": "sit-PST.UNW",
+          "predicted": "be-PST.UNW",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:9",
+          "source_word": "užiqor.",
+          "expected": "son-POSS.LAT",
+          "predicted": "boy-POSS.LAT",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:10",
+          "source_word": "haqo",
+          "expected": "mouth",
+          "predicted": "mouth-SUB.ABL",
+          "oov": true
+        }
+      ],
+      "rules_considered": 512
+    },
+    "rules": {
+      "counts": {
+        "sentences": 445,
+        "words": 4761,
+        "correct": 3575,
+        "covered": 4304,
+        "top5_correct": 3997,
+        "nonpunct_words": 4751,
+        "nonpunct_correct": 3565,
+        "correct_sentences": 49,
+        "oov_words": 928,
+        "oov_correct": 327,
+        "grounded_oov_words": 808,
+        "grounded_oov_correct": 312,
+        "ungrounded_or_grammatical_oov_words": 120,
+        "ungrounded_or_grammatical_oov_correct": 15
+      },
+      "word_accuracy": 0.7508926696072253,
+      "sentence_accuracy": 0.1101123595505618,
+      "coverage": 0.9040117622348246,
+      "top5_accuracy": 0.8395295106070153,
+      "oov_accuracy": 0.35237068965517243,
+      "nonpunct_accuracy": 0.7503683435066302,
+      "grounded_oov_accuracy": 0.38613861386138615,
+      "errors": [
+        {
+          "id": "ddo-dev-track1-uncovered:2",
+          "source_word": "xexbin",
+          "expected": "children-and",
+          "predicted": "children-TOP",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:2",
+          "source_word": "teƛno",
+          "expected": "give-PST.UNW",
+          "predicted": "give-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:3",
+          "source_word": "ruqˤno",
+          "expected": "II.PL-hide-PFV.CVB",
+          "predicted": "III.PL-hide-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:3",
+          "source_word": "rukayn.",
+          "expected": "II.PL-see-PST.UNW",
+          "predicted": "IV-see-PST.UNW",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:4",
+          "source_word": "äsirun",
+          "expected": "tell-IMM.ANT.CVB",
+          "predicted": "tell-PST.PRT-TOP",
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:4",
+          "source_word": "baħrä",
+          "expected": "hound-ERG",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:4",
+          "source_word": "mec",
+          "expected": "tongue",
+          "predicted": "language",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:5",
+          "source_word": "esarus",
+          "expected": "find-PST.PRT-GEN1",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "indowribin",
+          "expected": "turkey-PL-TOP",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "rayrno,",
+          "expected": "III.PL-bring-PFV.CVB",
+          "predicted": "IV-bring-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "eƛin,",
+          "expected": "say-PFV.CVB",
+          "predicted": "say-PST.UNW",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "mečoƛ’",
+          "expected": "field-SUPER.ESS",
+          "predicted": "place-SUPER.ESS",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "ist’owlin,",
+          "expected": "table-and",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "q’ˤuribin",
+          "expected": "chair-PL-and",
+          "predicted": "chair-PL-TOP",
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:6",
+          "source_word": "roqoƛƛin.",
+          "expected": "IV.PL-become-OPT-QUOT",
+          "predicted": "IV-become-OPT-QUOT",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:7",
+          "source_word": "suƛƛitow",
+          "expected": "immediately-EMPH",
+          "predicted": "at.once-EMPH",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "zown",
+          "expected": "ride-PFV.CVB",
+          "predicted": "be.NPRS-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "rok’ek’no",
+          "expected": "IV-steal-PFV.CVB",
+          "predicted": "II.PL-steal-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "rižin,",
+          "expected": "IV-carry-PFV.CVB",
+          "predicted": "IV-take.out-PFV.CVB",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "q’ˤida",
+          "expected": "under",
+          "predicted": "down",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:8",
+          "source_word": "ičin.",
+          "expected": "sit-PST.UNW",
+          "predicted": "be-PST.UNW",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:9",
+          "source_word": "užiqor.",
+          "expected": "son-POSS.LAT",
+          "predicted": "boy-POSS.LAT",
+          "oov": false
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:10",
+          "source_word": "esizaƛ’",
+          "expected": "tell-CSL.CVB",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:10",
+          "source_word": "haqo",
+          "expected": "mouth",
+          "predicted": "well-POSS.ESS",
+          "oov": true
+        },
+        {
+          "id": "ddo-dev-track1-uncovered:10",
+          "source_word": "c’ok’inayn",
+          "expected": "scold-PST.UNW",
+          "predicted": "scold-PFV.CVB",
+          "oov": false
+        }
+      ],
+      "rules_considered": 512
+    }
+  },
+  "manifest_sha256": "b0d5fcea627d7f6314c5658f747c8d7578b868c33ac1fc08b4746dd790816c50"
+}

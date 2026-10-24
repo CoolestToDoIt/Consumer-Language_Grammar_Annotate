@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decipher Lab · Workflow metrics</title>
+<style>
+.viz-root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface-1: #fcfcfb;
+  --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --border: rgba(11,11,11,0.10);
+  --good-text: #006300; --wash: rgba(11,11,11,0.05);
+  --series-1: #2a78d6; --series-2: #eb6834; --series-3: #1baf7a;
+  --ord-1: #184f95; --ord-2: #3987e5; --ord-3: #86b6ef;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) .viz-root {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface-1: #1a1a19;
+    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+    --good-text: #0ca30c; --wash: rgba(255,255,255,0.06);
+    --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70;
+    --ord-1: #86b6ef; --ord-2: #3987e5; --ord-3: #184f95;
+  }
+}
+:root[data-theme="dark"] .viz-root {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface-1: #1a1a19;
+  --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+  --good-text: #0ca30c; --wash: rgba(255,255,255,0.06);
+  --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70;
+  --ord-1: #86b6ef; --ord-2: #3987e5; --ord-3: #184f95;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.viz-root { min-height: 100vh; background: var(--page); color: var(--text-primary);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; padding: 28px clamp(16px, 4vw, 48px) 48px; }
+header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; max-width: 1240px; margin: 0 auto 20px; }
+h1 { font-size: 22px; font-weight: 600; margin: 0 0 4px; }
+h2 { font-size: 15px; font-weight: 600; margin: 0 0 2px; }
+.sub { color: var(--text-secondary); margin: 0; }
+.muted { color: var(--text-muted); font-size: 12px; }
+main { max-width: 1240px; margin: 0 auto; display: grid; gap: 16px; }
+.filters { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--surface-1); }
+.seg button { font: inherit; border: 0; background: transparent; color: var(--text-secondary); padding: 6px 14px; cursor: pointer; }
+.seg button:hover { background: var(--wash); }
+.seg button[aria-pressed="true"] { color: var(--text-primary); font-weight: 600; background: var(--wash); }
+.ghost { font: inherit; border: 1px solid var(--border); background: var(--surface-1); color: var(--text-secondary); border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+.tiles { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 16px; }
+.tiles .hero { grid-row: span 2; display: flex; flex-direction: column; justify-content: center; }
+@media (max-width: 900px) { .tiles { grid-template-columns: repeat(2, 1fr); } .tiles .hero { grid-column: 1 / -1; grid-row: auto; } }
+.hero .value { font-size: 72px; font-weight: 600; line-height: 1.05; margin: 6px 0 4px; }
+.tile .label, .hero .label { color: var(--text-secondary); }
+.tile .value { font-size: 28px; font-weight: 600; margin: 6px 0 2px; }
+.delta { font-size: 12px; color: var(--text-secondary); }
+.delta.up { color: var(--good-text); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 16px; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 10px 0 4px; color: var(--text-secondary); font-size: 12px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.key-line { width: 14px; height: 2px; border-radius: 1px; display: inline-block; }
+.key-rect { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.chart { width: 100%; }
+svg { display: block; overflow: visible; }
+svg text { font: 11px system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--text-muted); font-variant-numeric: tabular-nums; }
+svg text.lbl { fill: var(--text-secondary); font-size: 12px; }
+svg .mark:focus { outline: none; }
+svg .mark:hover, svg .mark:focus { filter: brightness(1.12); }
+details { margin-top: 10px; }
+summary { cursor: pointer; color: var(--text-secondary); font-size: 12px; }
+table { border-collapse: collapse; width: 100%; margin-top: 8px; font-size: 13px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--grid); }
+th { color: var(--text-secondary); font-weight: 500; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.ok { color: var(--good-text); font-weight: 600; }
+#tip { position: fixed; pointer-events: none; background: var(--surface-1); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 10px; box-shadow: 0 4px 16px rgba(0,0,0,.12); font-size: 12px; display: none; z-index: 10; min-width: 140px; }
+#tip .t { color: var(--text-secondary); margin-bottom: 4px; }
+#tip .row { display: flex; align-items: center; gap: 8px; }
+#tip strong { color: var(--text-primary); font-variant-numeric: tabular-nums; }
+#tip .n { color: var(--text-secondary); }
+footer { max-width: 1240px; margin: 20px auto 0; color: var(--text-muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="viz-root">
+  <header>
+    <div>
+      <h1>Decipher Lab · Workflow metrics</h1>
+      <p class="sub">A simulated linguist imports unglossed sentences, reviews each suggestion, then teaches the answer. Every suggestion is made before that sentence is taught.</p>
+    </div>
+    <button class="ghost" id="theme" type="button">Toggle theme</button>
+  </header>
+  <main>
+    <div class="filters" role="group" aria-label="Filters">
+      <span class="muted">Language</span>
+      <div class="seg" id="lang"></div>
+      <span class="muted">Tiles show the opt-in normalization backoff, with the change vs the default engine.</span>
+    </div>
+
+    <section class="tiles" id="tiles"></section>
+
+    <section class="grid2">
+      <div class="card">
+        <h2>Suggestions accepted as the user teaches</h2>
+        <p class="muted">Share of words accepted as-is in each 50-sentence window</p>
+        <div class="legend" id="legA"></div>
+        <div class="chart" id="chartA"></div>
+        <details><summary>Show table</summary><div id="tableA"></div></details>
+      </div>
+      <div class="card">
+        <h2>How each word gets glossed</h2>
+        <p class="muted">Share of all words during the teaching session</p>
+        <div class="legend" id="legB"></div>
+        <div class="chart" id="chartB"></div>
+        <details><summary>Show table</summary><div id="tableB"></div></details>
+      </div>
+      <div class="card">
+        <h2>Review queue finds mistakes early</h2>
+        <p class="muted">Share of errors found vs share of unseen dev words reviewed, frozen model</p>
+        <div class="legend" id="legC"></div>
+        <div class="chart" id="chartC"></div>
+        <details><summary>Show table</summary><div id="tableC"></div></details>
+      </div>
+      <div class="card">
+        <h2>Unseen-word fix vs alternatives</h2>
+        <p class="muted">Development set, full training data</p>
+        <div class="legend" id="legD"></div>
+        <div class="chart" id="chartD"></div>
+        <details><summary>Show table</summary><div id="tableD"></div></details>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Published results reproduce</h2>
+      <p class="muted">Fresh runs against checksum-verified data, compared with committed reports. These do not depend on the language filter.</p>
+      <div id="repro"></div>
+    </section>
+  </main>
+  <footer>
+    The simulated user accepts only exact gloss matches, so acceptance rates are conservative. Rates are empirical on two development languages,
+    one run in upstream corpus order, and are not calibrated probabilities. Gitksan is held out and unused. Generated by tools/build_dashboard.py.
+  </footer>
+  <div id="tip" role="tooltip"></div>
+</div>
+<script>
+const DATA = __DATA__;
+const NS = 'http://www.w3.org/2000/svg';
+const MODELS = {default: {name: 'Default engine', color: 'var(--series-1)'},
+                backoff: {name: 'With backoff', color: 'var(--series-2)'},
+                guess: {name: 'With guess_unknown', color: 'var(--series-3)'}};
+let lang = 'Tsez';
+const pct = (v, d = 1) => v == null ? 'n/a' : (100 * v).toFixed(d) + '%';
+const pts = v => (v >= 0 ? '+' : '−') + Math.abs(100 * v).toFixed(1) + ' pts';
+
+function el(tag, attrs = {}, parent) {
+  const node = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+  if (parent) parent.appendChild(node);
+  return node;
+}
+function h(tag, text, cls) { const n = document.createElement(tag); if (text != null) n.textContent = text; if (cls) n.className = cls; return n; }
+
+// Tooltip: values lead, labels follow; rows keyed with a short line in the series color.
+const tip = document.getElementById('tip');
+function showTip(evt, title, rows) {
+  tip.replaceChildren(h('div', title, 't'));
+  for (const r of rows) {
+    const row = h('div', null, 'row');
+    const key = h('span', null, 'key-line'); key.style.background = r.color; row.appendChild(key);
+    row.appendChild(h('strong', r.value)); row.appendChild(h('span', r.name, 'n'));
+    tip.appendChild(row);
+  }
+  tip.style.display = 'block';
+  const box = evt.target.getBoundingClientRect ? evt.target.getBoundingClientRect() : null;
+  const x = evt.clientX ?? (box.left + box.width / 2), y = evt.clientY ?? box.top;
+  const w = tip.offsetWidth;
+  tip.style.left = Math.min(window.innerWidth - w - 8, x + 14) + 'px';
+  tip.style.top = Math.max(8, y - tip.offsetHeight - 10) + 'px';
+}
+function hideTip() { tip.style.display = 'none'; }
+
+function legend(id, items, kind = 'line') {
+  const box = document.getElementById(id); box.replaceChildren();
+  for (const it of items) {
+    const s = h('span'); const k = h('span', null, kind === 'line' ? 'key-line' : 'key-rect');
+    k.style.background = it.color; s.appendChild(k); s.appendChild(document.createTextNode(it.name)); box.appendChild(s);
+  }
+}
+function table(id, head, rows) {
+  const t = h('table'); const tr = h('tr');
+  head.forEach((c, i) => tr.appendChild(h('th', c, i ? 'num' : '')));
+  t.appendChild(tr);
+  for (const r of rows) { const row = h('tr'); r.forEach((c, i) => row.appendChild(h('td', c, i ? 'num' : ''))); t.appendChild(row); }
+  document.getElementById(id).replaceChildren(t);
+}
+
+function lineChart(id, {series, xMax, xTicks, xFmt, xTitle, tipTitle, label}) {
+  const host = document.getElementById(id); host.replaceChildren();
+  const W = host.clientWidth, H = 240, m = {l: 40, r: 16, t: 12, b: 34};
+  const svg = el('svg', {width: W, height: H, role: 'img', 'aria-label': label}, host);
+  const x = v => m.l + (W - m.l - m.r) * v / xMax, y = v => H - m.b - (H - m.t - m.b) * v;
+  for (const g of [0, .25, .5, .75, 1]) {
+    el('line', {x1: m.l, x2: W - m.r, y1: y(g), y2: y(g), stroke: g ? 'var(--grid)' : 'var(--axis)', 'stroke-width': 1}, svg);
+    el('text', {x: m.l - 6, y: y(g) + 4, 'text-anchor': 'end'}, svg).textContent = (g * 100) + '%';
+  }
+  for (const t of xTicks) el('text', {x: x(t), y: H - m.b + 16, 'text-anchor': 'middle'}, svg).textContent = xFmt(t);
+  el('text', {x: (m.l + W - m.r) / 2, y: H - 2, 'text-anchor': 'middle'}, svg).textContent = xTitle;
+  for (const s of series) {
+    el('path', {d: s.points.map((p, i) => (i ? 'L' : 'M') + x(p[0]) + ' ' + y(p[1])).join(' '), fill: 'none', stroke: s.color,
+      'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round'}, svg);
+    const last = s.points[s.points.length - 1];
+    if (!s.baseline) el('circle', {cx: x(last[0]), cy: y(last[1]), r: 4, fill: s.color, stroke: 'var(--surface-1)', 'stroke-width': 2}, svg);
+  }
+  // Crosshair snaps to the nearest shared x position and lists every series.
+  const xs = series[0].points.map(p => p[0]);
+  const cross = el('line', {y1: m.t, y2: H - m.b, stroke: 'var(--axis)', 'stroke-width': 1, visibility: 'hidden'}, svg);
+  const dots = series.map(s => el('circle', {r: 4, fill: s.color, stroke: 'var(--surface-1)', 'stroke-width': 2, visibility: 'hidden'}, svg));
+  const hit = el('rect', {x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: 'transparent', tabindex: 0}, svg);
+  const at = (i, evt) => {
+    const xv = xs[i]; cross.setAttribute('x1', x(xv)); cross.setAttribute('x2', x(xv)); cross.setAttribute('visibility', 'visible');
+    const rows = [];
+    series.forEach((s, k) => { const p = s.points.find(q => q[0] === xv); if (!p) { dots[k].setAttribute('visibility', 'hidden'); return; }
+      dots[k].setAttribute('cx', x(p[0])); dots[k].setAttribute('cy', y(p[1])); dots[k].setAttribute('visibility', 'visible');
+      rows.push({value: pct(p[1]), name: s.name, color: s.color}); });
+    rows.sort((a, b) => parseFloat(b.value) - parseFloat(a.value));
+    showTip(evt, tipTitle(xv), rows);
+  };
+  let focusIndex = xs.length - 1;
+  hit.addEventListener('pointermove', evt => {
+    const px = evt.offsetX, v = (px - m.l) / (W - m.l - m.r) * xMax;
+    let best = 0; xs.forEach((q, i) => { if (Math.abs(q - v) < Math.abs(xs[best] - v)) best = i; });
+    focusIndex = best; at(best, evt);
+  });
+  const clear = () => { hideTip(); cross.setAttribute('visibility', 'hidden'); dots.forEach(d => d.setAttribute('visibility', 'hidden')); };
+  hit.addEventListener('pointerleave', clear); hit.addEventListener('blur', clear);
+  const keyAt = () => { const r = hit.getBoundingClientRect(); at(focusIndex, {clientX: r.left + x(xs[focusIndex]) - m.l, clientY: r.top + 20}); };
+  hit.addEventListener('focus', keyAt);
+  hit.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+    focusIndex = Math.max(0, Math.min(xs.length - 1, focusIndex + (e.key === 'ArrowRight' ? 1 : -1))); keyAt(); e.preventDefault(); } });
+  // Direct end labels only when they do not collide; the legend always carries identity.
+  const ends = series.filter(s => !s.baseline).map(s => ({s, yy: y(s.points[s.points.length - 1][1])}));
+  const clash = ends.some((a, i) => ends.some((b, j) => i < j && Math.abs(a.yy - b.yy) < 14));
+  if (!clash) for (const {s, yy} of ends) {
+    const last = s.points[s.points.length - 1];
+    el('text', {x: x(last[0]) - 8, y: yy - 9, 'text-anchor': 'end', class: 'lbl'}, svg).textContent = pct(last[1]);
+  }
+}
+
+function roundedBar(x0, y0, w, hgt, r, side) {
+  // Rounded data-end only; the baseline end stays square.
+  r = Math.min(r, w / 2, hgt / 2);
+  if (side === 'right') return `M${x0},${y0}H${x0 + w - r}Q${x0 + w},${y0} ${x0 + w},${y0 + r}V${y0 + hgt - r}Q${x0 + w},${y0 + hgt} ${x0 + w - r},${y0 + hgt}H${x0}Z`;
+  return `M${x0},${y0 + hgt}V${y0 + r}Q${x0},${y0} ${x0 + r},${y0}H${x0 + w - r}Q${x0 + w},${y0} ${x0 + w},${y0 + r}V${y0 + hgt}Z`;
+}
+function hover(node, title, rows) {
+  node.setAttribute('tabindex', 0); node.classList.add('mark');
+  node.addEventListener('pointermove', e => showTip(e, title, rows));
+  node.addEventListener('focus', e => { const r = node.getBoundingClientRect(); showTip({clientX: r.left + r.width / 2, clientY: r.top}, title, rows); });
+  node.addEventListener('pointerleave', hideTip); node.addEventListener('blur', hideTip);
+}
+
+function stackedBars(id, rows, parts) {
+  const host = document.getElementById(id); host.replaceChildren();
+  const W = host.clientWidth, labelW = 110, bar = 24, gap = 26, H = rows.length * (bar + gap) + 26;
+  const svg = el('svg', {width: W, height: H}, host);
+  const x = v => labelW + (W - labelW - 12) * v;
+  for (const g of [0, .25, .5, .75, 1]) {
+    el('line', {x1: x(g), x2: x(g), y1: 4, y2: H - 22, stroke: g ? 'var(--grid)' : 'var(--axis)'}, svg);
+    el('text', {x: x(g), y: H - 6, 'text-anchor': 'middle'}, svg).textContent = (g * 100) + '%';
+  }
+  rows.forEach((row, i) => {
+    const yy = 10 + i * (bar + gap);
+    el('text', {x: 0, y: yy + bar / 2 + 4, class: 'lbl'}, svg).textContent = row.name;
+    let acc = 0;
+    parts.forEach((p, k) => {
+      const v = row.values[k], x0 = x(acc) + (k ? 1 : 0), w = Math.max(0, x(acc + v) - x(acc) - (k ? 1 : 0) - (k < parts.length - 1 ? 1 : 0));
+      const node = el('path', {d: roundedBar(x0, yy, w, bar, k === parts.length - 1 ? 4 : 0, 'right'), fill: p.color}, svg);
+      hover(node, row.name, [{value: pct(v), name: p.name, color: p.color}]);
+      // Inline label only when it fits with padding; otherwise the tooltip and table carry it.
+      if (w > 52) el('text', {x: x0 + w / 2, y: yy + bar / 2 + 4, 'text-anchor': 'middle', style: `fill:${p.ink};font-size:12px`, 'pointer-events': 'none'}, svg).textContent = pct(v);
+      acc += v;
+    });
+  });
+}
+
+function groupedColumns(id, groups, series, labelSeries) {
+  const host = document.getElementById(id); host.replaceChildren();
+  const W = host.clientWidth, H = 240, m = {l: 40, r: 8, t: 18, b: 34}, bw = 22;
+  const svg = el('svg', {width: W, height: H}, host);
+  const y = v => H - m.b - (H - m.t - m.b) * v, band = (W - m.l - m.r) / groups.length;
+  for (const g of [0, .25, .5, .75, 1]) {
+    el('line', {x1: m.l, x2: W - m.r, y1: y(g), y2: y(g), stroke: g ? 'var(--grid)' : 'var(--axis)'}, svg);
+    el('text', {x: m.l - 6, y: y(g) + 4, 'text-anchor': 'end'}, svg).textContent = (g * 100) + '%';
+  }
+  groups.forEach((grp, i) => {
+    const total = series.length * bw + (series.length - 1) * 2, start = m.l + band * i + (band - total) / 2;
+    el('text', {x: m.l + band * (i + .5), y: H - m.b + 18, 'text-anchor': 'middle', class: 'lbl'}, svg).textContent = grp.name;
+    series.forEach((s, k) => {
+      const v = grp.values[k], x0 = start + k * (bw + 2);
+      const node = el('path', {d: roundedBar(x0, y(v), bw, y(0) - y(v), 4, 'top'), fill: s.color}, svg);
+      hover(node, grp.name, series.map((t, j) => ({value: pct(grp.values[j]), name: t.name, color: t.color})));
+      if (k === labelSeries) el('text', {x: x0 + bw / 2, y: y(v) - 6, 'text-anchor': 'middle', class: 'lbl'}, svg).textContent = pct(v, 1);
+    });
+  });
+}
+
+function tile(label, value, delta, note) {
+  const c = h('div', null, 'card tile');
+  c.appendChild(h('div', label, 'label')); c.appendChild(h('div', value, 'value'));
+  if (delta) c.appendChild(h('div', delta.text, 'delta' + (delta.up ? ' up' : '')));
+  if (note) c.appendChild(h('div', note, 'muted'));
+  return c;
+}
+
+function render() {
+  const L = DATA.languages[lang], d = L.default, b = L.backoff, cmp = DATA.comparison[lang];
+  document.querySelectorAll('#lang button').forEach(btn => btn.setAttribute('aria-pressed', btn.dataset.lang === lang));
+
+  const noTyping = r => r.suggestion_acceptance + r.one_click_fix;
+  const tiles = document.getElementById('tiles'); tiles.replaceChildren();
+  const hero = h('div', null, 'card hero');
+  hero.appendChild(h('div', 'Words that need no typing', 'label'));
+  hero.appendChild(h('div', pct(noTyping(b), 0), 'value'));
+  hero.appendChild(h('div', `${pts(noTyping(b) - noTyping(d))} vs default engine`, 'delta up'));
+  hero.appendChild(h('div', `Accepted as-is (${pct(b.suggestion_acceptance)}) or picked from the candidate list (${pct(b.one_click_fix)}), over ${b.words.toLocaleString()} words in ${b.sentences.toLocaleString()} sentences.`, 'muted'));
+  tiles.appendChild(hero);
+  const c20 = b.triage.budgets['20%'];
+  tiles.appendChild(tile('Suggestions that are right', pct(b.precision_when_suggesting), null, 'When the model shows a gloss rather than leaving it blank'));
+  tiles.appendChild(tile('Teach once, reuse', pct(b.teach_once_reuse), null, 'Later uses of a taught word glossed correctly'));
+  tiles.appendChild(tile('Errors caught in top 20% of review', pct(c20), null, `About ${(c20 / 0.2).toFixed(1)}× a random 20% sample`));
+  tiles.appendChild(tile('Unseen-word accuracy', pct(cmp['rules+backoff'].oov_accuracy),
+    {text: `${pts(cmp['rules+backoff'].oov_accuracy - cmp.rules.oov_accuracy)} vs default`, up: true}, 'Dev set'));
+  const m70 = r => r.sentences_until_rolling_acceptance['70%'];
+  tiles.appendChild(tile('Sentences to reach 70% acceptance', m70(b) ? m70(b).toLocaleString() : 'not reached',
+    m70(d) && m70(b) ? {text: `vs ${m70(d).toLocaleString()} default (${Math.round(100 * (1 - m70(b) / m70(d)))}% fewer)`, up: m70(b) < m70(d)} : null, 'Rolling 50-sentence window'));
+  tiles.appendChild(tile('Response time per sentence', `${b.predict_ms_p95.toFixed(2)} ms`, null, 'p95 prediction; corrections apply in under 1 ms'));
+
+  // A: learning curve
+  const curveSeries = [{name: MODELS.default.name, color: MODELS.default.color, points: d.curve},
+                       {name: MODELS.backoff.name, color: MODELS.backoff.color, points: b.curve}];
+  legend('legA', curveSeries);
+  const xMax = d.curve[d.curve.length - 1][0], step = xMax > 800 ? 250 : 100;
+  const xticks = []; for (let t = 0; t <= xMax; t += step) xticks.push(t);
+  lineChart('chartA', {series: curveSeries, xMax, xTicks: xticks, xFmt: String, xTitle: 'Sentences taught', label: 'Suggestion acceptance by sentences taught; values in table below', tipTitle: v => `After ${v} sentences`});
+  table('tableA', ['Sentences taught', MODELS.default.name, MODELS.backoff.name],
+        d.curve.map((p, i) => [String(p[0]), pct(p[1]), pct(b.curve[i][1])]));
+
+  // B: effort per word (ordered: no effort -> click -> typing)
+  // Ordinal ramp: darkest = least effort. Ink inside each fill follows its luminance in this mode.
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  const inks = dark ? ['#0b0b0b', '#ffffff', '#ffffff'] : ['#ffffff', '#ffffff', '#0b0b0b'];
+  const parts = [{name: 'Accepted as-is', color: 'var(--ord-1)', ink: inks[0]},
+                 {name: 'Picked from list', color: 'var(--ord-2)', ink: inks[1]},
+                 {name: 'Typed', color: 'var(--ord-3)', ink: inks[2]}];
+  legend('legB', parts, 'rect');
+  const effort = [{name: MODELS.default.name, values: [d.suggestion_acceptance, d.one_click_fix, d.typed_from_scratch]},
+                  {name: MODELS.backoff.name, values: [b.suggestion_acceptance, b.one_click_fix, b.typed_from_scratch]}];
+  stackedBars('chartB', effort, parts);
+  table('tableB', ['Engine', ...parts.map(p => p.name), 'Characters not typed'],
+        effort.map((r, i) => [r.name, ...r.values.map(v => pct(v)), pct([d, b][i].typing_saved_chars)]));
+
+  // C: review triage
+  const budgets = ['10%', '20%', '30%', '50%'], toPts = t => [[0, 0], ...budgets.map(k => [parseInt(k), t[k]]), [100, 1]];
+  const triage = [{name: 'Review order, default', color: MODELS.default.color, points: toPts(d.triage.budgets)},
+                  {name: 'Review order, backoff', color: MODELS.backoff.color, points: toPts(b.triage.budgets)},
+                  {name: 'Random order (expected)', color: 'var(--text-muted)', baseline: true, points: [[0, 0], ...budgets.map(k => [parseInt(k), parseInt(k) / 100]), [100, 1]]}];
+  legend('legC', triage);
+  lineChart('chartC', {series: triage, xMax: 100, xTicks: [0, 10, 20, 30, 50, 100], xFmt: v => v + '%', xTitle: 'Words reviewed', label: 'Errors found by share of words reviewed; values in table below',
+                       tipTitle: v => `Reviewing ${v}% of words`});
+  table('tableC', ['Words reviewed', 'Default', 'Backoff', 'Random (measured, default)'],
+        budgets.map(k => [k, pct(d.triage.budgets[k]), pct(b.triage.budgets[k]), pct(d.triage.random[k])]));
+
+  // D: improvement comparison
+  const models = [{name: 'Default', color: MODELS.default.color, key: 'rules'},
+                  {name: 'With backoff', color: MODELS.backoff.color, key: 'rules+backoff'},
+                  {name: 'With guess_unknown', color: MODELS.guess.color, key: 'rules+guess'}];
+  const metrics = [['Word exact', 'word_accuracy'], ['Unseen words', 'oov_accuracy'], ['Right when suggesting', 'precision_when_suggesting']];
+  legend('legD', models, 'rect');
+  groupedColumns('chartD', metrics.map(([name, k]) => ({name, values: models.map(mm => cmp[mm.key][k])})), models, 1);
+  table('tableD', ['Metric', ...models.map(mm => mm.name)], metrics.map(([name, k]) => [name, ...models.map(mm => pct(cmp[mm.key][k]))]));
+}
+
+function renderRepro() {
+  const t = h('table'); const head = h('tr');
+  ['Track', 'Split', 'Metric', 'Committed', 'Reproduced', 'Status'].forEach((c, i) => head.appendChild(h('th', c, i > 2 && i < 5 ? 'num' : '')));
+  t.appendChild(head);
+  for (const r of DATA.repro) {
+    const tr = h('tr');
+    const same = r.committed != null && Math.abs(r.committed - r.reproduced) < 1e-12;
+    [r.track, r.split, r.metric].forEach(c => tr.appendChild(h('td', c)));
+    tr.appendChild(h('td', r.committed == null ? '—' : pct(r.committed), 'num'));
+    tr.appendChild(h('td', pct(r.reproduced), 'num'));
+    tr.appendChild(h('td', r.committed == null ? 'New baseline' : same ? '✓ Exact match' : '✗ Differs', same ? 'ok' : ''));
+    t.appendChild(tr);
+  }
+  document.getElementById('repro').replaceChildren(t);
+}
+
+if (location.hash === '#light' || location.hash === '#dark') document.documentElement.dataset.theme = location.hash.slice(1);
+const seg = document.getElementById('lang');
+for (const name of Object.keys(DATA.languages)) {
+  const btn = h('button', name); btn.type = 'button'; btn.dataset.lang = name;
+  btn.addEventListener('click', () => { lang = name; render(); }); seg.appendChild(btn);
+}
+document.getElementById('theme').addEventListener('click', () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark'; render();
+});
+let timer; window.addEventListener('resize', () => { clearTimeout(timer); timer = setTimeout(render, 120); });
+renderRepro(); render();
+</script>
+</body>
+</html>

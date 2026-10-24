@@ -1,0 +1,4 @@
+lexicon: lemma 74.8%; POS 66.9%; joint 64.9%; OOV joint 0.0%
+affix: lemma 87.7%; POS 88.0%; joint 78.5%; OOV joint 44.7%
+Excluded 0 training-source overlaps; saved reports/hackathon/repro/turkish-imst-test.json
+$P -m decipher.app corpus evaluate --train  --eval  --split test --output   2.84s user 0.04s system 99% cpu 2.903 total

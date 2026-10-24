@@ -1,0 +1,647 @@
+{
+  "task": "Word-aligned, source-only interlinear gloss prediction; no translations or gold segmentation as input.",
+  "split": "dev",
+  "training": {
+    "path": "data/glossing/lezgi/lez-train-track1-uncovered",
+    "sha256": "aefe3a8da0719d52122c3d534beb0d384bb8d536649e9c7a022aef41b5e80aa0"
+  },
+  "evaluation": {
+    "path": "data/glossing/lezgi/lez-dev-track1-uncovered",
+    "sha256": "2f6c2b959d85ab17a3736bb16a57698023aee38f6f4a332b1340005c035e9034"
+  },
+  "filters": {
+    "training_reader": {
+      "records_read": 634,
+      "misaligned": 0,
+      "missing_gloss": 0
+    },
+    "evaluation_reader": {
+      "records_read": 88,
+      "misaligned": 0,
+      "missing_gloss": 0
+    },
+    "source_overlaps_excluded": 0,
+    "source_overlap_ids_excluded": []
+  },
+  "training_sentences": 634,
+  "training_words": 6250,
+  "config": {
+    "max_rules": 512,
+    "paradigm_window": 32,
+    "source_only": true,
+    "gold_segmentation": false,
+    "translation_input": false
+  },
+  "models": {
+    "memory": {
+      "counts": {
+        "sentences": 88,
+        "words": 992,
+        "correct": 681,
+        "covered": 770,
+        "top5_correct": 719,
+        "nonpunct_words": 710,
+        "nonpunct_correct": 400,
+        "oov_words": 222,
+        "oov_correct": 0,
+        "grounded_oov_words": 119,
+        "grounded_oov_correct": 0,
+        "ungrounded_or_grammatical_oov_words": 103,
+        "ungrounded_or_grammatical_oov_correct": 0,
+        "correct_sentences": 6
+      },
+      "word_accuracy": 0.686491935483871,
+      "sentence_accuracy": 0.06818181818181818,
+      "coverage": 0.7762096774193549,
+      "top5_accuracy": 0.7247983870967742,
+      "oov_accuracy": 0.0,
+      "nonpunct_accuracy": 0.5633802816901409,
+      "grounded_oov_accuracy": 0.0,
+      "errors": [
+        {
+          "id": "lez-dev-track1-uncovered:1",
+          "source_word": "инсанрин",
+          "expected": "man-ERG-GEN",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:1",
+          "source_word": "арада",
+          "expected": "between-INESS",
+          "predicted": "among-INESS",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:1",
+          "source_word": "гьатда",
+          "expected": "enter.FUT-FUT",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:1",
+          "source_word": "кьисметда",
+          "expected": "fate-INESS",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "Бес",
+          "expected": "And.but",
+          "predicted": "but",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "гьабурун",
+          "expected": "them-ERG-GEN",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "хъфена",
+          "expected": "returned-AOR",
+          "predicted": "go-AOR",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "кӀанда",
+          "expected": "want-ENT",
+          "predicted": "want-FUT",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "хъфин",
+          "expected": "go.back.HORT",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:4",
+          "source_word": "Ашкъи",
+          "expected": "love",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:5",
+          "source_word": "Вучиз",
+          "expected": "what-DAT",
+          "predicted": "what-ERG-DAT",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:5",
+          "source_word": "хьана",
+          "expected": "be-AOR",
+          "predicted": "happened-AOR",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "Хъсан",
+          "expected": "good",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "тостар",
+          "expected": "toasts-PL",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "разивилер",
+          "expected": "agreements-PL",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "хьана",
+          "expected": "be-AOR",
+          "predicted": "happened-AOR",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "мерекадилай",
+          "expected": "event.from-OBL-SUPER-EL",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "амукьна",
+          "expected": "remain-AOR",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:7",
+          "source_word": "Чукотка",
+          "expected": "Chukotka",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:7",
+          "source_word": "къийи",
+          "expected": "cold",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:7",
+          "source_word": "чка",
+          "expected": "place",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:7",
+          "source_word": "мекьи",
+          "expected": "cold",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:7",
+          "source_word": "чка",
+          "expected": "place",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:8",
+          "source_word": "Натаван",
+          "expected": "Natavan",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:8",
+          "source_word": ").",
+          "expected": ").",
+          "predicted": null,
+          "oov": true
+        }
+      ],
+      "rules_considered": 512
+    },
+    "analogy": {
+      "counts": {
+        "sentences": 88,
+        "words": 992,
+        "correct": 693,
+        "covered": 992,
+        "top5_correct": 731,
+        "nonpunct_words": 710,
+        "nonpunct_correct": 412,
+        "oov_words": 222,
+        "oov_correct": 12,
+        "grounded_oov_words": 119,
+        "grounded_oov_correct": 12,
+        "ungrounded_or_grammatical_oov_words": 103,
+        "ungrounded_or_grammatical_oov_correct": 0,
+        "correct_sentences": 6
+      },
+      "word_accuracy": 0.6985887096774194,
+      "sentence_accuracy": 0.06818181818181818,
+      "coverage": 1.0,
+      "top5_accuracy": 0.7368951612903226,
+      "oov_accuracy": 0.05405405405405406,
+      "nonpunct_accuracy": 0.5802816901408451,
+      "grounded_oov_accuracy": 0.10084033613445378,
+      "errors": [
+        {
+          "id": "lez-dev-track1-uncovered:1",
+          "source_word": "инсанрин",
+          "expected": "man-ERG-GEN",
+          "predicted": "man",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:1",
+          "source_word": "арада",
+          "expected": "between-INESS",
+          "predicted": "among-INESS",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:1",
+          "source_word": "гьатда",
+          "expected": "enter.FUT-FUT",
+          "predicted": "she",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:1",
+          "source_word": "кьисметда",
+          "expected": "fate-INESS",
+          "predicted": "a.story",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "Бес",
+          "expected": "And.but",
+          "predicted": "but",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "гьабурун",
+          "expected": "them-ERG-GEN",
+          "predicted": "them",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "хъфена",
+          "expected": "returned-AOR",
+          "predicted": "go-AOR",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "кӀанда",
+          "expected": "want-ENT",
+          "predicted": "want-FUT",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "хъфин",
+          "expected": "go.back.HORT",
+          "predicted": "go-MSD",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:4",
+          "source_word": "Ашкъи",
+          "expected": "love",
+          "predicted": "love-ERG-GEN",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:5",
+          "source_word": "Вучиз",
+          "expected": "what-DAT",
+          "predicted": "what-ERG-DAT",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:5",
+          "source_word": "хьана",
+          "expected": "be-AOR",
+          "predicted": "happened-AOR",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "тостар",
+          "expected": "toasts-PL",
+          "predicted": "waters-PL",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "разивилер",
+          "expected": "agreements-PL",
+          "predicted": "eye-PL",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "хьана",
+          "expected": "be-AOR",
+          "predicted": "happened-AOR",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "мерекадилай",
+          "expected": "event.from-OBL-SUPER-EL",
+          "predicted": "bank-DIR-SPSS-EL",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "амукьна",
+          "expected": "remain-AOR",
+          "predicted": "pass.on-AOC",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:7",
+          "source_word": "Чукотка",
+          "expected": "Chukotka",
+          "predicted": "Chukotka-INESS",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:7",
+          "source_word": "къийи",
+          "expected": "cold",
+          "predicted": "old.woman",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:7",
+          "source_word": "чка",
+          "expected": "place",
+          "predicted": "place-INELAT",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:7",
+          "source_word": "мекьи",
+          "expected": "cold",
+          "predicted": "teacher",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:7",
+          "source_word": "чка",
+          "expected": "place",
+          "predicted": "place-INELAT",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:8",
+          "source_word": "Натаван",
+          "expected": "Natavan",
+          "predicted": "young",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:8",
+          "source_word": ").",
+          "expected": ").",
+          "predicted": ")",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:9",
+          "source_word": "Абуру",
+          "expected": "they-ERG",
+          "predicted": "they",
+          "oov": true
+        }
+      ],
+      "rules_considered": 512
+    },
+    "rules": {
+      "counts": {
+        "sentences": 88,
+        "words": 992,
+        "correct": 716,
+        "covered": 845,
+        "top5_correct": 764,
+        "nonpunct_words": 710,
+        "nonpunct_correct": 435,
+        "oov_words": 222,
+        "oov_correct": 35,
+        "grounded_oov_words": 119,
+        "grounded_oov_correct": 33,
+        "ungrounded_or_grammatical_oov_words": 103,
+        "ungrounded_or_grammatical_oov_correct": 2,
+        "correct_sentences": 10
+      },
+      "word_accuracy": 0.7217741935483871,
+      "sentence_accuracy": 0.11363636363636363,
+      "coverage": 0.8518145161290323,
+      "top5_accuracy": 0.7701612903225806,
+      "oov_accuracy": 0.15765765765765766,
+      "nonpunct_accuracy": 0.6126760563380281,
+      "grounded_oov_accuracy": 0.2773109243697479,
+      "errors": [
+        {
+          "id": "lez-dev-track1-uncovered:1",
+          "source_word": "инсанрин",
+          "expected": "man-ERG-GEN",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:1",
+          "source_word": "арада",
+          "expected": "between-INESS",
+          "predicted": "among-INESS",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:1",
+          "source_word": "гьатда",
+          "expected": "enter.FUT-FUT",
+          "predicted": "enter-FUT",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:1",
+          "source_word": "кьисметда",
+          "expected": "fate-INESS",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "Бес",
+          "expected": "And.but",
+          "predicted": "but",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "гьабурун",
+          "expected": "them-ERG-GEN",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "хъфена",
+          "expected": "returned-AOR",
+          "predicted": "go-AOR",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "кӀанда",
+          "expected": "want-ENT",
+          "predicted": "want-FUT",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:3",
+          "source_word": "хъфин",
+          "expected": "go.back.HORT",
+          "predicted": "leave.FUT-MSD",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:5",
+          "source_word": "Вучиз",
+          "expected": "what-DAT",
+          "predicted": "what-ERG-DAT",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:5",
+          "source_word": "хьана",
+          "expected": "be-AOR",
+          "predicted": "happened-AOR",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "Хъсан",
+          "expected": "good",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "тостар",
+          "expected": "toasts-PL",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "разивилер",
+          "expected": "agreements-PL",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "хьана",
+          "expected": "be-AOR",
+          "predicted": "happened-AOR",
+          "oov": false
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "мерекадилай",
+          "expected": "event.from-OBL-SUPER-EL",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:6",
+          "source_word": "амукьна",
+          "expected": "remain-AOR",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:7",
+          "source_word": "къийи",
+          "expected": "cold",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:7",
+          "source_word": "мекьи",
+          "expected": "cold",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:8",
+          "source_word": "Натаван",
+          "expected": "Natavan",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:8",
+          "source_word": ").",
+          "expected": ").",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:9",
+          "source_word": "лайих",
+          "expected": "worthy",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:10",
+          "source_word": "бубадини",
+          "expected": "grandfather-DIR-FOC",
+          "predicted": "father-ERG-FOC",
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:10",
+          "source_word": "муькуьбуруни",
+          "expected": "others.and-ERG-FOC",
+          "predicted": null,
+          "oov": true
+        },
+        {
+          "id": "lez-dev-track1-uncovered:10",
+          "source_word": "муькуь",
+          "expected": "other.one",
+          "predicted": null,
+          "oov": true
+        }
+      ],
+      "rules_considered": 512
+    }
+  },
+  "manifest_sha256": "2c6c25734ffe074a6f8acfd0ea20f14f933fcc110fb0950b5e10483e920b5735"
+}

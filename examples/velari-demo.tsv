@@ -1,0 +1,80 @@
+tal	tree
+mir	bird
+vel	flower
+kor	dog
+sena	child
+dun	river
+pira	stone
+lom	house
+faru	fish
+zek	mountain
+vosa	see-PRS
+kela	chase-PRS
+mara	find-PRS
+tuna	carry-PRS
+sila	hear-PRS
+baka	touch-PRS
+talum	tree-PL
+talek	tree-ERG
+talsa	tree-LOC
+talumek	tree-PL-ERG
+mirum	bird-PL
+mirek	bird-ERG
+mirsa	bird-LOC
+mirumek	bird-PL-ERG
+vosta	see-PST
+vosni	see-FUT
+kelta	chase-PST
+kelni	chase-FUT
+piraek dunsa vel marta	stone-ERG river-LOC flower find-PST
+dunek senaumsa faru bakta	river-ERG child-PL-LOC fish touch-PST
+senaek faru vosta	child-ERG fish see-PST
+zekek sena kela	mountain-ERG child chase-PRS
+velek korsa zekum tunta	flower-ERG dog-LOC mountain-PL carry-PST
+korek lomum bakta	dog-ERG house-PL touch-PST
+faruek talum marni	fish-ERG tree-PL find-FUT
+zekumek lomsa lom tunni	mountain-PL-ERG house-LOC house carry-FUT
+velumek talum tuna	flower-PL-ERG tree-PL carry-PRS
+faruumek pirasa talum bakta	fish-PL-ERG stone-LOC tree-PL touch-PST
+faruumek piraumsa zekum baka	fish-PL-ERG stone-PL-LOC mountain-PL touch-PRS
+mirumek faru vosta	bird-PL-ERG fish see-PST
+mirumek senaumsa dunum mara	bird-PL-ERG child-PL-LOC river-PL find-PRS
+zekek lomum kelta	mountain-ERG house-PL chase-PST
+lomumek talsa korum silta	house-PL-ERG tree-LOC dog-PL hear-PST
+mirek velum vosni	bird-ERG flower-PL see-FUT
+piraumek kor kela	stone-PL-ERG dog chase-PRS
+lomek zeksa mirum baka	house-ERG mountain-LOC bird-PL touch-PRS
+senaumek pira vosta	child-PL-ERG stone see-PST
+zekek velum silni	mountain-ERG flower-PL hear-FUT
+senaek sena kela	child-ERG child chase-PRS
+lomumek pirasa faru tuna	house-PL-ERG stone-LOC fish carry-PRS
+velek zek baka	flower-ERG mountain touch-PRS
+zekumek mirumsa zekum sila	mountain-PL-ERG bird-PL-LOC mountain-PL hear-PRS
+faruumek talum silni	fish-PL-ERG tree-PL hear-FUT
+faruek piraumsa tal tuna	fish-ERG stone-PL-LOC tree carry-PRS
+lomumek velsa velum vosa	house-PL-ERG flower-LOC flower-PL see-PRS
+mirumek pira tunta	bird-PL-ERG stone carry-PST
+velumek zek kelni	flower-PL-ERG mountain chase-FUT
+lomek pira bakni	house-ERG stone touch-FUT
+talumek zekumsa talum mara	tree-PL-ERG mountain-PL-LOC tree-PL find-PRS
+lomek lomumsa lomum tunta	house-ERG house-PL-LOC house-PL carry-PST
+Dunumek pira vosa
+korumek faruumsa tal vosa.
+korumek senaum sila
+Piraumek pirasa piraum silta
+dunumek talumsa sena baka
+mirumek velumsa pira mara.
+Korumek mir vosa
+talek velumsa mir bakta
+korumek dunumsa dun bakta
+Senaek heskum bakta.
+senaumek senaum vosa
+lomumek korumsa pira kela
+Korumek mirum marta
+dunek farusa sena sila.
+korumek faru vosta
+Zekek velumsa vel tunta
+dunek faruum silta
+faruumek faruumsa lom kelta.
+Talumek faruum vosni
+dunek groviumsa korum tunta

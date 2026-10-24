@@ -1,0 +1,4 @@
+memory: 68.2% word exact; OOV 0.0
+analogy: 71.3% word exact; OOV 0.15948275862068967
+rules: 75.1% word exact; OOV 0.35237068965517243
+$P -m decipher.app gloss evaluate --train $G/tsez/ddo-train-track1-uncovered   2.19s user 0.09s system 98% cpu 2.305 total

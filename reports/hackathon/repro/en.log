@@ -1,0 +1,4 @@
+lexicon: lemma 95.1%; POS 85.8%; joint 80.0%; OOV joint 13.9%
+affix: lemma 95.8%; POS 92.3%; joint 88.6%; OOV joint 56.3%
+Excluded 94 training-source overlaps; saved reports/hackathon/repro/english-ewt-test.json
+$P -m decipher.app corpus evaluate --train  --eval  --split test --output   4.05s user 0.06s system 99% cpu 4.129 total

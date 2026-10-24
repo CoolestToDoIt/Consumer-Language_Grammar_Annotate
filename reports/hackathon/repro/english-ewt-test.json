@@ -1,0 +1,1394 @@
+{
+  "algorithm_id": "count-affix-v1",
+  "environment": {
+    "python": "3.13.1",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O"
+  },
+  "task": "Supervised word lemmatization, POS and morphological feature prediction; not translation.",
+  "protocol": "Frozen model; evaluation receives tokens only; exact NFC token-sequence overlaps with training are excluded; supplied syntactic-word segmentation; punctuation included with nonpunctuation scores reported separately.",
+  "split": "test",
+  "training": {
+    "path": "data/corpora/english-ewt/en_ewt-ud-train.conllu",
+    "sha256": "a049fc40822e21593ff89ccd0a4b081443f09fae71b61f813c624aa598f6c566"
+  },
+  "evaluation": {
+    "path": "data/corpora/english-ewt/en_ewt-ud-test.conllu",
+    "sha256": "0612e45914359e4b36d187ef2bfeaf66fc8933210925be985c5fbf6a9e311036"
+  },
+  "training_sentences": 12544,
+  "training_tokens": 204444,
+  "training_labels": "All available training annotations; no pretraining or external lexicon.",
+  "evaluation_sentences_read": 2077,
+  "excluded_train_overlap_sentences": 94,
+  "limit_train": null,
+  "limit_eval": null,
+  "training_seconds": 3.0982165000023087,
+  "models": {
+    "lexicon": {
+      "counts": {
+        "sentences": 1983,
+        "tokens": 24929,
+        "oov_tokens": 2292,
+        "covered_tokens": 24929,
+        "joint_total": 24914,
+        "joint_correct": 19938,
+        "nonpunct_joint_total": 21869,
+        "nonpunct_joint_correct": 16936,
+        "lemma_total": 24914,
+        "lemma_correct": 23705,
+        "upos_total": 24929,
+        "upos_correct": 21396,
+        "feats_total": 24929,
+        "feats_correct": 21756,
+        "oov_joint_total": 2285,
+        "oov_joint_correct": 317,
+        "oov_lemma_total": 2285,
+        "oov_lemma_correct": 1492,
+        "oov_upos_total": 2292,
+        "oov_upos_correct": 706,
+        "oov_feats_total": 2292,
+        "oov_feats_correct": 1250,
+        "sentence_total": 1968,
+        "sentence_correct": 318
+      },
+      "coverage": 1.0,
+      "joint_accuracy": 0.8002729389098499,
+      "seen_joint_accuracy": 0.8670732246232711,
+      "nonpunct_joint_accuracy": 0.774429557821574,
+      "sentence_exact_accuracy": 0.16158536585365854,
+      "oov_joint_accuracy": 0.1387308533916849,
+      "lemma_accuracy": 0.9514730673516898,
+      "oov_lemma_accuracy": 0.6529540481400438,
+      "upos_accuracy": 0.8582775081230695,
+      "oov_upos_accuracy": 0.3080279232111693,
+      "feats_accuracy": 0.8727185205984997,
+      "oov_feats_accuracy": 0.5453752181500873,
+      "feature_micro_f1": 0.854265058767787,
+      "feature_counts": {
+        "tp": 27946,
+        "fp": 3588,
+        "fn": 5947
+      },
+      "prediction_seconds": 0.38786088769847993,
+      "errors": [
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0001",
+          "token_index": 3,
+          "form": "Morphed",
+          "oov": true,
+          "expected": {
+            "lemma": "morph",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "Morphed",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0001",
+          "token_index": 5,
+          "form": "GoogleOS",
+          "oov": true,
+          "expected": {
+            "lemma": "GoogleOS",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "GoogleOS",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0002",
+          "token_index": 3,
+          "form": "expanded",
+          "oov": false,
+          "expected": {
+            "lemma": "expand",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "expand",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0002",
+          "token_index": 14,
+          "form": "wares",
+          "oov": true,
+          "expected": {
+            "lemma": "wares",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Ptan"
+            ]
+          },
+          "predicted": {
+            "lemma": "wares",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0002",
+          "token_index": 17,
+          "form": "full",
+          "oov": false,
+          "expected": {
+            "lemma": "full",
+            "upos": "ADV",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "full",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0002",
+          "token_index": 19,
+          "form": "fledged",
+          "oov": true,
+          "expected": {
+            "lemma": "fledged",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          },
+          "predicted": {
+            "lemma": "fledged",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0003",
+          "token_index": 3,
+          "form": "Watch",
+          "oov": false,
+          "expected": {
+            "lemma": "Watch",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "watch",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Imp",
+              "VerbForm=Fin"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0003",
+          "token_index": 6,
+          "form": "Jo",
+          "oov": true,
+          "expected": {
+            "lemma": "Jo",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "Jo",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0003",
+          "token_index": 7,
+          "form": "Foley",
+          "oov": true,
+          "expected": {
+            "lemma": "Foley",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "Foley",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0001",
+          "token_index": 13,
+          "form": "nostalgic",
+          "oov": true,
+          "expected": {
+            "lemma": "nostalgic",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          },
+          "predicted": {
+            "lemma": "nostalgic",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0001",
+          "token_index": 17,
+          "form": "when",
+          "oov": false,
+          "expected": {
+            "lemma": "when",
+            "upos": "ADV",
+            "feats": [
+              "PronType=Rel"
+            ]
+          },
+          "predicted": {
+            "lemma": "when",
+            "upos": "ADV",
+            "feats": [
+              "PronType=Int"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0001",
+          "token_index": 18,
+          "form": "that",
+          "oov": false,
+          "expected": {
+            "lemma": "that",
+            "upos": "PRON",
+            "feats": [
+              "Number=Sing",
+              "PronType=Dem"
+            ]
+          },
+          "predicted": {
+            "lemma": "that",
+            "upos": "SCONJ",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 0,
+          "form": "This",
+          "oov": false,
+          "expected": {
+            "lemma": "this",
+            "upos": "DET",
+            "feats": [
+              "Number=Sing",
+              "PronType=Dem"
+            ]
+          },
+          "predicted": {
+            "lemma": "this",
+            "upos": "PRON",
+            "feats": [
+              "Number=Sing",
+              "PronType=Dem"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 1,
+          "form": "BuzzMachine",
+          "oov": true,
+          "expected": {
+            "lemma": "BuzzMachine",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "BuzzMachine",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 3,
+          "form": "argues",
+          "oov": true,
+          "expected": {
+            "lemma": "argue",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "argues",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 7,
+          "form": "rush",
+          "oov": false,
+          "expected": {
+            "lemma": "rush",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "rush",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 11,
+          "form": "backfire",
+          "oov": true,
+          "expected": {
+            "lemma": "backfire",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          },
+          "predicted": {
+            "lemma": "backfire",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 15,
+          "form": "'ve",
+          "oov": false,
+          "expected": {
+            "lemma": "have",
+            "upos": "AUX",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=1",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "have",
+            "upos": "AUX",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=1",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 16,
+          "form": "all",
+          "oov": false,
+          "expected": {
+            "lemma": "all",
+            "upos": "ADV",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "all",
+            "upos": "DET",
+            "feats": [
+              "PronType=Tot"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 18,
+          "form": "before",
+          "oov": false,
+          "expected": {
+            "lemma": "before",
+            "upos": "ADV",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "before",
+            "upos": "SCONJ",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 22,
+          "form": "'s",
+          "oov": false,
+          "expected": {
+            "lemma": "be",
+            "upos": "AUX",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "'s",
+            "upos": "PART",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 26,
+          "form": "put",
+          "oov": false,
+          "expected": {
+            "lemma": "put",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part",
+              "Voice=Pass"
+            ]
+          },
+          "predicted": {
+            "lemma": "put",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0004",
+          "token_index": 3,
+          "form": "it",
+          "oov": false,
+          "expected": {
+            "lemma": "it",
+            "upos": "PRON",
+            "feats": [
+              "Case=Acc",
+              "Gender=Neut",
+              "Number=Sing",
+              "Person=3",
+              "PronType=Prs"
+            ]
+          },
+          "predicted": {
+            "lemma": "it",
+            "upos": "PRON",
+            "feats": [
+              "Case=Nom",
+              "Gender=Neut",
+              "Number=Sing",
+              "Person=3",
+              "PronType=Prs"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0005",
+          "token_index": 1,
+          "form": "own",
+          "oov": false,
+          "expected": {
+            "lemma": "own",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "own",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0005",
+          "token_index": 4,
+          "form": "of",
+          "oov": false,
+          "expected": {
+            "lemma": "of",
+            "upos": "ADP",
+            "feats": [
+              "ExtPos=ADV"
+            ]
+          },
+          "predicted": {
+            "lemma": "of",
+            "upos": "ADP",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0006",
+          "token_index": 1,
+          "form": "that",
+          "oov": false,
+          "expected": {
+            "lemma": "that",
+            "upos": "PRON",
+            "feats": [
+              "Number=Sing",
+              "PronType=Dem"
+            ]
+          },
+          "predicted": {
+            "lemma": "that",
+            "upos": "SCONJ",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_floppingaces_20041126180010_ENG_20041126_180010-0001",
+          "token_index": 1,
+          "form": "doubt",
+          "oov": false,
+          "expected": {
+            "lemma": "doubt",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=1",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "doubt",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_floppingaces_20041126180010_ENG_20041126_180010-0001",
+          "token_index": 7,
+          "form": "read",
+          "oov": false,
+          "expected": {
+            "lemma": "read",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "read",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_floppingaces_20041126180010_ENG_20041126_180010-0001",
+          "token_index": 10,
+          "form": "have",
+          "oov": false,
+          "expected": {
+            "lemma": "have",
+            "upos": "AUX",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "have",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_floppingaces_20041126180010_ENG_20041126_180010-0001",
+          "token_index": 12,
+          "form": "come",
+          "oov": false,
+          "expected": {
+            "lemma": "come",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part"
+            ]
+          },
+          "predicted": {
+            "lemma": "come",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        }
+      ]
+    },
+    "affix": {
+      "counts": {
+        "sentences": 1983,
+        "tokens": 24929,
+        "oov_tokens": 2292,
+        "covered_tokens": 24929,
+        "joint_total": 24914,
+        "joint_correct": 22073,
+        "nonpunct_joint_total": 21869,
+        "nonpunct_joint_correct": 19049,
+        "lemma_total": 24914,
+        "lemma_correct": 23856,
+        "upos_total": 24929,
+        "upos_correct": 23017,
+        "feats_total": 24929,
+        "feats_correct": 23079,
+        "oov_joint_total": 2285,
+        "oov_joint_correct": 1286,
+        "oov_lemma_total": 2285,
+        "oov_lemma_correct": 1554,
+        "oov_upos_total": 2292,
+        "oov_upos_correct": 1515,
+        "oov_feats_total": 2292,
+        "oov_feats_correct": 1679,
+        "sentence_total": 1968,
+        "sentence_correct": 703
+      },
+      "coverage": 1.0,
+      "joint_accuracy": 0.8859677289877177,
+      "seen_joint_accuracy": 0.9186000265146493,
+      "nonpunct_joint_accuracy": 0.8710503452375509,
+      "sentence_exact_accuracy": 0.35721544715447157,
+      "oov_joint_accuracy": 0.562800875273523,
+      "lemma_accuracy": 0.9575339166733563,
+      "oov_lemma_accuracy": 0.6800875273522976,
+      "upos_accuracy": 0.9233021781860484,
+      "oov_upos_accuracy": 0.6609947643979057,
+      "feats_accuracy": 0.9257892414457058,
+      "oov_feats_accuracy": 0.7325479930191972,
+      "feature_micro_f1": 0.9188311204494315,
+      "feature_counts": {
+        "tp": 30830,
+        "fp": 2384,
+        "fn": 3063
+      },
+      "prediction_seconds": 0.22763495847175363,
+      "errors": [
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0001",
+          "token_index": 3,
+          "form": "Morphed",
+          "oov": true,
+          "expected": {
+            "lemma": "morph",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "morph",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part",
+              "Voice=Pass"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0001",
+          "token_index": 5,
+          "form": "GoogleOS",
+          "oov": true,
+          "expected": {
+            "lemma": "GoogleOS",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "googleo",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Plur"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0002",
+          "token_index": 3,
+          "form": "expanded",
+          "oov": false,
+          "expected": {
+            "lemma": "expand",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Past",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "expand",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part",
+              "Voice=Pass"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0002",
+          "token_index": 14,
+          "form": "wares",
+          "oov": true,
+          "expected": {
+            "lemma": "wares",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Ptan"
+            ]
+          },
+          "predicted": {
+            "lemma": "ware",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0002",
+          "token_index": 17,
+          "form": "full",
+          "oov": false,
+          "expected": {
+            "lemma": "full",
+            "upos": "ADV",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "full",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0002",
+          "token_index": 19,
+          "form": "fledged",
+          "oov": true,
+          "expected": {
+            "lemma": "fledged",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          },
+          "predicted": {
+            "lemma": "fledge",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part",
+              "Voice=Pass"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0003",
+          "token_index": 3,
+          "form": "Watch",
+          "oov": false,
+          "expected": {
+            "lemma": "Watch",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "watch",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Imp",
+              "VerbForm=Fin"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_zentelligence_20040423000200_ENG_20040423_000200-0003",
+          "token_index": 6,
+          "form": "Jo",
+          "oov": true,
+          "expected": {
+            "lemma": "Jo",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "jo",
+            "upos": "PART",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0001",
+          "token_index": 13,
+          "form": "nostalgic",
+          "oov": true,
+          "expected": {
+            "lemma": "nostalgic",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          },
+          "predicted": {
+            "lemma": "nostalgic",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0001",
+          "token_index": 17,
+          "form": "when",
+          "oov": false,
+          "expected": {
+            "lemma": "when",
+            "upos": "ADV",
+            "feats": [
+              "PronType=Rel"
+            ]
+          },
+          "predicted": {
+            "lemma": "when",
+            "upos": "ADV",
+            "feats": [
+              "PronType=Int"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0001",
+          "token_index": 18,
+          "form": "that",
+          "oov": false,
+          "expected": {
+            "lemma": "that",
+            "upos": "PRON",
+            "feats": [
+              "Number=Sing",
+              "PronType=Dem"
+            ]
+          },
+          "predicted": {
+            "lemma": "that",
+            "upos": "PRON",
+            "feats": [
+              "PronType=Rel"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 0,
+          "form": "This",
+          "oov": false,
+          "expected": {
+            "lemma": "this",
+            "upos": "DET",
+            "feats": [
+              "Number=Sing",
+              "PronType=Dem"
+            ]
+          },
+          "predicted": {
+            "lemma": "this",
+            "upos": "PRON",
+            "feats": [
+              "Number=Sing",
+              "PronType=Dem"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 1,
+          "form": "BuzzMachine",
+          "oov": true,
+          "expected": {
+            "lemma": "BuzzMachine",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "buzzmachine",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 3,
+          "form": "argues",
+          "oov": true,
+          "expected": {
+            "lemma": "argue",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Sing",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "argue",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Plur"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 7,
+          "form": "rush",
+          "oov": false,
+          "expected": {
+            "lemma": "rush",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "rush",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 11,
+          "form": "backfire",
+          "oov": true,
+          "expected": {
+            "lemma": "backfire",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          },
+          "predicted": {
+            "lemma": "backfire",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 16,
+          "form": "all",
+          "oov": false,
+          "expected": {
+            "lemma": "all",
+            "upos": "ADV",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "all",
+            "upos": "DET",
+            "feats": [
+              "PronType=Tot"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0002",
+          "token_index": 18,
+          "form": "before",
+          "oov": false,
+          "expected": {
+            "lemma": "before",
+            "upos": "ADV",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "before",
+            "upos": "SCONJ",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0005",
+          "token_index": 1,
+          "form": "own",
+          "oov": false,
+          "expected": {
+            "lemma": "own",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "own",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0005",
+          "token_index": 4,
+          "form": "of",
+          "oov": false,
+          "expected": {
+            "lemma": "of",
+            "upos": "ADP",
+            "feats": [
+              "ExtPos=ADV"
+            ]
+          },
+          "predicted": {
+            "lemma": "of",
+            "upos": "ADP",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_marketview_20050511222700_ENG_20050511_222700-0006",
+          "token_index": 1,
+          "form": "that",
+          "oov": false,
+          "expected": {
+            "lemma": "that",
+            "upos": "PRON",
+            "feats": [
+              "Number=Sing",
+              "PronType=Dem"
+            ]
+          },
+          "predicted": {
+            "lemma": "that",
+            "upos": "SCONJ",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_floppingaces_20041126180010_ENG_20041126_180010-0001",
+          "token_index": 7,
+          "form": "read",
+          "oov": false,
+          "expected": {
+            "lemma": "read",
+            "upos": "VERB",
+            "feats": [
+              "Mood=Ind",
+              "Number=Plur",
+              "Person=3",
+              "Tense=Pres",
+              "VerbForm=Fin"
+            ]
+          },
+          "predicted": {
+            "lemma": "read",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_floppingaces_20041126180010_ENG_20041126_180010-0001",
+          "token_index": 12,
+          "form": "come",
+          "oov": false,
+          "expected": {
+            "lemma": "come",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part"
+            ]
+          },
+          "predicted": {
+            "lemma": "come",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_floppingaces_20041126180010_ENG_20041126_180010-0001",
+          "token_index": 14,
+          "form": "this",
+          "oov": false,
+          "expected": {
+            "lemma": "this",
+            "upos": "PRON",
+            "feats": [
+              "Number=Sing",
+              "PronType=Dem"
+            ]
+          },
+          "predicted": {
+            "lemma": "this",
+            "upos": "DET",
+            "feats": [
+              "Number=Sing",
+              "PronType=Dem"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_floppingaces_20041126180010_ENG_20041126_180010-0001",
+          "token_index": 23,
+          "form": "it",
+          "oov": false,
+          "expected": {
+            "lemma": "it",
+            "upos": "PRON",
+            "feats": [
+              "Case=Nom",
+              "Gender=Neut",
+              "Number=Sing",
+              "Person=3",
+              "PronType=Prs"
+            ]
+          },
+          "predicted": {
+            "lemma": "it",
+            "upos": "PRON",
+            "feats": [
+              "Case=Acc",
+              "Gender=Neut",
+              "Number=Sing",
+              "Person=3",
+              "PronType=Prs"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_floppingaces_20041126180010_ENG_20041126_180010-0001",
+          "token_index": 24,
+          "form": "out",
+          "oov": false,
+          "expected": {
+            "lemma": "out",
+            "upos": "ADV",
+            "feats": []
+          },
+          "predicted": {
+            "lemma": "out",
+            "upos": "ADP",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_floppingaces_20041126180010_ENG_20041126_180010-0002",
+          "token_index": 1,
+          "form": "Donovan",
+          "oov": true,
+          "expected": {
+            "lemma": "Donovan",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "donovan",
+            "upos": "ADJ",
+            "feats": [
+              "Degree=Pos"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_floppingaces_20041126180010_ENG_20041126_180010-0002",
+          "token_index": 3,
+          "form": "Argghhh!",
+          "oov": true,
+          "expected": {
+            "lemma": "Argghhh!",
+            "upos": "PROPN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "argghhh!",
+            "upos": "PUNCT",
+            "feats": []
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_floppingaces_20041126180010_ENG_20041126_180010-0002",
+          "token_index": 5,
+          "form": "put",
+          "oov": false,
+          "expected": {
+            "lemma": "put",
+            "upos": "VERB",
+            "feats": [
+              "Tense=Past",
+              "VerbForm=Part"
+            ]
+          },
+          "predicted": {
+            "lemma": "put",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        },
+        {
+          "sentence_id": "weblog-blogspot.com_floppingaces_20041126180010_ENG_20041126_180010-0002",
+          "token_index": 10,
+          "form": "show",
+          "oov": false,
+          "expected": {
+            "lemma": "show",
+            "upos": "NOUN",
+            "feats": [
+              "Number=Sing"
+            ]
+          },
+          "predicted": {
+            "lemma": "show",
+            "upos": "VERB",
+            "feats": [
+              "VerbForm=Inf"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,4 @@
+memory: 68.6% word exact; OOV 0.0
+analogy: 69.9% word exact; OOV 0.05405405405405406
+rules: 72.2% word exact; OOV 0.15765765765765766
+$P -m decipher.app gloss evaluate --train $G/lezgi/lez-train-track1-uncovered  0.23s user 0.05s system 96% cpu 0.291 total
