@@ -67,7 +67,7 @@ class BulkGlossTests(unittest.TestCase):
         for item in items:
             online.correct(item.example, item.glosses)
         bulk.fit(items)
-        self.assertEqual(online.ranking_passes, len(items))
+        self.assertEqual(online.ranking_passes, len(items)-1)  # anchors add no rules
         self.assertEqual(bulk.ranking_passes, 1)
         self.assertIsNotNone(bulk._rule_cache)
         before = copy.deepcopy(bulk.__dict__)
@@ -254,6 +254,41 @@ class AnalogyIndexTests(unittest.TestCase):
         self.assertEqual(result[0]['anchor'], 'abc')
         self.assertTrue(model.grams.reads)
         self.assertEqual(set(model.grams.reads), {'abc'})
+
+
+class IncrementalRankingTests(unittest.TestCase):
+    @staticmethod
+    def exhaustive(model):
+        return sorted(model.rule_evidence, key=lambda rule: (
+            -len(model.rule_evidence[rule]),
+            sum(len(rule[i]) for i in (1, 2, 4, 5)), rule))[:model.max_rules]
+
+    def test_every_update_and_revision_matches_exhaustive_ranking(self):
+        import random
+        rng = random.Random(491)
+        items = []
+        for index in range(120):
+            stem = rng.choice(('tal', 'mir', 'vel', 'nim', 'café', 'doran'))
+            marker, label = rng.choice((('', ''), ('um', '-PL'), ('en', '-DAT'), ('fin', '-ABL')))
+            items.append(record(str(index), (stem + marker,), (stem + label,)))
+        for bound in (1, 3, 17, 512):
+            model = GlossLearner(max_rules=bound)
+            for item in items + [record('0', items[0].example.tokens, ('revised-LOC',))]:
+                model.correct(item.example, item.glosses)
+                self.assertEqual(model._rules(), self.exhaustive(model))
+                self.assertFalse(model._dirty_rules)
+            bulk = GlossLearner(max_rules=bound).fit(items + [record('0', items[0].example.tokens, ('revised-LOC',))])
+            self.assertEqual(model.__dict__, bulk.__dict__)
+
+    def test_unchanged_support_keeps_prepared_ranking(self):
+        model = CountingGlossLearner().fit(annotations()[:3])
+        ranking = model._rule_cache
+        passes = model.ranking_passes
+        item = record('repeat', ('talum', 'mir'), ('tree-PL', 'bird'))
+        model.correct(item.example, item.glosses)
+        self.assertIs(model._rule_cache, ranking)
+        self.assertEqual(model.ranking_passes, passes)
+        self.assertEqual(model.lexicon['talum']['tree-PL'], 2)
 
 
 if __name__ == '__main__':

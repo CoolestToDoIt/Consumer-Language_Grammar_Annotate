@@ -110,6 +110,8 @@ class GlossLearner:
         self.paradigms=defaultdict(list)
         self.rule_evidence=defaultdict(set)
         self._rule_cache=[]
+        self._ranked_rules=[]
+        self._dirty_rules=set()
         self.grams={}
         self._gram_index=defaultdict(set)
 
@@ -139,9 +141,13 @@ class GlossLearner:
                             if shared_gloss<2 or not (remove_gloss or append_gloss):
                                 continue
                             rule=(source_side,remove,append,target_side,remove_gloss,append_gloss)
-                            self.rule_evidence[rule].add(key)
+                            support=self.rule_evidence[rule]
+                            if key not in support:
+                                support.add(key)
+                                self._dirty_rules.add(rule)
             paradigm.append((word,gloss))
-        self._rule_cache=None
+        if self._dirty_rules:
+            self._rule_cache=None
 
     def _correct_record(self,example,glosses):
         """Apply one authoritative correction without preparing rule rankings."""
@@ -193,7 +199,13 @@ class GlossLearner:
 
     def _rules(self):
         if self._rule_cache is None:
-            self._rule_cache=sorted(self.rule_evidence,key=lambda rule:(-len(self.rule_evidence[rule]),sum(len(value) for value in (rule[1],rule[2],rule[4],rule[5])),rule))[:self.max_rules]
+            # During append-only ingestion support can only grow. An unchanged
+            # outsider cannot overtake the previous top K; only changed rules
+            # need to compete with those winners. Revisions reset both sets.
+            candidates=set(self._ranked_rules)|self._dirty_rules
+            self._rule_cache=sorted(candidates,key=lambda rule:(-len(self.rule_evidence[rule]),sum(len(value) for value in (rule[1],rule[2],rule[4],rule[5])),rule))[:self.max_rules]
+            self._ranked_rules=list(self._rule_cache)
+            self._dirty_rules.clear()
         return self._rule_cache
 
     @staticmethod
