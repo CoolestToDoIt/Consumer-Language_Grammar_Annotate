@@ -111,12 +111,15 @@ class GlossLearner:
         self.rule_evidence=defaultdict(set)
         self._rule_cache=[]
         self.grams={}
+        self._gram_index=defaultdict(set)
 
     def _observe(self,record):
         for word,gloss in zip(record.example.tokens,record.glosses):
             self.lexicon[word][gloss]+=1
             if word not in self.grams:
                 self.grams[word]=self._grams(word)
+                for gram in self.grams[word]:
+                    self._gram_index[gram].add(word)
             key=lexical_key(gloss)
             if not key:
                 continue
@@ -207,10 +210,15 @@ class GlossLearner:
             return []
         if self.mode=='analogy':
             query=self._grams(word)
+            overlap=Counter()
+            for gram in query:
+                overlap.update(self._gram_index.get(gram,()))
             def similarity(known):
-                grams=self.grams[known]
-                return len(grams & query)/len(grams | query)
-            known=min(self.lexicon,key=lambda w:(-similarity(w),w))
+                shared=overlap[known]
+                return shared/(len(self.grams[known])+len(query)-shared)
+            # A positive-overlap word always outranks every zero-overlap word.
+            # If no words overlap, preserve the original lexical tie-break.
+            known=min(overlap,key=lambda w:(-similarity(w),w)) if overlap else min(self.lexicon)
             return [{'gloss':majority(self.lexicon[known]),'score':similarity(known),'kind':'analogy','anchor':known}]
         votes=Counter()
         evidence={}

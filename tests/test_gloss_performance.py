@@ -177,5 +177,84 @@ class BulkGlossTests(unittest.TestCase):
                 GlossLearner.load(path)
 
 
+class AnalogyIndexTests(unittest.TestCase):
+    @staticmethod
+    def brute_force(model, word):
+        query = model._grams(word)
+        def similarity(known):
+            grams = model.grams[known]
+            return len(grams & query) / len(grams | query)
+        nearest = min(model.lexicon, key=lambda known: (-similarity(known), known))
+        counts = model.lexicon[nearest]
+        gloss = min(counts, key=lambda value: (-counts[value], value))
+        return [{'gloss': gloss, 'score': similarity(nearest), 'kind': 'analogy', 'anchor': nearest}]
+
+    def test_matches_exhaustive_oracle_on_unicode_and_randomized_words(self):
+        import random
+        rng = random.Random(2048)
+        alphabet = 'abcABCéøжя日α!?-'
+        words = sorted({''.join(rng.choices(alphabet, k=rng.randint(1, 18))) for _ in range(700)})
+        model = GlossLearner('analogy').fit([record('vocabulary', words, [f'label{i}' for i in range(len(words))])])
+        queries = [''.join(rng.choices(alphabet, k=rng.randint(1, 24))) for _ in range(250)]
+        queries += ['☃', 'e\u0301', '日本語', 'UNKNOWN', '^', '$', '']
+        for word in queries:
+            if word in model.lexicon:
+                continue
+            with self.subTest(word=word):
+                self.assertEqual(model.word_candidates(word), self.brute_force(model, word))
+
+    def test_no_overlap_and_similarity_ties_preserve_lexical_order(self):
+        model = GlossLearner('analogy').fit([record('words', ('cat', 'bat', 'aaaa', 'aaaaa'), ('cat', 'bat', 'short', 'long'))])
+        for word in ('hat', '☃', 'aaaaaa'):
+            self.assertEqual(model.word_candidates(word), self.brute_force(model, word))
+        self.assertEqual(model.word_candidates('hat')[0]['anchor'], 'bat')
+        self.assertEqual(model.word_candidates('☃')[0]['anchor'], 'aaaa')
+        self.assertEqual(model.word_candidates('☃')[0]['score'], 0)
+        self.assertEqual(model.word_candidates('aaaaaa')[0]['anchor'], 'aaaa')
+        self.assertEqual(model.word_candidates('aaaaaa')[0]['score'], 1)
+
+    def test_index_tracks_append_revision_duplicate_and_checkpoint_reload(self):
+        model = GlossLearner('analogy').fit(annotations()[:6])
+        model.fit(annotations()[6:])
+        extra = record('extra', ('nimfin', 'sun'), ('stone-ABL', 'sun'))
+        model.correct(extra.example, extra.glosses)
+        self.assertFalse(model.correct(extra.example, extra.glosses))
+        model.correct(extra.example, ('stone-DAT', 'sun'))
+        expected = {}
+        for word, grams in model.grams.items():
+            for gram in grams:
+                expected.setdefault(gram, set()).add(word)
+        self.assertEqual(dict(model._gram_index), expected)
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'indexed.json.gz'
+            model.save(path)
+            restored = GlossLearner.load(path)
+        self.assertEqual(restored.__dict__, model.__dict__)
+        for query in ('sunum', 'nimfinen', '☃'):
+            self.assertEqual(restored.word_candidates(query), self.brute_force(restored, query))
+
+    def test_unknown_queries_do_not_insert_postings_or_change_state(self):
+        model = GlossLearner('analogy').fit(annotations())
+        before = copy.deepcopy(model.__dict__)
+        for word in ('☃', 'UNKNOWN', 'velum', '☃☃☃'):
+            model.word_candidates(word)
+        self.assertEqual(model.__dict__, before)
+
+    def test_positive_overlap_does_not_scan_unrelated_lexicon_entries(self):
+        model = GlossLearner('analogy').fit([record('words', ('abc', 'xyz', '日本', '☀☀'), ('first', 'second', 'third', 'fourth'))])
+        class CountingGrams(dict):
+            def __init__(self, values):
+                super().__init__(values)
+                self.reads = []
+            def __getitem__(self, key):
+                self.reads.append(key)
+                return super().__getitem__(key)
+        model.grams = CountingGrams(model.grams)
+        result = model.word_candidates('abd')
+        self.assertEqual(result[0]['anchor'], 'abc')
+        self.assertTrue(model.grams.reads)
+        self.assertEqual(set(model.grams.reads), {'abc'})
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -1,5 +1,7 @@
 # Gloss-engine performance and equivalence
 
+This report records the first bulk-fit optimization. Follow-up: [exact indexed analogy](analogy-index.md) removes the analogy bottleneck identified below while preserving the same outputs.
+
 Worker A branch: `feat/gloss-engine`. Shared base: `524163c64150cf06773c0afcc1a28ea4d797774c`. Engine/API commit: `83e70a0`.
 
 This change preserves the learner and corpus semantics. It removes redundant global rule ranking during bulk ingestion and version-1 checkpoint reconstruction. Online `correct()` still prepares inference immediately. No evaluator, CLI, event/session, source-manifest, neural, or shared README files were changed.
