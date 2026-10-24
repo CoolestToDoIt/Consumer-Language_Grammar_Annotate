@@ -1,10 +1,16 @@
 # Current development direction
 
-The user approved bringing the tested integration into `main`. Main now
-contains integration checkpoint `7b95de1`; the accompanying status update is
-being published with it. [Main integration update](updates/2026-10-24-25-main-integration.md).
-The [tested stopping note](updates/2026-10-24-24-tested-integration-checkpoint.md)
-preserves the validation and earlier branch state.
+The tested integration is published on `origin/main` at `7b07cdf`, including
+integration checkpoint `7b95de1`. The [integrated release milestone](updates/2026-10-24-05-integrated-gloss-release.md)
+records validation, publication, operating limits and the deferred experiment.
+
+The consolidated milestone history is:
+
+1. [Synthetic foundations](updates/2026-10-24-01-synthetic-foundation.md).
+2. [Real-corpus morphology](updates/2026-10-24-02-real-corpus-morphology.md).
+3. [Neural and gloss foundations](updates/2026-10-24-03-neural-and-gloss-foundation.md).
+4. [Scalable gloss engine and safety](updates/2026-10-24-04-gloss-engine.md).
+5. [Integrated release and next decisions](updates/2026-10-24-05-integrated-gloss-release.md).
 
 Worker A and Worker B are combined on main. **83 tests pass**, including the
 optional neural tests. All 36 fresh Lezgi/Tsez prefix matrix runs completed;

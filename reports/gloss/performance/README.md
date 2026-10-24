@@ -16,9 +16,9 @@ approval. Combined integration awaits Worker B's branch.
 | Prepared source-affix rules | Full Tsez rule pass 90 ms → 50 ms | [Rule indexing](rule-affix-index.md) |
 | Bounded exact selection | Isolated median ranking 92 ms → 37 ms | [Bounded ranking](bounded-ranking.md) |
 | Shared edit spans | Full Tsez fit 0.794 s → 0.533 s | [Edit induction](shared-edits.md) |
-| Input integrity | Invalid corrections rejected before mutation | [Engine note 14](../../../plans/updates/2026-10-24-14-engine.md) |
+| Input integrity | Invalid corrections rejected before mutation | [Engine safety milestone](../../../plans/updates/2026-10-24-04-gloss-engine.md#input-integrity-and-persistence) |
 | Full correction workloads | Tsez 3,537 updates in 2.006 s; Lezgi 624 in 0.174 s | [Full correction scaling](full-corrections.md) |
-| Exact tier tags | Similarly prefixed metadata remains excluded | [Engine note 17](../../../plans/updates/2026-10-24-17-engine.md) |
+| Exact tier tags | Similarly prefixed metadata remains excluded | [Reader boundary checks](../../../plans/updates/2026-10-24-04-gloss-engine.md#input-integrity-and-persistence) |
 | Prepared gloss keys | Six-run median fit 0.502 s → 0.478 s | [Prepared gloss keys](prepared-gloss-keys.md) |
 | Portable original-engine check | 9,690 matched candidate records per language plus complete learned evidence | [Git-reference comparison](git-reference-equivalence.md) |
 
