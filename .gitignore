@@ -10,3 +10,8 @@ language-projects/
 .DS_Store
 demo-run/
 demo-run-*/
+
+# Downloaded corpora and local run output stay local (third-party licences; see NOTICE.md).
+data/corpora/
+data/glossing/
+runs/

@@ -1,4 +1,5 @@
 """Portable, revisioned workspaces for source-only gloss teaching."""
+from collections import Counter, defaultdict
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -7,10 +8,11 @@ from pathlib import Path
 import re
 import tempfile
 import time
+import unicodedata
 import zipfile
 
 from .corpus import TextExample, nfc
-from .gloss import GlossExample, GlossLearner, load_gloss
+from .gloss import GlossExample, GlossLearner, lexical_key, load_gloss, transform
 
 
 SCHEMA_VERSION = 1
@@ -22,6 +24,11 @@ DEFAULT_MODEL_CONFIG = {
     'guess_unknown': True,
 }
 MAX_IMPORT_BYTES = 25 * 1024 * 1024
+UNDETERMINED_LANGUAGE = 'und'  # ISO 639 code for an unidentified language
+MAX_DESCRIPTION = 4000
+# Data-ownership notes recorded per language; they travel with backups.
+GOVERNANCE_FIELDS = ('owner', 'license', 'consent', 'provenance', 'retention', 'conventions')
+MAX_KEPT_GLOSSES = 10000
 
 
 class ProjectWriteConflict(ValueError):
@@ -167,10 +174,12 @@ class LanguageProject:
             raise ValueError('Project ID cannot contain path separators')
         _validate_name(data.get('name'), 'Project name')
         _validate_name(data.get('language_id'), 'Language ID')
+        description = data.get('description', '')
+        if not isinstance(description, str) or len(description) > MAX_DESCRIPTION:
+            raise ValueError(f'Language description must be text of at most {MAX_DESCRIPTION} characters')
         _model_config(data.get('model_config'))
         governance = data.get('governance', {})
-        fields = {'owner', 'license', 'consent', 'provenance', 'retention', 'conventions'}
-        if (not isinstance(governance, dict) or set(governance) - fields
+        if (not isinstance(governance, dict) or set(governance) - set(GOVERNANCE_FIELDS)
                 or any(not isinstance(v, str) or len(v) > 4000 for v in governance.values())):
             raise ValueError('Invalid project governance metadata')
         if not isinstance(data.get('corpora'), list) or not isinstance(data.get('sentences'), list):
@@ -191,6 +200,12 @@ class LanguageProject:
             if sentence['id'] in sentence_ids:
                 raise ValueError('Duplicate project sentence ID')
             sentence_ids.add(sentence['id'])
+        kept = data.get('kept_glosses', [])
+        if (not isinstance(kept, list) or len(kept) > MAX_KEPT_GLOSSES
+                or any(not isinstance(entry, list) or len(entry) != 3 or not isinstance(entry[0], str) or entry[0] not in sentence_ids
+                       or type(entry[1]) is not int or entry[1] < 0 or not isinstance(entry[2], str) or not entry[2]
+                       for entry in kept)):
+            raise ValueError('Invalid list of kept glosses')
         if not isinstance(data.get('annotation_history'), list):
             raise ValueError('Project annotation history must be an array')
         revisions = {}
@@ -365,6 +380,229 @@ class LanguageProject:
     def annotation_count(self):
         return len(self._latest_annotations())
 
+    def update_language(self, *, name=None, language_id=None, description=None):
+        """Change display details only; the project file name and ID stay stable."""
+        if name is not None:
+            self.data['name'] = _validate_name(name, 'Language name')
+        if language_id is not None:
+            self.data['language_id'] = _validate_name(language_id or UNDETERMINED_LANGUAGE, 'Language ID')
+        if description is not None:
+            if not isinstance(description, str) or len(description) > MAX_DESCRIPTION:
+                raise ValueError(f'Language description must be text of at most {MAX_DESCRIPTION} characters')
+            self.data['description'] = description.strip()
+        self.save()
+
+    def summary(self):
+        governance = self.data.get('governance', {})
+        return {'project_id': self.data['project_id'], 'name': self.data['name'],
+                'language_id': self.data['language_id'], 'description': self.data.get('description', ''),
+                'sentences': len(self.data['sentences']), 'reviewed': self.annotation_count,
+                'words_known': len(self.model.lexicon),
+                # Which data-ownership notes are filled in (names only, not their text).
+                'policy_recorded': [field for field in GOVERNANCE_FIELDS if governance.get(field, '').strip()]}
+
+    def performance(self, *, points=12):
+        """Replay saved glosses in order and score the suggestion made before each.
+
+        Every first annotation of a sentence (imported or reviewed) is scored
+        against what a fresh model, taught only the earlier annotations, would
+        have suggested. Later revisions are applied but not scored. Rates are
+        empirical counts on this project's own data, not calibrated confidence.
+        """
+        learner = GlossLearner(**_model_config(self.data['model_config']))
+        tokens = {sentence['id']: tuple(sentence['tokens']) for sentence in self.data['sentences']}
+        totals = dict.fromkeys(('sentences', 'words', 'accepted', 'picked', 'repeat_words', 'repeat_accepted'), 0)
+        kinds = {kind: {'words': 0, 'right': 0} for kind in ('known', 'pattern', 'guess', 'none')}
+        taught, per_sentence = set(), []
+        last, revised, fixed = {}, set(), 0
+        for entry in self.data['annotation_history']:
+            example, glosses = TextExample(entry['id'], tokens[entry['id']]), tuple(entry['glosses'])
+            if entry['revision'] > 1:
+                # A later save that changes glosses: earlier work corrected on a second look.
+                revised.add(entry['id'])
+                fixed += sum(old != new for old, new in zip(last[entry['id']], glosses))
+            last[entry['id']] = glosses
+            if entry['revision'] == 1:
+                right = 0
+                for word, gold, prediction in zip(example.tokens, glosses, learner.predict(example)):
+                    top = prediction['candidates'][0] if prediction['candidates'] else None
+                    kind = ('none' if prediction['gloss'] is None or top is None else
+                            'known' if top['kind'] in ('lexical', 'contextual') else
+                            'pattern' if top['kind'] == 'rule' else 'guess')
+                    accepted = prediction['gloss'] == gold
+                    totals['words'] += 1
+                    totals['accepted'] += accepted
+                    totals['picked'] += not accepted and any(row['gloss'] == gold for row in prediction['candidates'][:5])
+                    kinds[kind]['words'] += 1
+                    kinds[kind]['right'] += accepted
+                    if (word, gold) in taught:
+                        totals['repeat_words'] += 1
+                        totals['repeat_accepted'] += accepted
+                    right += accepted
+                totals['sentences'] += 1
+                per_sentence.append((len(glosses), right))
+            learner.correct(example, glosses)
+            taught.update(zip(example.tokens, glosses))
+        curve, size = [], max(1, -(-len(per_sentence) // points))
+        for start in range(0, len(per_sentence), size):
+            chunk = per_sentence[start:start+size]
+            curve.append({'sentences': start + len(chunk), 'accepted': sum(r for _, r in chunk) / sum(n for n, _ in chunk)})
+
+        def ratio(a, b):
+            return a / b if b else None
+        return {'sentences': totals['sentences'], 'words': totals['words'],
+                'accepted': ratio(totals['accepted'], totals['words']),
+                'picked': ratio(totals['picked'], totals['words']),
+                'no_typing': ratio(totals['accepted'] + totals['picked'], totals['words']),
+                'teach_once': ratio(totals['repeat_accepted'], totals['repeat_words']),
+                'counts': totals, 'by_kind': kinds, 'curve': curve,
+                'revisions': {'sentences': len(revised), 'glosses': fixed}}
+
+    def unusual_glosses(self, *, limit=None):
+        """Saved glosses that differ from how the same word is usually glossed.
+
+        A word form that is otherwise consistent (one gloss in at least three
+        quarters of its uses, and at least three times) but saved once or twice,
+        and in at most a fifth of its uses, with another gloss is flagged. That is often a slip, a missing tag or a
+        typo, and sometimes real ambiguity, so a person decides; glosses they
+        keep are not flagged again. Words already split between common glosses
+        are not flagged.
+        """
+        kept = {tuple(entry) for entry in self.data.get('kept_glosses', [])}
+        uses = defaultdict(list)
+        for annotation in self._latest_annotations().values():
+            for index, (token, gloss) in enumerate(zip(annotation.example.tokens, annotation.glosses)):
+                uses[token.casefold()].append((annotation.example.id, index, token, gloss))
+        flagged, kept_count = [], 0
+        for rows in uses.values():
+            counts = Counter(row[3] for row in rows)
+            usual, usual_count = counts.most_common(1)[0]
+            if len(counts) < 2 or usual_count < 3 or usual_count * 4 < len(rows) * 3:
+                continue
+            for identifier, index, token, gloss in rows:
+                if gloss == usual or counts[gloss] > 2 or counts[gloss] * 5 > len(rows):
+                    continue
+                if (identifier, index, gloss) in kept:
+                    kept_count += 1
+                else:
+                    flagged.append({'id': identifier, 'index': index, 'token': token, 'gloss': gloss,
+                                    'usual': usual, 'usual_count': usual_count, 'uses': len(rows)})
+        flagged.sort(key=lambda row: (-row['usual_count'], row['id'], row['index']))
+        return {'count': len(flagged), 'kept': kept_count, 'items': flagged if limit is None else flagged[:limit]}
+
+    def keep_gloss(self, identifier, index, gloss):
+        """Record that a person checked an unusual saved gloss and it is right."""
+        latest = self._latest_annotations().get(identifier)
+        if (latest is None or type(index) is not int or not 0 <= index < len(latest.glosses)
+                or latest.glosses[index] != gloss):
+            raise ValueError('That gloss is no longer saved. Refresh and check again.')
+        kept = self.data.setdefault('kept_glosses', [])
+        if [identifier, index, gloss] not in kept:
+            if len(kept) >= MAX_KEPT_GLOSSES:
+                raise ValueError('Too many kept glosses in one language')
+            kept.append([identifier, index, gloss])
+            self.save()
+
+    def knowledge(self, *, max_endings=60, examples_per_ending=3):
+        """Read-only view of what the model has learned from reviewed glosses.
+
+        Vocabulary groups taught word forms by lexical meaning (the lowercase
+        parts of a Leipzig-style gloss). Endings are the model's own affix rules
+        that add a purely grammatical tag, with the number of distinct meanings
+        supporting each one and taught example pairs. Counts are evidence, not
+        probabilities.
+        """
+        model = self.model
+        vocabulary = []
+        for key, pairs in model.paradigms.items():
+            forms = [{'form': word, 'gloss': gloss, 'count': model.lexicon[word][gloss]} for word, gloss in pairs]
+            forms.sort(key=lambda row: (len(row['form']), row['form']))
+            vocabulary.append({'meaning': '-'.join(key), 'forms': forms,
+                               'count': sum(row['count'] for row in forms)})
+        vocabulary.sort(key=lambda row: (-row['count'], row['meaning']))
+        function_words = sorted(
+            ({'form': word, 'gloss': gloss, 'count': count}
+             for word, counts in model.lexicon.items() for gloss, count in counts.items() if not lexical_key(gloss)),
+            key=lambda row: (-row['count'], row['form']))
+        def grammatical(tag):
+            return bool(tag) and any(c.isupper() for c in tag) and not any(c.islower() for c in tag)
+
+        def aligned(gloss, side, edit):
+            # The gloss edit must start at a tag boundary of a real taught gloss,
+            # so "see-PRS -> see-PST" is PRS -> PST, never "RS -> ST".
+            if edit and (edit[0] if side == 'suffix' else edit[-1]) in '-=':
+                return True
+            kept = gloss[:len(gloss)-len(edit)] if side == 'suffix' else gloss[len(edit):]
+            return (kept[-1:] if side == 'suffix' else kept[:1]) in ('-', '=')
+
+        def letters(affix):
+            # Attached punctuation ("in." / "no,") is not an ending; apostrophes
+            # stay because some orthographies write ejectives with them.
+            return all(c in "'’ʼ" or not unicodedata.category(c).startswith('P') for c in affix)
+
+        def examples(rule):
+            side, remove, append, target_side, remove_gloss, append_gloss = rule
+            found = []
+            for word, counts in model.lexicon.items():
+                derived = transform(word, side, remove, append)
+                if derived is None or derived not in model.lexicon:
+                    continue
+                for gloss in counts:
+                    target = transform(gloss, target_side, remove_gloss, append_gloss)
+                    if (target in model.lexicon[derived] and lexical_key(gloss)
+                            and (aligned(gloss, target_side, remove_gloss) or aligned(target, target_side, append_gloss))):
+                        found.append({'base': word, 'base_gloss': gloss, 'form': derived, 'gloss': target})
+                        break
+                if len(found) >= examples_per_ending:
+                    break
+            return found
+
+        # A rule maps a base form to a derived form by removing one affix and
+        # appending another. "add" rules attach a grammatical tag to a bare
+        # form; "swap" rules exchange one tag for another (e.g. PRS -> PST).
+        candidates = []
+        for rule in model._rules():
+            side, remove, append, target_side, remove_gloss, append_gloss = rule
+            tag, old_tag = append_gloss.strip('-='), remove_gloss.strip('-=')
+            if (not append or not grammatical(tag) or len(model.rule_evidence[rule]) < 2
+                    or not letters(append) or not letters(remove)):
+                continue
+            if remove or remove_gloss:
+                if not remove or not grammatical(old_tag):
+                    continue
+                candidates.append(('swap', rule, tag, old_tag))
+            else:
+                candidates.append(('add', rule, tag, ''))
+        added = {tag for kind, _, tag, _ in candidates if kind == 'add'}
+        endings, seen = [], set()
+        for kind, rule, tag, old_tag in candidates:
+            if len(endings) >= max_endings:
+                break
+            side, remove, append = rule[:3]
+            if kind == 'swap':
+                # Each swap is also learned in reverse; skip swaps already
+                # explained by "add" endings and stacked affixes like -ek -> -umek.
+                if ({tag, old_tag} <= added or (side == 'suffix' and (append.endswith(remove) or remove.endswith(append)))
+                        or (side == 'prefix' and (append.startswith(remove) or remove.startswith(append)))):
+                    continue
+                identity = (side, frozenset({(remove, old_tag), (append, tag)}))
+            else:
+                identity = (side, append, tag)
+            if identity in seen:
+                continue
+            found = examples(rule)
+            if not found:
+                continue
+            seen.add(identity)
+            endings.append({'kind': kind, 'side': side, 'affix': append, 'tag': tag,
+                            'replaces_affix': remove, 'replaces_tag': old_tag,
+                            'meanings': len(model.rule_evidence[rule]), 'examples': found})
+        endings.sort(key=lambda row: (row['kind'] != 'add', -row['meanings'], len(row['affix']), row['affix'], row['tag']))
+        return {'vocabulary': vocabulary, 'function_words': function_words, 'endings': endings,
+                'stats': {'word_forms': len(model.lexicon), 'meanings': len(vocabulary),
+                          'endings': len(endings), 'reviewed': self.annotation_count,
+                          'sentences': len(self.data['sentences'])}}
+
     def save(self):
         self.data['checkpoint'] = {
             'model_version': self.model.version,
@@ -429,6 +667,7 @@ class LanguageProject:
                 'tokens': sentence['tokens'],
                 'predictions': predictions,
                 'annotated': sentence['id'] in latest,
+                'glosses': list(latest[sentence['id']].glosses) if sentence['id'] in latest else None,
                 'revision': sum(item['id'] == sentence['id'] for item in self.data['annotation_history']),
                 'tentative_words': sum(bool(item.get('provisional')) for item in predictions),
                 'needs_gloss_words': sum(item['gloss'] is None for item in predictions),
@@ -455,10 +694,5 @@ def list_projects(workspace):
         return []
     projects = []
     for path in sorted(directory.glob('*.dproj')):
-        project = LanguageProject.open(path)
-        projects.append({
-            'project_id': project.data['project_id'],
-            'name': project.data['name'],
-            'language_id': project.data['language_id'],
-        })
+        projects.append(LanguageProject.open(path).summary())
     return projects

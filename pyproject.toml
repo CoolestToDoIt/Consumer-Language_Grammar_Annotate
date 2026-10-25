@@ -17,4 +17,4 @@ decipher = "decipher.app:main"
 include = ["decipher*"]
 
 [tool.setuptools.package-data]
-decipher = ["demo.tsv"]
+decipher = ["demo.tsv", "ui.html"]
