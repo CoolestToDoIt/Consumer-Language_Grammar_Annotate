@@ -1,5 +1,5 @@
-Note: Full research history (experiments, evaluation, and the complete commit log): [https://github.com/CoolestToDoIt/Unknown-Language-Translation]
-
+**Note: Full research history (experiments, evaluation, and the complete commit log): [https://github.com/CoolestToDoIt/Unknown-Language-Translation]
+**
 # Decipher Lab · Local pilot edition
 
 A small, offline workbench for human-reviewed **word-level gloss annotation**, scoped to the local product in [the commercial plan](plans/COMMERCIAL_USAGE_AND_OPPORTUNITIES.md). It learns from aligned examples and corrections; it does not produce fluent sentence translations.
